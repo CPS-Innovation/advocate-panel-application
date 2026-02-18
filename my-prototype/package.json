@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "dev": "govuk-prototype-kit dev",
+    "serve": "govuk-prototype-kit serve",
+    "start": "govuk-prototype-kit start"
+  },
+  "dependencies": {
+    "@govuk-prototype-kit/common-templates": "3.0.0",
+    "@govuk-prototype-kit/step-by-step": "3.0.0",
+    "@govuk-prototype-kit/task-list": "2.0.0",
+    "govuk-frontend": "6.0.0",
+    "govuk-prototype-kit": "13.19.0",
+    "hmrc-frontend": "6.115.0",
+    "jquery": "4.0.0",
+    "notifications-node-client": "8.2.1"
+  }
+}

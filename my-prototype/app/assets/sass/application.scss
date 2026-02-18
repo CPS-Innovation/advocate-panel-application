@@ -1,0 +1,17 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+// 
+
+// Add extra styles here
+/* === CPS Header Style === */
+.cps-header {
+  background-color: #003078; /* CPS navy */
+  border-bottom: 0;
+}
+.cps-logo {
+  display: block;
+  height: 40px;   /* adjust as needed */
+  width: auto;
+  margin: 4px 0;
+}

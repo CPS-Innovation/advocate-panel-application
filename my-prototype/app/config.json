@@ -1,0 +1,9 @@
+{
+  "serviceName": "Advocate Panel Application",
+  "useServiceNavigation": true,
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}
