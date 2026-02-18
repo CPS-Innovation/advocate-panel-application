@@ -1,0 +1,161 @@
+{% extends "_layouts/main.html" %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/tag/macro.njk" import govukTag %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% set navId = 'cases' %}
+{% set secondaryNavId = 'directions' %}
+{% set pageName = "Directions (:total)" | replace(':total', _case.directions.length | formatNumber) %}
+
+{% block beforeContent %}
+  {% include "_includes/case/identity-bar.njk" %}
+{% endblock %}
+
+{% block content %}
+  {% include "_includes/success-banner.njk" %}
+  {% include "_includes/case/navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+      
+      {{ govukButton({
+        text: "Add direction"
+      }) }}
+
+      {% if _case.directions.length %}
+        <div class="app-list">
+          {% for direction in _case.directions %}
+          <div class="app-list__item">
+              {% set directionDescriptionDisplay %}
+                {% if direction.description.length > 115 %}
+                  {{ direction.description | truncate(115) }}
+                {% else %}
+                  {{ direction.description }}
+                {% endif %}
+              {% endset %}
+
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <div>
+                  <a href="/cases/{{_case.id}}/directions/{{direction.id}}" class="govuk-link--no-visited-state">{{ directionDescriptionDisplay | trim }}</a>
+                </div>
+                {% if direction.status %}
+                  <div class="app-list__tag">
+                    {{ govukTag({ text: direction.status, classes: direction.status | directionStatusTagClass }) }}
+                  </div>
+                {% endif %}
+              </h3>
+
+              {% set prosecutorValue %}
+                {% if _case.prosecutors.length %}
+                  {{_case.prosecutors[0].user.firstName}} {{_case.prosecutors[0].user.lastName}}
+                  {% if _case.prosecutors.length > 1 %}
+                    and {{_case.prosecutors.length - 1}} more
+                  {% endif %}
+                {% else %}
+                  Unassigned
+                {% endif %}
+              {% endset %}
+
+              {% set paralegalOfficerValue %}
+                {% if _case.paralegalOfficers.length %}
+                  {{_case.paralegalOfficers[0].user.firstName}} {{_case.paralegalOfficers[0].user.lastName}}
+                  {% if _case.paralegalOfficers.length > 1 %}
+                    and {{_case.paralegalOfficers.length - 1}} more
+                  {% endif %}
+                {% else %}
+                  Unassigned
+                {% endif %}
+              {% endset %}
+
+              {% set dueDateValue %}
+                {{ direction.dueDate | isoDateString | govukDateTime }}
+                <span>({{ direction.dueDate | daysUntil }})</span>
+              {% endset %}
+
+              {{ govukSummaryList({
+                classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                rows: [
+                  {
+                    key: {
+                      text: 'Defendant'
+                    },
+                    value: {
+                      html: (direction.defendant.firstName + ' ' + direction.defendant.lastName) if direction.defendant else ''
+                    }
+                  } if direction.defendant,
+                  {
+                    key: {
+                      html: 'Prosecutor'
+                    },
+                    value: {
+                      html: prosecutorValue
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Paralegal officer'
+                    },
+                    value: {
+                      html: paralegalOfficerValue
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Due date'
+                    },
+                    value: {
+                      html: dueDateValue
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Assignee'
+                    },
+                    value: {
+                      html: direction.assignee
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Latest note'
+                    },
+                    value: {
+                      html: direction.notes[0].description
+                    }
+                  } if direction.notes and direction.notes.length > 0,
+                  {
+                    key: {
+                      text: 'Custody time limit'
+                    },
+                    value: {
+                      html: (_case.soonestCTL | isoDateString | govukDateTime) + ' (' + (_case.soonestCTL | daysUntil) + ')'
+                    }
+                  } if _case.hasCTL,
+                  {
+                    key: {
+                      html: 'Hearing date'
+                    },
+                    value: {
+                      html: (_case.hearings[0].startDate | isoDateString | govukDateTime) + ' <span>(' + (_case.hearings[0].startDate | daysUntil) + ')</span>'
+                    }
+                  } if _case.hearings and _case.hearings.length > 0,
+                  {
+                    key: {
+                      html: 'Hearing type'
+                    },
+                    value: {
+                      html: _case.hearings[0].type
+                    }
+                  } if _case.hearings and _case.hearings.length > 0
+                ]
+              })}}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no directions.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

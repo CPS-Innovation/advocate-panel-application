@@ -1,0 +1,62 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'activity' %}
+{% set pageName = "Activity (:total)" | replace(':total', totalEvents | formatNumber) %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+  <div class="app-filter-layout">
+    <div class="app-filter-layout__filter">
+      {% include "_includes/activity/filter-panel.njk" %}
+    </div>
+    <div class="app-filter-layout__content">
+
+      <div class="app-action-bar">
+        <div class="app-action-bar__filter"></div>
+      </div>
+
+      {% include "_includes/activity/search-form.njk" %}
+
+      {% if events.length %}
+        <div class="app-activity-log">
+          {% for event in events %}
+            {{ appActivityLogItem({
+              event: event,
+              eventTitle: event.title + ' (' + event.case.reference + ')'
+            }) }}
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No activity.</p>
+      {% endif %}
+
+      {% include "_includes/pagination.njk" %}
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script>
+    new App.FilterToggleButton({
+      bigModeMediaQuery: '(min-width: 48.063em)',
+      startHidden: false,
+      toggleButton: {
+        container: $('.app-action-bar__filter'),
+        showText: 'Show filter',
+        hideText: 'Hide filter',
+        classes: 'govuk-button--secondary govuk-!-margin-bottom-3'
+      },
+      closeButton: {
+        container: $('.app-filter__header-action'),
+        text: 'Close'
+      },
+      filter: {
+        container: $('.app-filter-layout__filter')
+      }
+    })
+
+  </script>
+{% endblock %}
+

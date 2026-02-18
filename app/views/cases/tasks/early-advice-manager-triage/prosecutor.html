@@ -1,0 +1,38 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'cases' %}
+{% set caption %} {{task.case.reference}} - Early advice manager triage {% endset %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <span class="govuk-caption-l">{{caption}}</span>
+      <form method="post">
+        {{ xGovukAutocomplete({
+          id: "prosecutor",
+          name: "completeEarlyAdviceManagerTriage[prosecutor]",
+          allowEmpty: false,
+          showAllValues: true,
+          label: {
+            text: "Prosecutor",
+            isPageHeading: true,
+            classes: "govuk-label--l"
+          },
+          value: data.completeEarlyAdviceManagerTriage.prosecutor,
+          items: prosecutorItems
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

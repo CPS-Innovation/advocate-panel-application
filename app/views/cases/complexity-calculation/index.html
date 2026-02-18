@@ -1,0 +1,99 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set pageName = 'How we calculated the case complexity to be ‘:complexity’' | replace(':complexity', _case.complexity) %}
+
+{% block beforeContent %}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Cases",
+        href: "/cases"
+      },
+      {
+        text: _case.reference,
+        href: "/cases/:caseId" | replace(':caseId', _case.id)
+      },
+      {
+        text: pageName
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+ {% include "_includes/success-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+      
+      <p>This is because the case is has:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          4 defendants
+        </li>
+        <li>
+          5 victims
+        </li>
+      </ul>
+      
+      {# <p>You can <a href="/cases/{{_case.id}}/edit-complexity">change the complexity level</a>.</p> #}
+
+      {% set complexityExplanation %}
+
+        <h2 class="govuk-heading-s">Basic</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>1 defendant</li>
+          <li>1 victim</li>
+          <li>1 to 20 witnesses</li>
+        </ul>
+
+        <h2 class="govuk-heading-s">BasicPlus</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>2 to 3 defendants</li>
+          <li>2 to 3 victims</li>
+          <li>21 to 40 witnesses</li>
+        </ul>
+
+        <h2 class="govuk-heading-s">Standard</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>4 to 5 defendants</li>
+          <li>4 to 5 victims</li>
+          <li>31 to 40 witnesses</li>
+          <li>Driving fatalities</li>
+          <li>Child abuse or neglect</li>
+        </ul>
+
+        <h2 class="govuk-heading-s">High</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>6 or more defendants</li>
+          <li>6 or more victims</li>
+          <li>41 or more witnesses</li>
+          <li>Murder</li>
+          <li>Attempted murder</li>
+          <li>Any conspiracy</li>
+        </ul>
+
+        <h2 class="govuk-heading-s">Complex</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>10 or more defendants</li>
+          <li>Complex case unit</li>
+        </ul>
+      {% endset %}
+
+      {{ govukDetails({
+        summaryText: "Understanding case complexity",
+        html: complexityExplanation
+      }) }}
+
+
+
+    </div>
+  </div>
+{% endblock %}

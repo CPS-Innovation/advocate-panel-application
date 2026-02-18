@@ -1,0 +1,47 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'cases' %}
+{% set caption %} {{task.case.reference}} - Priority PCD review {% endset %}
+{% set pageName = "Are you CPS Direct?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <span class="govuk-caption-l">{{caption}}</span>
+      <form method="post">
+        {{ govukRadios({
+          name: "completePriorityPcdReview[cpsd]",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          value: data.completePriorityPcdReview.cpsd,
+          items: [
+            {
+              value: "Yes",
+              text: "Yes"
+            },
+            {
+              value: "No",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

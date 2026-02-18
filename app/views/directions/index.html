@@ -1,0 +1,250 @@
+{% extends "_layouts/main.html" %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/tag/macro.njk" import govukTag %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% set navId = 'directions' %}
+{% set pageName = "Directions (:total)" | replace(':total', totalDirections | formatNumber) %}
+
+{% block skipLink %}
+  {{super()}}
+  {{ govukSkipLink({
+    text: "Skip to direction search",
+    href: "#app-direction-search"
+  }) }} 
+  {{ govukSkipLink({
+    text: "Skip to direction list",
+    href: "#app-direction-list"
+  }) }} 
+{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+  <div class="app-filter-layout">
+    <div class="app-filter-layout__filter">
+      {% include "_includes/direction/filter-panel.njk" %}
+    </div>
+    <div class="app-filter-layout__content">
+
+      <div class="app-action-bar">
+        <div class="app-action-bar__filter"></div>
+      </div>
+
+      {% include "_includes/direction/search-form.njk" %}
+
+      {% if directions.length %}
+        <div class="app-list" id="app-direction-list">
+          {% for direction in directions %}
+            {% if loop.first or direction.groupKey != directions[loop.index0 - 1].groupKey %}
+              <h2 class="govuk-heading-m govuk-!-margin-top-7 govuk-!-margin-bottom-0">{{direction.groupHeading}}</h2>
+            {% endif %}
+
+            <div class="app-list__item">
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <div>
+                  <a href="/cases/{{direction.case.id}}/directions/{{direction.id}}" class="govuk-link--no-visited-state">{{ direction.description | truncate(115) }}</a>
+                </div>
+                {% if direction.status %}
+                  <div class="app-list__tag">
+                    {{ govukTag({ text: direction.status, classes: direction.status | directionStatusTagClass }) }}
+                  </div>
+                {% endif %}
+              </h3>
+
+              {% set defendantsValue %}
+                {% if direction.defendant %}
+                  {{direction.defendant.firstName}} {{direction.defendant.lastName}}
+                {% endif %}
+              {% endset %}
+
+              {% set prosecutorValue %}
+                {% if direction.case.prosecutors.length %}
+                  {{direction.case.prosecutors[0].user.firstName}} {{direction.case.prosecutors[0].user.lastName}}
+                  {% if direction.case.prosecutors.length > 1 %}
+                    and {{direction.case.prosecutors.length - 1}} more
+                  {% endif %}
+                {% else %}
+                  Unassigned
+                {% endif %}
+              {% endset %}
+
+              {% set paralegalOfficerValue %}
+                {% if direction.case.paralegalOfficers.length %}
+                  {{direction.case.paralegalOfficers[0].user.firstName}} {{direction.case.paralegalOfficers[0].user.lastName}}
+                  {% if direction.case.paralegalOfficers.length > 1 %}
+                    and {{direction.case.paralegalOfficers.length - 1}} more
+                  {% endif %}
+                {% else %}
+                  Unassigned
+                {% endif %}
+              {% endset %}
+
+              {% set dueDateValue %}
+                {{ direction.dueDate | isoDateString | govukDateTime }}
+                <span>({{ direction.dueDate | daysUntil }})</span>
+              {% endset %}
+
+              {% if direction.case.hearings and direction.case.hearings.length > 0 %}
+                {% set hearingDateValue %}
+                  {{ direction.case.hearings[0].startDate | isoDateString | govukDateTime }}
+                  <span>({{ direction.case.hearings[0].startDate | daysUntil }})</span>
+                {% endset %}
+              {% endif %}
+
+              {% if direction.case.hasCTL %}
+                {% set ctlValue %}
+                  {{ direction.case.soonestCTL | isoDateString | govukDateTime }}
+                  <span>({{ direction.case.soonestCTL | daysUntil }})</span>
+                {% endset %}
+              {% endif %}
+
+              {{ govukSummaryList({
+                classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                rows: [
+                  {
+                    key: {
+                      html: 'URN'
+                    },
+                    value: {
+                      html: direction.case.reference
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Operation name'
+                    },
+                    value: {
+                      html: direction.case.operationName
+                    }
+                  } if direction.case.operationName,
+                  {
+                    key: {
+                      html: 'Defendant'
+                    },
+                    value: {
+                      html: defendantsValue
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Prosecutor'
+                    },
+                    value: {
+                      html: prosecutorValue
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Paralegal officer'
+                    },
+                    value: {
+                      html: paralegalOfficerValue
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Due date'
+                    },
+                    value: {
+                      html: dueDateValue
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Assignee'
+                    },
+                    value: {
+                      html: direction.assignee
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Latest note'
+                    },
+                    value: {
+                      html: direction.notes[0].description
+                    }
+                  } if direction.notes and direction.notes.length > 0,
+                  {
+                    key: {
+                      html: 'Custody time limit'
+                    },
+                    value: {
+                      html: ctlValue
+                    }
+                  } if direction.case.hasCTL,
+                  {
+                    key: {
+                      html: 'Unit'
+                    },
+                    value: {
+                      html: direction.case.unit.name
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Hearing date'
+                    },
+                    value: {
+                      html: hearingDateValue
+                    }
+                  } if direction.case.hearings and direction.case.hearings.length > 0,
+                  {
+                    key: {
+                      html: 'Hearing type'
+                    },
+                    value: {
+                      html: direction.case.hearings[0].type
+                    }
+                  } if direction.case.hearings and direction.case.hearings.length > 0
+                ]
+              })}}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no results.</p>
+      {% endif %}
+
+      {% include "_includes/pagination.njk" %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script>
+    new App.FilterToggleButton({
+      bigModeMediaQuery: '(min-width: 48.063em)',
+      startHidden: false,
+      toggleButton: {
+        container: $('.app-action-bar__filter'),
+        showText: 'Show filter',
+        hideText: 'Hide filter',
+        classes: 'govuk-button--secondary govuk-!-margin-bottom-3'
+      },
+      closeButton: {
+        container: $('.app-filter__header-action'),
+        text: 'Close'
+      },
+      filter: {
+        container: $('.app-filter-layout__filter')
+      }
+    })
+
+    new App.ListFilter({
+      container: $('.prosecutor-filter'),
+      textBox: {
+        label: 'Find prosecutor'
+      }
+    })
+
+    new App.ListFilter({
+      container: $('.paralegal-officer-filter'),
+      textBox: {
+        label: 'Find paralegal officer'
+      }
+    })
+  </script>
+{% endblock %}

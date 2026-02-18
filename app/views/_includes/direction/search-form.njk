@@ -1,0 +1,25 @@
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+<search class="app-search-form" id="app-direction-search">
+  <form>
+    {{ govukInput({
+      id: "directionSearch[keywords]",
+      name: "directionSearch[keywords]",
+      label: {
+        text: "Search by direction, URN or defendant name",
+        classes: "govuk-label--s app-search-form__label"
+      },
+      value: data.directionSearch.keywords
+    }) }}
+
+    {{ govukButton({
+      text: "Search",
+      classes: "app-search-form__button"
+    }) }}
+  </form>
+
+  {% if data.directionSearch.keywords %}
+    <p><a href="/directions/clear-search" class="govuk-link govuk-link--no-visited-state">Clear search</a></p>
+  {% endif %}
+</search>

@@ -1,0 +1,442 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./data/database.sqlite"
+}
+
+model User {
+  id                    Int                      @id @default(autoincrement())
+  email                 String                   @unique
+  password              String
+  firstName             String
+  lastName              String
+  role                  String
+  notes                 Note[]
+  activityLogs          ActivityLog[]
+  tasks                 Task[]
+  taskNotes             TaskNote[]
+  directionNotes        DirectionNote[]
+  units                 UserUnit[]
+  caseProsecutors       CaseProsecutor[]
+  caseParalegalOfficers CaseParalegalOfficer[]
+  specialistAreas       Specialism[]             @relation("UserSpecialistAreas")
+  preferredAreas        Specialism[]             @relation("UserPreferredAreas")
+  restrictedAreas       Specialism[]             @relation("UserRestrictedAreas")
+  recentCases           RecentCase[]
+}
+
+model ActivityLog {
+  id        Int      @id @default(autoincrement())
+  action    String
+  model     String
+  recordId  Int?
+  title     String
+  meta      Json?
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
+  caseId    Int?
+  case      Case?    @relation(fields: [caseId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Victim {
+  id        Int     @id @default(autoincrement())
+  firstName String
+  lastName  String
+  cases     Case[]  @relation("CaseVictims")
+}
+
+model PoliceUnit {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  cases Case[]
+}
+
+model Witness {
+  id                          Int                @id @default(autoincrement())
+  title                       String?
+  firstName                   String
+  lastName                    String
+  dateOfBirth                 DateTime?
+  gender                      Gender?
+  ethnicity                   Ethnicity?
+  preferredLanguage           PreferredLanguage  @default(English)
+  isCpsContactAllowed         Boolean            @default(true)
+  addressLine1                String?
+  addressLine2                String?
+  addressTown                 String?
+  addressPostcode             String?
+  mobileNumber                String?
+  emailAddress                String?
+  preferredContactMethod      String?
+  faxNumber                   String?
+  homeNumber                  String?
+  workNumber                  String?
+  otherNumber                 String?
+  isVictim                    Boolean            @default(false)
+  isKeyWitness                Boolean            @default(false)
+  isChild                     Boolean            @default(false)
+  isExpert                    Boolean            @default(false)
+  isInterpreter               Boolean            @default(false)
+  isPolice                    Boolean            @default(false)
+  isProfessional              Boolean            @default(false)
+  isPrisoner                  Boolean            @default(false)
+  isVulnerable                Boolean            @default(false)
+  isIntimidated               Boolean            @default(false)
+  isAppearingInCourt          Boolean?
+  reasonForNotAppearingInCourt String?
+  isRelevant                  Boolean?
+  attendanceIssues            String?
+  previousTransgressions      String?
+  acroConvictions             Boolean            @default(true)
+  wasWarned                   Boolean?
+  dcf                         Boolean
+  courtAvailabilityStartDate  DateTime?
+  courtAvailabilityEndDate    DateTime?
+  victimCode                  String?
+  victimExplained             Boolean?
+  victimOfferResponse         String?
+  caseId                      Int
+  case                        Case               @relation(fields: [caseId], references: [id])
+  statements                  WitnessStatement[]
+  specialMeasures             SpecialMeasure[]
+}
+
+model WitnessStatement {
+  id                    Int      @id @default(autoincrement())
+  witnessId             Int
+  witness               Witness  @relation(fields: [witnessId], references: [id])
+  number                Int
+  isMarkedAsSection9    Boolean?
+  isUsedAsEvidence      Boolean?
+  receivedDate          DateTime
+  @@unique([witnessId, number]) // enforce uniqueness per witness
+}
+
+model SpecialMeasure {
+  id                                Int      @id @default(autoincrement())
+  type                              String
+  details                           String?
+  needs                             String?
+  requiresMeeting                   Boolean  @default(false)
+  meetingUrl                        String?
+  hasAppliedForReportingRestrictions Boolean  @default(false)
+  witnessId                         Int
+  witness                           Witness  @relation(fields: [witnessId], references: [id])
+}
+
+model Case {
+  id                Int                      @id @default(autoincrement())
+  reference         String                   @unique
+  operationName     String?
+  complexity        String?
+  type              String?
+  unitId            Int
+  unit              Unit                     @relation(fields: [unitId], references: [id])
+  policeUnitId      Int?
+  policeUnit        PoliceUnit?              @relation(fields: [policeUnitId], references: [id])
+  defendants        Defendant[]              @relation("CaseDefendants")
+  victims           Victim[]                 @relation("CaseVictims")
+  witnesses         Witness[]
+  hearings          Hearing[]
+  location          Location?
+  tasks             Task[]
+  directions        Direction[]
+  documents         Document[]
+  dga               DGA?
+  notes             Note[]
+  activityLogs      ActivityLog[]
+  prosecutors       CaseProsecutor[]
+  paralegalOfficers CaseParalegalOfficer[]
+  recentCases       RecentCase[]
+}
+
+model DGA {
+  id                            Int                 @id @default(autoincrement())
+  caseId                        Int                 @unique
+  case                          Case                @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  reason                        String?
+  outcome                       String?
+  failureReasons                DGAFailureReason[]
+  reviewDate                    DateTime?           // When the DGA assessment was done (used to determine month)
+  recordDisputeOutcomesDeadline DateTime?           // Deadline for recording dispute outcomes (only for non-compliant cases)
+  sentToPoliceDate              DateTime?           // When the DGA cases were sent to the police unit
+  createdAt                     DateTime            @default(now())
+  updatedAt                     DateTime            @updatedAt
+}
+
+model DGAFailureReason {
+  id          Int      @id @default(autoincrement())
+  reason      String
+  disputed    String?
+  cpsAccepted String?
+  details     String?
+  methods     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  dga         DGA      @relation(fields: [dgaId], references: [id])
+  dgaId       Int
+
+  @@map("dga_failure_reasons")
+}
+
+
+enum DGAOutcome {
+  NOT_DISPUTED
+  DISPUTED_SUCCESSFULLY
+  DISPUTED_UNSUCCESSFULLY
+}
+
+enum Gender {
+  Male
+  Female
+  Unknown
+}
+
+enum PreferredLanguage {
+  English
+  Welsh
+}
+
+enum Ethnicity {
+  White
+  Asian_or_Asian_British
+  Black_or_Black_British
+  Mixed
+  Other
+  Prefer_not_to_say
+}
+
+model Specialism {
+  id              Int    @id @default(autoincrement())
+  name            String @unique
+  usersSpecialist User[] @relation("UserSpecialistAreas")
+  usersPreferred  User[] @relation("UserPreferredAreas")
+  usersRestricted User[] @relation("UserRestrictedAreas")
+}
+
+model Area {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  units Unit[]
+}
+
+model Unit {
+  id        Int        @id @default(autoincrement())
+  name      String
+  areaId    Int?
+  area      Area?      @relation(fields: [areaId], references: [id])
+  cases     Case[]
+  teams     Team[]
+  userUnits UserUnit[]
+}
+
+model Team {
+  id          Int          @id @default(autoincrement())
+  name        String
+  unitId      Int
+  unit        Unit         @relation(fields: [unitId], references: [id])
+  isStandard  Boolean      @default(true)
+  tasks       Task[]
+}
+
+model UserUnit {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+  unitId Int
+  unit   Unit @relation(fields: [unitId], references: [id])
+  @@unique([userId, unitId])
+}
+
+model Defendant {
+  id               Int            @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  gender           Gender?
+  religion         String?
+  occupation       String?
+  dateOfBirth      DateTime?
+  remandStatus     RemandStatus?
+  paceClock        DateTime?
+  defenceLawyerId  Int?
+  defenceLawyer    DefenceLawyer? @relation(fields: [defenceLawyerId], references: [id])
+  cases            Case[]         @relation("CaseDefendants")
+  charges          Charge[]
+  directions       Direction[]
+}
+
+model DefenceLawyer {
+  id           Int         @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  organisation String
+  defendants   Defendant[]
+}
+
+model Charge {
+  id                  Int       @id @default(autoincrement())
+  chargeCode          String
+  description         String
+  status              String
+  offenceDate         DateTime
+  plea                Plea?
+  particulars         String
+  custodyTimeLimit    DateTime?
+  statutoryTimeLimit  DateTime?
+  isCount             Boolean   @default(false)
+  defendantId         Int
+  defendant           Defendant @relation(fields: [defendantId], references: [id])
+}
+
+enum RemandStatus {
+  UNCONDITIONAL_BAIL
+  CONDITIONAL_BAIL
+  REMANDED_IN_CUSTODY
+  REMANDED_IN_SECURE_UNIT
+}
+
+enum Plea {
+  NOT_GUILTY
+  GUILTY
+  NO_PLEA
+  NOT_INDICATED
+}
+
+model Hearing {
+  id        Int       @id @default(autoincrement())
+  startDate DateTime
+  endDate   DateTime?
+  status    String
+  type      String
+  venue     String
+  case      Case      @relation(fields: [caseId], references: [id])
+  caseId    Int
+}
+
+model Location {
+  id       Int     @id @default(autoincrement())
+  name     String
+  line1    String
+  line2    String
+  town     String
+  postcode String
+  case     Case?   @relation(fields: [caseId], references: [id])
+  caseId   Int?    @unique
+}
+
+model Task {
+  id               Int        @id @default(autoincrement())
+  name             String
+  reminderType     String?
+  reminderDate     DateTime
+  dueDate          DateTime
+  escalationDate   DateTime
+  completedDate    DateTime?
+  isUrgent         Boolean    @default(false)
+  urgentNote       String?
+  notUrgentNote    String?
+  case             Case       @relation(fields: [caseId], references: [id])
+  caseId           Int
+  assignedToUser   User?      @relation(fields: [assignedToUserId], references: [id])
+  assignedToUserId Int?
+  assignedToTeam   Team?      @relation(fields: [assignedToTeamId], references: [id])
+  assignedToTeamId Int?
+  notes            TaskNote[]
+}
+
+model TaskNote {
+  id          Int      @id @default(autoincrement())
+  description String
+  taskId      Int
+  task        Task     @relation(fields: [taskId], references: [id])
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Direction {
+  id               Int             @id @default(autoincrement())
+  title            String
+  description      String
+  dueDate          DateTime
+  completedDate    DateTime?
+  assignee         String          // 'Prosecution' or 'Defence'
+  case             Case            @relation(fields: [caseId], references: [id])
+  caseId           Int
+  defendant        Defendant?      @relation(fields: [defendantId], references: [id])
+  defendantId      Int?
+  notes            DirectionNote[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+model DirectionNote {
+  id          Int       @id @default(autoincrement())
+  description String
+  directionId Int
+  direction   Direction @relation(fields: [directionId], references: [id])
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Document {
+  id           Int      @id @default(autoincrement())
+  name         String
+  description  String?
+  type         String
+  size         Int
+  case         Case     @relation(fields: [caseId], references: [id])
+  caseId       Int
+}
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  content   String
+  caseId    Int
+  case      Case     @relation(fields: [caseId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CaseProsecutor {
+  id     Int  @id @default(autoincrement())
+  caseId Int
+  case   Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([caseId, userId])
+  @@map("case_prosecutors")
+}
+
+model CaseParalegalOfficer {
+  id     Int  @id @default(autoincrement())
+  caseId Int
+  case   Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([caseId, userId])
+  @@map("case_paralegal_officers")
+}
+
+model RecentCase {
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  caseId   Int
+  case     Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  openedAt DateTime @default(now())
+
+  @@unique([userId, caseId])
+  @@map("recent_cases")
+}

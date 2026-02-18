@@ -1,0 +1,32 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set pageName = "Description" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: "/cases/:caseId/tasks" | replace(':caseId', _case.id)
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <span class="govuk-caption-l">{{_case.reference}} - add reminder</span>
+      <form method="post">
+        {{ govukCharacterCount({
+          name: "addTask[description]",
+          id: "task-description",
+          maxlength: 5000,
+          label: {
+            text: pageName,
+            isPageHeading: true,
+            classes: "govuk-label--l"
+          },
+          value: data.addTask.description
+        }) }}
+        {{ govukButton({ text: "Continue" }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

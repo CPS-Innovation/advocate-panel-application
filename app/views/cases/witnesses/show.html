@@ -1,0 +1,643 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set secondaryNavId = 'details' %}
+{% set defendantName = _case.defendants[0].firstName + ' ' + _case.defendants[0].lastName %}
+{% set witnessName = witness.firstName + ' ' + witness.lastName %}
+{% set pageName = witnessName %}
+
+{% block beforeContent %}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: _case.reference,
+        href: "/cases/:caseId" | replace(':caseId', _case.id)
+      },
+      {
+        text: 'Witnesses',
+        href: "/cases/:caseId/witnesses" | replace(':caseId', _case.id)
+      },
+      {
+        text: pageName
+      }
+    ]
+  })}}
+
+  {# {% include "_includes/witness/identity-bar.njk" %} #}
+{% endblock %}
+
+{% block content %}
+  {{ govukNotificationBanner({
+    type: "success",
+    text: flash
+  }) if flash.length }}
+  {# {% include "_includes/witness/navigation.njk" %} #}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">
+        {{ pageName }}
+        {% if witness.isVictim %}
+          {{ govukTag({ text: 'Victim' })}}
+        {% endif %}
+        {% if witness.isKeyWitness %}
+          {{ govukTag({ text: 'Key witness' })}}
+        {% endif %}
+        {% if witness.isAppearingInCourt %}
+          {{ govukTag({ text: 'Required to attend court' })}}
+        {% endif %}
+        {% if witness.isAppearingInCourt == false %}
+          {{ govukTag({ text: 'Not required to attend court' })}}
+        {% endif %}
+        {% if witness.hasSection9Statement %}
+          {{ govukTag({ text: 'Section 9' })}}
+        {% endif %}
+      </h1>
+
+      {% if witness.isAppearingInCourt == true %}
+        {# <p>Witness called.</p> #}
+        <p><a class="govuk-link--no-visited-state" href="/cases/{{_case.id}}/witnesses/{{witness.id}}/mark-as-not-required-to-attend-court">Mark as not required to attend court</a></p>
+      {% elseif witness.isAppearingInCourt == false %}
+        {# <p>Witness dewarned.</p> #}
+        <p><a class="govuk-link--no-visited-state" href="/cases/{{_case.id}}/witnesses/{{witness.id}}/mark-as-required-to-attend-court">Mark as required to attend court</a></p>
+      {% else %}
+        <p><a class="govuk-link--no-visited-state" href="/cases/{{_case.id}}/witnesses/{{witness.id}}/mark-as-required-to-attend-court">Mark as required to attend court</a></p>
+      {% endif %}
+
+      {% set witnessTypeValue %}
+        {% set hasTypes = witness.isChild or witness.isExpert or witness.isInterpreter or witness.isPolice or witness.isProfessional or witness.isPrisoner or witness.isVulnerable or witness.isIntimidated %}
+
+        {% if hasTypes %}
+          <ul class="govuk-list govuk-list--bullet">
+            {% if witness.isChild %}
+              <li>Child</li>
+            {% endif %}
+            {% if witness.isExpert %}
+              <li>Expert</li>
+            {% endif %}
+            {% if witness.isInterpreter %}
+              <li>Interpreter</li>
+            {% endif %}
+            {% if witness.isPolice %}
+              <li>Police</li>
+            {% endif %}
+            {% if witness.isProfessional %}
+              <li>Professional</li>
+            {% endif %}
+            {% if witness.isPrisoner %}
+              <li>Prisoner</li>
+            {% endif %}
+            {% if witness.isVulnerable %}
+              <li>Vulnerable</li>
+            {% endif %}
+            {% if witness.isIntimidated %}
+              <li>Intimidated</li>
+            {% endif %}
+          </ul>
+        {% else %}
+          Not entered
+        {% endif %}
+      {% endset %}
+
+      {# <h2 class="govuk-heading-m govuk-!-margin-top-7">Details</h2> #}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Title"
+            },
+            value: {
+              text: witness.title or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "title"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "First name"
+            },
+            value: {
+              text: witness.firstName
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "first name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Last name"
+            },
+            value: {
+              text: witness.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "last name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Date of birth"
+            },
+            value: {
+              text: witness.dateOfBirth | isoDateString | govukDate if witness.dateOfBirth else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Gender"
+            },
+            value: {
+              text: witness.gender or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "gender"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Ethnicity"
+            },
+            value: {
+              text: witness.ethnicity | replace("_", " ") if witness.ethnicity else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "ethnicity"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Preferred language"
+            },
+            value: {
+              text: witness.preferredLanguage or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "preferred language"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Witness relevant"
+            },
+            value: {
+              text: "Yes" if witness.isRelevant == true else "No"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "witness relevant"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Attendance at court issues"
+            },
+            value: {
+              text: witness.attendanceIssues or "Not entered"
+            }
+          },
+          {
+            key: {
+              text: "Previous transgressions"
+            },
+            value: {
+              text: witness.previousTransgressions or "Not entered"
+            }
+          },
+          {
+            key: {
+              text: "ACRO convictions"
+            },
+            value: {
+              text: "Yes" if witness.acroConvictions == true else "No"
+            }
+          },
+          {
+            key: {
+              text: "Type"
+            },
+            value: {
+              html: witnessTypeValue
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "type"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      {% if witness.isVictim %}
+        <h2 class="govuk-heading-m govuk-!-margin-top-7">Victim information</h2>
+
+        {% set victimPersonalStatementValue %}
+          {% if witness.victimExplained != null and witness.victimOfferResponse %}
+            {% if witness.victimExplained == true %}
+              Explained - {{ witness.victimOfferResponse }}
+            {% else %}
+              Not explained - {{ witness.victimOfferResponse }}
+            {% endif %}
+          {% else %}
+            Not entered
+          {% endif %}
+        {% endset %}
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Victim code"
+              },
+              value: {
+                text: witness.victimCode or "Not entered"
+              }
+            },
+            {
+              key: {
+                text: "Victim personal statement"
+              },
+              value: {
+                text: victimPersonalStatementValue | trim
+              }
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <h2 class="govuk-heading-m">Contact details</h2>
+
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "CPS contact allowed"
+            },
+            value: {
+              text: "Yes" if witness.isCpsContactAllowed == true else "No"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "if CPS contact is allowed"
+                }
+              ]
+            }
+          },
+           {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: ([witness.addressLine1, witness.addressLine2, witness.addressTown, witness.addressPostcode] | reject("equalto", none) | reject("equalto", "") | join("<br>")) if witness.addressLine1 else "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "address"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Preferred contact method"
+            },
+            value: {
+              text: witness.preferredContactMethod or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "preferred contact method"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Mobile number"
+            },
+            value: {
+              text: witness.mobileNumber or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "mobile number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Home number"
+            },
+            value: {
+              text: witness.homeNumber or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "home number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Work number"
+            },
+            value: {
+              text: witness.workNumber or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "work number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Fax number"
+            },
+            value: {
+              text: witness.faxNumber or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "fax number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Other number"
+            },
+            value: {
+              text: witness.otherNumber or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "other number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: witness.emailAddress or "Not entered"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "email address"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m govuk-!-margin-top-7">Statements</h2>
+
+      {% if witness.statements.length > 0 %}
+
+        {% for statement in witness.statements %}
+
+          {% set section9Status = '' %}
+          {% if statement.isMarkedAsSection9 == true %}
+            {% set section9Status = 'Section 9' %}
+          {% elseif statement.isMarkedAsSection9 == false %}
+            {# {% set section9Status = 'Section 9 withdrawn' %} #}
+          {% endif %}
+
+          <h3 class="govuk-heading-s govuk-!-margin-bottom-2">
+            Statement {{loop.index}}
+            {% if section9Status %} {{ govukTag({ text: section9Status, classes: 'govuk-!-margin-left-1' }) }}{% endif %}
+          </h3>
+
+          <div class="govuk-button-group govuk-!-margin-bottom-0">
+            <a class="govuk-link govuk-link--no-visited-state" href="#">View statement</a>
+            {% if statement.isMarkedAsSection9 == true %}
+            <a class="govuk-link govuk-link--no-visited-state" href="/cases/{{_case.id}}/witnesses/{{witness.id}}/statements/{{statement.id}}/unmark-as-section9">Unmark as Section 9</a>
+          {% elseif statement.isMarkedAsSection9 == false %}
+            <a class="govuk-link govuk-link--no-visited-state" href="/cases/{{_case.id}}/witnesses/{{witness.id}}/statements/{{statement.id}}/mark-as-section9">Mark as Section 9</a>
+          {% else %}
+            <a class="govuk-link govuk-link--no-visited-state" href="/cases/{{_case.id}}/witnesses/{{witness.id}}/statements/{{statement.id}}/mark-as-section9">Mark as Section 9</a>
+          {% endif %}
+          </div>
+
+          {% if statement.isUsedAsEvidence == true %}
+            {% set useAsEvidenceValue = 'Used' %}
+          {% elseif statement.isUsedAsEvidence == false %}
+            {% set useAsEvidenceValue = 'Unused' %}
+          {% else %}
+            {% set useAsEvidenceValue = 'None' %}
+          {% endif %}
+
+          {{ govukSummaryList({
+            classes: "govuk-!-margin-top-0 govuk-!-margin-bottom-7",
+            rows: [
+              {
+                key: {
+                  html: 'Statement date'
+                },
+                value: {
+                  html: statement.receivedDate | isoDateString | govukDate
+                }
+              },
+              {
+                key: {
+                  html: 'Material status'
+                },
+                value: {
+                  html: useAsEvidenceValue
+                }
+              }
+            ]
+          })}}
+
+        {% endfor %}
+      {% else %}
+        <p class="govuk-body">No statements.</p>
+      {% endif %}
+
+      {% if witness.dcf %}
+        <h2 class="govuk-heading-m govuk-!-margin-top-7">Availability</h2>
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Available from"
+              },
+              value: {
+                text: witness.courtAvailabilityStartDate | isoDateString | govukDate
+              }
+            },
+            {
+              key: {
+                text: "Available to"
+              },
+              value: {
+                text: witness.courtAvailabilityEndDate | isoDateString | govukDate
+              }
+            },
+            {
+              key: {
+                text: "Unavailable dates"
+              },
+              value: {
+                text: "Not entered"
+              }
+            }
+          ]
+        }) }}
+
+        <h2 class="govuk-heading-m govuk-!-margin-top-7">Special measures</h2>
+
+        {% if witness.specialMeasures.length > 0 %}
+          {% for specialMeasure in witness.specialMeasures %}
+            <h3 class="govuk-heading-s">{{ specialMeasure.type }}</h3>
+
+            {% set specialMeasureRows = [
+              {
+                key: {
+                  text: "Details"
+                },
+                value: {
+                  text: specialMeasure.details
+                }
+              },
+              {
+                key: {
+                  text: "Needs"
+                },
+                value: {
+                  text: specialMeasure.needs
+                }
+              },
+              {
+                key: {
+                  text: "Is a meeting required?"
+                },
+                value: {
+                  text: "Yes" if specialMeasure.requiresMeeting == true else "No"
+                }
+              }
+            ] %}
+
+            {% if specialMeasure.requiresMeeting %}
+              {% set specialMeasureRows = (specialMeasureRows.push({
+                key: {
+                  text: "Meeting URL"
+                },
+                value: {
+                  text: specialMeasure.meetingUrl or "Not entered"
+                }
+              }), specialMeasureRows) %}
+            {% endif %}
+
+            {% set specialMeasureRows = (specialMeasureRows.push({
+              key: {
+                text: "Apply for reporting restrictions?"
+              },
+              value: {
+                text: "Yes" if specialMeasure.hasAppliedForReportingRestrictions == true else "No"
+              }
+            }), specialMeasureRows) %}
+
+            {{ govukSummaryList({
+              classes: "govuk-!-margin-bottom-7",
+              rows: specialMeasureRows
+            }) }}
+          {% endfor %}
+        {% else %}
+          <p class="govuk-body">No special measures.</p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

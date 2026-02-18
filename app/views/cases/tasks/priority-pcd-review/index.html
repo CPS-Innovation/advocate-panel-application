@@ -1,0 +1,51 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'cases' %}
+{% set caption %} {{task.case.reference}} - Priority PCD review {% endset %}
+{% set pageName = "Decision" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <span class="govuk-caption-l">{{caption}}</span>
+      <form method="post">
+        {{ govukRadios({
+          name: "completePriorityPcdReview[decision]",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          value: data.completePriorityPcdReview.decision,
+          items: [
+            {
+              value: "NFS compliant",
+              text: "NFS compliant"
+            },
+            {
+              value: "NFS non-compliant",
+              text: "NFS non-compliant"
+            },
+            {
+              value: "Priority / Red rejection",
+              text: "Priority / Red rejection"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

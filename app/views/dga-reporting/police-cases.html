@@ -1,0 +1,113 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set secondaryNavId = 'dga' %}
+{% set pageName = 'Cases that failed DGA' %}
+
+{% block beforeContent %}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Director’s Guidance Assessment (DGA) reporting",
+        href: "/dga-reporting"
+      },
+      {
+        text: monthName,
+        href: "/dga-reporting/" + monthKey
+      },
+      {
+        text: pageName
+      }
+    ]
+  }) }}
+{% endblock beforeContent %}
+
+{% block content %}
+  {% include "_includes/success-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-l">{{ policeUnitName }}</span>
+      <h1 class="govuk-heading-l">{{ pageName }} ({{ totalCases }})</h1>
+
+      {% include "_includes/dga-reporting/search-form.njk" %}
+
+      <form method="post">
+        <div class="govuk-button-group govuk-!-margin-top-7">
+          {{ govukButton({
+            text: "Mark as not disputed",
+            classes: "govuk-button--secondar"
+          }) }}
+        </div>
+
+        <div class="app-list app-list--with-checkboxes">
+          {% for _case in cases %}
+            <div class="app-list__item">
+              {{ govukCheckboxes({
+                classes: "govuk-checkboxes--small app-list__checkbox",
+                name: "markAsNotDisputed",
+                items: [
+                  {
+                    value: _case.id,
+                    html: '<span class="govuk-visually-hidden">' + _case.reference + '</span>'
+                  }
+                ]
+              }) }}
+              <div class="app-list__content">
+                <h2 class="govuk-heading-s govuk-!-margin-bottom-0">
+                  <div>
+                    <a href="/dga-reporting/{{ monthKey }}/{{ policeUnitId }}/{{ _case.id }}" class="govuk-link--no-visited-state">
+                      {{ _case.reference }}
+                    </a>
+                  </div>
+                  <div class="app-list__tag">
+                    {{ govukTag({
+                      text: _case.reportStatus,
+                      classes: _case.reportStatus | completionStatusTagClass
+                    }) }}
+                  </div>
+                </h2>
+
+                {{ govukSummaryList({
+                  classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                  rows: [
+                    {
+                      key: {
+                        text: "Total failures"
+                      },
+                      value: {
+                        text: _case.outcomesTotal
+                      }
+                    },
+                    {
+                      key: {
+                        text: "Failures without outcomes"
+                      },
+                      value: {
+                        text: _case.outcomesNotRecorded
+                      }
+                    } if _case.reportStatus == "In progress"
+                  ]
+                }) }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </form>
+
+      {% include "_includes/pagination.njk" %}
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script>
+    new App.CheckboxSelector({
+     container: $('.govuk-button-group'),
+     injectRule: 'prepend', 
+     checkboxes: $('.govuk-checkboxes__input')
+    })
+
+  </script>
+{% endblock %}

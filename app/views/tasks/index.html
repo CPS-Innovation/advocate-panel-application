@@ -1,0 +1,273 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'tasks' %}
+{% set pageName = "Tasks (:total)" | replace(':total', totalTasks | formatNumber) %}
+
+{% block skipLink %}
+  {{super()}}
+  {{ govukSkipLink({
+    text: "Skip to task search",
+    href: "#app-task-search"
+  }) }} 
+  {{ govukSkipLink({
+    text: "Skip to task list",
+    href: "#app-task-list"
+  }) }} 
+{% endblock %}
+
+{% block content %}
+    <h1 class="govuk-heading-l">
+      {{ pageName }}
+    </h1>
+
+    <div class="app-filter-layout">
+      <div class="app-filter-layout__filter">
+        {% include "_includes/task/filter-panel.njk" %}
+      </div>
+      <div class="app-filter-layout__content">
+
+        <div class="app-action-bar">
+          <div class="app-action-bar__filter"></div>
+        </div>
+
+        {% include "_includes/task/search-form.njk" %}
+        {% include "_includes/task/sort-controls.njk" %}
+
+        {% if tasks.length %}
+          <div class="app-list" id="app-task-list">
+            {% for task in tasks %}
+            {# Show group heading when group changes or on first task #}
+            {% if loop.first or task.groupKey != tasks[loop.index0 - 1].groupKey %}
+              <h2 class="govuk-heading-m govuk-!-margin-top-7 govuk-!-margin-bottom-0">{{task.groupHeading}}</h2>
+            {% endif %}
+            <div class="app-list__item">
+                {% set taskNameDisplay %}
+                  {% if task.name.length > 115 %}
+                    {{ task.name | truncate(115) }}
+                  {% else %}
+                    {{ task.name }}
+                  {% endif %}
+                {% endset %}
+
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                  <div>
+                    <a href="/cases/{{task.case.id}}/tasks/{{task.id}}" class="govuk-link--no-visited-state">{{ taskNameDisplay | trim }}</a>
+                  </div>
+
+                  <div class="app-list__tag">
+                    {# {{ govukTag({ text: task.severity, classes: task.severity | severityTagClass })}} #}
+                    {% if task.isUrgent %}
+                      {{ govukTag({ text: 'Urgent', classes: 'govuk-tag--red govuk-!-margin-left-' })}}
+                    {% endif %}
+                  </div>
+
+                </h3>
+
+                {% set defendantsValue %}
+                  {{task.case.defendants[0].firstName}} {{task.case.defendants[0].lastName}}
+                  {% if task.case.defendants.length > 1 %}
+                    and {{task.case.defendants.length - 1}} more
+                  {% endif %}
+                {% endset %}
+
+                {% set ownerValue %}
+                  {% if task.assignedToUser %}
+                    {{task.assignedToUser.firstName}} {{task.assignedToUser.lastName}}
+                  {% elif task.assignedToTeam %}
+                    {{task.assignedToTeam.name}} ({{task.assignedToTeam.unit.name}})
+                  {% endif %}
+                {% endset %}
+
+                {% set dueDateValue %}
+                  {{ task.dueDate | isoDateString | govukDateTime }}
+                  {% if task.severity == 'Overdue' or task.severity == 'Critically overdue' %}
+                    ({{ task.severity | lower }})
+                  {% else %}
+                    ({{ task.dueDate | daysUntil }})
+                  {% endif %}
+                {% endset %}
+
+                {{ govukSummaryList({
+                  classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                  rows: [
+                    {
+                      key: {
+                        text: 'URN'
+                      },
+                      value: {
+                        text: task.case.reference
+                      }
+                    },
+                    {
+                      key: {
+                        text: 'Operation name'
+                      },
+                      value: {
+                        text: task.case.operationName
+                      }
+                    } if task.case.operationName,
+                    {
+                      key: {
+                        text: 'Defendant'
+                      },
+                      value: {
+                        html: defendantsValue
+                      }
+                    },
+                    {
+                      key: {
+                        text: 'Reminder date'
+                      },
+                      value: {
+                        html: (task.reminderDate | isoDateString | govukDateTime)
+                      }
+                    } if 1==2,
+                    {
+                      key: {
+                        text: 'Due date'
+                      },
+                      value: {
+                        html: dueDateValue
+                      }
+                    },
+                    {
+                      key: {
+                        text: 'Escalation date'
+                      },
+                      value: {
+                        html: (task.escalationDate | isoDateString | govukDateTime)
+                      }
+                    } if 1==2,
+                    {
+                      key: {
+                        text: 'Custody time limit'
+                      },
+                      value: {
+                        html: (task.case.custodyTimeLimit | isoDateString | govukDateTime) + ' (' + (task.case.custodyTimeLimit | daysUntil) + ')'
+                      }
+                    } if task.case.custodyTimeLimit,
+                    {
+                      key: {
+                        text: 'Statutory time limit'
+                      },
+                      value: {
+                        html: (task.case.statutoryTimeLimit | isoDateString | govukDateTime) + ' (' + (task.case.statutoryTimeLimit | daysUntil) + ')'
+                      }
+                    } if task.case.statutoryTimeLimit,
+                    {
+                      key: {
+                        text: 'PACE clock'
+                      },
+                      value: {
+                        html: (task.case.paceClock | isoDateString | govukDateTime) + ' (' + (task.case.paceClock | paceClockStatus) + ')'
+                      }
+                    } if task.case.paceClock,
+                    {
+                      key: {
+                        text: 'Reason for marking as urgent'
+                      },
+                      value: {
+                        text: task.urgentNote
+                      }
+                    } if task.isUrgent,
+                    {
+                      key: {
+                        html: 'Owner'
+                      },
+                      value: {
+                        html: ownerValue
+                      }
+                    },
+                    {
+                      key: {
+                        html: 'Unit'
+                      },
+                      value: {
+                        html: task.case.unit.name
+                      }
+                    },
+                    {
+                      key: {
+                        html: 'Reminder type'
+                      },
+                      value: {
+                        html: 'Reminder' if task.reminderType == 'Standard' else 'Reminder (asset recovery)'
+                      }
+                    } if task.reminderType,
+                    {
+                      key: {
+                        html: 'Latest note'
+                      },
+                      value: {
+                        html: task.notes[0].description
+                      }
+                    } if task.notes and task.notes.length > 0,
+                    {
+                      key: {
+                        html: 'Hearing date'
+                      },
+                      value: {
+                        html: (task.case.hearings[0].startDate | isoDateString | govukDateTime) + ' <span>(' + (task.case.hearings[0].startDate | daysUntil) + ')</span>'
+                      }
+                    } if task.case.hearings and task.case.hearings.length > 0,
+                    {
+                      key: {
+                        html: 'Hearing type'
+                      },
+                      value: {
+                        html: task.case.hearings[0].type
+                      }
+                    } if task.case.hearings and task.case.hearings.length > 0
+                  ]
+                })}}
+
+
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p>There are no results.</p>
+        {% endif %}
+
+        {% include "_includes/pagination.njk" %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script>
+    new App.FilterToggleButton({
+      bigModeMediaQuery: '(min-width: 48.063em)',
+      startHidden: false,
+      toggleButton: {
+        container: $('.app-action-bar__filter'),
+        showText: 'Show filter',
+        hideText: 'Hide filter',
+        classes: 'govuk-button--secondary govuk-!-margin-bottom-3'
+      },
+      closeButton: {
+        container: $('.app-filter__header-action'),
+        text: 'Close'
+      },
+      filter: {
+        container: $('.app-filter-layout__filter')
+      }
+    })
+
+    new App.ListFilter({
+      container: $('.owner-filter'),
+      textBox: {
+        label: 'Find owner'
+      }
+    })
+
+    new App.ListFilter({
+      container: $('.task-name-filter'),
+      textBox: {
+        label: 'Find task'
+      }
+    })
+  </script>
+{% endblock %}

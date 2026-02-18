@@ -1,0 +1,107 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set secondaryNavId = 'defendants' %}
+{% set pageName = "Defendants (:total)" | replace(':total', _case.defendants.length | formatNumber) %}
+
+{% block beforeContent %}
+  {% include "_includes/case/identity-bar.njk" %}
+{% endblock %}
+
+{% block content %}
+  {% include "_includes/success-banner.njk" %}
+  {# {% include "_includes/case/header.njk" %} #}
+  {% include "_includes/case/navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {% if _case.defendants.length %}
+        <div class="app-list">
+          {% for defendant in _case.defendants %}
+          <div class="app-list__item">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <a href="/cases/{{_case.id}}/defendants/{{defendant.id}}" class="govuk-link--no-visited-state">{{defendant.firstName}} {{defendant.lastName}}</a>
+              </h2>
+
+              {% set chargesList %}
+                <ul class="govuk-list govuk-list--bullet">
+                  {% for charge in defendant.charges %}
+                    <li>{{ charge.chargeCode }}: {{ charge.description }}</li>
+                  {% endfor %}
+                </ul>
+              {% endset %}
+
+              {% set defenceLawyerValue %}
+                {% if defendant.defenceLawyer %}
+                  {{ defendant.defenceLawyer.firstName }} {{ defendant.defenceLawyer.lastName }}, {{ defendant.defenceLawyer.organisation }}
+                {% else %}
+                  Not assigned
+                {% endif %}
+              {% endset %}
+
+              {% set dobValue %}
+                {% if defendant.dateOfBirth %}
+                  {{ defendant.dateOfBirth | isoDateString | govukDate }} ({{ defendant.dateOfBirth | age }} old)
+                {% endif %}
+              {% endset %}
+
+              {% set remandStatusValue %}
+                {% if defendant.remandStatus == 'UNCONDITIONAL_BAIL' %}
+                  Unconditional bail
+                {% elif defendant.remandStatus == 'CONDITIONAL_BAIL' %}
+                  Conditional bail
+                {% elif defendant.remandStatus == 'REMANDED_IN_CUSTODY' %}
+                  Remanded in custody
+                {% elif defendant.remandStatus == 'REMANDED_IN_SECURE_UNIT' %}
+                  Remanded in secure unit
+                {% endif %}
+              {% endset %}
+
+              {{ govukSummaryList({
+                classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                rows: [
+                  {
+                    key: {
+                      html: 'Date of birth'
+                    },
+                    value: {
+                      html: dobValue
+                    }
+                  } if defendant.dateOfBirth,
+                  {
+                    key: {
+                      html: 'Remand status'
+                    },
+                    value: {
+                      html: remandStatusValue
+                    }
+                  } if defendant.remandStatus,
+                  {
+                    key: {
+                      html: 'Defence lawyer'
+                    },
+                    value: {
+                      html: defenceLawyerValue
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Charge'
+                    },
+                    value: {
+                      html: chargesList
+                    }
+                  } if defendant.charges.length
+                ]
+              })}}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no defendants.</p>
+      {% endif %}
+
+    </div>
+  </div>
+{% endblock %}

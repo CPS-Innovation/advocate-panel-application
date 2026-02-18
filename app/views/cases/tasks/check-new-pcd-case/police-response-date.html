@@ -1,0 +1,60 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'cases' %}
+{% set caption %} {{task.case.reference}} - Check new PCD case {% endset %}
+{% set pageName = "Date the police should respond by" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <span class="govuk-caption-l">{{caption}}</span>
+
+      <form method="post">
+        {{ govukDateInput({
+          id: "policeResponseDate",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: "For example, 31 3 2025"
+          },
+          items: [
+            {
+              name: "completeCheckNewPcdCase[policeResponseDate][day]",
+              label: "Day",
+              value: data.completeCheckNewPcdCase.policeResponseDate.day,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "completeCheckNewPcdCase[policeResponseDate][month]",
+              label: "Month",
+              value: data.completeCheckNewPcdCase.policeResponseDate.month,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "completeCheckNewPcdCase[policeResponseDate][year]",
+              label: "Year",
+              value: data.completeCheckNewPcdCase.policeResponseDate.year,
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

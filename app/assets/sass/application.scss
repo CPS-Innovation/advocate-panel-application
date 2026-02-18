@@ -1,0 +1,237 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+// 
+
+@import "components/hidden.scss";
+@import "components/header.scss";
+
+// Filter bits
+@import "components/action-bar.scss";
+@import "components/filter-layout.scss";
+@import "components/filter-panel.scss";
+@import "components/list-filter.scss";
+
+// Identity bar
+@import "components/button-menu.scss";
+@import "components/identity-bar.scss";
+
+// Lists
+@import "components/list.scss";
+
+// Search
+@import "components/search-form.scss";
+
+// Logo
+@import "components/brand";
+
+h1 .govuk-tag {
+  position: relative;
+  top: -7px;
+}
+
+.app-overview-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: govuk-spacing(4);
+  grid-auto-rows: 1fr;
+
+  @include govuk-media-query($from: tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.app-overview-card {
+  background-color: govuk-colour("light-grey");
+  padding: govuk-spacing(2);
+  text-decoration: none;
+
+  @include govuk-font($size: 19);
+
+  @include govuk-media-query($from: desktop) {
+    padding: govuk-spacing(4);
+  }
+
+  &:focus, &:link:focus, &:visited:focus {
+    color:  $govuk-text-colour;
+    background:  $govuk-focus-colour;
+  }
+
+}
+
+.app-overview-card, .app-overview-card:visited {
+  color: inherit;
+}
+
+.app-overview-card__count {
+  &, &:link, &:visited {
+    @include govuk-font($size: 36, $weight: bold, $tabular: true);
+  }
+  display: block;
+}
+
+.app-overview-card__status {
+  // text-decoration: underline;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: none;
+}
+
+
+$statuses: (
+  "grey": (
+    "colour":            govuk-shade(govuk-colour("dark-grey", $legacy: "grey-1"), 30),
+    "background-colour": govuk-tint(govuk-colour("dark-grey", $legacy: "grey-1"), 90),
+    "hover":             govuk-tint(govuk-colour("dark-grey", $legacy: "grey-1"), 80)
+  ),
+  "turquoise": (
+    "colour":            govuk-shade(govuk-colour("turquoise"), 60),
+    "background-colour": govuk-tint(govuk-colour("turquoise"), 70),
+    "hover":             govuk-tint(govuk-colour("turquoise"), 57),
+  ),
+  "blue": (
+    "colour":            govuk-shade(govuk-colour("blue"), 30),
+    "background-colour": govuk-tint(govuk-colour("blue"), 80),
+    "hover":             govuk-tint(govuk-colour("blue"), 70)
+  ),
+  "yellow": (
+    "colour":            govuk-shade(govuk-colour("yellow"), 65),
+    "background-colour": govuk-tint(govuk-colour("yellow"), 75),
+    "hover":             govuk-tint(govuk-colour("yellow"), 60)
+  ),
+  "red": (
+    "colour":            govuk-shade(govuk-colour("red"), 30),
+    "background-colour": govuk-tint(govuk-colour("red"), 80),
+    "hover":             govuk-tint(govuk-colour("red"), 70)
+  ),
+  "purple": (
+    "colour":            govuk-shade(govuk-colour("purple"), 20),
+    "background-colour": govuk-tint(govuk-colour("purple"), 80),
+    "hover":             govuk-tint(govuk-colour("purple"), 70)
+  ),
+  "orange": (
+    "colour":            govuk-shade(govuk-colour("orange"), 55),
+    "background-colour": govuk-tint(govuk-colour("orange"), 70),
+    "hover":             govuk-tint(govuk-colour("orange"), 55)
+  ),
+  "green": (
+    "colour":            govuk-shade(govuk-colour("green"), 20),
+    "background-colour": govuk-tint(govuk-colour("green"), 80),
+    "hover":             govuk-tint(govuk-colour("green"), 70)
+  ),
+  "pink": (
+    "colour":            govuk-shade(govuk-colour("pink"), 30),
+    "background-colour": govuk-tint(govuk-colour("pink"), 80),
+    "hover":             govuk-tint(govuk-colour("pink"), 70)
+  ),
+);
+
+@each $status, $data in $statuses
+{
+  .app-overview-card--#{$status} {
+    &, &:link, &:visited {
+      color: map-get($data, "colour");
+      background: map-get($data, "background-colour");
+    }
+    &:hover {
+      background: map-get($data, "hover");
+    }
+  }
+}
+
+.app-secondary-navigation {
+  margin-top: -15px;
+
+  @include govuk-media-query($from: tablet) {
+    margin-top: -35px;
+  }
+}
+
+.govuk-summary-list li:last-child {
+  margin-bottom: 0;
+}
+
+.x-govuk-secondary-navigation__list-item {
+  @include govuk-media-query($from: desktop) {
+    padding: 10px 0 15px;
+  }
+}
+
+.x-govuk-secondary-navigation__list-item--current {
+  @include govuk-media-query($from: desktop) {
+    padding-bottom: 10px;
+  }
+}
+
+.govuk-summary-card .govuk-summary-list:last-child {
+  margin-bottom: 0 !important;
+}
+
+.govuk-summary-card {
+  
+  .govuk-tabs__panel {
+    border: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+.app-activity-log__item:first-child {
+  border-top: 1px solid govuk-colour("mid-grey");
+  padding-top: 20px;
+}
+
+.app-activity-log__item {
+  border-bottom: 1px solid govuk-colour("mid-grey");
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.app-activity-log__box {
+  // border-left: 10px solid govuk-colour("mid-grey");
+  padding: 15px 20px 10px 20px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+.app-activity-log__description .govuk-summary-list {
+  margin-bottom: 0;
+}
+
+.app-activity-log__box .govuk-summary-list .govuk-summary-list__row:last-child,
+.app-activity-log__box .govuk-summary-list .govuk-summary-list__row:last-child {
+  border-bottom: 0;
+}
+
+.app-log-card__note--link {
+  margin-bottom: 0;
+}
+
+.govuk-summary-card__content .govuk-summary-list__row:last-of-type {
+  border-bottom: 1px solid #b1b4b6 !important;
+}
+
+.govuk-summary-card__content .govuk-summary-list:last-of-type {
+  margin-bottom: 15px !important;
+}
+
+.govuk-template--rebranded .govuk-header {
+  // background: govuk-colour("black") !important;
+}
+
+.govuk-template--rebranded .govuk-header__link--homepage:not(:focus) {
+  // background: govuk-colour("black") !important;
+}
+
+.app-inset-action {
+  margin-top: -30px;
+}
+
+.app-overview-section {
+  margin-bottom: govuk-spacing(9);
+}
+
+.govuk-header__product-name {
+  display: none; // Temp
+}

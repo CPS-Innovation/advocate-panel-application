@@ -1,0 +1,175 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set secondaryNavId = 'tasks' %}
+{% set pageName = "Tasks (:total)" | replace(':total', _case.tasks.length | formatNumber) %}
+
+{% block beforeContent %}
+  {% include "_includes/case/identity-bar.njk" %}
+{% endblock %}
+
+{% block content %}
+  {% include "_includes/success-banner.njk" %}
+  {# {% include "_includes/case/header.njk" %} #}
+  {% include "_includes/case/navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {{ govukButton({
+        text: "Add reminder",
+        href: '/cases/:caseId/tasks/new' | replace(':caseId', _case.id)
+      }) }}
+
+      {% if _case.tasks.length %}
+        <div class="app-list">
+          {% for task in _case.tasks %}
+          <div class="app-list__item">
+              {% set taskNameDisplay %}
+                {% if task.name.length > 115 %}
+                  {{ task.name | truncate(115) }}
+                {% else %}
+                  {{ task.name }}
+                {% endif %}
+              {% endset %}
+
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <div>
+                  <a href="/cases/{{_case.id}}/tasks/{{task.id}}" class="govuk-link--no-visited-state">{{ taskNameDisplay | trim }}</a>
+                </div>
+
+                <div class="app-list__tag">
+                  {# {{ govukTag({ text: task.severity, classes: task.severity | severityTagClass })}} #}
+                  {% if task.isUrgent %}
+                    {{ govukTag({ text: 'Urgent', classes: 'govuk-tag--red govuk-!-margin-left-' })}}
+                  {% endif %}
+                </div>
+              </h3>
+
+              {% set ownerValue %}
+                {% if task.assignedToUser %}
+                  {{task.assignedToUser.firstName}} {{task.assignedToUser.lastName}}
+                {% elif task.assignedToTeam %}
+                  {{task.assignedToTeam.name}} ({{task.assignedToTeam.unit.name}})
+                {% endif %}
+              {% endset %}
+
+              {% set dueDateValue %}
+                {{ task.dueDate | isoDateString | govukDateTime }}
+                {% if task.severity == 'Overdue' or task.severity == 'Critically overdue' %}
+                  ({{ task.severity | lower }})
+                {% else %}
+                  ({{ task.dueDate | daysUntil }})
+                {% endif %}
+              {% endset %}
+
+              {{ govukSummaryList({
+                classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                rows: [
+                  {
+                    key: {
+                      text: 'Reminder date'
+                    },
+                    value: {
+                      html: (task.reminderDate | isoDateString | govukDateTime)
+                    }
+                  } if 1==2,
+                  {
+                    key: {
+                      text: 'Due date'
+                    },
+                    value: {
+                      html: dueDateValue
+                    }
+                  },
+                  {
+                    key: {
+                      text: 'Escalation date'
+                    },
+                    value: {
+                      html: (task.escalationDate | isoDateString | govukDateTime)
+                    }
+                  } if 1==2,
+                  {
+                    key: {
+                      text: 'Custody time limit'
+                    },
+                    value: {
+                      html: (_case.custodyTimeLimit | isoDateString | govukDateTime) + ' (' + (_case.custodyTimeLimit | daysUntil) + ')'
+                    }
+                  } if _case.custodyTimeLimit,
+                  {
+                    key: {
+                      text: 'Statutory time limit'
+                    },
+                    value: {
+                      html: (_case.statutoryTimeLimit | isoDateString | govukDateTime) + ' (' + (_case.statutoryTimeLimit | daysUntil) + ')'
+                    }
+                  } if _case.statutoryTimeLimit,
+                  {
+                    key: {
+                      text: 'PACE clock'
+                    },
+                    value: {
+                      html: (_case.paceClock | isoDateString | govukDateTime) + ' (' + (_case.paceClock | paceClockStatus) + ')'
+                    }
+                  } if _case.paceClock,
+                  {
+                    key: {
+                      text: 'Reason for marking as urgent'
+                    },
+                    value: {
+                      text: task.urgentNote
+                    }
+                  } if task.isUrgent,
+                  {
+                    key: {
+                      html: 'Owner'
+                    },
+                    value: {
+                      html: ownerValue
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Reminder type'
+                    },
+                    value: {
+                      html: 'Reminder' if task.reminderType == 'Standard' else 'Reminder (asset recovery)'
+                    }
+                  } if task.reminderType,
+                  {
+                    key: {
+                      html: 'Latest note'
+                    },
+                    value: {
+                      html: task.notes[0].description
+                    }
+                  } if task.notes and task.notes.length > 0,
+                  {
+                    key: {
+                      html: 'Hearing date'
+                    },
+                    value: {
+                      html: (_case.hearings[0].startDate | isoDateString | govukDateTime) + ' <span>(' + (_case.hearings[0].startDate | daysUntil) + ')</span>'
+                    }
+                  } if _case.hearings and _case.hearings.length > 0,
+                  {
+                    key: {
+                      html: 'Hearing type'
+                    },
+                    value: {
+                      html: _case.hearings[0].type
+                    }
+                  } if _case.hearings and _case.hearings.length > 0
+                ]
+              })}}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no tasks.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

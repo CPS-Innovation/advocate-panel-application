@@ -1,0 +1,128 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'cases' %}
+{% set caption %} {{task.case.reference}} - Early advice manager triage {% endset %}
+{% set pageName = "Check details and complete task" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <span class="govuk-caption-l">{{caption}}</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {# Complex value lookups #}
+
+      {# Prosecutor value lookup (Accept flow) #}
+      {% set prosecutorValue = "" %}
+      {% if data.prosecutor %}
+        {% set selectedProsecutorId = data.prosecutor | int %}
+        {% for prosecutor in prosecutors %}
+          {% if prosecutor.id == selectedProsecutorId %}
+            {% set prosecutorValue = prosecutor.firstName + " " + prosecutor.lastName %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {# Rejection reasons HTML (Reject flow) #}
+      {% set reasonsHtml %}
+        <ul class="govuk-list govuk-list--spaced">
+          {% for reason in data.rejectionReasons %}
+            <li>
+              {% if data.rejectionDetails and data.rejectionDetails[reason] and data.rejectionDetails[reason] | trim %}
+                <p class="govuk-!-margin-bottom-0">{{ reason }}:</p>
+                <p>{{ data.rejectionDetails[reason] }}</p>
+              {% else %}
+                {{ reason }}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Decision" },
+            value: { text: data.decision },
+            actions: {
+              items: [{
+                href: '/cases/:caseId/tasks/:taskId/early-advice-manager-triage' | replace(':caseId', task.case.id) | replace(':taskId', task.id),
+                text: "Change",
+                visuallyHiddenText: "decision"
+              }]
+            }
+          },
+          {
+            key: { text: "Prosecutor" },
+            value: { text: prosecutorValue },
+            actions: {
+              items: [{
+                href: '/cases/:caseId/tasks/:taskId/early-advice-manager-triage/prosecutor' | replace(':caseId', task.case.id) | replace(':taskId', task.id),
+                text: "Change",
+                visuallyHiddenText: "prosecutor"
+              }]
+            }
+          } if data.decision == "Accept" and data.prosecutor,
+          {
+            key: { text: "Reasons for rejection" },
+            value: { html: reasonsHtml },
+            actions: {
+              items: [{
+                href: '/cases/:caseId/tasks/:taskId/early-advice-manager-triage/reasons-for-rejection' | replace(':caseId', task.case.id) | replace(':taskId', task.id),
+                text: "Change",
+                visuallyHiddenText: "reasons for rejection"
+              }]
+            }
+          } if data.decision == "Reject" and data.rejectionReasons and data.rejectionReasons.length,
+          {
+            key: { text: "Date the police should respond by" },
+            value: { text: data.policeResponseDate | isoDateFromDateInput | govukDateTime },
+            actions: {
+              items: [{
+                href: '/cases/:caseId/tasks/:taskId/early-advice-manager-triage/police-response-date' | replace(':caseId', task.case.id) | replace(':taskId', task.id),
+                text: "Change",
+                visuallyHiddenText: "date the police should respond by"
+              }]
+            }
+          } if data.decision == "Reject" and data.policeResponseDate and data.policeResponseDate.day and data.policeResponseDate.month and data.policeResponseDate.year,
+          {
+            key: { text: "Do you want to create a task to remind you about when the police should respond back to you?" },
+            value: { text: "Yes" if data.createReminderTask == "Yes" else "No" },
+            actions: {
+              items: [{
+                href: '/cases/:caseId/tasks/:taskId/early-advice-manager-triage/create-reminder-task' | replace(':caseId', task.case.id) | replace(':taskId', task.id),
+                text: "Change",
+                visuallyHiddenText: "if you want to create a task to remind you about when the police should respond back to you"
+              }]
+            }
+          } if data.decision == "Reject",
+          {
+            key: { text: "Date you’ll be reminded" },
+            value: { text: data.reminderDueDate | isoDateFromDateInput | govukDateTime },
+            actions: {
+              items: [{
+                href: '/cases/:caseId/tasks/:taskId/early-advice-manager-triage/create-reminder-task' | replace(':caseId', task.case.id) | replace(':taskId', task.id),
+                text: "Change",
+                visuallyHiddenText: "date you’ll be reminded"
+              }]
+            }
+          } if data.decision == "Reject" and data.createReminderTask == "Yes" and data.reminderDueDate and data.reminderDueDate.day and data.reminderDueDate.month and data.reminderDueDate.year
+        ]
+      }) }}
+
+      <form method="post">
+        {{ govukButton({
+          text: "Complete task"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
