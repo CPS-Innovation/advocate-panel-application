@@ -1,8 +1,0 @@
-{
-  "serviceName": "Prosecute a case",
-  "plugins": {
-    "govuk-frontend": {
-      "rebrand": true
-    }
-  }
-}
