@@ -5,13 +5,71 @@
 
 // Add extra styles here
 /* === CPS Header Style === */
+
+
+:root {
+  --ds-color-primary: #1d70b8;
+  --cps-color-theme: #002d9d;
+  --cps-color-theme-background: rgba(255, 255, 255, .1);
+  --cps-color-primary: var(--gds-color-primary);
+  --cps-color-neutral: #0b0c0c;
+}
+
+
+body {
+    font-family: sans-serif, Arial, Verdana, "Trebuchet MS", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 12px;
+    color: #333;
+    background-color: #fff;
+    margin: 20px;
+}
+
+@font-face {
+    font-family: GDS Transport;
+    font-style: normal;
+    font-weight: 400;
+    src: url(../Font-Regular-NewTransport-CPS5.woff2?mecgM0d41DaFOZgUumz_uw) format("woff2"), url(../Font-Regular-NewTransport-CPS5.woff?kL7fG5tGI1SOmcOodPc+QA) format("woff");
+    font-display: fallback;
+}
+
+/* Header*/
+
 .cps-header {
-  background-color: #003078; /* CPS navy */
+  background-color: #002d9d; /* CPS navy */
   border-bottom: 0;
 }
+
 .cps-logo {
   display: block;
   height: 40px;   /* adjust as needed */
   width: auto;
   margin: 4px 0;
 }
+
+.govuk-header__logo {
+box-sizing: border-box;
+padding-top: 0px 0px 16px 0px;
+padding-bottom: 12px;
+}
+
+.govuk-header .font-bold {
+font-weight: bold;
+}
+
+.govuk-template--rebranded .govuk-header__product-name {
+margin-top: 0;
+margin-bottom: -0.0625rem;
+font-size: 1.9375rem;
+letter-spacing: -0.015em;
+}
+
+
+span.govuk-header__product-name {
+line-height: 1;
+font-weight: 400;
+display: inline-table;
+margin-top: 7px;
+margin-left: 5px;
+vertical-align: top;
+}
+
