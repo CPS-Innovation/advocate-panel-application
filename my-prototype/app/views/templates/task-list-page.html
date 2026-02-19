@@ -10,6 +10,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+       <form action="./check-answers.html" method="get" novalidate>
+
+
       <h1 class="govuk-heading-l">{{ serviceName }}</h1>
 
       <h2 class="govuk-heading-m">[ Heading for first set of tasks ]</h2>
@@ -18,14 +21,14 @@
         text: "Completed"
       } %}
 
-      {% set incompleteStatus = {
+      {% set completedStatus = {
         tag: {
           text: "Incomplete",
           classes: "govuk-tag--blue"
         }
       } %}
 
-      {# To switch between the completed and incomplete statues, use some inline logic within the component below, like this: "status: (completedStatus if ... else incompleteStatus)" #}
+      {# To switch between the completed and incomplete statues, use some inline logic within the component below, like this: "status: (completedStatus if ... else completedStatus)" #}
 
       {{ govukTaskList({
         idPrefix: "first-section",
@@ -42,7 +45,7 @@
               text: "Name of second task"
             },
             href: "#",
-            status: incompleteStatus
+            status: completedStatus
           }
         ]
       }) }}
@@ -64,7 +67,7 @@
               text: "Name of fifth task"
             },
             href: "#",
-            status: incompleteStatus
+            status: completedStatus
           },
           {
             title: {
@@ -78,21 +81,23 @@
               text: "Name of seventh task"
             },
             href: "#",
-            status: incompleteStatus
+            status: completedStatus
           },
           {
             title: {
               text: "Name of eighth task"
             },
             href: "#",
-            status: incompleteStatus
+            status: completedStatus
           }
         ]
       }) }}
 
-      <div class="govuk-!-margin-top-5">
-        {{ govukButton({ text: "Apply", href: "#" }) }}
-      </div>
+   <button type="submit" class="govuk-button" data-module="govuk-button">
+        Submit application
+      </button>
+    
+    </form>
 
     </div>
   </div>

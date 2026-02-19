@@ -1,0 +1,84 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  CPS Advocate Panel – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <!-- Important banner -->
+    <div class="important-banner govuk-!-margin-bottom-6">
+      <strong class="govuk-tag govuk-tag--blue">Important</strong>
+      <p class="govuk-body govuk-!-margin-top-2">
+        Periods of inactivity may result in you being logged out
+      </p>
+    </div>
+
+    <h1 class="govuk-heading-l">CPS Advocate Panel</h1>
+    <h2 class="govuk-heading-m">Panel applications</h2>
+
+    <table class="govuk-table app-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header">View / edit</th>
+          <th class="govuk-table__header">Form ref</th>
+          <th class="govuk-table__header">Panel</th>
+          <th class="govuk-table__header">Specialist panel</th>
+          <th class="govuk-table__header">Level</th>
+          <th class="govuk-table__header">Reference status</th>
+          <th class="govuk-table__header">Date submitted</th>
+          <th class="govuk-table__header">Application status</th>
+          <th class="govuk-table__header">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody class="govuk-table__body">
+        {% for row in tableData %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="#">View Form</a>
+          </td>
+          <td class="govuk-table__cell">{{ row.ref }}</td>
+          <td class="govuk-table__cell">{{ row.panel }}</td>
+          <td class="govuk-table__cell">{{ row.specialist }}</td>
+          <td class="govuk-table__cell">{{ row.level }}</td>
+          <td class="govuk-table__cell">{{ row.refStatus }}</td>
+          <td class="govuk-table__cell">{{ row.date }}</td>
+
+          <td class="govuk-table__cell">
+            {% if row.status == "Submitted" %}
+              <span class="govuk-tag govuk-tag--green">Submitted</span>
+            {% elif row.status == "Draft" %}
+              <span class="govuk-tag govuk-tag--grey">Draft</span>
+            {% elif row.status == "Withdrawn" %}
+              <span class="govuk-tag govuk-tag--red">Withdrawn</span>
+            {% else %}
+              <span class="govuk-tag">{{ row.status }}</span>
+            {% endif %}
+          </td>
+
+          <td class="govuk-table__cell">
+            <div class="action-wrapper">
+              <button class="action-button" data-menu="{{ loop.index }}">
+                Actions ▼
+              </button>
+
+              <div class="action-menu" id="menu-{{ loop.index }}">
+                <a href="#" class="govuk-link">Open</a>
+                <a href="#" class="govuk-link">Download PDF</a>
+                <a href="#" class="govuk-link">Delete</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+{% endblock %}
