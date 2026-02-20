@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+{% block pageTitle %}Check your answers{% endblock %}
+
+{% block content %}
+
+<h1 class="govuk-heading-xl">Check your answers</h1>
+
+<dl class="govuk-summary-list">
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Property type</dt>
+    <dd class="govuk-summary-list__value">{{ data['propertyType'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="/mtd-complex/property-type">Change<span class="govuk-visually-hidden"> property type</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Estimated income</dt>
+    <dd class="govuk-summary-list__value">£{{ data['income'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="/mtd-complex/property-income">Change<span class="govuk-visually-hidden"> income</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Expenses</dt>
+    <dd class="govuk-summary-list__value">£{{ data['expenses'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="/mtd-complex/uk-property-expenses">Change<span class="govuk-visually-hidden"> expenses</span></a>
+    </dd>
+  </div>
+
+
+</dl>
+
+<form action="/mtd-complex/task-list-completed" method="post">
+  <button class="govuk-button">Confirm and submit</button>
+</form>
+
+{% endblock %}

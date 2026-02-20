@@ -1,22 +1,49 @@
-{% if data.user %}
-  {% set serviceUrl = '/overview' %}
-{% else %}
-  {% set serviceUrl = '/' %}
-{% endif %}
+<header class="govuk-header cps-header govuk-header--with-account" role="banner" data-module="govuk-header">
 
-{{ appHeader({ 
-  productName: serviceName,
-  serviceUrl: serviceUrl,
-  navigationClasses: "govuk-header__navigation--end",
-  navigation: [
-    {
-      href: "/account",
-      text: "Account",
-      active: accountNavId == 'account'
-    } if data.user,
-    {
-      href: "/account/sign-out" if data.user else "/account/sign-in",
-      text: "Sign out" if data.user else "Sign in"
-    }
-  ]
-}) }}
+  <div class="govuk-header__container govuk-width-container">
+
+    <!-- LEFT SIDE → Logo + Title -->
+    <div class="govuk-header__logo">
+    <img src="/public/images/cps/logo.png" class="cps-logo" alt="CPS" />
+      <span class="govuk-header__product-name font-bold">CPS</span>
+      <span class="govuk-header__product-name">Advocate Panel Application</span>
+    </div>
+
+    <!-- RIGHT SIDE → Username -->
+    <div class="govuk-header__content cps-header-account">
+        <span class="cps-username">user_name_2000</span>
+        <span class="cps-arrow">▼</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- SECONDARY BAR -->
+<div class="cps-subheader">
+  <div class="govuk-width-container cps-subheader__inner">
+
+    <!-- LEFT: Breadcrumbs -->
+    <div class="cps-subheader__left">
+      <nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Sign in</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Category</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Category</a>
+    </li>
+  </ol>
+</nav>
+    </div>
+
+    <!-- RIGHT: Language switcher -->
+    <div class="cps-subheader__right cps-language-switch">
+      English |
+      <a href="#" class="govuk-link">Cymraeg</a>
+    </div>
+
+  </div>
+</div>

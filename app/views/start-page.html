@@ -1,0 +1,111 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Advocate Panels – Application Portal (Prototype)" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-xl">
+      {{ serviceName }}
+    </h1>
+
+    <h2 class="govuk-heading-m">
+      Use this service to:
+    </h2>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Crown Court, if you’re a barrister or a solicitor with higher rights of audience</li>
+      <li>Magistrates’ and Youth Court, if you’re a solicitor</li>
+      <li>do something else</li>
+    </ul>
+
+    <p class="govuk-body">The Crown Court panels are:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>general crime</li>
+      <li>RASSO</li>
+      <li>specialist panels</li>
+    </ul>
+
+    <h2 class="govuk-heading-m">
+      Before you start
+    </h2>
+
+    <p class="govuk-body">You can also:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>edit, submit or view an existing application</li>
+      <li>view or update your personal details</li>
+    </ul>
+
+
+
+    <div class="govuk-inset-text">
+      To make an application you’ll need access to your email and mobile phone.<br><br>
+      If this is your first application you’ll need to create an account. This should take around 10 minutes.
+    </div>
+
+
+    <p class="govuk-body">Registering takes around 5 minutes.</p>
+
+
+    {{ govukButton({
+    text: "Start now",
+    href: "./question-page.html",
+    isStartButton: true
+    }) }}
+
+
+
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+
+    <aside class="govuk-prototype-kit-common-templates-related-items" role="complementary">
+      <h2 class="govuk-heading-m" id="subsection-title">
+        Subsection
+      </h2>
+      <nav role="navigation" aria-labelledby="subsection-title">
+        <ul class="govuk-list govuk-!-font-size-16">
+          <li>
+            <a href="#">
+              Related link
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Related link
+            </a>
+          </li>
+          <li>
+            <a href="#" class="govuk-!-font-weight-bold">
+              More <span class="govuk-visually-hidden">in Subsection</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+  </div>
+</div>
+
+
+<script>
+  const toggle = document.getElementById('accountToggle');
+  const menu = document.getElementById('accountMenu');
+
+  toggle.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', !isOpen);
+    menu.classList.toggle('active');
+  });
+
+  // Optional: Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+{% endblock %}
