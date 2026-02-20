@@ -50,10 +50,93 @@ body {
 box-sizing: border-box;
 padding-top: 0px 0px 16px 0px;
 padding-bottom: 12px;
+display: flex;
+flex-direction: row;   
+align-items: center;
 }
+
+
+/* Main CPS blue branding */
+.cps-header {
+  background-color: #002d9d;
+  border-bottom: none;
+  padding-bottom: 5px;
+}
+
+/* Header internal layout (HMRC equivalent) */
+.govuk-header--with-account .govuk-header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Username menu on right */
+.cps-header-account {
+  display: flex;
+  align-items: center;
+}
+
+.cps-username {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.cps-arrow {
+  color: #ffffff;
+  margin-left: 4px;
+  font-size: 14px;
+}
+
+/* Hover styling */
+.cps-header-account a:hover,
+.cps-username:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+span.govuk-header__product-name {
+  display: inline-block;
+}
+
 
 .govuk-header .font-bold {
 font-weight: bold;
+}
+
+
+/* Subheader layout */
+.cps-subheader__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+
+
+.cps-subheader__inner {
+  font-size: 1rem !important;
+line-height: 1.25 !important;
+}
+
+.cps-subheader__inner a {
+  font-size: 1rem !important;
+line-height: 1.25 !important;
+}
+
+.cps-subheader__inner a:visited, .govuk-link:visited {
+color: var(--govuk-link-visited-colour, #000000);
+}
+
+
+a:visited, .govuk-link:visited {
+color: var(--govuk-link-visited-colour, #000000);
+}
+
+/* Right-side languages */
+.cps-language-switch {
+  margin-left: auto;
+  text-align: right;
 }
 
 .govuk-template--rebranded .govuk-header__product-name {
