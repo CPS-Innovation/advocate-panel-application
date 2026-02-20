@@ -156,3 +156,42 @@ margin-left: 5px;
 vertical-align: top;
 }
 
+.cps-username-toggle {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.cps-arrow {
+  margin-left: 4px;
+  transition: transform 0.2s;
+}
+
+/* Dropdown hidden by default */
+.cps-account-menu {
+  display: none;
+  position: absolute;
+  background: white;
+  padding: 10px 0;
+  right: 0;
+  top: 60px;
+  min-width: 150px;
+  border: 1px solid #b1b4b6;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Visible state */
+.cps-account-menu.active {
+  display: block;
+}
+
+/* Rotate arrow when open */
+.cps-username-toggle[aria-expanded="true"] .cps-arrow {
+  transform: rotate(180deg);
+}
+
