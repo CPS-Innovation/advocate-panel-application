@@ -1,0 +1,45 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Sign in – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Sign in</h1>
+
+    <p class="govuk-body">
+      Use this prototype sign-in to access your Making Tax Digital: Property Income dashboard.
+    </p>
+
+    <form method="post" action="/dashboard">
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="email">
+          Email address
+        </label>
+        <input class="govuk-input" id="email" name="email" type="email" autocomplete="email">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="password">
+          Password
+        </label>
+        <input class="govuk-input" id="password" name="password" type="password" autocomplete="current-password">
+      </div>
+
+      <button class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

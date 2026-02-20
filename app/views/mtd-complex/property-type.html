@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  What type of property do you receive income from?
+{% endblock %}
+
+{% block content %}
+
+<form method="post" action="/mtd-complex/property-income">
+
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        What type of property do you receive income from?
+      </h1>
+    </legend>
+    <div class="govuk-radios" data-module="govuk-radios">
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="residential" name="propertyType" type="radio" value="Residential">
+        <label class="govuk-label govuk-radios__label" for="residential">
+         Residential
+        </label>
+      </div>
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="commercial" name="propertyType" type="radio" value="Commercial">
+        <label class="govuk-label govuk-radios__label" for="commercial">
+          Commercial
+        </label>
+      </div>
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="residential-3" name="propertyType" type="radio" value="Holiday let">
+        <label class="govuk-label govuk-radios__label" for="holiday">
+          Holiday let
+        </label>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+
+
+  <button class="govuk-button" type="submit">Continue</button>
+</form>
+
+
+
+
+
+{% endblock %}
