@@ -1,0 +1,79 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set secondaryNavId = 'documents' %}
+{% set pageName = "Material (:total)" | replace(':total', documents.length | formatNumber) %}
+
+{% block beforeContent %}
+  {% include "_includes/case/identity-bar.njk" %}
+{% endblock %}
+
+{% block content %}
+  {% include "_includes/success-banner.njk" %}
+  {# {% include "_includes/case/header.njk" %} #}
+  {% include "_includes/case/navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <div class="app-filter-layout">
+        <div class="app-filter-layout__filter">
+          {% include "_includes/document/filter-panel.njk" %}
+        </div>
+        <div class="app-filter-layout__content">
+
+          <div class="app-action-bar">
+            <div class="app-action-bar__filter"></div>
+          </div>
+
+          {% include "_includes/document/search-form.njk" %}
+
+          {% if documents.length %}
+            <div class="app-list">
+              {% for document in documents %}
+              <div class="app-list__item">
+                  <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+                    <a href="/cases/{{_case.id}}/documents/{{document.id}}" class="govuk-link--no-visited-state">{{document.name}}</a>
+                  </h2>
+
+                  {{ govukSummaryList({
+                    classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                    rows: [
+                      {
+                        key: {
+                          html: 'Description'
+                        },
+                        value: {
+                          html: document.description
+                        }
+                      },
+                      {
+                        key: {
+                          html: 'Type'
+                        },
+                        value: {
+                          html: document.type
+                        }
+                      },
+                      {
+                        key: {
+                          html: 'Size'
+                        },
+                        value: {
+                          html: document.size + ' KB'
+                        }
+                      }
+                    ]
+                  })}}
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p>There are no documents.</p>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

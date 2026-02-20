@@ -1,0 +1,33 @@
+{% extends "_layouts/main.html" %}
+
+{% set hideNav = true %}
+
+{% set pageName = "Static pages" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full-width">
+
+      <h1 class="govuk-heading-l">
+        {{ pageName }}
+      </h1>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          <a href="/account/sign-in" class="govuk-link">Sign in</a>
+        </li>
+        <li>
+          <a href="/static/403-case" class="govuk-link">403 - lack of permissions to view a case</a>
+        </li>
+        <li>
+          <a href="/static/500" class="govuk-link">500</a>
+        </li>
+        <li>
+          <a href="/static/show-more" class="govuk-link">Show more</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
+

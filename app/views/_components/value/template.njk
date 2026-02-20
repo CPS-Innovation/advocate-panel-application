@@ -1,0 +1,9 @@
+{% if params.attribute.length %}
+  {% for item in params.attribute %}
+    {{item.name}}
+    {%- if not loop.last -%}, {%- endif -%}
+  {% endfor %}
+{% else %}
+  {{params.emptyLabel}}
+{% endif %}
+

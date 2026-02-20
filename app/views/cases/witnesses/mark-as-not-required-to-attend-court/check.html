@@ -1,0 +1,48 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'cases' %}
+{% set pageName = "Check details and mark the witness as not required to attend court" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <span class="govuk-caption-l">{{_case.reference}} - {{witness.firstName}} {{witness.lastName}}</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Reason for marking the witness as not required to attend court"
+            },
+            value: {
+              text: data.markWitnessAsNotAttendingCourt.reason
+            },
+            actions: {
+              items: [
+                {
+                  href: "/cases/:caseId/witnesses/:witnessId/mark-as-not-required-to-attend-court" | replace(':caseId', _case.id) | replace(':witnessId', witness.id),
+                  text: "Change",
+                  visuallyHiddenText: "Reason for marking the witness as not required to attend court"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <form method="post">
+        {{ govukButton({
+          text: "Mark witness as not required to attend court"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

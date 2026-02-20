@@ -1,0 +1,59 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set secondaryNavId = 'documents' %}
+{% set pageName = document.name %}
+
+{% block beforeContent %}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: _case.reference,
+        href: "/cases/:caseId" | replace(':caseId', _case.id)
+      },
+      {
+        text: "Material",
+        href: "/cases/:caseId/documents" | replace(':caseId', _case.id)
+      }
+    ]
+  }) }}
+{% endblock beforeContent %}
+
+{% block content %}
+  {% include "_includes/success-banner.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{document.name}}</h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: 'Type'
+            },
+            value: {
+              html: document.type
+            }
+          },
+          {
+            key: {
+              text: 'Size'
+            },
+            value: {
+              html: document.size + ' KB'
+            }
+          },
+          {
+            key: {
+              text: 'Case reference'
+            },
+            value: {
+              html: '<a href="/cases/' + _case.id + '">' + _case.reference + '</a>'
+            }
+          }
+        ]
+      })}}
+
+    </div>
+  </div>
+{% endblock %}

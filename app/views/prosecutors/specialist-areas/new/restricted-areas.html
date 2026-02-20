@@ -1,0 +1,38 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'prosecutors' %}
+{% set pageName = "Restricted areas" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <span class="govuk-caption-l">{{prosecutor.firstName}} {{prosecutor.lastName}} - add specialist areas</span>
+      <form method="post">
+        {{ govukCheckboxes({
+          name: "addSpecialistArea[restrictedAreas]",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          values: data.addSpecialistArea.restrictedAreas,
+          items: specialismItems
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

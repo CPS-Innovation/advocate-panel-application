@@ -1,0 +1,66 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'cases' %}
+{% set pageName = "Check details and assign prosecutor" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <span class="govuk-caption-l">{{_case.reference}}</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Do you want to assign " + recommendedProsecutorName + "?"
+            },
+            value: {
+              text: "Yes" if acceptRecommendation === "yes" else "No, I want to choose another prosecutor"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/cases/" + _case.id + "/add-prosecutor",
+                  text: "Change",
+                  visuallyHiddenText: "whether to assign " + recommendedProsecutorName
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Prosecutor"
+            },
+            value: {
+              text: prosecutor.firstName + " " + prosecutor.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "/cases/" + _case.id + "/add-prosecutor/choose",
+                  text: "Change",
+                  visuallyHiddenText: "prosecutor"
+                }
+              ]
+            }
+          } if acceptRecommendation === "no"
+        ]
+      }) }}
+
+      <form method="post">
+        {{ govukButton({
+          text: "Assign prosecutor"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

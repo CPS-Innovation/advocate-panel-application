@@ -1,0 +1,109 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set secondaryNavId = 'witnesses' %}
+{% set pageName = "Witnesses (:total)" | replace(':total', _case.witnesses.length | formatNumber) %}
+
+{% block beforeContent %}
+  {% include "_includes/case/identity-bar.njk" %}
+{% endblock %}
+
+{% block content %}
+  {% include "_includes/success-banner.njk" %}
+  {% include "_includes/case/navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+      
+      {% if _case.witnesses.length %}
+        <div class="app-list">
+          {% for witness in _case.witnesses %}
+            {% set witnessTypeValue %}
+              {% set hasTypes = witness.isChild or witness.isExpert or witness.isInterpreter or witness.isPolice or witness.isProfessional or witness.isPrisoner or witness.isVulnerable or witness.isIntimidated %}
+
+              {% if hasTypes %}
+                <ul class="govuk-list govuk-list--bullet">
+                  {% if witness.isChild %}
+                    <li>Child</li>
+                  {% endif %}
+                  {% if witness.isExpert %}
+                    <li>Expert</li>
+                  {% endif %}
+                  {% if witness.isInterpreter %}
+                    <li>Interpreter</li>
+                  {% endif %}
+                  {% if witness.isPolice %}
+                    <li>Police</li>
+                  {% endif %}
+                  {% if witness.isProfessional %}
+                    <li>Professional</li>
+                  {% endif %}
+                  {% if witness.isPrisoner %}
+                    <li>Prisoner</li>
+                  {% endif %}
+                  {% if witness.isVulnerable %}
+                    <li>Vulnerable</li>
+                  {% endif %}
+                  {% if witness.isIntimidated %}
+                    <li>Intimidated</li>
+                  {% endif %}
+                </ul>
+              {% else %}
+                Not entered
+              {% endif %}
+            {% endset %}
+
+            <div class="app-list__item">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <div>
+                  <a href="/cases/{{_case.id}}/witnesses/{{witness.id}}" class="govuk-link--no-visited-state">{{witness.firstName}} {{witness.lastName}}</a>
+                </div>
+                <div class="app-list__tag">
+                  {% if witness.isVictim %}
+                    {{ govukTag({ text: 'Victim', classes: 'govuk-!-margin-left-1' })}}
+                  {% endif %}
+                  {% if witness.isKeyWitness %}
+                    {{ govukTag({ text: 'Key witness', classes: 'govuk-!-margin-left-1' })}}
+                  {% endif %}
+                  {% if witness.isAppearingInCourt %}
+                    {{ govukTag({ text: 'Required to attend court', classes: 'govuk-!-margin-left-1' })}}
+                  {% endif %}
+                  {% if witness.isAppearingInCourt == false %}
+                    {{ govukTag({ text: 'Not required to attend court', classes: 'govuk-!-margin-left-1' })}}
+                  {% endif %}
+                  {% if witness.hasSection9Statement %}
+                    {{ govukTag({ text: 'Section 9', classes: 'govuk-!-margin-left-1' })}}
+                  {% endif %}
+                </div>
+              </h2>
+
+              {{ govukSummaryList({
+                classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                rows: [
+                  {
+                    key: {
+                      html: 'Date of birth'
+                    },
+                    value: {
+                      html: witness.dateOfBirth | isoDateString | govukDate
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Type'
+                    },
+                    value: {
+                      html: witnessTypeValue
+                    }
+                  }
+                ]
+              })}}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no witnesses.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

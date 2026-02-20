@@ -1,0 +1,22 @@
+<search class="app-search-form">
+  <form>
+    {{ govukInput({
+      id: "caseActivitySearch[keywords]",
+      name: "caseActivitySearch[keywords]",
+      label: {
+        text: "Search by event type",
+        classes: "govuk-label--s app-search-form__label"
+      },
+      value: data.caseActivitySearch.keywords
+    }) }}
+
+    {{ govukButton({
+      text: "Search",
+      classes: "app-search-form__button"
+    }) }}
+  </form>
+
+  {% if data.caseActivitySearch.keywords %}
+    <p class="govuk-!-margin-top-2 govuk-!-margin-bottom-0"><a class="govuk-link--no-visited-state" href="/cases/{{_case.id}}/activity/clear-search">Clear search</a></p>
+  {% endif %}
+</search>

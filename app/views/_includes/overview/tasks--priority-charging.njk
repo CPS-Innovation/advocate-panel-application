@@ -1,0 +1,18 @@
+{% if priorityChargingTaskCount > 0 %}
+  <div class="app-overview-section">
+    <h2 class="govuk-heading-m">Priority charging tasks</h2>
+    <div class="app-overview-cards govuk-!-margin-bottom-9">
+      <a href="/tasks/shortcut/priority-charging" class="app-overview-card app-overview-card--blue">
+        <span class="app-overview-card__count">{{priorityChargingTaskCount}}</span>
+        <span class="app-overview-card__status">
+          priority charging
+          {% if priorityChargingTaskCount == 1 %}
+            task
+          {% else %}
+            tasks
+          {% endif %}
+        </span>
+      </a>
+    </div>
+  </div>
+{% endif %}

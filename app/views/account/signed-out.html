@@ -1,0 +1,17 @@
+{% extends "_layouts/main.html" %}
+{% set hideNav = true %}
+{% set pageName = "You have signed out" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      {{ govukButton({
+        text: "Sign in",
+        href: "/"
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}

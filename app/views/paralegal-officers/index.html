@@ -1,0 +1,57 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'paralegalOfficers' %}
+{% set pageName = "Paralegal officers (:total)" | replace(':total', totalParalegalOfficers | formatNumber) %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {% include "_includes/paralegal-officer-search-form.njk" %}
+
+    {% if paralegalOfficers.length %}
+      <div class="app-list">
+        {% for po in paralegalOfficers %}
+          <div class="app-list__item">
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+              {{po.firstName}} {{po.lastName}}
+            </h2>
+
+            {% set units %}
+              {% if po.units.length %}
+                {% for item in po.units %}
+                  {{item.unit.name}}
+                  {%- if not loop.last -%}, {%- endif -%}
+                {% endfor %}
+              {% else %}
+                No units
+              {% endif %}
+            {% endset %}
+
+            {{ govukSummaryList({
+              classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+              rows: [
+                {
+                  key: {
+                    html: 'Units'
+                  },
+                  value: {
+                    html: units
+                  }
+                }
+              ]
+            })}}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>There are no results.</p>
+    {% endif %}
+
+    {% include "_includes/pagination.njk" %}
+  </div>
+</div>
+
+{% endblock %}

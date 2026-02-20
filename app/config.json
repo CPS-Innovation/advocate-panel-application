@@ -1,6 +1,5 @@
 {
-  "serviceName": "Advocate Panel Application",
-  "useServiceNavigation": true,
+  "serviceName": "Prosecute a case",
   "plugins": {
     "govuk-frontend": {
       "rebrand": true

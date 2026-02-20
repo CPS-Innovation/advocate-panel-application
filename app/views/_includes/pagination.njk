@@ -1,0 +1,16 @@
+{% if pagination.pageItems.length > 1%}
+
+{{ govukPagination({
+  classes: "govuk-!-margin-top-4 govuk-!-margin-bottom-2",
+  previous: {
+    href: pagination.previousPage.href
+  },
+  next: {
+    href: pagination.nextPage.href
+  },
+  items: pagination.pageItems
+}) }}
+
+<p class="govuk-!-margin-bottom-0">Showing {{pagination.firstResultNumber}} to {{pagination.lastResultNumber}} of {{pagination.totalCount}} results</p>
+
+{% endif %}

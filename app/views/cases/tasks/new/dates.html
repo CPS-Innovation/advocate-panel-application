@@ -1,0 +1,125 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set pageName = "Reminder dates" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: "/cases/:caseId/tasks/new/asset-recovery" | replace(':caseId', _case.id)
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <span class="govuk-caption-l">{{_case.reference}} - add reminder</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <form method="post">
+        {{ govukDateInput({
+          id: "reminderDate",
+          fieldset: {
+            legend: {
+              text: "Reminder date",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 31 3 2025"
+          },
+          items: [
+            {
+              name: "addTask[reminderDate][day]",
+              label: "Day",
+              value: data.addTask.reminderDate.day,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "addTask[reminderDate][month]",
+              label: "Month",
+              value: data.addTask.reminderDate.month,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "addTask[reminderDate][year]",
+              label: "Year",
+              value: data.addTask.reminderDate.year,
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+        {{ govukDateInput({
+          id: "dueDate",
+          fieldset: {
+            legend: {
+              text: "Due date",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 31 3 2025"
+          },
+          items: [
+            {
+              name: "addTask[dueDate][day]",
+              label: "Day",
+              value: data.addTask.dueDate.day,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "addTask[dueDate][month]",
+              label: "Month",
+              value: data.addTask.dueDate.month,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "addTask[dueDate][year]",
+              label: "Year",
+              value: data.addTask.dueDate.year,
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+        {{ govukDateInput({
+          id: "escalationDate",
+          fieldset: {
+            legend: {
+              text: "Escalation date",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 31 3 2025"
+          },
+          items: [
+            {
+              name: "addTask[escalationDate][day]",
+              label: "Day",
+              value: data.addTask.escalationDate.day,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "addTask[escalationDate][month]",
+              label: "Month",
+              value: data.addTask.escalationDate.month,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "addTask[escalationDate][year]",
+              label: "Year",
+              value: data.addTask.escalationDate.year,
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({ text: "Continue" }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

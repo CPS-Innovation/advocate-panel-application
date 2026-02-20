@@ -1,0 +1,16 @@
+<div class="app-sort">
+  <p>
+    <b class="govuk-!-margin-right-1">Sort by:</b>
+    {% if data.sort == 'Name' %}
+      <span class="">Name</span>
+    {% else %}
+      <a  href="?sort=Name">Name</a>
+    {% endif %}
+    <span class="govuk-!-margin-left-1 govuk-!-margin-right-1">|</span>
+    {% if data.sort == 'Number of cases' %}
+      <span>Number of cases</span>
+    {% else %}
+      <a href="?sort=Number of cases">Number of cases</a>
+    {% endif %}
+  </p>
+</div>

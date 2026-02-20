@@ -1,0 +1,114 @@
+{% extends "_layouts/main.html" %}
+
+{% set accountNavId = 'account' %}
+{% set pageName = "Account" %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      {% set unitsValue %}
+        <ul class="govuk-list govuk-list--bullet">
+          {% for uu in user.units %}
+            <li>{{ uu.unit.name }}</li>
+          {% endfor %}
+        </ul>
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "First name"
+            },
+            value: {
+              text: user.firstName
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "First name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Last name"
+            },
+            value: {
+              text: user.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "Last name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Role"
+            },
+            value: {
+              text: user.role
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "Last name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: user.email
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "Email address"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Unit"
+            },
+            value: {
+              html: unitsValue
+            },
+            actions: {
+              items: [
+                {
+                  href: "Item URL",
+                  text: "Change",
+                  visuallyHiddenText: "Unit"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+
+    </div>
+  </div>
+
+{% endblock %}

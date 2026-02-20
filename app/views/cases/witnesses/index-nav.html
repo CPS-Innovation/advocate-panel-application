@@ -1,0 +1,221 @@
+{% extends "_layouts/main.html" %}
+{% set navId = 'cases' %}
+{% set secondaryNavId = 'witnesses' %}
+{% set pageName = 'Witnesses' %}
+
+{% block beforeContent %}
+  {% include "_includes/case/identity-bar.njk" %}
+{% endblock %}
+
+{% block content %}
+  {% include "_includes/success-banner.njk" %}
+  {# {% include "_includes/case/header.njk" %} #}
+  {% include "_includes/case/navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+      
+      {% if _case.witnesses.length %}
+          {% for witness in _case.witnesses %}
+            {% if witness.isAppearingInCourt %}
+              {% set attendanceStatus = 'Attending court' %}
+            {% elseif witness.isAppearingInCourt == false %}
+              {# {% set attendanceStatus = 'Dewarned' %} #}
+            {% endif %}
+
+
+
+            <div class="govuk-summary-card">
+              <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title govuk-!-font-size-27">
+                  {{witness.firstName}} {{witness.lastName}}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Victim"
+                  }) if witness.isVictim }}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Key witness"
+                  }) if witness.isKeyWitness }}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Child"
+                  }) if witness.isChild }}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Expert"
+                  }) if witness.isExpert }}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Interpreter"
+                  }) if witness.isInterpreter }}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Police"
+                  }) if witness.isPolice }}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Professional"
+                  }) if witness.isProfessional }}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Prisoner"
+                  }) if witness.isPrisoner }}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Vulnerable"
+                  }) if witness.isVulnerable }}
+
+                  {{ govukTag({
+                    classes: 'govuk-!-margin-left-1',
+                    text: "Intimidated"
+                  }) if witness.isIntimidated }}
+
+                  {% if attendanceStatus %} {{ govukTag({ text: attendanceStatus, classes: 'govuk-!-margin-left-1' }) }}{% endif %}
+                </h2>
+              </div>
+              <div class="govuk-summary-card__content">
+                {{ xGovukSecondaryNavigation({
+                  classes: 'govuk-!-margin-bottom-5',
+                  visuallyHiddenTitle: "Secondary menu",
+                  items: [{
+                    text: "Statements",
+                    href: "#",
+                    current: true
+                  }, {
+                    text: "Witness details",
+                    href: "#"
+                  }, {
+                    text: "Availability",
+                    href: "#"
+                  }, {
+                    text: "Special measures",
+                    href: "#"
+                  }]
+                })}}
+
+                <h3 class="govuk-heading-m">Court attendance</h3>
+                {% if witness.isAppearingInCourt == true %}
+                  {# <p>Witness called.</p> #}
+                  <p><a href="/cases/{{_case.id}}/witnesses/{{witness.id}}/mark-as-not-attending-court">Mark as not attending court</a></p>
+                {% elseif witness.isAppearingInCourt == false %}
+                  {# <p>Witness dewarned.</p> #}
+                  <p><a href="/cases/{{_case.id}}/witnesses/{{witness.id}}/mark-as-attending-court">Mark as attending court</a></p>
+                {% else %}
+                  <p><a href="/cases/{{_case.id}}/witnesses/{{witness.id}}/mark-as-attending-court">Mark as attending court</a></p>
+                {% endif %}
+
+                {% if witness.statements.length > 0 %}
+
+                  {% for statement in witness.statements %}
+
+                    {% set section9Status = '' %}
+                    {% if statement.isMarkedAsSection9 == true %}
+                      {% set section9Status = 'Section 9' %}
+                    {% elseif statement.isMarkedAsSection9 == false %}
+                      {# {% set section9Status = 'Section 9 withdrawn' %} #}
+                    {% endif %}
+
+                    <h3 class="govuk-heading-m">
+                      Statement {{statement.number}}
+                      {% if section9Status %} {{ govukTag({ text: section9Status, classes: 'govuk-!-margin-left-1' }) }}{% endif %}
+                    </h3>
+
+                    {% if statement.isMarkedAsSection9 == true %}
+                      {# <p>Served as Section 9.</p> #}
+                      <p><a href="/cases/{{_case.id}}/witnesses/{{witness.id}}/statements/{{statement.id}}/unmark-as-section9">Unmark as Section 9</a></p>
+                    {% elseif statement.isMarkedAsSection9 == false %}
+                      {# <p>Section 9 withdrawn.</p> #}
+                      <p><a href="/cases/{{_case.id}}/witnesses/{{witness.id}}/statements/{{statement.id}}/mark-as-section9">Mark as Section 9</a></p>
+                    {% else %}
+                      <p><a href="/cases/{{_case.id}}/witnesses/{{witness.id}}/statements/{{statement.id}}/mark-as-section9">Mark as Section 9</a></p>
+                    {% endif %}
+ 
+                    {% if statement.isUsedAsEvidence == true %}                    
+                      {% set useAsEvidenceValue = 'Used' %}
+                    {% elseif statement.isUsedAsEvidence == false %}
+                      {% set useAsEvidenceValue = 'Unused' %}
+                    {% else %}
+                      {% set useAsEvidenceValue = 'None' %}
+                    {% endif %}
+
+                    {{ govukSummaryList({
+                      classes: 'app-summary-list--compac app-summary-list--small-tex govuk-!-margin-bottom-5',
+                      rows: [
+                        {
+                          key: {
+                            html: 'Statement number'
+                          },
+                          value: {
+                            html: loop.index
+                          }
+                        } if 1==2,
+                        {
+                          key: {
+                            html: 'Statement'
+                          },
+                          value: {
+                            html: '<a href="">View statement</a>'
+                          }
+                        },
+                        {
+                          key: {
+                            html: 'Statement date'
+                          },
+                          value: {
+                            html: statement.receivedDate | isoDateString | govukDate
+                          }
+                        },
+                        {
+                          key: {
+                            html: 'Date received from police'
+                          },
+                          value: {
+                            html: statement.receivedDate | isoDateString | govukDateTime
+                          }
+                        } if 1==2,
+                        {
+                          key: {
+                            html: 'Material status'
+                          },
+                          value: {
+                            html: useAsEvidenceValue
+                          }
+                        },
+                        {
+                          key: {
+                            html: 'CPS disclosure assessment'
+                          },
+                          value: {
+                            html: 'Evidence'
+                          }
+                        } if 1==2
+                                     
+                      ]
+                    })}}
+
+                  {% endfor %}
+                {% else %}
+                  <h3 class="govuk-heading-s">Statements</h3>
+                  <p class="govuk-!-font-size-16">No statements.</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no witnesses.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

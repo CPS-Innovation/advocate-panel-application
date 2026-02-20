@@ -1,0 +1,110 @@
+
+.app-list {
+  border-top: 1px solid govuk-colour('mid-grey');
+	margin-bottom: govuk-spacing(6);
+}
+
+.app-list__item {
+  border-bottom: 1px solid govuk-colour('mid-grey');
+  padding-top: 15px;
+  padding-bottom: 15px;
+	position: relative;
+
+	h2, h3 {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+
+		> div:first-child {
+			flex: 1;
+			min-width: 0;
+		}
+	}
+
+	.govuk-tag {
+		white-space: nowrap;
+		max-width: 100%;
+	}
+
+	.app-list__tag {
+		flex-shrink: 0;
+		white-space: nowrap;
+	}
+
+	.app-list__actions {
+		@include govuk-font($size: 19);
+		position: absolute;
+		right: 5px;
+		top: 15px;
+		white-space: nowrap;
+		max-width: 100%;
+	}
+
+	.govuk-summary-list {
+		margin: 0;
+
+		.govuk-summary-list__row:last-child {
+			border-bottom: none;
+		}
+	}
+}
+
+.app-list--with-checkboxes {
+	.app-list__item {
+		display: flex;
+		gap: govuk-spacing(2);
+		align-items: flex-start;
+	}
+}
+
+.app-list__item .govuk-form-group {
+	margin: 0;
+}
+
+.app-list__checkbox {
+	// flex-shrink: 0;
+	margin-top: -5px;
+
+	.govuk-checkboxes__label {
+		padding: 0 !important;
+	}
+}
+
+.app-list__content {
+	flex: 1;
+	min-width: 0;
+}
+
+.govuk-tag {
+	white-space: nowrap;
+	max-width: 100%;
+}
+
+
+.app-summary-list--compact {
+  margin-bottom: 0;
+
+  .govuk-summary-list__key, .govuk-summary-list__value {
+    padding-bottom: govuk-spacing(0);
+  }
+
+  @include govuk-media-query($from: tablet) {
+    .govuk-summary-list__key {
+      width: 30%;
+    }
+  }
+}
+
+.app-summary-list--small-text {
+	@include govuk-font(16);
+
+	ul {
+		@include govuk-font(16);
+	}
+}
+
+.app-summary-list--wide-actions {
+	.govuk-summary-list__actions {
+		width: 25%;
+	}
+}

@@ -1,0 +1,125 @@
+{% extends "_layouts/main.html" %}
+
+{% set navId = 'prosecutors' %}
+{% set pageName = "Check details and add specialist areas" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <span class="govuk-caption-l">{{prosecutor.firstName}} {{prosecutor.lastName}}</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {% set specialistAreasValue %}
+        {% if specialistAreas.length %}
+          <ul class="govuk-list govuk-list--bullet">
+            {% for item in specialistAreas %}
+              <li>
+                {{item.name}}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          No specialist areas
+        {% endif %}
+      {% endset %}
+
+      {% set preferredAreasValue %}
+        {% if preferredAreas.length %}
+          <ul class="govuk-list govuk-list--bullet">
+            {% for item in preferredAreas %}
+              <li>
+                {{item.name}}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          No preferred areas
+        {% endif %}
+      {% endset %}
+
+      {% set restrictedAreasValue %}
+        {% if restrictedAreas.length %}
+          <ul class="govuk-list govuk-list--bullet">
+            {% for item in restrictedAreas %}
+              <li>
+                {{item.name}}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          No restricted areas
+        {% endif %}
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Specialist areas"
+            },
+            value: {
+              html: specialistAreasValue
+            },
+            actions: {
+              items: [
+                {
+                  href: "/prosecutors/:prosecutorId/specialist-areas/new" | replace(':prosecutorId', prosecutor.id),
+                  text: "Change",
+                  visuallyHiddenText: "Specialist areas"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Preferred areas"
+            },
+            value: {
+              html: preferredAreasValue
+            },
+            actions: {
+              items: [
+                {
+                  href: "/prosecutors/:prosecutorId/specialist-areas/new/preferred-areas" | replace(':prosecutorId', prosecutor.id),
+                  text: "Change",
+                  visuallyHiddenText: "Preferred areas"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Restricted areas"
+            },
+            value: {
+              html: restrictedAreasValue
+            },
+            actions: {
+              items: [
+                {
+                  href: "/prosecutors/:prosecutorId/specialist-areas/new/restricted-areas" | replace(':prosecutorId', prosecutor.id),
+                  text: "Change",
+                  visuallyHiddenText: "Restricted areas"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <form method="post">
+        {{ govukButton({
+          text: "Add specialist areas"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

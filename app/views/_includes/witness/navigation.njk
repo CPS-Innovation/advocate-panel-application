@@ -1,0 +1,28 @@
+{% set navItems = [{
+  text: "Details",
+  href: "/cases/:caseId/witnesses/:witnessId" | replace(':caseId', _case.id) | replace(':witnessId', witness.id),
+  current: secondaryNavId == 'details'
+}, {
+  text: "Statements",
+  href: "/cases/:caseId/witnesses/:witnessId/statements" | replace(':caseId', _case.id) | replace(':witnessId', witness.id),
+  current: secondaryNavId == 'statements'
+}] %}
+
+{% if witness.dcf %}
+  {% set navItems = (navItems.push({
+    text: "Availability",
+    href: "/cases/:caseId/witnesses/:witnessId/availability" | replace(':caseId', _case.id) | replace(':witnessId', witness.id),
+    current: secondaryNavId == 'availability'
+  }), navItems) %}
+  {% set navItems = (navItems.push({
+    text: "Special measures",
+    href: "/cases/:caseId/witnesses/:witnessId/special-measures" | replace(':caseId', _case.id) | replace(':witnessId', witness.id),
+    current: secondaryNavId == 'special-measures'
+  }), navItems) %}
+{% endif %}
+
+{{ xGovukSecondaryNavigation({
+  classes: 'govuk-!-margin-bottom-5 app-secondary-navigation',
+  visuallyHiddenTitle: "Secondary menu",
+  items: navItems
+})}}

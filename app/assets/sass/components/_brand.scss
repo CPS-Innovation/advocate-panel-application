@@ -1,0 +1,49 @@
+
+.cps-logo {                 /* control size without distorting the SVG */
+  inline-size: 180px;       
+  block-size: auto;
+  display: inline-block;
+}
+
+/* Optional variants */
+.cps-logo--xsmall  { inline-size: 80px; }
+.cps-logo--small  { inline-size: 120px; }
+.cps-logo--large  { inline-size: 220px; }
+
+/* colour variants */
+.cps-logo--black { filter: brightness(0) saturate(100%); }  
+.cps-logo--white { filter: brightness(0) invert(1); }      
+
+
+/* adding icons that fit with the current header */
+.app-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* make the “No SSO user” look like text, not a link */
+.app-header__label {
+  color: currentColor;
+  text-decoration: none;
+  cursor: default;
+}
+
+.app-header__label--strong {
+  font-weight: 700; /* GOV.UK bold */
+}
+
+/* neat spacing between icon and hit area */
+.govuk-header__navigation-item a,
+.govuk-header__navigation-item [aria-disabled="true"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+
+
+
+
