@@ -8,7 +8,7 @@
 <dl class="govuk-summary-list">
 
   <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Property type</dt>
+    <dt class="govuk-summary-list__key">Item 1</dt>
     <dd class="govuk-summary-list__value">{{ data['propertyType'] }}</dd>
     <dd class="govuk-summary-list__actions">
       <a href="/mtd-complex/property-type">Change<span class="govuk-visually-hidden"> property type</span></a>
@@ -16,16 +16,16 @@
   </div>
 
   <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Estimated income</dt>
-    <dd class="govuk-summary-list__value">£{{ data['income'] }}</dd>
+    <dt class="govuk-summary-list__key">Item 2</dt>
+    <dd class="govuk-summary-list__value">{{ data['income'] }}</dd>
     <dd class="govuk-summary-list__actions">
       <a href="/mtd-complex/property-income">Change<span class="govuk-visually-hidden"> income</span></a>
     </dd>
   </div>
 
   <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Expenses</dt>
-    <dd class="govuk-summary-list__value">£{{ data['expenses'] }}</dd>
+    <dt class="govuk-summary-list__key">Item</dt>
+    <dd class="govuk-summary-list__value">{{ data['expenses'] }}</dd>
     <dd class="govuk-summary-list__actions">
       <a href="/mtd-complex/uk-property-expenses">Change<span class="govuk-visually-hidden"> expenses</span></a>
     </dd>
@@ -34,7 +34,7 @@
 
 </dl>
 
-<form action="/mtd-complex/task-list-completed" method="post">
+<form action="../mtd-complex/confirmation.html" method="get">
   <button class="govuk-button">Confirm and submit</button>
 </form>
 

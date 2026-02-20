@@ -3,57 +3,210 @@
 
 {% block content %}
 
-<h1 class="govuk-heading-xl">Your tasks</h1>
-<p class="govuk-body">Some text here</p>
+<form action="./check-answers.html" method="get" novalidate>
 
+<h1 class="govuk-heading-xl">Your tasks</h1>
+<dl class="govuk-summary-list">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Application
+    </dt>
+    <dd class="govuk-summary-list__value">
+      Reference number: 1234567890
+    </dd>
+    <dd class="govuk-summary-list__actions">
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Panel applied for:
+    </dt>
+    <dd class="govuk-summary-list__value">
+      General Crime
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> Panel</span></a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Level
+    </dt>
+    <dd class="govuk-summary-list__value">
+      1
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <ul class="govuk-summary-list__actions-list">
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link" href="#">Add<span class="govuk-visually-hidden"> contact details</span></a>
+        </li>
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact details</span></a>
+        </li>
+      </ul>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+</dl>
+
+<h2 class="govuk-heading-l">Role</h2>
 <ul class="govuk-task-list">
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="/mtd-complex/step1-property-type" aria-describedby="property-type-status">
-        Provide property type
+      <a class="govuk-link govuk-task-list__link" href="/mtd-complex/property-type"
+        aria-describedby="property-type-status">
+        Item 1
       </a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Lorem Lorem ipsum dolor sit amet.
+      </div>
     </div>
     <div class="govuk-task-list__status" id="property-type-status">
-        Completed
+    Completed
     </div>
   </li>
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
       <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="company-details-2-status">
-        Report property income
+        Item 2
       </a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Lorem Lorem ipsum dolor sit amet.
+      </div>
     </div>
     <div class="govuk-task-list__status" id="company-details-2-status">
-          Completed
+    Completed
     </div>
   </li>
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="company-details-3-hint company-details-3-status">
-        Enter property expenses
+      <a class="govuk-link govuk-task-list__link" href="#"
+        aria-describedby="company-details-3-hint company-details-3-status">
+        Item 3
       </a>
       <div id="company-details-3-hint" class="govuk-task-list__hint">
-        Some text
+        Lorem Lorem ipsum dolor sit amet.
       </div>
     </div>
     <div class="govuk-task-list__status" id="company-details-3-status">
-     Completed
-    </div>
-  </li>
-  <li class="govuk-task-list__item govuk-task-list__item--with-link">
-    <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="company-details-4-status">
-       Check your answers
-      </a>
-    </div>
-    <div class="govuk-task-list__status" id="company-details-4-status">
-      Completed
+    Completed
     </div>
   </li>
 </ul>
 
-<form action="/mtd-complex/confirmation" method="post">
-  <button class="govuk-button">Confirm and submit</button>
+
+
+<h2 class="govuk-heading-l">Panel</h2>
+<ul class="govuk-task-list">
+  <li class="govuk-task-list__item govuk-task-list__item--with-link">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link govuk-task-list__link" href="/mtd-complex/property-type"
+        aria-describedby="property-type-status">
+        Item 1
+      </a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Lorem Lorem ipsum dolor sit amet.
+      </div>
+    </div>
+    <div class="govuk-task-list__status" id="property-type-status">
+    Completed
+    </div>
+  </li>
+  <li class="govuk-task-list__item govuk-task-list__item--with-link">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="company-details-2-status">
+        Item 2
+      </a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Lorem Lorem ipsum dolor sit amet.
+      </div>
+    </div>
+    <div class="govuk-task-list__status" id="company-details-2-status">
+    Completed
+    </div>
+  </li>
+  <li class="govuk-task-list__item govuk-task-list__item--with-link">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link govuk-task-list__link" href="#"
+        aria-describedby="company-details-3-hint company-details-3-status">
+        Item 3
+      </a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Lorem Lorem ipsum dolor sit amet.
+      </div>
+    </div>
+    <div class="govuk-task-list__status" id="company-details-3-status">
+    Completed
+    </div>
+  </li>
+</ul>
+
+
+<h2 class="govuk-heading-l">Level</h2>
+<ul class="govuk-task-list">
+  <li class="govuk-task-list__item govuk-task-list__item--with-link">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link govuk-task-list__link" href="/mtd-complex/property-type"
+        aria-describedby="property-type-status">
+        Item 1
+      </a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Lorem Lorem ipsum dolor sit amet.
+      </div>
+    </div>
+    <div class="govuk-task-list__status" id="property-type-status">
+    Completed
+    </div>
+  </li>
+  <li class="govuk-task-list__item govuk-task-list__item--with-link">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="company-details-2-status">
+        Item 2
+      </a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Lorem Lorem ipsum dolor sit amet.
+      </div>
+    </div>
+    <div class="govuk-task-list__status" id="company-details-2-status">
+   Completed
+    </div>
+  </li>
+  <li class="govuk-task-list__item govuk-task-list__item--with-link">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link govuk-task-list__link" href="#"
+        aria-describedby="company-details-3-hint company-details-3-status">
+        Item 3
+      </a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Lorem Lorem ipsum dolor sit amet.
+      </div>
+    </div>
+    <div class="govuk-task-list__status" id="company-details-3-status">
+   Completed
+    </div>
+  </li>
+  <li class="govuk-task-list__item govuk-task-list__item--with-link">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link govuk-task-list__link" href="#"
+        aria-describedby="company-details-3-hint company-details-3-status">
+        Item 4
+      </a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Lorem Lorem ipsum dolor sit amet.
+      </div>
+    </div>
+    <div class="govuk-task-list__status" id="company-details-3-status">
+    Completed
+    </div>
+  </li>
+</ul>
+
+
+
+<button type="submit" class="govuk-button" data-module="govuk-button">
+  Continue
+</button>
+
 </form>
 
 {% endblock %}
