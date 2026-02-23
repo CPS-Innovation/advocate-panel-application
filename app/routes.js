@@ -80,7 +80,7 @@ router.post('/membership-type-answer', function (req, res) {
   if (answer === 'permanent') {
     res.redirect('./about-you-questions/level-2-4-permanent.html')
   } else if (answer === 'temporary') {
-    res.redirect('./about-you-questions/nlevel-2-4-temporary.html')
+    res.redirect('./about-you-questions/level-2-4-temporary.html')
   } else {
     // If nothing selected, redirect back or show an error page
     res.redirect('/#')
