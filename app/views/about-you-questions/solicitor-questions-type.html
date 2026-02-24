@@ -1,7 +1,7 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
 {% block header %}
-  {% include "_includes/header-internal.njk" %}
+{% include "_includes/header-internal.njk" %}
 {% endblock %}
 
 {% block pageTitle %}
@@ -10,8 +10,8 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
 {% block containerStart %}
 {{ govukBackLink({
-  text: "Back",
-  href: "javascript:window.history.back()"
+text: "Back",
+href: "javascript:window.history.back()"
 }) }}
 {% endblock %}
 
@@ -21,7 +21,7 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l">
-      Apply for the CPS Advocate Panel
+      Type of youthCourt
     </h1>
 
     <details class="govuk-details">
@@ -40,36 +40,29 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
       Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum</a>.
     </p>
 
-
- <form action="./question-court-panel.html" method="get">
+    <form action="/typeSolicitor-answers" method="post">
 
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-           What type of solicitor are you?
+            What type of solicitor are you?
           </legend>
 
           <div class="govuk-radios" data-module="govuk-radios">
 
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="whatDescribesYou-barrister"
-                     name="whatDescribesYou"
-                     type="radio"
-                     value="barrister">
-              <label class="govuk-label govuk-radios__label" for="whatDescribesYou-barrister">
-               With Higher Rights of Audience wishing to practice in the Crown Court
+             <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="typeSolicitor-crownCourt" name="typeSolicitor" type="radio"
+                value="crownCourt">
+              <label class="govuk-label govuk-radios__label" for="typeSolicitor-crownCourt">
+                With Higher Rights of Audience wishing to practice in the Crown Court
               </label>
             </div>
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="whatDescribesYou-solicitor"
-                     name="whatDescribesYou"
-                     type="radio"
-                     value="solicitor">
-              <label class="govuk-label govuk-radios__label" for="whatDescribesYou-solicitor">
-               Solicitor wishing to practice in the Magistrates' and/or Youth Courts
+              <input class="govuk-radios__input" id="typeSolicitor-youthCourt" name="typeSolicitor" type="radio"
+                value="youthCourt">
+              <label class="govuk-label govuk-radios__label" for="typeSolicitor-youthCourt">
+                Youth Court wishing to practice in the Magistrates' and/or Youth Courts
               </label>
             </div>
 
