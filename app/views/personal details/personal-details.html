@@ -21,7 +21,7 @@ href: "javascript:window.history.back()"
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l">
-     Personal details
+      Personal details
     </h1>
 
     <p class="govuk-body">
@@ -32,14 +32,21 @@ href: "javascript:window.history.back()"
 
       <div class="govuk-form-group">
         <label class="govuk-label" for="name-on-the-account">
-         Full name
+          Full name
         </label>
-        <input class="govuk-input" id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false"
-          autocomplete="name">
+
+        <div class="govuk-form-group">
+          <div id="name-on-the-account-hint" class="govuk-hint">
+            You cannot change this
+          </div>
+          <input class="govuk-input" id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="true"
+            autocomplete="name" disabled value="Rupert Ashdown" aria-describedby="name-on-the-account-hint" readonly>
+        </div>
+
       </div>
       <div class="govuk-form-group">
         <label class="govuk-label" for="name-on-the-account">
-         SRA number:
+          SRA number:
         </label>
         <div id="roll-number-hint" class="govuk-hint">
           Provide your 6 or 7 Solicitors RegulationAuthority number.
@@ -49,7 +56,7 @@ href: "javascript:window.history.back()"
       </div>
 
       <button type="submit" class="govuk-button govuk-!-static-margin-right-5" data-module="govuk-button">
-       Submit personal details
+        Submit personal details
       </button>
     </form>
 
