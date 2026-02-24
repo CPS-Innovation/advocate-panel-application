@@ -112,10 +112,6 @@ router.post('/solicitor-levels-answer', function (req, res) {
 })
 
 
-
-
-
-
 // 4. Route to handle "Select a membership type" answer
 router.post('/membership-type-answer', function (req, res) {
 
@@ -169,6 +165,33 @@ router.post('/typeSolicitor-answers', function (req, res) {
     res.redirect('/#')
   }
 })
+
+
+
+// Task-list Application Start form
+
+// 6. Route to handle "Current Chambers or Solicitors firm" answer
+router.post('/employmentType-answer', function (req, res) {
+
+  // Read form value (Prototype Kit stores it in req.session.data)
+  const answer = req.session.data['employmentType']
+
+  // Redirect depending on the value
+  if (answer === 'memberChambers') {
+    res.redirect('../current-chambers/name-chambers.html')
+  } else if (answer === 'soleTrader') {
+    res.redirect('../current-chambers/address-details.html')
+  } else if (answer === 'solicitorsFirm') {
+    res.redirect('../current-chambers/firm-name.html')
+  } else {
+    // If nothing selected, redirect back or show an error page
+    res.redirect('/#')
+  }
+})
+
+
+
+
 
 
 

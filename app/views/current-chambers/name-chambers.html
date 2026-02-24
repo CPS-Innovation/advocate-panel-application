@@ -1,0 +1,138 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+  {% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Member of Chambers
+    </h1>
+
+    <p class="govuk-body">
+      Select chambers from…
+    </p>
+
+
+      <div class="govuk-form-group" id="country-group">
+
+        <label class="govuk-label govuk-label--l" for="country">
+          Pick a country
+        </label>
+
+        <div id="country-hint" class="govuk-hint">
+          Start typing to filter the list (autocomplete will appear when enabled).
+        </div>
+
+        <!-- WORKS NOW as a normal <select>; will turn into autocomplete later -->
+        <select class="govuk-select govuk-!-width-two-thirds"
+                id="country"
+                name="country"
+                aria-describedby="country-hint">
+
+          <option value="" selected disabled>Select an option</option>
+          <option value="Austria">Austria</option>
+          <option value="Belgium">Belgium</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Croatia">Croatia</option>
+          <option value="Republic of Cyprus">Republic of Cyprus</option>
+          <option value="Czech Republic">Czech Republic</option>
+          <option value="Denmark">Denmark</option>
+          <option value="Estonia">Estonia</option>
+          <option value="Finland">Finland</option>
+          <option value="France">France</option>
+          <option value="Germany">Germany</option>
+          <option value="Greece">Greece</option>
+          <option value="Hungary">Hungary</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Italy">Italy</option>
+          <option value="Latvia">Latvia</option>
+          <option value="Lithuania">Lithuania</option>
+          <option value="Luxembourg">Luxembourg</option>
+          <option value="Malta">Malta</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="Poland">Poland</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Romania">Romania</option>
+          <option value="Slovakia">Slovakia</option>
+          <option value="Slovenia">Slovenia</option>
+          <option value="Spain">Spain</option>
+          <option value="Sweden">Sweden</option>
+
+        </select>
+
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+<!-- ---------------------------------------------------------
+     Autocomplete enhancement – SAFE EVEN IF NOT INSTALLED YET
+---------------------------------------------------------- -->
+<script>
+  (function enhanceSelectWhenAvailable () {
+    if (!window.accessibleAutocomplete || !accessibleAutocomplete.enhanceSelectElement)
+      return;
+
+    var selectEl = document.getElementById('country');
+
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: selectEl,
+      minLength: 1,
+      autoselect: true,
+      confirmOnBlur: false,
+      displayMenu: 'overlay'
+    });
+
+    var enhancedInput = document.getElementById('country-autocomplete');
+    if (enhancedInput) {
+      enhancedInput.setAttribute('aria-describedby', 'country-hint');
+    }
+  })();
+</script>
+
+<noscript>
+  <p class="govuk-body govuk-!-margin-top-2">
+    Autocomplete is not available because JavaScript is turned off. You can still use the list.
+  </p>
+</noscript>
+
+{% endblock %}
+
+{# ---------------------------------------------------------
+   ADD AUTOCOMPLETE CSS
+---------------------------------------------------------- #}
+{% block head %}
+  {{ super() }}
+  /public/css/accessible-autocomplete.min.css
+{% endblock %}
+
+{# ---------------------------------------------------------
+   ADD AUTOCOMPLETE JS
+---------------------------------------------------------- #}
+{% block pageScripts %}
+  {{ super() }}
+
+  <script src="../../public//public/javascripts/accessible-autocomplete.min.js"></script>
+{% endblock %}

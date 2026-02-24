@@ -5,6 +5,7 @@
 
 // Add extra styles here
 /* === CPS Header Style === */
+@import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
 
 
 :root {
@@ -195,3 +196,21 @@ vertical-align: top;
   transform: rotate(180deg);
 }
 
+/* Fix for MOJ search layout when MOJ Frontend is not installed */
+.moj-search__container {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.moj-search__input {
+  flex: 1;
+}
+
+/* Autocomplete input inherits GOV.UK styles (optional, safe) */
+.autocomplete__wrapper * {
+  font-family: "GDS Transport", Arial, sans-serif;
+}
+
+
+@import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
