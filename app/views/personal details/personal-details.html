@@ -1,0 +1,59 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+     Personal details
+    </h1>
+
+    <p class="govuk-body">
+      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum </a>.
+    </p>
+
+    <form action="../start-application-2.html" method="get" novalidate>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="name-on-the-account">
+         Full name
+        </label>
+        <input class="govuk-input" id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false"
+          autocomplete="name">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="name-on-the-account">
+         SRA number:
+        </label>
+        <div id="roll-number-hint" class="govuk-hint">
+          Provide your 6 or 7 Solicitors RegulationAuthority number.
+        </div>
+        <input class="govuk-input" id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false"
+          autocomplete="name">
+      </div>
+
+      <button type="submit" class="govuk-button govuk-!-static-margin-right-5" data-module="govuk-button">
+       Submit personal details
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
