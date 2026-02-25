@@ -180,9 +180,9 @@ router.post('/employmentType-answer', function (req, res) {
   if (answer === 'memberChambers') {
     res.redirect('../current-chambers/name-chambers.html')
   } else if (answer === 'soleTrader') {
-    res.redirect('../current-chambers/address-details.html')
+    res.redirect('./current-chambers/sole-trader-adding-address.html')
   } else if (answer === 'solicitorsFirm') {
-    res.redirect('../current-chambers/firm-name.html')
+    res.redirect('../current-chambers/solicitor-firm-adding-address.html')
   } else {
     // If nothing selected, redirect back or show an error page
     res.redirect('/#')

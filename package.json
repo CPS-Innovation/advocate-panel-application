@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "govuk-prototype-kit dev",
     "serve": "govuk-prototype-kit serve",
-    "start": "govuk-prototype-kit start"
+    "start": "govuk-prototype-kit start",
+    "build:js": "browserify app/assets/javascripts/autocomplete-src.js --outfile public/javascripts/autocomplete-bundle.js"
   },
   "dependencies": {
     "@govuk-prototype-kit/common-templates": "3.0.0",
@@ -14,5 +15,11 @@
     "hmrc-frontend": "6.115.0",
     "jquery": "4.0.0",
     "notifications-node-client": "8.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.1"
   }
 }

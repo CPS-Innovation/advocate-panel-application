@@ -5,8 +5,17 @@
 
 // Add extra styles here
 /* === CPS Header Style === */
-@import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
 
+
+// Standard GOV.UK styles
+
+// Fix typography for autocomplete
+.autocomplete__wrapper * {
+  @include govuk-typography-common();
+}
+
+
+@import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
 
 :root {
   --ds-color-primary: #1d70b8;
@@ -212,5 +221,62 @@ vertical-align: top;
   font-family: "GDS Transport", Arial, sans-serif;
 }
 
+.autocomplete__wrapper * {
+  @include govuk-typography-common();
+}
 
-@import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
+/* Remove any native browser arrow */
+.autocomplete__input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none !important;
+}
+
+/* General styling to match your screenshot */
+.autocomplete__input {
+  border: 2px solid #505a5f;        /* GOV.UK grey */
+  padding-left: 2.2rem;             /* space for search icon */
+  height: 2.5rem;
+  border-radius: 0;
+  font-size: 1rem;
+}
+
+/* Yellow focus style like GOV.UK */
+.autocomplete__input:focus {
+  border-color: #fd0;               /* GOV.UK yellow */
+  box-shadow: 0 0 0 3px #fd0;
+  outline: none;
+}
+
+.autocomplete__wrapper {
+  position: relative;
+}
+
+.autocomplete__wrapper::before {
+  content: "🔍";       /* or replace with SVG background */
+  position: absolute;
+  left: 0.6rem;
+  top: 0.55rem;
+  font-size: 1.2rem;
+  pointer-events: none;
+  color: #505a5f;
+}
+
+.autocomplete__menu {
+  border: 2px solid #b1b4b6;
+  box-shadow: none;
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.autocomplete__option,
+.autocomplete__option--highlighted {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.autocomplete__option--highlighted {
+  background-color: #f3f2f1;
+}
+
