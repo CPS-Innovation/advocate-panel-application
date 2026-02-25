@@ -1,5 +1,5 @@
 {
-  "serviceName": "Advocate Panel Application",
+  "serviceName": "Apply to join a CPS advocate panel",
   "useServiceNavigation": true,
   "plugins": {
     "govuk-frontend": {
