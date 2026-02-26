@@ -1,0 +1,204 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="./examples-work-2.html" method="get">
+
+      <h1 class="govuk-heading-l">
+        Examples of your work - Advocacy
+      </h1>
+
+      <div class="govuk-inset-text">
+        The Advocate Panel arrangements follow the fundamental principles of the Equality Act 2010 and our <a
+          href="https://urldefense.com/v3/__https://www.gov.uk/guidance/equality-act-2010-guidance*public-sector-equality-duty__;Iw!!EJ3n55FBLexp1rhr!5coOW4uCPBguyAQUHGfk2OEN_bUPbjsE3PcW60XA78oM0N6R_c9HJQ6GeHUmPp1PgIaodPXsmoG3Rra8ACDNLCN7YQQbnPI$"
+          class="govuk-link" rel="noreferrer noopener" target="_blank">Public Sector Equality Duty (PSED) (opens in new
+          tab)</a>.<br>
+        One of the ways the CPS meets this duty, is by collecting and analysing data on the protected characteristics of
+        applicants to the Panel. <br>
+        Accordingly, all applicants wishing to join the Advocate Panel are required to complete Equality Monitoring
+        questions. This will enable the CPS to identify whether groups with protected characteristics are
+        proportionately represented and to take action to encourage groups to apply where there is underrepresentation.
+        <br>
+        The data we collect is used for statistical analysis and will not impact on whether or not an applicant is
+        successful in their application. All applications will be judged solely on merit.
+      </div>
+
+      <h2 class="govuk-heading-m govuk-!-margin-top-9">Describe yourself</h2>
+      <!-- What best describes you-->
+      <p class="govuk-body">Which of the following best describes you:</p>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="sexOrientation">
+          What is your sex?
+        </label>
+        <input class="govuk-input" id="sexOrientation" name="sexOrientation" type="text" spellcheck="false"
+          autocomplete="sexOrientation">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="genderOrientation">
+          Is the gender you identify with the same as your sex registered at birth?
+        </label>
+        <input class="govuk-input" id="genderOrientation" name="genderOrientation" type="text" spellcheck="false"
+          autocomplete="genderOrientation">
+      </div>
+
+      <!-- Age group -->
+      <h2 class="govuk-heading-m govuk-!-margin-top-9">Age group </h2>
+      <p class="govuk-body">Which age group do you belong to?</p>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive" name="whereDoYouLive" type="radio" value="england">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive">
+                24 and under
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-2" name="whereDoYouLive" type="radio"
+                value="scotland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-2">
+                25-34
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-3" name="whereDoYouLive" type="radio" value="wales">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-3">
+                35-44
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                45-54
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                55-64
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                65+
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                Prefer not to say
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <h2 class="govuk-heading-m govuk-!-margin-top-9">Nationality </h2>
+      <!-- National identify-->
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="waste-hint">
+          <div id="waste-hint" class="govuk-hint">
+            Select all that apply
+          </div>
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses">
+              <label class="govuk-label govuk-checkboxes__label" for="waste">
+                British
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-2" name="waste" type="checkbox" value="mines">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-2">
+                English
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+                Gypsy Roma
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+                Irish
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+                Member of the Irish Traveller Community
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+                Northern Irish
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+                Scottish
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+                Welsh
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+                Dual Nationality
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+                Other National Identity
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+              <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+                Prefer not to say
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
