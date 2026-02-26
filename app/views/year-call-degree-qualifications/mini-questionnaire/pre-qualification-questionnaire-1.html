@@ -1,0 +1,66 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Criminal investigation
+    </h1>
+
+    <p class="govuk-body">Have you ever been the subject of a criminal investigation by the police, Serious Fraud Office
+      or any other prosecuting authority in the United Kingdom or abroad?</p>
+
+    <form action="./pre-qualification-questionnaire-2.html" method="get">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-radios" data-module="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="yesCriminalInvestigation" name="CriminalInvestigation" type="radio"
+                value="Yes">
+              <label class="govuk-label govuk-radios__label" for="yesCriminalInvestigation">
+                Yes
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="noCriminalInvestigation" name="CriminalInvestigation" type="radio"
+                value="No">
+              <label class="govuk-label govuk-radios__label" for="noCriminalInvestigation">
+                No
+              </label>
+            </div>
+
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+
+
+  </div>
+</div>
+{% endblock %}

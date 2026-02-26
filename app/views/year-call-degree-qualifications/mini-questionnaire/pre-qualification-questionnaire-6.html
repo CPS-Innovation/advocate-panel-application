@@ -1,0 +1,65 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Prosecuting Authority
+    </h1>
+
+    <p class="govuk-body">Has the CPS or other Prosecuting Authority ever had occasion to remove instructions from you?</p>
+
+    <form action="./check-answers.html" method="get">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-radios" data-module="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="yesProsecutingAuthority" name="ProsecutingAuthority" type="radio"
+                value="Yes">
+              <label class="govuk-label govuk-radios__label" for="yesProsecutingAuthority">
+                Yes
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="noProsecutingAuthority" name="ProsecutingAuthority" type="radio"
+                value="No">
+              <label class="govuk-label govuk-radios__label" for="noProsecutingAuthority">
+                No
+              </label>
+            </div>
+
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+
+
+  </div>
+</div>
+{% endblock %}
