@@ -16,19 +16,29 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key"> What is your sex?</dt>
-    <dd class="govuk-summary-list__value">{{ data['exOrientation'] }}</dd>
+    <dd class="govuk-summary-list__value">{{ data['sexOrientation'] }}</dd>
     <dd class="govuk-summary-list__actions">
       <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden">What is your sex?</span></a>
     </dd>
   </div>
 
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Your gender</dt>
-    <dd class="govuk-summary-list__value">{{ data['genderOrientation'] }}</dd>
-    <dd class="govuk-summary-list__actions">
-      <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden">Your gender</span></a>
-    </dd>
-  </div>
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">Your gender</dt>
+  <dd class="govuk-summary-list__value">
+    {% if data['genderbirth'] == "no" and data['genderIdentity'] %}
+      {{ data['genderIdentity'] }}
+    {% else %}
+      {{ data['genderbirth'] }}
+    {% endif %}
+  </dd>
+  <dd class="govuk-summary-list__actions">
+    <a href="./equalities-questions-1.html">
+      Change <span class="govuk-visually-hidden">Your gender</span>
+    </a>
+  </dd>
+</div>
+
+  
 
 
   <div class="govuk-summary-list__row">
@@ -57,7 +67,7 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
   </div>
 
   <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">OSexual orientation</dt>
+    <dt class="govuk-summary-list__key">Sexual orientation</dt>
     <dd class="govuk-summary-list__value">{{ data['sexualOrientation'] }}</dd>
     <dd class="govuk-summary-list__actions">
       <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden">Sexual orientation</span></a>
