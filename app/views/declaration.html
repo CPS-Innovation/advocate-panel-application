@@ -1,0 +1,75 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="./finish-application.html" method="get" novalidate>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="declaration-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Applicant declaration
+            </h1>
+          </legend>
+          <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+              <span class="govuk-visually-hidden">Warning</span>
+              Your application may be delayed if you include sensitive or identifying information in your
+              application.
+            </strong>
+          </div>
+          <p class="govuk-body">False, misleading or plagiarised work may result in disqualification from the
+            application process or lead to
+            removal from any existing panels.</p>
+          <div id="declaration-hint" class="govuk-hint">
+            Select all that apply
+          </div>
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="declaration" name="declaration" type="checkbox"
+                value="carcasses">
+              <label class="govuk-label govuk-checkboxes__label" for="declaration">
+                I confirm that all personal and case-identifying details are redacted, and the examples provided are
+                true and my own
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="declaration-2" name="declaration" type="checkbox"
+                value="mines">
+              <label class="govuk-label govuk-checkboxes__label" for="declaration-2">
+                I confirm that I will work in accordance with the Advocate Panel Members' Commitment
+                <a href="#" class="govuk-link" rel="noreferrer noopener" target="_blank">The Advocate Panel Members'
+                  Commitment can be found here (opens in new tab)</a>
+
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Submit application
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
