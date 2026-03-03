@@ -1,0 +1,29 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="govuk-heading-xl">Your details have been submitted </h1>
+
+<p class="govuk-body">You have now completed submitting your details and an application form has been created and tailored to your needs. <br>
+  Please continue to start the application for the Advocate Court Panle.</p>
+
+<form action="../task-list-about-you-details-completed.html" method="get">
+  <button class="govuk-button">Continue</button>
+</form>
+
+{% endblock %}

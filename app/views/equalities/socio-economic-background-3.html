@@ -1,0 +1,142 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+
+<style>
+  /* Make all 3-column GOV.UK tables have equal-width columns */
+  .equal-width-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .equal-width-table th,
+  .equal-width-table td {
+    width: 33.3333%;
+  }
+
+  .govuk-table__header,
+  .govuk-table__cell {
+    width: 200px;
+  }
+</style>
+{% endblock %}
+
+{% block pageTitle %}
+Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="/socioEconomic-answers" method="post">
+
+      <h1 class="govuk-heading-l">
+        Socio-economic background
+      </h1>
+
+
+      <!-- Age group -->
+      <h2 class="govuk-heading-m govuk-!-margin-top-9">What type of secondary school did you mainly attend between the
+        ages of 11 and 16? </h2>
+      <p class="govuk-body">Select school type</p>
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="socioEconomic-hint">
+          <div id="socioEconomic-hint" class="govuk-hint">
+            You’ll need an account to prove your identity and complete your Self Assessment
+          </div>
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socioEconomic-state-run" name="socioEconomic" type="radio" value="state-run"
+                aria-describedby="socioEconomic-state-run-item-hint">
+              <label class="govuk-label govuk-radios__label" for="socioEconomic-state-run">
+                State-run
+              </label>
+              <div id="socioEconomic-state-run-item-hint" class="govuk-hint govuk-radios__hint">
+                State-funded selective
+              </div>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socioEconomic-bursary" name="socioEconomic" type="radio" value="bursary"
+                aria-describedby="socioEconomic-bursary-item-hint">
+              <label class="govuk-label govuk-radios__label" for="socioEconomic-bursary">
+                Bursary
+              </label>
+              <div id="socioEconomic-bursary-item-hint" class="govuk-hint govuk-radios__hint">
+                Independent or fee-paying school
+              </div>
+            </div>
+             <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socioEconomic-no-bursary" name="socioEconomic" type="radio" value="no-bursary"
+                aria-describedby="socioEconomic-no-bursary-item-hint">
+              <label class="govuk-label govuk-radios__label" for="socioEconomic-no-bursary">
+                No bursary
+              </label>
+              <div id="socioEconomic-no-bursary-item-hint" class="govuk-hint govuk-radios__hint">
+                Independent or fee-paying school
+              </div>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socioEconomic-outside-uk" name="socioEconomic" type="radio" value="outside-uk"
+                aria-describedby="socioEconomic-outside-uk-item-hint">
+              <label class="govuk-label govuk-radios__label" for="socioEconomic-outside-uk">
+                Outside UK
+              </label>
+              <div id="socioEconomic-outside-uk-item-hint" class="govuk-hint govuk-radios__hint">
+                Attended school outside the UK
+              </div>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socioEconomic-dont-know" name="socioEconomic" type="radio" value="dont-know"
+                aria-describedby="socioEconomic-dont-know-item-hint">
+              <label class="govuk-label govuk-radios__label" for="socioEconomic-dont-know">
+                Don't know
+              </label>
+              <div id="socioEconomic-dont-know-item-hint" class="govuk-hint govuk-radios__hint">
+                Not sure what school...
+              </div>
+            </div>
+
+
+            <!-- Other option -->
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="other" name="other" type="radio" value="other"
+                data-aria-controls="conditional-other">
+              <label class="govuk-label govuk-radios__label" for="other">
+                Other
+              </label>
+            </div>
+            <div class="govuk-radios__conditional" id="conditional-other">
+              <div class="govuk-form-group" id="other-form-group">
+                <label class="govuk-label" for="other-input">
+                  Please specify
+                </label>
+                <input class="govuk-input govuk-!-width-one-half" id="other-input" name="other" type="text"
+                  inputmode="text"
+                  aria-describedby="other-hint other-error" autocomplete="off">
+              </div>
+            </div>
+
+          </div>
+        </fieldset>
+      </div>
+
+
+      <button type="submit" class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}
