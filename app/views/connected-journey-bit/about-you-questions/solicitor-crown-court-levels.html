@@ -1,0 +1,110 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+  {% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      General Crime Panel
+    </h1>
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Help with something
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        Something about levels explanation
+      </div>
+    </details>
+    <p class="govuk-body">
+      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum </a>.
+    </p>
+
+    
+ <form action="/solicitor-levels-answer" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            Select the a level:
+          </legend>
+
+          <div class="govuk-radios" data-module="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="levels-level1"
+                     name="levels"
+                     type="radio"
+                     value="level1">
+              <label class="govuk-label govuk-radios__label" for="levels-level1">
+                Level 1
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="levels-level2"
+                     name="levels"
+                     type="radio"
+                     value="level2">
+              <label class="govuk-label govuk-radios__label" for="levels-level2">
+                Level 2
+              </label>
+            </div>
+
+             <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="levels-level3"
+                     name="levels"
+                     type="radio"
+                     value="level3">
+              <label class="govuk-label govuk-radios__label" for="levels-level3">
+                Level 3
+              </label>
+            </div>
+
+              <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="levels-level4"
+                     name="levels"
+                     type="radio"
+                     value="level4">
+              <label class="govuk-label govuk-radios__label" for="levels-level4">
+                Level 4
+              </label>
+            </div>
+
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  
+
+  </div>
+</div>
+{% endblock %}

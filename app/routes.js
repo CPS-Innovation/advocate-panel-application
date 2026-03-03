@@ -47,6 +47,29 @@ router.post('/panel-answer', function (req, res) {
 })
 
 
+
+// "connected-journey-bit/question-what-describes-you" answer
+router.post('/whatDescribesYou-answer', function (req, res) {
+
+  // Read form value (Prototype Kit stores it in req.session.data)
+  const answer = req.session.data['whatDescribesYou']
+
+  // Redirect depending on the value
+  if (answer === 'barrister') {
+    res.redirect('../connected-journey-bit/about-you-questions/crown-court-levels.html')
+  } else if (answer === 'solicitor') {
+    res.redirect('../connected-journey-bit/about-you-questions/crown-court-levels.html')
+  } else if (answer === 'other') {
+    res.redirect('../connected-journey-bit/about-you-questions/crown-court-levels.html')
+  } else {
+    // If nothing selected, redirect back or show an error page
+    res.redirect('/#')
+  }
+})
+
+
+
+
 router.post('/solicitor-panel-answer', function (req, res) {
 
   // Read form value (Prototype Kit stores it in req.session.data)
