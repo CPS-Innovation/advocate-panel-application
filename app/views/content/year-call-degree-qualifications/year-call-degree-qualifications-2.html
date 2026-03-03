@@ -1,0 +1,290 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Submit year of call, degree and post-graduate qualifications
+    </h1>
+
+    <p class="govuk-body">Lorem ipsum lorem ipsum lorem</p>
+
+    <form action="./crown-courts-circuit/crown-courts-select-page.html" method="get" novalidate>
+
+
+
+      <!--- Year of call-->
+
+
+      <h2 class="govuk-heading-m">Year of call</h2>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
+          <div class="govuk-date-input" id="passport-issued">
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
+                  Year
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="passport-issued-year"
+                  name="passport-issued-year" type="text" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Date of completion-->
+
+      <h2 class="govuk-heading-m">Date of completion</h2>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
+          <div class="govuk-date-input" id="passport-issued">
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="passport-issued-day">
+                  Day
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-day"
+                  name="passport-issued-day" type="text" inputmode="numeric">
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="passport-issued-month">
+                  Month
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-month"
+                  name="passport-issued-month" type="text" inputmode="numeric">
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
+                  Year
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="passport-issued-year"
+                  name="passport-issued-year" type="text" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="full-name">
+          Institution
+        </label>
+        <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="full-name">
+          Course or subject
+        </label>
+        <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="full-name">
+          Results including grades
+        </label>
+        <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
+      </div>
+
+
+      <div class="govuk-inset-text">
+        2014<br>
+        22/09/2016<br>
+        Faculty of Law — University of Oxford<br>
+        Graduate Diploma in Law (GDL)<br>
+        First Class Honours
+      </div>
+
+      <div class="govuk-inset-text">
+        2012<br>
+        14/07/2015<br>
+        The University of Law, London<br>
+        Legal Practice Course (LPC)<br>
+        Distinction
+      </div>
+
+      <div class="govuk-inset-text">
+        2017<br>
+        03/10/2018<br>
+        King’s College London — Dickson Poon School of Law<br>
+        LLM International Business Law<br>
+        Merit
+      </div>
+
+
+      <div class="govuk-button-group">
+        <a href="./year-call-degree-qualifications-3.html" role="button" draggable="false" class="govuk-button"
+          data-module="govuk-button" style="background-color: #1d70b8 !important;">
+          Save qualification
+        </a>
+
+        <button id="clear-address" type="button" class="govuk-button govuk-button--secondary">
+          Add new
+        </button>
+      </div>
+
+
+
+      <div class="govuk-button-group">
+        <a href="../start-application-5.html" role="button" draggable="false" class="govuk-button"
+          data-module="govuk-button">
+          Continue and submit qualifications
+        </a>
+      </div>
+
+
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+  /* ----------------------------------------
+     CHAMBERS LIST SOURCE
+  ----------------------------------------- */
+  const allChambers = [
+    "Redbridge Court Chambers", "Harborstone Chambers", "Northgate Square Chambers",
+    "Crownwell Chambers", "Elm & Ivory Chambers", "Westminster Gate Chambers",
+    "Blackthorne Walk Chambers", "Stonemount Chambers", "Marble Court Chambers",
+    "Eastbridge Inn Chambers", "Winterfield Chambers", "Hamilton Crest Chambers",
+    "Ironwood Court Chambers", "Templefield Chambers", "Oakshire Chambers",
+    "Silverbrook Chambers", "Ashbury Court Chambers", "Briarstone Chambers"
+  ];
+
+  const chamberAddresses = {
+    "Redbridge Court Chambers": "12 Market Street, London SW1A 1AA",
+    "Harborstone Chambers": "88 Crown Lane, Bristol BS1 3QF",
+    "Northgate Square Chambers": "5 Northgate Square, Manchester M2 4GH",
+    "Templefield Chambers": "1 Inner Temple Lane, London EC4Y 7HL",
+    "default": "101 Example Road, London W1A 2BC"
+  };
+
+  const listEl = document.getElementById("country-list");
+  const inputEl = document.getElementById("country-filter");
+  const buttonEl = document.querySelector(".search-button");
+  const chosenEl = document.getElementById("selected-chamber");
+
+  // 👉 NEW: store up to 3 selections
+  let selectedCourts = [];
+
+  /* ----------------------------------------
+     RENDER SEARCH LIST
+  ----------------------------------------- */
+  function renderList(filter = "") {
+    listEl.innerHTML = "";
+    const filtered = allChambers.filter(ch =>
+      ch.toLowerCase().includes(filter.toLowerCase())
+    );
+    filtered.forEach(ch => {
+      listEl.insertAdjacentHTML(
+        "beforeend",
+        `<div class="filter-item" tabindex="0">${ch}</div>`
+      );
+    });
+  }
+
+  renderList();
+
+  /* ----------------------------------------
+     INPUT + SEARCH BEHAVIOUR
+  ----------------------------------------- */
+  inputEl.addEventListener("focus", () => listEl.style.display = "block");
+
+  inputEl.addEventListener("input", e => {
+    renderList(e.target.value);
+    listEl.style.display = e.target.value.trim() ? "block" : "none";
+  });
+
+  buttonEl.addEventListener("click", () => {
+    renderList(inputEl.value);
+    listEl.style.display = inputEl.value.trim() ? "block" : "none";
+  });
+
+  /* ----------------------------------------
+     HANDLE SELECTING A COURT Up to 3 addresses!
+  ----------------------------------------- */
+  listEl.addEventListener("click", e => {
+    if (e.target.classList.contains("filter-item")) {
+      addCourt(e.target.textContent.trim());
+    }
+  });
+
+  function addCourt(name) {
+    if (selectedCourts.length >= 3) {
+      alert("You can only select 3 Crown Courts");
+      return;
+    }
+
+    if (selectedCourts.includes(name)) return;
+
+    selectedCourts.push(name);
+    inputEl.value = "";
+    listEl.style.display = "none";
+
+    renderSelected();
+  }
+
+  /* ----------------------------------------
+     RENDER SELECTED COURTS
+  ----------------------------------------- */
+  function renderSelected() {
+    chosenEl.innerHTML = "";
+
+    selectedCourts.forEach((name, index) => {
+      const address = chamberAddresses[name] || chamberAddresses.default;
+
+      chosenEl.insertAdjacentHTML(
+        "beforeend",
+        `
+      <div class="govuk-inset-text">
+        <strong>${name}</strong><br>
+        ${address}<br>
+        <button 
+          class="govuk-button govuk-button--secondary govuk-!-margin-top-2" 
+          type="button" 
+          onclick="removeCourt(${index})">
+          Remove
+        </button>
+      </div>
+      `
+      );
+    });
+  }
+
+  window.removeCourt = function (index) {
+    selectedCourts.splice(index, 1);
+    renderSelected();
+  };
+
+  /* ----------------------------------------
+     CLEAR ALL
+  ----------------------------------------- */
+  document.getElementById("clear-address").addEventListener("click", () => {
+    selectedCourts = [];
+    renderSelected();
+    inputEl.value = "";
+  });
+</script>
+
+
+{% endblock %}

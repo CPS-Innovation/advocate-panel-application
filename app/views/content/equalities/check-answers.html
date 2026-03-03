@@ -1,0 +1,188 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<h1 class="govuk-heading-xl">Check your answers</h1>
+
+<dl class="govuk-summary-list">
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key"> What is your sex?</dt>
+    <dd class="govuk-summary-list__value">{{ data['sexOrientation'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden">What is your sex?</span></a>
+    </dd>
+  </div>
+
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">Your gender</dt>
+  <dd class="govuk-summary-list__value">
+    {% if data['genderbirth'] == "no" and data['genderIdentity'] %}
+      {{ data['genderIdentity'] }}
+    {% else %}
+      {{ data['genderbirth'] }}
+    {% endif %}
+  </dd>
+  <dd class="govuk-summary-list__actions">
+    <a href="./equalities-questions-1.html">
+      Change <span class="govuk-visually-hidden">Your gender</span>
+    </a>
+  </dd>
+</div>
+
+  
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Your gender birth</dt>
+    <dd class="govuk-summary-list__value">{{ data['genderbirth'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden">Your gender birth</span></a>
+    </dd>
+  </div>
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Age group</dt>
+    <dd class="govuk-summary-list__value">{{ data['ageGroup'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden">Age group</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Nationality</dt>
+    <dd class="govuk-summary-list__value">{{ data['nationality'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden"> Nationality</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Sexual orientation</dt>
+    <dd class="govuk-summary-list__value">{{ data['sexualOrientation'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden">Sexual orientation</span></a>
+    </dd>
+  </div>
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Religion</dt>
+    <dd class="govuk-summary-list__value">{{ data['religion'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden">Religion</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Ethnic group</dt>
+    <dd class="govuk-summary-list__value">{{ data['ethnicity'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./equalities-questions-1.html">Change<span class="govuk-visually-hidden"> Ethnic group</span></a>
+    </dd>
+  </div>
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Do you have a disability?</dt>
+    <dd class="govuk-summary-list__value">{{ data['disability-question'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./disability-question-2.html">Change<span class="govuk-visually-hidden"> Disability</span></a>
+    </dd>
+  </div>
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Type of secondary school</dt>
+    <dd class="govuk-summary-list__value">{{ data['socioEconomic'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./socio-economic-background-3.html">Change<span class="govuk-visually-hidden"> Socio-economic
+          background</span></a>
+    </dd>
+  </div>
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key"> Parents' qualifications </dt>
+    <dd class="govuk-summary-list__value">{{ data['parents-qualifications'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./occupation-questions-4.html">Change<span class="govuk-visually-hidden"> Parents'
+          qualifications</span></a>
+    </dd>
+  </div>
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Parents' occupation </dt>
+    <dd class="govuk-summary-list__value">{{ data['occupation'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./occupation-parents-5.html">Change<span class="govuk-visually-hidden">Parents' main
+          occupation</span></a>
+    </dd>
+  </div>
+
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Income of the highest earner in the household</dt>
+    <dd class="govuk-summary-list__value">{{ data['occupation-income'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./occupation-parents-6.html">Change<span class="govuk-visually-hidden">Income of the highest earner in
+          the household</span></a>
+    </dd>
+  </div>
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key"> How many peole were employed on the parents' company?</dt>
+    <dd class="govuk-summary-list__value">{{ data['number-employees'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./occupation-parents-7.html">Change<span class="govuk-visually-hidden"> How many peole were employed on
+          the parents' company?</span></a>
+    </dd>
+  </div>
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key"> Parents' highest income supervisor</dt>
+    <dd class="govuk-summary-list__value">{{ data['supervisor-status'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./occupation-parents-8.html">Change<span class="govuk-visually-hidden"> Parents' highest income
+          supervisor</span></a>
+    </dd>
+  </div>
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key"> Free school meals</dt>
+    <dd class="govuk-summary-list__value">{{ data['school-meals'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./school-meals-9.html">Change<span class="govuk-visually-hidden"> Free school meals</span></a>
+    </dd>
+  </div>
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key"> Self-Assessment of Socio-Economic Background Status</dt>
+    <dd class="govuk-summary-list__value">{{ data['socio-economic-status'] }}</dd>
+    <dd class="govuk-summary-list__actions">
+      <a href="./assessment-10.html">Change<span class="govuk-visually-hidden"> Self-Assessment of Socio-Economic
+          Background Status</span></a>
+    </dd>
+  </div>
+
+</dl>
+
+<form action="../../start-application-8.html" method="get">
+  <button class="govuk-button">Confirm and continue</button>
+</form>
+
+{% endblock %}

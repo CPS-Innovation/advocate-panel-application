@@ -1,0 +1,104 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Task list template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+       <form action="./check-answers.html" method="get" novalidate>
+
+
+      <h1 class="govuk-heading-l">{{ serviceName }}</h1>
+
+      <h2 class="govuk-heading-m">[ Heading for first set of tasks ]</h2>
+
+      {% set completedStatus = {
+        text: "Completed"
+      } %}
+
+      {% set completedStatus = {
+        tag: {
+          text: "Incomplete",
+          classes: "govuk-tag--blue"
+        }
+      } %}
+
+      {# To switch between the completed and incomplete statues, use some inline logic within the component below, like this: "status: (completedStatus if ... else completedStatus)" #}
+
+      {{ govukTaskList({
+        idPrefix: "first-section",
+        items: [
+          {
+            title: {
+              text: "Name of first task"
+            },
+            href: "#",
+            status: completedStatus
+          },
+          {
+            title: {
+              text: "Name of second task"
+            },
+            href: "#",
+            status: completedStatus
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m govuk-!-margin-top-5">[ Heading for second set of tasks ]</h2>
+
+      {{ govukTaskList({
+        idPrefix: "second-section",
+        items: [
+          {
+            title: {
+              text: "Name of third task"
+            },
+            href: "#",
+            status: completedStatus
+          },
+          {
+            title: {
+              text: "Name of fifth task"
+            },
+            href: "#",
+            status: completedStatus
+          },
+          {
+            title: {
+              text: "Name of sixth task"
+            },
+            href: "#",
+            status: completedStatus
+          },
+          {
+            title: {
+              text: "Name of seventh task"
+            },
+            href: "#",
+            status: completedStatus
+          },
+          {
+            title: {
+              text: "Name of eighth task"
+            },
+            href: "#",
+            status: completedStatus
+          }
+        ]
+      }) }}
+
+   <button type="submit" class="govuk-button" data-module="govuk-button">
+        Submit application
+      </button>
+    
+    </form>
+
+    </div>
+  </div>
+{% endblock %}

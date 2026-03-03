@@ -1,0 +1,101 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+  {% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Apply for the CPS Advocate Panel
+    </h1>
+
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Help with something
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        We need to know your nationality so we can work out which elections you’re entitled to vote in.
+      </div>
+    </details>
+
+    <p class="govuk-body">Lorem ipsum loremn ipum lorem</p>
+    <p class="govuk-body">
+      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum</a>.
+    </p>
+
+
+ <form action="/whatDescribesYou-answer" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            Select the option that best describes you:
+          </legend>
+
+          <div class="govuk-radios" data-module="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="whatDescribesYou-barrister"
+                     name="whatDescribesYou"
+                     type="radio"
+                     value="barrister">
+              <label class="govuk-label govuk-radios__label" for="whatDescribesYou-barrister">
+                Barrister
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="whatDescribesYou-solicitor"
+                     name="whatDescribesYou"
+                     type="radio"
+                     value="solicitor">
+              <label class="govuk-label govuk-radios__label" for="whatDescribesYou-solicitor">
+                Solicitor
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="whatDescribesYou-other"
+                     name="whatDescribesYou"
+                     type="radio"
+                     value="other">
+              <label class="govuk-label govuk-radios__label" for="whatDescribesYou-other">
+                Other
+              </label>
+            </div>
+
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  
+
+  </div>
+</div>
+{% endblock %}

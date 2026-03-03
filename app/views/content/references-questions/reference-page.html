@@ -1,0 +1,195 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-xl">
+      Referee
+    </h1>
+
+    <!-- <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Help with references
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+      </div>
+    </details> -->
+
+      <p class="govuk-body">The referee will be sent an email asking them to give you a reference.</p>
+
+      <!-- <p class="govuk-body">We must receive the reference by 30 September. You should give your referee enough time to write and submit the reference.</p> -->
+      <p class="govuk-body">You can ask anyone who you can support your application and is prepared to stand as a referee. Suitable referees for your panel and level include:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>pupil supervisors</li>
+        <li>heads of chambers</li>
+        <li>chambers advocacy trainers</li>
+      </ul>
+
+
+    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Referee details</h2>
+    <!-- <p class="govuk-body">Please provide the details of the referee you wish to use in support of your application.</p> -->
+
+    <form action="../completed-application.html" method="get" novalidate>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="name-on-the-account">
+          Referee full name
+        </label>
+        <input class="govuk-input" id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false"
+          autocomplete="name">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="name-on-the-account">
+          Referee job title
+        </label>
+        <input class="govuk-input" id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false"
+          autocomplete="name">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="name-on-the-account">
+          Referee email address
+        </label>
+        <!-- <div id="roll-number-hint" class="govuk-hint">
+          Providing an incorrect email address can cause delays with your reference. CPS referees use the format
+          Firstname.Surname@cps.gov.uk
+        </div> -->
+        <input class="govuk-input" id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false"
+          autocomplete="name">
+      </div>
+
+
+      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Referee role</h2>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive" name="whereDoYouLive" type="radio" value="england">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive">
+                Pupil supervisor
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-2" name="whereDoYouLive" type="radio"
+                value="scotland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-2">
+                Head of chambers
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-3" name="whereDoYouLive" type="radio" value="wales">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-3">
+                Chambers advocacy trainer
+              </label>
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                Instructing solicitor
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                Leading or opposing advocate
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                Instructing member of another prosecuting authority
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                Advocacy assessor
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                Current or retired member of the full time judiciary
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                Member of the part time judiciary
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                CPS lawyer
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="whereDoYouLive-4" name="whereDoYouLive" type="radio"
+                value="northern-ireland">
+              <label class="govuk-label govuk-radios__label" for="whereDoYouLive-4">
+                Other
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+
+      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Your message to the referee</h2>
+      <p class="govuk-body">This will be included in the email which is sent to the referee. You should include:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>why you’re applying for the panel</li>
+        <li>cases which you’ve worked on with the referee</li>
+      </ul>
+
+      <div class="govuk-form-group">
+        <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"
+          aria-describedby="more-detail-hint"></textarea>
+      </div>
+
+
+
+
+
+      <button type="submit" class="govuk-button govuk-!-static-margin-right-5" data-module="govuk-button">
+        Confirm referee
+      </button>
+
+       <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        Save referee draft
+      </button>
+
+
+
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

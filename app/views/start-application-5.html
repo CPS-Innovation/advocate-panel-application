@@ -5,7 +5,7 @@
 
 <form action="./#" method="get" novalidate></form>
 
-<h1 class="govuk-heading-xl"> Start application ref 234567890</h1>
+<h1 class="govuk-heading-xl"> Application ref 234567890</h1>
 <p class="govuk-body">We have generated this tailored application and you can now start the application</p>
 <details class="govuk-details">
   <summary class="govuk-details__summary">
@@ -59,15 +59,15 @@
 <ul class="govuk-task-list">
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="./personal details/personal-details.html"
-        aria-describedby="personal-details-name">
-        Name and membership type
-      </a>
+      <a href="#" class="govuk-link govuk-link--no-underline"> Name and membership type</a>
       <div id="personal-details-name-hint" class="govuk-task-list__hint">
       </div>
     </div>
     <div class="govuk-task-list__status" id="personal-details-name">
-      Completed
+      Completed | <a class="govuk-link govuk-task-list__link" href="./summary-example.html"
+        aria-describedby="personal-details-name">
+        View
+      </a>
     </div>
   </li>
 </ul>
@@ -76,16 +76,30 @@
 <ul class="govuk-task-list">
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="./question-what-describes-you.html"
-        aria-describedby="what-describes-you">
-        Employment type
-      </a>
+      <a href="#" class="govuk-link govuk-link--no-underline"> Employment type</a>
       <div id="company-details-3-hint" class="govuk-task-list__hint">
         About employment type
       </div>
     </div>
-    <div class="govuk-task-list__status" id="what-describes-you">
-     Completed
+    <div class="govuk-task-list__status" id="personal-details-name">
+      Completed | <a class="govuk-link govuk-task-list__link" href="./summary-example.html"
+        aria-describedby="personal-details-name">
+        View
+      </a>
+    </div>
+  </li>
+  <li class="govuk-task-list__item govuk-task-list__item--with-link">
+    <div class="govuk-task-list__name-and-hint">
+      <a href="#" class="govuk-link govuk-link--no-underline"> Select a firm</a>
+      <div id="company-details-3-hint" class="govuk-task-list__hint">
+        Select a firm text...
+      </div>
+    </div>
+    <div class="govuk-task-list__status" id="personal-details-name">
+      Completed | <a class="govuk-link govuk-task-list__link" href="./summary-example.html"
+        aria-describedby="personal-details-name">
+        View
+      </a>
     </div>
   </li>
 </ul>
@@ -95,40 +109,44 @@
 <ul class="govuk-task-list">
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="./preferred-circuit/circuit-question-page.html"
-        aria-describedby="what-describes-you">
-        Select a circuit
-      </a>
+      <a href="#" class="govuk-link govuk-link--no-underline"> Select a circuit</a>
       <div id="company-details-3-hint" class="govuk-task-list__hint">
         About a circuit (you can select a max of two circuits)
       </div>
     </div>
-    <div class="govuk-task-list__status" id="what-describes-you">
-    Completed
+    <div class="govuk-task-list__status" id="personal-details-name">
+      Completed | <a class="govuk-link govuk-task-list__link" href="./summary-example.html"
+        aria-describedby="personal-details-name">
+        View
+      </a>
     </div>
   </li>
 </ul>
+
+
+
 
 
 <h2 class="govuk-heading-l govuk-!-static-padding-top-5">Qualifications</h2>
 <ul class="govuk-task-list">
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="./year-call-degree-qualifications/year-call-degree-qualifications.html"
-        aria-describedby="what-describes-you">
-        Year of call, degree & post-graduate qualifications
-      </a>
+      <a href="#" class="govuk-link govuk-link--no-underline">Year of call, degree & post-graduate qualifications</a>
       <div id="company-details-3-hint" class="govuk-task-list__hint">
         About degree & post-graduate qualifications
       </div>
     </div>
-    <div class="govuk-task-list__status" id="what-describes-you">
-      Completed
+    <div class="govuk-task-list__status" id="personal-details-name">
+      Completed | <a class="govuk-link govuk-task-list__link" href="./summary-example.html"
+        aria-describedby="personal-details-name">
+        View
+      </a>
     </div>
   </li>
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="./year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1.html"
+      <a class="govuk-link govuk-task-list__link"
+        href="./year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1.html"
         aria-describedby="what-describes-you">
         Pre-qualification questionnaire
       </a>
@@ -142,7 +160,7 @@
       </strong>
     </div>
   </li>
-   <li class="govuk-task-list__item govuk-task-list__item--with-link">
+  <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
       <a class="govuk-link govuk-task-list__link" href="./examples-work/examples-work-1.html"
         aria-describedby="what-describes-you">
@@ -162,14 +180,12 @@
 
 
 
+
 <h2 class="govuk-heading-l govuk-!-static-padding-top-5">Equalities </h2>
 <ul class="govuk-task-list">
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="./equalities/equalities-questions-1.html"
-        aria-describedby="what-describes-you">
-        Equalities form
-      </a>
+      <a href="#" class="govuk-link govuk-link--no-underline"> Equalities form</a>
       <div id="company-details-3-hint" class="govuk-task-list__hint">
         About equalities lorem
       </div>
@@ -189,16 +205,13 @@
 <ul class="govuk-task-list">
   <li class="govuk-task-list__item govuk-task-list__item--with-link">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link govuk-task-list__link" href="./declaration.html"
-        aria-describedby="what-describes-you">
-        Sign your declaration 
-      </a>
+      <a href="#" class="govuk-link govuk-link--no-underline"> Sign your declaration</a>
       <div id="company-details-3-hint" class="govuk-task-list__hint">
         Sign the declaration becauase...
       </div>
     </div>
     <div class="govuk-task-list__status" id="what-describes-you">
-    <strong class="govuk-tag govuk-tag--blue">
+      <strong class="govuk-tag govuk-tag--blue">
         Incomplete
       </strong>
     </div>

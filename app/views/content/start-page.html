@@ -1,0 +1,100 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Advocate Panels – Application Portal (Prototype)" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-xl">
+      {{ serviceName }}
+    </h1>
+
+    <p class="govuk-body">Use this service to apply to join a CPS advocate panel for:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Crown Court, if you’re a barrister or a solicitor with higher rights of audience</li>
+      <li>Magistrates’ and Youth Court, if you’re a solicitor</li>
+    </ul>
+
+    <h2 class="govuk-heading-m">
+      Before you start
+    </h2>
+
+    <p class="govuk-body">To register or sign in you'll need access to your email and mobile phone.</p>
+
+    <p class="govuk-body">To apply your the first time you’ll need your:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>bar reference number of Solicitor Regulation Authority (SRA) number</li>
+    </ul>
+
+    <p class="govuk-body">Check what examples of work, evidence and references you'll need to apply for:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="https://www.cps.gov.uk/advocate-panels/advocate-panels-application-portal/advocate-panels-2020-panel-general-crime-and-rasso-list" class="govuk-link">general crime or rape and serious sexual offences (RASSO) panels</a></li>
+      <li><a href="https://www.cps.gov.uk/advocate-panels/advocate-panels-application-portal/advocate-panels-specialist-panels" class="govuk-link">specialist panels</a> - these are for serious crime, counter terrorism, fraud, proceeds of crime and extradition</li>
+      <li><a href="https://www.cps.gov.uk/advocate-panels/advocate-panels-application-portal/advocate-panels-magistrates-and-youth-court" class="govuk-link">Magistrates’ and Youth Court panel</a></li>
+    </ul>
+
+    <p class="govuk-body">You must not include identifying case information in your application.</p>
+
+    {{ govukButton({
+    text: "Start now",
+    href: "./account.html",
+    isStartButton: true
+    }) }}
+
+  </div>
+
+  <!-- <div class="govuk-grid-column-one-third">
+
+    <aside class="govuk-prototype-kit-common-templates-related-items" role="complementary">
+      <h2 class="govuk-heading-m" id="subsection-title">
+        Subsection
+      </h2>
+      <nav role="navigation" aria-labelledby="subsection-title">
+        <ul class="govuk-list govuk-!-font-size-16">
+          <li>
+            <a href="#">
+              Related link
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Related link
+            </a>
+          </li>
+          <li>
+            <a href="#" class="govuk-!-font-weight-bold">
+              More <span class="govuk-visually-hidden">in Subsection</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+  </div>
+</div> -->
+
+
+<script>
+  const toggle = document.getElementById('accountToggle');
+  const menu = document.getElementById('accountMenu');
+
+  toggle.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', !isOpen);
+    menu.classList.toggle('active');
+  });
+
+  // Optional: Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+{% endblock %}
