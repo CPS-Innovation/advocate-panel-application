@@ -1,3 +1,10 @@
+{% set appServiceName = serviceName or "Advocate Panels: Application Portal" %}
+
 <header>
   {{ govukHeader() }}
 </header>
+
+{{ govukServiceNavigation({
+  serviceName: appServiceName,
+  serviceUrl: "/landing-page"
+}) }}
