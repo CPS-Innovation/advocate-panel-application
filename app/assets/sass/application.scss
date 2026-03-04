@@ -1,239 +1,18 @@
 //
 // For guidance on how to add CSS and SCSS see:
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
-// 
+//
 
 // Add extra styles here
-/* === CPS Header Style === */
-
-
-// Standard GOV.UK styles
-
-// Fix typography for autocomplete
-.autocomplete__wrapper * {
-  @include govuk-typography-common();
-}
-
 
 @import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
 
-:root {
-  --ds-color-primary: #1d70b8;
-  --cps-color-theme: #002d9d;
-  --cps-color-theme-background: rgba(255, 255, 255, .1);
-  --cps-color-primary: var(--gds-color-primary);
-  --cps-color-neutral: #0b0c0c;
-}
-
-
-body {
-    font-family: sans-serif, Arial, Verdana, "Trebuchet MS", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 12px;
-    color: #333;
-    background-color: #fff;
-    margin: 20px;
-}
-
-@font-face {
-    font-family: GDS Transport;
-    font-style: normal;
-    font-weight: 400;
-    src: url(../Font-Regular-NewTransport-CPS5.woff2?mecgM0d41DaFOZgUumz_uw) format("woff2"), url(../Font-Regular-NewTransport-CPS5.woff?kL7fG5tGI1SOmcOodPc+QA) format("woff");
-    font-display: fallback;
-}
-
-/* Header*/
-
-.cps-header {
-  background-color: #002d9d; /* CPS navy */
-  border-bottom: 0;
-}
-
-.cps-logo {
-  display: block;
-  height: 40px;   /* adjust as needed */
-  width: auto;
-  margin: 4px 0;
-}
-
-.govuk-header__logo {
-box-sizing: border-box;
-padding-top: 0px 0px 16px 0px;
-padding-bottom: 12px;
-display: flex;
-flex-direction: row;   
-align-items: center;
-}
-
-
-/* Main CPS blue branding */
-.cps-header {
-  background-color: #002d9d;
-  border-bottom: none;
-  padding-bottom: 5px;
-}
-
-/* Header internal layout (HMRC equivalent) */
-.govuk-header--with-account .govuk-header__container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Username menu on right */
-.cps-header-account {
-  display: flex;
-  align-items: center;
-}
-
-.cps-username {
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.cps-arrow {
-  color: #ffffff;
-  margin-left: 4px;
-  font-size: 14px;
-}
-
-/* Hover styling */
-.cps-header-account a:hover,
-.cps-username:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-span.govuk-header__product-name {
-  display: inline-block;
-}
-
-
-.govuk-header .font-bold {
-font-weight: bold;
-}
-
-
-/* Subheader layout */
-.cps-subheader__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
-}
-
-
-.cps-subheader__inner {
-  font-size: 1rem !important;
-line-height: 1.25 !important;
-}
-
-.cps-subheader__inner a {
-  font-size: 1rem !important;
-line-height: 1.25 !important;
-}
-
-.cps-subheader__inner a:visited, .govuk-link:visited {
-color: var(--govuk-link-visited-colour, #000000);
-}
-
-
-a:visited, .govuk-link:visited {
-color: var(--govuk-link-visited-colour, #000000);
-}
-
-/* Right-side languages */
-.cps-language-switch {
-  margin-left: auto;
-  text-align: right;
-}
-
-.govuk-template--rebranded .govuk-header__product-name {
-margin-top: 0;
-margin-bottom: -0.0625rem;
-font-size: 1.9375rem;
-letter-spacing: -0.015em;
-}
-
-
-span.govuk-header__product-name {
-line-height: 1;
-font-weight: 400;
-display: inline-table;
-margin-top: 7px;
-margin-left: 5px;
-vertical-align: top;
-}
-
-.cps-username-toggle {
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-}
-
-.cps-arrow {
-  margin-left: 4px;
-  transition: transform 0.2s;
-}
-
-/* Dropdown hidden by default */
-.cps-account-menu {
-  display: none;
-  position: absolute;
-  background: white;
-  padding: 10px 0;
-  right: 0;
-  top: 60px;
-  min-width: 150px;
-  border: 1px solid #b1b4b6;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-/* Visible state */
-.cps-account-menu.active {
-  display: block;
-}
-
-/* Rotate arrow when open */
-.cps-username-toggle[aria-expanded="true"] .cps-arrow {
-  transform: rotate(180deg);
-}
-
-/* Fix for MOJ search layout when MOJ Frontend is not installed */
-.moj-search__container {
-  display: flex;
-  align-items: flex-end;
-  gap: 15px;
-}
-
-.moj-search__input {
-  flex: 1;
-}
-
-/* Autocomplete input inherits GOV.UK styles (optional, safe) */
-.autocomplete__wrapper * {
-  font-family: "GDS Transport", Arial, sans-serif;
-}
-
-.autocomplete__wrapper * {
-  @include govuk-typography-common();
-}
-
-/* Remove any native browser arrow */
-.autocomplete__input {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: none !important;
-}
-
 /* Landing page quick-access tiles */
+.app-landing-title {
+  color: #002d9d;
+  font-weight: 500;
+}
+
 .app-landing-tiles .govuk-grid-column-one-third {
   margin-bottom: govuk-spacing(3);
 }
@@ -260,18 +39,36 @@ vertical-align: top;
   margin-bottom: 0;
 }
 
-/* General styling to match your screenshot */
+/* Fix for MOJ search layout when MOJ Frontend is not installed */
+.moj-search__container {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.moj-search__input {
+  flex: 1;
+}
+
+/* Accessible autocomplete tweaks */
+.autocomplete__wrapper * {
+  @include govuk-typography-common();
+}
+
 .autocomplete__input {
-  border: 2px solid #505a5f;        /* GOV.UK grey */
-  padding-left: 2.2rem;             /* space for search icon */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none !important;
+  border: 2px solid #505a5f;
+  padding-left: 2.2rem;
   height: 2.5rem;
   border-radius: 0;
   font-size: 1rem;
 }
 
-/* Yellow focus style like GOV.UK */
 .autocomplete__input:focus {
-  border-color: #fd0;               /* GOV.UK yellow */
+  border-color: #fd0;
   box-shadow: 0 0 0 3px #fd0;
   outline: none;
 }
@@ -281,7 +78,7 @@ vertical-align: top;
 }
 
 .autocomplete__wrapper::before {
-  content: "🔍";       /* or replace with SVG background */
+  content: "🔍";
   position: absolute;
   left: 0.6rem;
   top: 0.55rem;
@@ -306,4 +103,3 @@ vertical-align: top;
 .autocomplete__option--highlighted {
   background-color: #f3f2f1;
 }
-
