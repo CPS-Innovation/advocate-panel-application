@@ -233,6 +233,33 @@ vertical-align: top;
   background-image: none !important;
 }
 
+/* Landing page quick-access tiles */
+.app-landing-tiles .govuk-grid-column-one-third {
+  margin-bottom: govuk-spacing(3);
+}
+
+.app-landing-tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: govuk-spacing(4);
+  border: 1px solid #b1b4b6;
+  box-sizing: border-box;
+}
+
+.app-landing-tile--primary {
+  background-color: #cce6f5;
+}
+
+.app-landing-tile--secondary {
+  background-color: #f3f2f1;
+}
+
+.app-landing-tile__button {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
 /* General styling to match your screenshot */
 .autocomplete__input {
   border: 2px solid #505a5f;        /* GOV.UK grey */
