@@ -18,33 +18,30 @@
 
     <form action="./login.html" method="get" novalidate>
       <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" role="group" aria-describedby="account-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-            <h1 class="govuk-fieldset__heading">
-              Do you have an account?
-            </h1>
-          </legend>
-          <div id="account-hint" class="govuk-hint">
-            You’ll have an account if you’ve ever started an application for a CPS advocate panel
-          </div>
 
-          <div class="govuk-radios" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="interviewNeeds" name="interviewNeeds" type="radio" value="yes">
-              <label class="govuk-label govuk-radios__label" for="interviewNeeds">
-                Yes
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="interviewNeeds-2" name="interviewNeeds" type="radio" value="no">
-              <label class="govuk-label govuk-radios__label" for="interviewNeeds-2">
-                No
-              </label>
-            </div>
-          </div>
-
-        </fieldset>
+        {{ govukRadios({
+          name: "hasAccount",
+          fieldset: {
+            legend: {
+              text: "Do you have an account?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: "You'll have an account if you've ever started an application for a CPS advocate panel"
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
       </div>
 
       <button type="submit" class="govuk-button" data-module="govuk-button">
