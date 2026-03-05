@@ -1,4 +1,4 @@
-# Advocate Panel Application Prototype
+# Apply to join a CPS advocate panel prototype
 
 A GOV.UK Prototype Kit service for exploring the CPS Advocate Panel application journey.
 
