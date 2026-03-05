@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block pageTitle %}
-Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+Application complete – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block content %}
@@ -15,11 +15,11 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
       {{ govukPanel({
         titleText: "Application complete",
-        html: "Your reference number<br><strong>HDJ2123F</strong>"
+        html: "Your reference number is<br><strong>234567890</strong>"
       }) }}
 
      <p class="govuk-body">
-        We have sent you a confirmation email.
+        We’ve sent you a confirmation email.
       </p>
 
       <h2 class="govuk-heading-m">
@@ -27,31 +27,38 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
       </h2>
 
       <p class="govuk-body">
-        We've sent your application to Hackney Electoral Register Office.
+        It will take up to 1 month for us to assess your application.
       </p>
 
-    <p class="govuk-body">
-        They will contact you either to confirm your registration, or to ask for more information.
-      </p>
-  
-
-        <p class="govuk-body">
-        <a href="./dashboard.html">
-         Return to the dashboard
-        </a>
+      <p class="govuk-body">
+        We’ll send you an email when we receive your reference.
       </p>
 
-       <p class="govuk-body">
+<!-- Not for level 1 or magistrates’ or youth court
+
+      <p class="govuk-body">
+          Your referee must submit your reference by 11:59pm on 30 September 2026. If they do not do this then you will need to apply again next year. 
+        </p> -->
+    
+      <p class="govuk-body"><a href="./dashboard.html">Visit your dashboard</a> to:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>download your application</li>
+        <li>check if we’ve received your reference</li>
+    </ul>
+
+
+       <!-- <p class="govuk-body">
         <a href="./start-application-9.html">
          Return to the task-list
         </a>
-      </p>
+      </p> -->
 
-          <p class="govuk-body">
+          <!-- <p class="govuk-body">
         <a href="#">
           What did you think of this service?
         </a> (takes 30 seconds)
-      </p>
+      </p> -->
 
 
     </div>
