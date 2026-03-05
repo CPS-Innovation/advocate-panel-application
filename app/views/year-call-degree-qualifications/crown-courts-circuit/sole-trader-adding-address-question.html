@@ -1,1 +1,57 @@
-{% include "content/year-call-degree-qualifications/crown-courts-circuit/sole-trader-adding-address-question.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">Is this a new correspondence address?</h1>
+
+
+        <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                <div class="govuk-radios" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="whereDoYouLive" name="whereDoYouLive" type="radio"
+                            value="england">
+                        <label class="govuk-label govuk-radios__label" for="whereDoYouLive">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="whereDoYouLive-2" name="whereDoYouLive" type="radio"
+                            value="scotland">
+                        <label class="govuk-label govuk-radios__label" for="whereDoYouLive-2">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="govuk-button-group">
+            <a href="./sole-trader-adding-address-3.html" role="button" draggable="false" class="govuk-button"
+                data-module="govuk-button">
+                Continue
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

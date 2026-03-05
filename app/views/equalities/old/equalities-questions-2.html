@@ -1,1 +1,52 @@
-{% include "content/equalities/old/equalities-questions-2.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="./examples-work-3.html" method="get">
+
+      <h1 class="govuk-heading-l">
+        Examples of Advisory work
+      </h1>
+
+      <p class="govuk-body">Please provide details of a question or problem you have had to advise on, what you advised
+        and why. Where possible, please provide more than one example. Identifying case information must not be included
+        in your application. Please refer to the Selection Criteria (specific to your level).
+        Review <a
+          href="https://www.cps.gov.uk/advocate-panels/advocate-panels-application-portal/advocate-panels-2020-panel-general-crime-and-rasso-list#selectioncriteriageneralcrimelevelone"
+          class="govuk-link" rel="noreferrer noopener" target="_blank">General Crime 1 Selection Criteria (opens in new
+          tab)</a>
+      </p>
+
+      <div class="govuk-form-group">
+        <div id="advisoryWork-hint" class="govuk-hint">Please do not include maximum of 400 words
+        </div>
+        <textarea class="govuk-textarea" id="advisoryWork" name="advisoryWork" rows="5"
+          aria-describedby="advisoryWork-hint"></textarea>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}

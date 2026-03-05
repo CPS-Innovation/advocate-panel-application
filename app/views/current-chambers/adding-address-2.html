@@ -1,1 +1,77 @@
-{% include "content/current-chambers/adding-address-2.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">What is your new address?</h1>
+
+        <p class="govuk-body">
+            Add a new address here to be added to the main list of member of Chambers lorem ipsum lorem
+        </p>
+
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-line-1">
+                    Address line 1
+                </label>
+                <input class="govuk-input" id="address-line-1" name="addressLine1" type="text"
+                    autocomplete="address-line1">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-line-2">
+                    Address line 2 (optional)
+                </label>
+                <input class="govuk-input" id="address-line-2" name="addressLine2" type="text"
+                    autocomplete="address-line2">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-town">
+                    Town or city
+                </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="address-town" name="addressTown" type="text"
+                    autocomplete="address-level2">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-county">
+                    County (optional)
+                </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="address-county" name="addressCounty"
+                    type="text">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-postcode">
+                    Postcode
+                </label>
+                <input class="govuk-input govuk-input--width-10" id="address-postcode" name="addressPostcode"
+                    type="text" autocomplete="postal-code">
+            </div>
+        </fieldset>
+
+        <div class="govuk-button-group">
+            <a href="./adding-address-3.html" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+                Continue
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+

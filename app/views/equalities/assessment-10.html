@@ -1,1 +1,111 @@
-{% include "content/equalities/assessment-10.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+
+<style>
+  /* Make all 3-column GOV.UK tables have equal-width columns */
+  .equal-width-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .equal-width-table th,
+  .equal-width-table td {
+    width: 33.3333%;
+  }
+
+  .govuk-table__header,
+  .govuk-table__cell {
+    width: 200px;
+  }
+</style>
+{% endblock %}
+
+{% block pageTitle %}
+Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="/socio-economic-status-answer" method="post">
+
+      <h1 class="govuk-heading-l">
+        Self-Assessment of Socio-Economic Background Status
+      </h1>
+
+      <p class="govuk-body">Compared to people in general, would you describe yourself as coming from a lower socio economic background? </p>
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+           Select response
+          </legend>
+
+          <div class="govuk-radios" data-module="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socio-economic-status-yes" name="socio-economic-status" type="radio"
+                value="yes">
+              <label class="govuk-label govuk-radios__label" for="socio-economic-status-yes">
+                Yes
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socio-economic-status-no" name="socio-economic-status" type="radio"
+                value="no">
+              <label class="govuk-label govuk-radios__label" for="socio-economic-status-no">
+                No
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socio-economic-status-dontknow" name="socio-economic-status" type="radio"
+                value="dontknow">
+              <label class="govuk-label govuk-radios__label" for="socio-economic-status-dontknow">
+                Don't know
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socio-economic-status-notapplicable" name="socio-economic-status"
+                type="radio" value="notapplicable">
+              <label class="govuk-label govuk-radios__label" for="socio-economic-status-notapplicable">
+                Not applicable
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="socio-economic-status-prefernotsay" name="socio-economic-status" type="radio"
+                value="prefernotsay">
+              <label class="govuk-label govuk-radios__label" for="socio-economic-status-prefernotsay">
+                Prefer not to say
+              </label>
+            </div>
+
+
+          </div>
+        </fieldset>
+      </div>
+
+
+
+      <button type="submit" class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

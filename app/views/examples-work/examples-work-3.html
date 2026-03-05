@@ -1,1 +1,53 @@
-{% include "content/examples-work/examples-work-3.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="./examples-work-4.html" method="get">
+
+      <h1 class="govuk-heading-l">
+        Other Relevant Knowledge, Skills & Experience
+      </h1>
+
+      <p class="govuk-body">Please refer to the relevant Selection Criteria for information required for this section.
+        Refer to the
+        <a href="https://www.cps.gov.uk/advocate-panels#sensitivecaseinfo" class="govuk-link" rel="noreferrer noopener"
+          target="_blank">Sensitive Identifying Case Information section (opens in new tab)</a>
+      </p>
+
+
+      <div class="govuk-form-group">
+        <div id="otherRelevantKnowledge-hint" class="govuk-hint">Please do not include maximum of 400 words
+        </div>
+        <textarea class="govuk-textarea" id="otherRelevantKnowledge" name="otherRelevantKnowledge" rows="5"
+          aria-describedby="otherRelevantKnowledge-hint"></textarea>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+
+
+  </div>
+</div>
+{% endblock %}

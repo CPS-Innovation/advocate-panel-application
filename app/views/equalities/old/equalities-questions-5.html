@@ -1,1 +1,54 @@
-{% include "content/equalities/old/equalities-questions-5.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Additional information
+    </h1>
+
+    <p class="govuk-body">Please use the space below to provide any other additional information you consider relevant
+      in support of your application. Refer to the
+      <a href="https://www.cps.gov.uk/advocate-panels#sensitivecaseinfo" class="govuk-link" rel="noreferrer noopener"
+        target="_blank">Sensitive Identifying Case Information section (opens in new tab)</a>
+    </p>
+
+
+    <form action="./check-answers.html" method="get">
+
+
+      <div class="govuk-form-group">
+        <div id="additionalInfo-hint" class="govuk-hint">Please do not include maximum of 400 words
+        </div>
+        <textarea class="govuk-textarea" id="additionalInfo" name="additionalInfo" rows="5"
+          aria-describedby="additionalInfo-hint"></textarea>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+
+
+  </div>
+</div>
+{% endblock %}

@@ -1,1 +1,81 @@
-{% include "content/connected-journey-bit/about-you-questions/solicitor-questions-type.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Type of youthCourt
+    </h1>
+
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Help with something
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        We need to know your nationality so we can work out which elections you’re entitled to vote in.
+      </div>
+    </details>
+
+    <p class="govuk-body">Lorem ipsum loremn ipum lorem</p>
+    <p class="govuk-body">
+      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum</a>.
+    </p>
+
+    <form action="/typeSolicitor-answers" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            What type of solicitor are you?
+          </legend>
+
+          <div class="govuk-radios" data-module="govuk-radios">
+
+             <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="typeSolicitor-crownCourt" name="typeSolicitor" type="radio"
+                value="crownCourt">
+              <label class="govuk-label govuk-radios__label" for="typeSolicitor-crownCourt">
+                With Higher Rights of Audience wishing to practice in the Crown Court
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="typeSolicitor-youthCourt" name="typeSolicitor" type="radio"
+                value="youthCourt">
+              <label class="govuk-label govuk-radios__label" for="typeSolicitor-youthCourt">
+                Youth Court wishing to practice in the Magistrates' and/or Youth Courts
+              </label>
+            </div>
+
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,1 +1,252 @@
-{% include "content/preferred-circuit/crown-courts-circuit/solicitor-firm-adding-address.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+
+<style>
+    /* ------------------------------------
+        COMPANIES HOUSE STYLE SEARCH BOX
+     ------------------------------------ */
+    .search-container {
+        display: flex;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .filter-search {
+        width: 100%;
+        height: 3rem;
+        padding: 0.5rem 0.75rem;
+        border: 3px solid #0b0c0c;
+        font-size: 1.1875rem;
+        border-right: none;
+    }
+
+    .filter-search:focus,
+    .search-button:focus,
+    .filter-item:focus {
+        outline: 4px solid #ffdd00 !important;
+        outline-offset: 0;
+    }
+
+    .search-button {
+        background: #1a65a6;
+        border: 2px solid #1a65a6;
+        color: white;
+        height: 3rem;
+        width: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .search-button:hover {
+        background: #0f385c;
+        border: 2px solid #0f385c;
+    }
+
+    .filter-box {
+        width: calc(100% - 3rem);
+        display: none;
+        border: 1px solid #f3f2f1;
+        background: #fff;
+        max-height: 20rem;
+        overflow-y: auto;
+        position: relative;
+        z-index: 10;
+    }
+
+    .filter-item {
+        padding: 1rem;
+        cursor: pointer;
+        border-bottom: 1px solid #e5e5e5;
+        background: white;
+        font-size: 1.1875rem;
+    }
+
+    .filter-item:nth-child(even) {
+        background: #f3f2f1;
+    }
+
+    .filter-item:hover {
+        background: #e5e5e5;
+    }
+</style>
+{% endblock %}
+
+{% block pageTitle %}
+Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">Member of a Solicitors' firm</h1>
+
+        <p class="govuk-body">
+            Add the name and address lorem ipsum
+        </p>
+
+
+        <div class="govuk-form-group">
+            <label class="govuk-label" for="full-name">
+                Full name
+            </label>
+            <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false"
+                autocomplete="name">
+        </div>
+
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-line-1">
+                    Address line 1
+                </label>
+                <input class="govuk-input" id="address-line-1" name="addressLine1" type="text"
+                    autocomplete="address-line1">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-line-2">
+                    Address line 2 (optional)
+                </label>
+                <input class="govuk-input" id="address-line-2" name="addressLine2" type="text"
+                    autocomplete="address-line2">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-town">
+                    Town or city
+                </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="address-town" name="addressTown" type="text"
+                    autocomplete="address-level2">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-county">
+                    County (optional)
+                </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="address-county" name="addressCounty"
+                    type="text">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="address-postcode">
+                    Postcode
+                </label>
+                <input class="govuk-input govuk-input--width-10" id="address-postcode" name="addressPostcode"
+                    type="text" autocomplete="postal-code">
+            </div>
+        </fieldset>
+
+        <div class="govuk-button-group">
+            <a href="./solicitor-firm-adding-address-question.html" role="button" draggable="false" class="govuk-button"
+                data-module="govuk-button">
+                Continue
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+{{ super() }}
+
+<script>
+    /* ----------------------------------------
+       CHAMBERS LIST SOURCE
+    ----------------------------------------- */
+    const allChambers = [
+        "Redbridge Court Chambers", "Harborstone Chambers", "Northgate Square Chambers",
+        "Crownwell Chambers", "Elm & Ivory Chambers", "Westminster Gate Chambers",
+        "Blackthorne Walk Chambers", "Stonemount Chambers", "Marble Court Chambers",
+        "Eastbridge Inn Chambers", "Winterfield Chambers", "Hamilton Crest Chambers",
+        "Ironwood Court Chambers", "Templefield Chambers", "Oakshire Chambers",
+        "Silverbrook Chambers", "Ashbury Court Chambers", "Briarstone Chambers"
+    ];
+
+    const chamberAddresses = {
+        "Redbridge Court Chambers": "12 Market Street, London SW1A 1AA",
+        "Harborstone Chambers": "88 Crown Lane, Bristol BS1 3QF",
+        "Northgate Square Chambers": "5 Northgate Square, Manchester M2 4GH",
+        "Templefield Chambers": "1 Inner Temple Lane, London EC4Y 7HL",
+        "default": "101 Example Road, London W1A 2BC"
+    };
+
+    const listEl = document.getElementById("country-list");
+    const inputEl = document.getElementById("country-filter");
+    const buttonEl = document.querySelector(".search-button");
+    const chosenEl = document.getElementById("selected-chamber");
+
+    function renderList(filter = "") {
+        listEl.innerHTML = "";
+        const filtered = allChambers.filter(ch =>
+            ch.toLowerCase().includes(filter.toLowerCase())
+        );
+        filtered.forEach(ch => {
+            listEl.insertAdjacentHTML(
+                "beforeend",
+                `<div class="filter-item" tabindex="0">${ch}</div>`
+            );
+        });
+    }
+
+    renderList();
+
+    inputEl.addEventListener("focus", () => listEl.style.display = "block");
+    inputEl.addEventListener("input", e => {
+        renderList(e.target.value);
+        listEl.style.display = e.target.value.trim() ? "block" : "none";
+    });
+
+    buttonEl.addEventListener("click", () => {
+        renderList(inputEl.value);
+        listEl.style.display = inputEl.value.trim() ? "block" : "none";
+    });
+
+    listEl.addEventListener("click", e => {
+        if (e.target.classList.contains("filter-item")) {
+            selectChamber(e.target.textContent.trim());
+        }
+    });
+
+    function selectChamber(name) {
+        inputEl.value = name;
+        listEl.style.display = "none";
+
+        const address = chamberAddresses[name] || chamberAddresses.default;
+
+        chosenEl.innerHTML = `
+    <div class="govuk-inset-text">
+      <strong>${name}</strong><br>
+      ${address}
+    </div>
+  `;
+    }
+
+    /* ------------------------------------
+       CLEAR ADDRESS BUTTON
+    ------------------------------------- */
+    document.getElementById("clear-address").addEventListener("click", () => {
+        chosenEl.innerHTML = "";
+        inputEl.value = "";
+    });
+
+    /* ------------------------------------
+       ADD ANOTHER ADDRESS
+    ------------------------------------- */
+    const extraAddressContainer = document.getElementById("extra-address-container");
+
+    document.getElementById("add-address").addEventListener("click", () => {
+        extraAddressContainer.style.display = "block";
+    });
+</script>
+
+{% endblock %}

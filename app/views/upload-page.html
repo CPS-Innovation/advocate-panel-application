@@ -1,1 +1,375 @@
-{% include "content/upload-page.html" %}
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Upload patterns page – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Upload pattern only
+    </h1>
+
+    <p class="govuk-body">Lorem ipsum lorem</p>
+    <p class="govuk-body">
+      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum </a>.
+    </p>
+
+    <form action="./start-application-5.html" method="get" novalidate>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="file-upload-1">
+          Upload a file
+        </label>
+        <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
+      </div>
+
+
+      <div class="govuk-form-group">
+        <div class="govuk-form-group">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--l" for="file-upload-1">
+              Upload receipt
+            </label>
+          </h1>
+          <div id="file-upload-1-hint" class="govuk-hint">
+            You can upload your receipt as a scanned copy or photo of the original. The selected file must be smaller
+            than 100MB.
+          </div>
+          <div class="govuk-drop-zone" data-module="govuk-file-upload">
+            <input class="govuk-file-upload" id="file-upload-1" name="file-upload-1" type="file"
+              aria-describedby="file-upload-1-hint">
+          </div>
+        </div>
+
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h1 class="govuk-heading-l">Upload receipts</h1>
+
+          <div id="file-upload-1-hint" class="govuk-hint">
+            You can upload your receipt as a scanned copy or photo of the original. The selected file must be smaller
+            than 100MB.
+          </div>
+
+          <p class="govuk-body" aria-live="polite">1 of 2 files uploaded</p>
+
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Upload another receipt
+          </button>
+
+          <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh
+              page to update file upload progress</a></p>
+
+          <dl class="govuk-summary-list govuk-summary-list--long-key">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                receipt2.jpg
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--yellow">
+                  Uploading
+                </strong>
+
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> receipt1.jpg</span></a>
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                <a class="govuk-link" href="#">receipt1.jpg</a>
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--green">
+                  Uploaded
+                </strong>
+
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> receipt1.jpg</span></a>
+              </dd>
+            </div>
+          </dl>
+
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+          </button>
+        </div>
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h1 class="govuk-heading-l">Upload receipts</h1>
+
+          <div id="file-upload-1-hint" class="govuk-hint">
+            You can upload your receipt as a scanned copy or photo of the original. The selected file must be smaller
+            than 100MB.
+          </div>
+
+          <p class="govuk-body" aria-live="polite">1 of 2 files uploaded</p>
+
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-visually-hidden" for="file-upload-1">
+              Upload receipts
+            </label>
+            <div class="govuk-drop-zone" data-module="govuk-file-upload">
+              <input class="govuk-file-upload" id="file-upload-1" name="file-upload-1" type="file">
+            </div>
+          </div>
+
+          <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh
+              page to update file upload progress</a></p>
+
+          <dl class="govuk-summary-list govuk-summary-list--long-key">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                receipt2.jpg
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--yellow">
+                  Uploading
+                </strong>
+
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> receipt2.jpg</span></a>
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                <a class="govuk-link" href="#">receipt1.jpg</a>
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--green">
+                  Uploaded
+                </strong>
+
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> receipt1.jpg</span></a>
+              </dd>
+            </div>
+          </dl>
+
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+          </button>
+        </div>
+      </div>
+
+      <h1 class="govuk-heading-l">Upload receipt</h1>
+
+      <div id="file-upload-1-hint" class="govuk-hint">
+        You can upload your receipt as a scanned copy or photo of the original. The selected file must be smaller than
+        100MB.
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+          <div class="govuk-visually-hidden" aria-live="polite" id="statusInformation"></div>
+
+          <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh
+              page to update file upload progress</a></p>
+
+          <dl class="govuk-summary-list govuk-summary-list--long-key">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                receipt1.jpg
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--yellow">
+                  Uploading
+                </strong>
+
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> receipt1.jpg</span></a>
+              </dd>
+            </div>
+          </dl>
+
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+          </button>
+        </div>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--l" for="file-upload-1">
+          Upload receipt
+        </label>
+        <div id="file-upload-1-hint" class="govuk-hint">
+          You can upload your receipt as a scanned copy or photo of the original
+        </div>
+        <input class="govuk-file-upload" id="file-upload-1" name="file-upload-1" type="file"
+          aria-describedby="file-upload-1-hint">
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+      <h1 class="govuk-heading-l">Upload receipts</h1>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h2 class="govuk-heading-m">Files added</h2>
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                File 1
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <a download href="/" class="govuk-link">receipta.jpg</a>, 2MB
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Delete<span class="govuk-visually-hidden"> file 1</span></a>
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                File 2
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <a download href="/" class="govuk-link">receipt2.jpg</a>, 5MB
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Delete<span class="govuk-visually-hidden"> file 2</span></a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            Do you want to upload another receipt?
+          </legend>
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="another" name="another" type="radio" value="yes">
+              <label class="govuk-label govuk-radios__label" for="another">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="another-2" name="another" type="radio" value="no">
+              <label class="govuk-label govuk-radios__label" for="another-2">
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+      <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+        <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+          <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+        </svg>
+        <div class="moj-banner__message">File named abc.jpg has been deleted</div>
+      </div>
+      <h1 class="govuk-heading-l">Upload receipts</h1>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h2 class="govuk-heading-m">Files added</h2>
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                File 1
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <a download href="/">receipta.jpg</a>, 2MB
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Delete<span class="govuk-visually-hidden"> file 1</span></a>
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                File 2
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <a download href="/">receipt2.jpg</a>, 5MB
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Delete<span class="govuk-visually-hidden"> file 2</span></a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            Do you want to upload another receipt?
+          </legend>
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="another" name="another" type="radio" value="yes">
+              <label class="govuk-label govuk-radios__label" for="another">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="another-2" name="another" type="radio" value="no">
+              <label class="govuk-label govuk-radios__label" for="another-2">
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+      <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+        <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+          <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+        </svg>
+        <div class="moj-banner__message">File named abc.jpg has been deleted</div>
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--l" for="file-upload-1">
+          Upload receipts
+        </label>
+        <div id="file-upload-1-hint" class="govuk-hint">
+          You can upload your receipt as a scanned copy or photo of the original
+        </div>
+        <input class="govuk-file-upload" id="file-upload-1" name="file-upload-1" type="file"
+          aria-describedby="file-upload-1-hint">
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

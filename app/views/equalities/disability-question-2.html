@@ -1,1 +1,90 @@
-{% include "content/equalities/disability-question-2.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+  {% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Disability
+    </h1>
+
+    <p class="govuk-body">Lorem ipsum loremn ipum lorem</p>
+    <p class="govuk-body">
+      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum</a>.
+    </p>
+
+
+ <form action="/disability-question-answer" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            Do you have a physical or mental health condition, illness or disability?
+          </legend>
+
+          <div class="govuk-radios" data-module="govuk-radios">
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="disability-question-yes"
+                     name="disability-question"
+                     type="radio"
+                     value="yes">
+              <label class="govuk-label govuk-radios__label" for="disability-question-yes">
+                Yes
+              </label>
+            </div>
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="disability-question-no"
+                     name="disability-question"
+                     type="radio"
+                     value="no">
+              <label class="govuk-label govuk-radios__label" for="disability-question-no">
+                No
+              </label>
+            </div>
+
+              <div class="govuk-radios__item">
+              <input class="govuk-radios__input"
+                     id="disability-question-prefernotsay"
+                     name="disability-question"
+                     type="radio"
+                     value="prefernotsay">
+              <label class="govuk-label govuk-radios__label" for="disability-question-prefernotsay">
+                Prefer not to say
+              </label>
+            </div>
+
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  
+
+  </div>
+</div>
+{% endblock %}

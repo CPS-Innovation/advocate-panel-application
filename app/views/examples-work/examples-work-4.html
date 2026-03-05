@@ -1,1 +1,54 @@
-{% include "content/examples-work/examples-work-4.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+        <form action="./examples-work-5.html" method="get">
+
+    <h1 class="govuk-heading-l">
+      Appreciation of the Role of a Panel Advocate
+    </h1>
+
+    <p class="govuk-body">Please explain why you want to be on the CPS Advocate Panel, what you understand the role of a Panel advocate to be, and what qualities you possess which would make you a good prosecution advocate. Refer to the
+      <a href="https://www.cps.gov.uk/advocate-panels#sensitivecaseinfo" class="govuk-link" rel="noreferrer noopener"
+        target="_blank">Sensitive Identifying Case Information section (opens in new tab)</a>
+    </p>
+
+
+
+
+
+      <div class="govuk-form-group">
+        <div id="apprciationRole-hint" class="govuk-hint">Please do not include maximum of 400 words
+        </div>
+        <textarea class="govuk-textarea" id="apprciationRole" name="apprciationRole" rows="5"
+          aria-describedby="apprciationRole-hint"></textarea>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+
+
+  </div>
+</div>
+{% endblock %}

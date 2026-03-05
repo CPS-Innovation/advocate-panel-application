@@ -1,1 +1,59 @@
-{% include "content/connected-journey-bit/about-you-questions/solicitor-wishing-to-practice.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+  {% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Solicitor wishing to apply for Magistrates and Youth court panel
+    </h1>
+
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Help with something
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        We need to know your nationality so we can work out which elections you’re entitled to vote in.
+      </div>
+    </details>
+
+    <p class="govuk-body">Lorem ipsum loremn ipum lorem</p>
+    <p class="govuk-body">
+      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum</a>.
+    </p>
+
+    <div class="govuk-inset-text">
+  Existing memebers of the CPS Advocate panel need not to apply to the Magistrates and Youth court panel as they are already approved for work at this level.
+</div>
+
+
+ <form action="./solicitor-check-answers-wishing-to-practice.html" method="get">
+
+   
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
