@@ -9,12 +9,12 @@ module.exports = router => {
     if (hasAccount === 'yes') {
       res.redirect('/login')
     } else {
-      res.redirect('/register')
+      res.redirect('/create-account')
     }
   })
 
   ////////// REGISTER 
-  router.post('/register', (req, res) => {
+  router.post('/create-account', (req, res) => {
     res.redirect('/question-what-describes-you')
   })
 
