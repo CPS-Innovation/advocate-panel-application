@@ -1,4 +1,4 @@
-{# app/views/account.html #}
+{# app/views/register.html #}
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
@@ -21,16 +21,16 @@
       <div class="govuk-form-group">
 
         {{ govukRadios({
-          name: "new[hasAccount]",
+          name: "hasFinishedRegistering",
           fieldset: {
             legend: {
-              text: "Do you have an account?",
+              text: "Have you finished registering for an account?",
               isPageHeading: true,
               classes: "govuk-fieldset__legend--l"
             }
           },
           hint: {
-            text: "You'll have an account if you've ever started an application for a CPS advocate panel"
+            text: "This is just a placeholder screen to test the flow of the start page. It doesn't actually do anything yet."
           },
           items: [
             {
