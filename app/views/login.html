@@ -1,10 +1,18 @@
+{# app/views/login.html #}
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
   Sign in – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
-{% block beforeContent %}{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
 
 {% block content %}
 
@@ -13,31 +21,33 @@
 
     <h1 class="govuk-heading-l">Sign in</h1>
 
-    <!-- <p class="govuk-body">
-      Use this prototype sign-in to access your Making Tax Digital: Property Income dashboard.
-    </p> -->
+      <form method="post" action="/account/sign-in" novalidate>
 
-    <form method="get" action="./task-list.html">
+        {{ govukInput({
+          id: "signIn[emailAddress]",
+          name: "signIn[emailAddress]",
+          type: "email",
+          label: {
+            text: "Email address",
+            classes: "govuk-label--s"
+          }
+        }) }}
 
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="email">
-          Email address
-        </label>
-        <input class="govuk-input" id="email" name="email" type="email" autocomplete="email">
-      </div>
+        {{ govukInput({
+          id: "signIn[password]",
+          name: "signIn[password]",
+          type: "password",
+          label: {
+            text: "Password",
+            classes: "govuk-label--s"
+          }
+        }) }}
 
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="password">
-          Password
-        </label>
-        <input class="govuk-input" id="password" name="password" type="password" autocomplete="current-password">
-      </div>
+        {{ govukButton({
+          text: "Sign in"
+        }) }}
 
-      <button class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
-
-    </form>
+      </form>
 
   </div>
 </div>

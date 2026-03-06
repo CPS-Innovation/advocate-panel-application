@@ -27,53 +27,38 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
     <p class="govuk-body">Choose the most appropriate description of your employment type.</p>
 
 
-    <form action="/employmentType-answer" method="post">
+      <form method="post" novalidate>
 
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset">
-          <div class="govuk-radios" data-module="govuk-radios">
+        {{ govukRadios({
+          name: "employmentType",
+          fieldset: {
+            legend: {
+              text: "What best describes your employment type?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m govuk-visually-hidden"
+            }
+          },
+          items: [
+            {
+              value: "memberChambers",
+              text: "Member of chambers"
+            },
+            {
+              value: "soleTrader",
+              text: "Sole trader"
+            },
+            {
+              value: "solicitorsFirm",
+              text: "Member of a solicitors' firm"
+            }
+          ]
+        }) }}
 
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="employmentType-memberChambers"
-                     name="employmentType"
-                     type="radio"
-                     value="memberChambers">
-              <label class="govuk-label govuk-radios__label" for="employmentType-memberChambers">
-                Member of chambers
-              </label>
-            </div>
+        {{ govukButton({
+          text: "Continue"
+        }) }}
 
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="employmentType-soleTrader"
-                     name="employmentType"
-                     type="radio"
-                     value="soleTrader">
-              <label class="govuk-label govuk-radios__label" for="employmentType-soleTrader">
-                   Sole trader
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="employmentType-solicitorsFirm"
-                     name="employmentType"
-                     type="radio"
-                     value="solicitorsFirm">
-              <label class="govuk-label govuk-radios__label" for="employmentType-solicitorsFirm">
-                Member of a solicitors' firm
-              </label>
-            </div>
-          </div>
-        </fieldset>
-      </div>
-
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
-
-    </form>
+      </form>
 
   </div>
 </div>

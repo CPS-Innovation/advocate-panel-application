@@ -1,3 +1,4 @@
+{# app/views/start-page.html #}
 {% extends "layouts/main.html" %}
 
 {% set pageName = "Advocate Panels – Application Portal (Prototype)" %}
@@ -40,9 +41,9 @@
     <p class="govuk-body">You must not include identifying case information in your application.</p>
 
     {{ govukButton({
-    text: "Start now",
-    href: "./account.html",
-    isStartButton: true
+      text: "Start now",
+      href: "/account",
+      isStartButton: true
     }) }}
 
   </div>
