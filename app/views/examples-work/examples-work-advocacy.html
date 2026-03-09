@@ -1,3 +1,4 @@
+{# app/views/examples-work/examples-work-advocacy.html #}
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
 {% block header %}
@@ -19,8 +20,7 @@ href: "javascript:window.history.back()"
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-        <form action="./examples-work-2.html" method="get">
-
+        
     <h1 class="govuk-heading-l">
       Examples of your work - Advocacy
     </h1>
@@ -54,19 +54,47 @@ href: "javascript:window.history.back()"
 
     <p class="govuk-body">Your application will be returned for you to change if you include these kinds of identifying information.</p>
 
+    <form method="post" novalidate>
       <div class="govuk-form-group">
-          <label class="govuk-label govuk-label--l" for="more-detail">
-            Evidence of advocacy
-          </label>
-        <div id="advocacy-hint" class="govuk-hint">You can write up to 400 words.
-        </div>
-        <textarea class="govuk-textarea" id="advocacy" name="advocacy" rows="5"
-          aria-describedby="advocacy-hint"></textarea>
+        {{ govukTextarea({
+          id: "advocacy",
+          name: "advocacyExample",
+          rows: 10,
+          value: data['advocacyExample'],
+          label: {
+            text: "Evidence of advocacy",
+            classes: "govuk-label--m"
+          },
+          hint: {
+            text: "You can write up to 400 words."
+          }
+        }) }}
       </div>
 
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
+        {{ govukRadios({
+          name: "haveYouCompletedThisSection",
+          fieldset: {
+            legend: {
+              text: "Have you completed this section?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes, I've completed this section"
+            },
+            {
+              value: "no",
+              text: "No, I'll come back to it later"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
 
     </form>
 
