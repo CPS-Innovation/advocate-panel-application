@@ -32,7 +32,11 @@ module.exports = router => {
 
   ////////// SIGN OUT
   router.get('/sign-out', (req, res) => {
-    req.session.data.user = null
+    req.session.destroy()
+    res.redirect('/sign-out-confirmation')
+  })
+
+  router.get('/sign-out-confirmation', (req, res) => {
     res.render('sign-out')
   })
 
