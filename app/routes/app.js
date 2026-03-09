@@ -63,16 +63,38 @@ module.exports = router => {
   router.post('/about-you-questions/question-court-panel', (req, res) => {
     const courtPanel = req.session.data['courtPanel']
 
-    if (courtPanel === 'crownCourtGeneralCrime') {
+    if (courtPanel === 'Crown Court General Crime') {
       res.redirect('/about-you-questions/crown-court-levels')
-    } else if (courtPanel === 'rasso') {
+    } else if (courtPanel === 'Rape and serious sexual offences') {
       res.redirect('/about-you-questions/question-court-panel')
-    } else if (courtPanel === 'specialist') {
+    } else if (courtPanel === 'Specialist') {
       res.redirect('/about-you-questions/question-court-panel')
     } else {
       res.redirect('/about-you-questions/question-court-panel')
     }
   })
 
+  ////////// CROWN COURT LEVELS
+  router.post('/about-you-questions/crown-court-levels', (req, res) => {
+    const crownCourtLevel = req.session.data['crownCourtLevel']
+
+    if (crownCourtLevel === 'Level 1') {
+      res.redirect('/about-you-questions/new-joiner-level-1')
+    } else if (crownCourtLevel === 'Level 4') {
+      res.redirect('/about-you-questions/london-secondee')
+    } else {
+      res.redirect('/about-you-questions/london-secondee')
+    }
+  })
+
+  ////////// NEW JOINER LEVEL 1
+  router.post('/about-you-questions/new-joiner-level-1', (req, res) => {
+    res.redirect('/about-you-questions/check-answers')
+  })
+
+  ////////// LONDON SECONDEE (LEVEL 4)
+  router.post('/about-you-questions/london-secondee', (req, res) => {
+    res.redirect('/about-you-questions/check-answers')
+  })
 
 }

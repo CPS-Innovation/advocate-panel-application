@@ -8,12 +8,12 @@
 Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
-{% block containerStart %}
-{{ govukBackLink({
-  text: "Back",
-  href: "javascript:window.history.back()"
-}) }}
-{% endblock %}
+  {% block containerStart %}
+    {{ govukBackLink({
+      text: "Back",
+      href: "javascript:window.history.back()"
+    }) }}
+  {% endblock %}
 
 {% block content %}
 
@@ -54,19 +54,19 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
         },
         items: [
           {
-            value: "crownCourtGeneralCrime",
+            value: "Crown Court General Crime",
             text: "Crown Court General Crime"
           },
           {
-            value: "rasso",
+            value: "Rape and serious sexual offences",
             text: "Rape and serious sexual offences"
           },
           {
-            value: "specialist",
+            value: "Specialist",
             text: "Specialist"
           },
           {
-            value: "other",
+            value: "Other",
             text: "Other"
           }
         ]

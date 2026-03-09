@@ -1,4 +1,4 @@
-{# app/views/about-you-questions/new-joiner-level-2-4.html #}
+{# app/views/about-you-questions/london-secondee.html #}
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
 {% block header %}
@@ -23,7 +23,7 @@ href: "javascript:window.history.back()"
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l">
-      General Crime Panel - Membership type x
+      General Crime Panel - Upgrade existing member
     </h1>
     <details class="govuk-details">
       <summary class="govuk-details__summary">
@@ -41,29 +41,26 @@ href: "javascript:window.history.back()"
       Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum </a>.
     </p>
 
-
-
-
      
- <form method="post">
+    <form method="post">
 
       <div class="govuk-form-group">
         {{ govukRadios({
-          name: "membership",
+          name: "londonSecondee",
           fieldset: {
             legend: {
-              text: "Select a membership type:",
+              text: "Are you a London Secondee?",
               classes: "govuk-fieldset__legend--m"
             }
           },
           items: [
             {
-              value: "permanent",
-              text: "Permanent"
+              value: "Yes",
+              text: "Yes"
             },
             {
-              value: "temporary",
-              text: "Temporary"
+              value: "No",
+              text: "No"
             }
           ]
         }) }}
