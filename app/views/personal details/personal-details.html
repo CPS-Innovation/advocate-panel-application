@@ -24,127 +24,31 @@ href: "javascript:window.history.back()"
       Personal details
     </h1>
 
-    <p class="govuk-body">
+    <!-- <p class="govuk-body">
       Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum </a>.
-    </p>
+    </p> -->
 
     <form action="../start-application-2.html" method="get" novalidate>
 
       <div class="govuk-form-group">
-        <label class="govuk-label" for="name-on-the-account">
+        <label class="govuk-label govuk-label--m" for="full-name">
           Full name
         </label>
-
-        <div class="govuk-form-group">
-          <div id="name-on-the-account-hint" class="govuk-hint">
-            You cannot change this
-          </div>
-          <input class="govuk-input" id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="true"
-            autocomplete="name" disabled value="Rupert Ashdown" aria-describedby="name-on-the-account-hint" readonly>
-        </div>
-
+        <input class="govuk-input" id="full-name" name="fullName" type="text">
       </div>
 
+<!-- Barristers are asked about their bar number. Solicitors would instead be asked to enter their Solicitors' Regulation Authority (SRA) number. -->
 
-     <!-- Conditional reveal start -->
-<div class="govuk-form-group govuk-!-margin-top-7">
-  <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      <h2 class="govuk-heading-m">
-        Select membership type
-      </h2>
-    </legend>
-
-    <div id="contact-hint" class="govuk-hint">
-      Select one option
-    </div>
-
-    <div class="govuk-radios" data-module="govuk-radios">
-      <!-- Bar number option -->
-      <div class="govuk-radios__item">
-        <input
-          class="govuk-radios__input"
-          id="barnumber"
-          name="membershipType"
-          type="radio"
-          value="bar"
-          data-aria-controls="conditional-barnumber"
-          checked>
-        <label class="govuk-label govuk-radios__label" for="barnumber">
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--m" for="full-name">
           Bar number
         </label>
-      </div>
-
-      <div class="govuk-radios__conditional" id="conditional-barnumber">
-        <div class="govuk-form-group" id="bar-form-group">
-          <label class="govuk-label" for="bar-number-input">
-            Provide your 5 digit bar member number (this can be found in your MyBar portal). This is not your BAR ID.
-          </label>
-          <div id="bar-number-hint" class="govuk-hint">
-            Must be exactly 5 digits (0–9).
-          </div>
-          <!-- Error message is shown only when invalid (server-side or JS adds the error classes and reveals this) -->
-          <p id="bar-number-error" class="govuk-error-message" hidden>
-            <span class="govuk-visually-hidden">Error:</span>
-            Bar number must be exactly 5 numeric digits.
-          </p>
-          <input
-            class="govuk-input govuk-!-width-one-half"
-            id="bar-number-input"
-            name="barNumber"
-            type="text"
-            inputmode="numeric"
-            pattern="[0-9]{5}"
-            title="Enter exactly 5 digits (0–9)"
-            aria-describedby="bar-number-hint bar-number-error"
-            autocomplete="off">
+        <div id="passport-number-hint" class="govuk-hint">
+            This is a 5 digit number. It is not the same as your bar ID.
         </div>
-      </div>
 
-      <!-- SRA number option -->
-      <div class="govuk-radios__item">
-        <input
-          class="govuk-radios__input"
-          id="sranumber"
-          name="membershipType"
-          type="radio"
-          value="sra"
-          data-aria-controls="conditional-sranumber">
-        <label class="govuk-label govuk-radios__label" for="sranumber">
-          SRA number
-        </label>
+        <input class="govuk-input govuk-input--width-10" id="full-name" name="fullName" type="text">
       </div>
-
-      <div class="govuk-radios__conditional" id="conditional-sranumber">
-        <div class="govuk-form-group" id="sra-form-group">
-          <label class="govuk-label" for="sra-number-input">
-            Provide your 6 or 7 digit Solicitors Regulation Authority number so we can...
-          </label>
-          <div id="sra-number-hint" class="govuk-hint">
-            Must be 6 or 7 digits (0–9).
-          </div>
-          <!-- Error message is shown only when invalid -->
-          <p id="sra-number-error" class="govuk-error-message" hidden>
-            <span class="govuk-visually-hidden">Error:</span>
-            SRA number must be 6 or 7 numeric digits.
-          </p>
-          <input
-            class="govuk-input govuk-!-width-one-half"
-            id="sra-number-input"
-            name="sraNumber"
-            type="text"
-            inputmode="numeric"
-            pattern="[0-9]{6,7}"
-            title="Enter 6 or 7 digits (0–9)"
-            aria-describedby="sra-number-hint sra-number-error"
-            autocomplete="off">
-        </div>
-      </div>
-    </div>
-  </fieldset>
-</div>
-<!-- Conditional reveal end -->
-
 
       <button type="submit" class="govuk-button govuk-!-static-margin-right-5" data-module="govuk-button">
         Submit personal details
