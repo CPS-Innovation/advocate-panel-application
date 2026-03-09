@@ -13,6 +13,15 @@ module.exports = router => {
     }
   })
 
+  ////////// LOGIN
+  router.get('/login', (req, res) => {
+    res.render('login')
+  })
+
+  router.post('/login', (req, res) => {
+    res.redirect('/profile')
+  })
+
   ////////// REGISTER 
   router.post('/create-account', (req, res) => {
     res.redirect('/question-what-describes-you')

@@ -1,6 +1,14 @@
 {% extends "layouts/main.html" %}
 {% block pageTitle %}Your MTD property tasks{% endblock %}
 
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: returnUrl or "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
 {% block content %}
 
 <div class="govuk-grid-row">
@@ -15,73 +23,85 @@
         rows: [
           {
             key: {
-              text: "Name"
+              text: "Name and bar number"
             },
             value: {
-              text: "Sarah Philips"
+              text: "xxxxxxxxx"
             },
             actions: {
               items: [
                 {
                   href: "#",
                   text: "Change",
-                  visuallyHiddenText: "name"
+                  visuallyHiddenText: "name and bar number"
                 }
               ]
             }
           },
           {
             key: {
-              text: "Date of birth"
+              text: "Where you work"
             },
             value: {
-              text: "5 January 1978"
+              text: "xxxxxxxxx"
             },
             actions: {
               items: [
                 {
                   href: "#",
                   text: "Change",
-                  visuallyHiddenText: "date of birth"
+                  visuallyHiddenText: "where you work"
                 }
               ]
             }
           },
           {
             key: {
-              text: "Address"
+              text: "Preferred circuits and Crown Courts  "
             },
             value: {
-              html: "72 Guild Street<br>London<br>SE23 6FH"
+              html: "xxxxxxxxx"
             },
             actions: {
               items: [
                 {
                   href: "#",
                   text: "Change",
-                  visuallyHiddenText: "address"
+                  visuallyHiddenText: "preferred circuits and Crown Courts"
                 }
               ]
             }
           },
           {
             key: {
-              text: "Contact details"
+              text: "Qualifications"
             },
             value: {
-              html: '<p class="govuk-body">07700 900457</p><p class="govuk-body">sarah.phillips@example.com</p>'
+              html: 'xxxxxxxx'
             },
             actions: {
               items: [
                 {
                   href: "#",
-                  text: "Add",
-                  visuallyHiddenText: "contact details"
-                },
+                  text: "Change",
+                  visuallyHiddenText: "qualifications"
+                }
+              ]
+            }
+          },
+           {
+            key: {
+              text: "Equality monitoring"
+            },
+            value: {
+              html: 'xxxxxxxx'
+            },
+            actions: {
+              items: [
                 {
                   href: "#",
                   text: "Change",
-                  visuallyHiddenText: "contact details"
+                  visuallyHiddenText: "equality monitoring"
                 }
               ]
             }
@@ -90,7 +110,7 @@
       }) }}
 
       {{ govukButton({
-        text: "Save and continue",
+        text: "Save and confirm",
         href: "./about-you-questions/question-court-panel"
       }) }}
 
