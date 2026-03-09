@@ -1,0 +1,99 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Call to the bar and pupillage
+    </h1>
+
+    <!-- <p class="govuk-body">Lorem ipsum lorem ipsum lorem</p> -->
+
+    <form action="./crown-courts-circuit/crown-courts-select-page.html" method="get" novalidate>
+
+
+
+      <!--- Year of call-->
+
+
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--m" for="call-bar-year">
+          Year of call to the bar
+        </label>
+      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="call-bar-year"
+                  name="call-bar-year" type="text" inputmode="numeric">
+      </div>
+
+      <!-- Date of completion-->
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" role="group" aria-describedby="second-six-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            Start date of your ‘second six’
+          </legend>
+          <div id="second-six-hint" class="govuk-hint">
+            For example, 31 3 2021
+          </div>
+          <div class="govuk-date-input" id="second-six">
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="second-six-day">
+                  Day
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="second-six-day" name="second-six-day" type="text" inputmode="numeric">
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="second-six-month">
+                  Month
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="second-six-month" name="second-six-month" type="text" inputmode="numeric">
+              </div>
+            </div>
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="second-six-year">
+                  Year
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="second-six-year" name="second-six-year" type="text" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+
+
+      
+      <div class="govuk-button-group">
+        <a href="./year-call-degree-qualifications-2.html" role="button" draggable="false" class="govuk-button"
+          data-module="govuk-button">
+          Save qualification
+        </a>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
