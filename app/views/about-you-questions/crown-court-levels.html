@@ -39,71 +39,41 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
     </p>
 
     
- <form action="/levels-answer" method="post">
-
+    <form  method="post">
       <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-            Select the a level:
-          </legend>
-
-          <div class="govuk-radios" data-module="govuk-radios">
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="levels-level1"
-                     name="levels"
-                     type="radio"
-                     value="level1">
-              <label class="govuk-label govuk-radios__label" for="levels-level1">
-                Level 1
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="levels-level2"
-                     name="levels"
-                     type="radio"
-                     value="level2">
-              <label class="govuk-label govuk-radios__label" for="levels-level2">
-                Level 2
-              </label>
-            </div>
-
-             <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="levels-level3"
-                     name="levels"
-                     type="radio"
-                     value="level3">
-              <label class="govuk-label govuk-radios__label" for="levels-level3">
-                Level 3
-              </label>
-            </div>
-
-              <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="levels-level4"
-                     name="levels"
-                     type="radio"
-                     value="level4">
-              <label class="govuk-label govuk-radios__label" for="levels-level4">
-                Level 4
-              </label>
-            </div>
-
-          </div>
-        </fieldset>
+          {{ govukRadios({
+            name: "crownCourtLevel",
+            fieldset: {
+              legend: {
+                text: "Select a level:",
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "crownCourtLevel1",
+                text: "Level 1"
+              },
+              {
+                value: "crownCourtLevel2",
+                text: "Level 2"
+              },
+              {
+                value: "crownCourtLevel3",
+                text: "Level 3"
+              },
+              {
+                value: "crownCourtLevel4",
+                text: "Level 4"
+              }
+            ]
+          }) }}
       </div>
 
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
-
+       {{ govukButton({
+        text: "Continue"
+      }) }}
     </form>
-
-  
 
   </div>
 </div>

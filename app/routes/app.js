@@ -1,5 +1,7 @@
 /////////// app/routes/app.js
 
+const { route } = require("../routes-old")
+
 module.exports = router => {
 
   ////////// START PAGE
@@ -56,5 +58,21 @@ module.exports = router => {
       res.redirect('/#')
     }  
   })
+
+  ////////// COURT PANEL
+  router.post('/about-you-questions/question-court-panel', (req, res) => {
+    const courtPanel = req.session.data['courtPanel']
+
+    if (courtPanel === 'crownCourtGeneralCrime') {
+      res.redirect('/about-you-questions/crown-court-levels')
+    } else if (courtPanel === 'rasso') {
+      res.redirect('/about-you-questions/question-court-panel')
+    } else if (courtPanel === 'specialist') {
+      res.redirect('/about-you-questions/question-court-panel')
+    } else {
+      res.redirect('/about-you-questions/question-court-panel')
+    }
+  })
+
 
 }

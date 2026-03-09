@@ -41,67 +41,42 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
     </p>
 
 
- <form action="/panel-answer" method="post">
+    <form method="post" novalidate>
 
       <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-            Select a panel to apply for:
-          </legend>
-
-          <div class="govuk-radios" data-module="govuk-radios">
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="panel-barrister"
-                     name="panel"
-                     type="radio"
-                     value="barrister">
-              <label class="govuk-label govuk-radios__label" for="panel-barrister">
-                Crown Court General Crime
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="panel-solicitor"
-                     name="panel"
-                     type="radio"
-                     value="solicitor">
-              <label class="govuk-label govuk-radios__label" for="panel-solicitor">
-                Rape and serious sexual offences
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="panel-other"
-                     name="panel"
-                     type="radio"
-                     value="other">
-              <label class="govuk-label govuk-radios__label" for="panel-other">
-                Specialist
-              </label>
-            </div>
-             <div class="govuk-radios__item">
-              <input class="govuk-radios__input"
-                     id="panel-other"
-                     name="panel"
-                     type="radio"
-                     value="other">
-              <label class="govuk-label govuk-radios__label" for="panel-other">
-                Other
-              </label>
-            </div>
-
-          </div>
-        </fieldset>
-      </div>
-
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
-
+        {{ govukRadios({
+        name: "courtPanel",
+        fieldset: {
+          legend: {
+            text: "Select a panel to apply for:",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          {
+            value: "crownCourtGeneralCrime",
+            text: "Crown Court General Crime"
+          },
+          {
+            value: "rasso",
+            text: "Rape and serious sexual offences"
+          },
+          {
+            value: "specialist",
+            text: "Specialist"
+          },
+          {
+            value: "other",
+            text: "Other"
+          }
+        ]
+      }) }}
+      </div>  
+      
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+        
     </form>
 
   
