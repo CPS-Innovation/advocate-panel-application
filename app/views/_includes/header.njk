@@ -1,10 +1,27 @@
-{% set appServiceName = serviceName or "Advocate Panels: Application Portal" %}
+{% if data.user %}
+  {% set serviceUrl = 'profile' %}
+{% else %}
+  {% set serviceUrl = '/' %}
+{% endif %}
 
-<header>
-  {{ govukHeader() }}
-</header>
-
-{{ govukServiceNavigation({
-  serviceName: appServiceName,
-  serviceUrl: "/landing-page"
-}) }}
+{% if data.user %}
+  {{ appHeader({
+    productName: serviceName,
+    serviceUrl: '/profile',
+    navigation: [
+      {
+        href: "/profile",
+        text: "Account"
+      },
+      {
+        href: "/sign-out",
+        text: "Sign out"
+      }
+    ]
+  }) }}
+{% else %}
+  {{ appHeader({
+    productName: serviceName,
+    serviceUrl: '/'
+  }) }}
+{% endif %}

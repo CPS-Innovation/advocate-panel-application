@@ -15,13 +15,25 @@ module.exports = router => {
     }
   })
 
+    ////////// CHECK - PERSONAL DETAILS
+  router.post('/check', (req, res) => {
+    res.redirect('/profile')
+  })
+
   ////////// LOGIN
   router.get('/login', (req, res) => {
     res.render('login')
   })
 
   router.post('/login', (req, res) => {
+    req.session.data.user = {}
     res.redirect('/profile')
+  })
+
+  ////////// SIGN OUT
+  router.get('/sign-out', (req, res) => {
+    req.session.data.user = null
+    res.render('sign-out')
   })
 
   ////////// REGISTER 
