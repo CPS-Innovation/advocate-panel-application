@@ -1,0 +1,50 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+text: "Back",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+        <form action="./examples-work-2.html" method="get">
+
+    <h1 class="govuk-heading-l">
+      Examples of public interest immunity (PII) and disclosure work 
+    </h1>
+
+    <p class="govuk-body">Please outline your knowledge and experience of the PII and Disclosure regime. When providing examples (no more than three), please give details of the issue you had to advise on, or address, and explain your approach and the outcome.</p>
+
+    <p class="govuk-body">
+      <a href="https://www.cps.gov.uk/advocate-panels/advocate-panels-application-portal/advocate-panels-2020-panel-general-crime-and-rasso-list#selectioncriteriageneralcrimelevelfour" class="govuk-link" rel="noreferrer noopener" target="_blank">General Crime 4 Selection Criteria (opens in new
+          tab)</a>
+    </p>
+
+      <div class="govuk-form-group">
+        <div id="publicinterestWork-hint" class="govuk-hint">Please do not include maximum of 400 words
+        </div>
+        <textarea class="govuk-textarea" id="publicinterestWork" name="publicinterestWork" rows="5"
+          aria-describedby="publicinterestWork-hint"></textarea>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
