@@ -21,26 +21,6 @@ href: "javascript:window.history.back()"
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
-    <h1 class="govuk-heading-l">
-      General Crime Panel - Upgrade existing member
-    </h1>
-    <details class="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          Help with something
-        </span>
-      </summary>
-      <div class="govuk-details__text">
-       Applications to upgrade General Crime membership (to levels 2, 3 or 4) are accepted from 1st to 30th September.<br>
-        Temporary membership applications are accepted between 1 November and 31 July each year. <br>
-        Temporary members who fail to secure permanent memebership during the next available application window will be removed from the Panel.
-      </div>
-    </details>
-    <p class="govuk-body">
-      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum </a>.
-    </p>
-
      
     <form method="post">
 
@@ -49,9 +29,13 @@ href: "javascript:window.history.back()"
           name: "londonSecondee",
           fieldset: {
             legend: {
-              text: "Are you a London Secondee?",
-              classes: "govuk-fieldset__legend--m"
+              text: "Are you a London secondee?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
             }
+          },
+          hint: {
+            text: "You can apply to upgrade your level from 1 to 30 September. You can apply at any time if you’re on secondment to the CPS in a London circuit."
           },
           items: [
             {
@@ -65,9 +49,6 @@ href: "javascript:window.history.back()"
           ]
         }) }}
 
-        {{ govukInsetText({
-          html: "Applications to upgrade General Crime membership (to levels 2, 3 or 4) are accepted from 1st to 30th September.<br>Temporary membership applications are accepted between 1 November and 31 July each year.<br>Temporary members who fail to secure permanent membership during the next available application window will be removed from the Panel."
-        }) }}
       </div>
         {{ govukButton({
           text: "Continue"

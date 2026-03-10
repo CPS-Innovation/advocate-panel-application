@@ -22,21 +22,14 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
     {% set summaryRows = [
       {
-        key: { text: "What describes you" },
-        value: { text: data.yourRolesIs or "Barrister" },
-        actions: {
-          items: [{ href: "/question-what-describes-you", text: "Change", visuallyHiddenText: "what describes you" }]
-        }
-      },
-      {
-        key: { text: "Court panel" },
+        key: { text: "Panel" },
         value: { text: data.courtPanel },
         actions: {
           items: [{ href: "/about-you-questions/question-court-panel", text: "Change", visuallyHiddenText: "court panel" }]
         }
       },
       {
-        key: { text: "Court level" },
+        key: { text: "Level" },
         value: { text: data.crownCourtLevel },
         actions: {
           items: [{ href: "/about-you-questions/crown-court-levels", text: "Change", visuallyHiddenText: "court level" }]
