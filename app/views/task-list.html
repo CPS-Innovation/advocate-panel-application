@@ -54,6 +54,7 @@
               Preferred circuits and Crown Courts
             </a>
           </div>
+           {# status updated by macro in _includes #}
           <div class="govuk-task-list__status" id="personal-details-location">
             {{ taskStatus(data['preferredCircuitStatus']) }}
           </div>
@@ -65,10 +66,9 @@
               Call to the bar and pupillage
             </a>
           </div>
-          <div class="govuk-task-list__status" id="personal-details-qualifications">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+          {# status updated by macro in _includes #}
+          <div class="govuk-task-list__status" id="personal-details-location">
+            {{ taskStatus(data['callToBarAndPupilage']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -78,10 +78,9 @@
               Degree and post-graduate qualifications
             </a>
           </div>
-          <div class="govuk-task-list__status" id="personal-details-qualifications">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+          {# status updated by macro in _includes #}
+          <div class="govuk-task-list__status" id="personal-details-location">
+            {{ taskStatus(data['degreeAndPostGradQualifications']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -91,10 +90,9 @@
               Equality monitoring
             </a>
           </div>
-          <div class="govuk-task-list__status" id="personal-details-equality">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+          {# status updated by macro in _includes #}
+          <div class="govuk-task-list__status" id="personal-details-location">
+            {{ taskStatus(data['equalityInformation']) }}
           </div>
         </li>
       </ul>

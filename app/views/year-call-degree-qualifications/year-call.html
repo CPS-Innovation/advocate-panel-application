@@ -26,12 +26,9 @@ href: "javascript:window.history.back()"
 
     <!-- <p class="govuk-body">Lorem ipsum lorem ipsum lorem</p> -->
 
-    <form action="./crown-courts-circuit/crown-courts-select-page.html" method="get" novalidate>
-
-
+    <form method="post" novalidate>
 
       <!--- Year of call-->
-
 
       <div class="govuk-form-group">
         <label class="govuk-label govuk-label--m" for="call-bar-year">
@@ -84,11 +81,9 @@ href: "javascript:window.history.back()"
 
       
       <div class="govuk-button-group">
-        <a href="./year-call-degree-qualifications-2.html" role="button" draggable="false" class="govuk-button"
-          data-module="govuk-button">
-          Save qualification
-        </a>
-
+        {{ govukButton({
+          text: "Save qualification"
+        }) }}
       </div>
 
     </form>

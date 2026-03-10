@@ -98,5 +98,69 @@ module.exports = router => {
     res.redirect('/task-list')
   })
 
+  ////////// CALL TO BAR AND PUPILAGE
+  router.post('/year-call-degree-qualifications/year-call', (req, res) => {
+    req.session.data['callToBarAndPupilage'] = 'completed'
+    res.redirect('/task-list')
+  })
+
+  ////////// DEGREE AND POSTGRAD QUALS
+  router.post('/year-call-degree-qualifications/degree-qualifications', (req, res) => {
+    req.session.data['degreeAndPostGradQualifications'] = 'completed'
+    res.redirect('/task-list')
+  })
+
+   ////////// EQUALITIES MONITORING
+  router.post('/equalities/equalities-questions-1', (req, res) => {
+    res.redirect('/equalities/disability-question-2')
+  })
+
+  ////////// DISABILITY
+  router.post('/equalities/disability-question-2', (req, res) => {
+    res.redirect('/equalities/socio-economic-background-3')
+  })
+
+  ////////// SOCIO ECONOMINC
+  router.post('/equalities/socio-economic-background-3', (req, res) => {
+    res.redirect('/equalities/occupation-questions-4')
+  })
+
+  ////////// PARENTS QUALS
+  router.post('/equalities/occupation-questions-4', (req, res) => {
+    res.redirect('/equalities/occupation-parents-5')
+  })
+
+  ////////// PARENTS OCCUPATION
+  router.post('/equalities/occupation-parents-5', (req, res) => {
+    res.redirect('/equalities/occupation-parents-6')
+  })
+
+    ////////// HIGHEST INCOME IN HOUSEHOLD
+  router.post('/equalities/occupation-parents-6', (req, res) => {
+    res.redirect('/equalities/occupation-parents-7')
+  })
+
+      ////////// HOW MANY EMPLOYED IN PARETNTS COMPANY
+  router.post('/equalities/occupation-parents-7', (req, res) => {
+    res.redirect('/equalities/occupation-parents-8')
+  })
+
+        ////////// HIGHEST INCOME SUPERVISOR
+  router.post('/equalities/occupation-parents-8', (req, res) => {
+    res.redirect('/equalities/school-meals-9')
+  })
+
+          ////////// FREE SCHOOL MEALS
+  router.post('/equalities/school-meals-9', (req, res) => {
+    res.redirect('/equalities/assessment-10')
+  })
+
+
+  ////////// SELF ASSESSMENT
+  router.post('/equalities/assessment-10', (req, res) => {
+    req.session.data['equalityInformation'] = 'completed'
+    res.redirect('/task-list')
+  })
+
 
 }
