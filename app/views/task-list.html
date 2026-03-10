@@ -1,4 +1,5 @@
 {% extends "layouts/main.html" %}
+{% from "_includes/task-status.njk" import taskStatus %}
 {% block pageTitle %}Your MTD property tasks{% endblock %}
 
 {% block content %}
@@ -30,9 +31,7 @@
             </a>
           </div>
           <div class="govuk-task-list__status" id="personal-details-name">
-            <strong class="govuk-tag {{ personalDetailsClass }}">
-              {{ personalDetailsText }}
-            </strong>
+            {{ taskStatus(data['personalDetailsStatus']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -43,9 +42,7 @@
             </a>
           </div>
           <div class="govuk-task-list__status" id="personal-details-work">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+            {{ taskStatus(data['whereYouWorkStatus']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">

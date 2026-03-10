@@ -1,0 +1,9 @@
+{% macro taskStatus(status) %}
+  {% if status == 'completed' %}
+    <strong class="govuk-tag govuk-tag--green">Completed</strong>
+  {% elif status == 'inProgress' %}
+    <strong class="govuk-tag govuk-tag--yellow">In progress</strong>
+  {% else %}
+    <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
+  {% endif %}
+{% endmacro %}

@@ -135,16 +135,19 @@ href: "javascript:window.history.back()"
     </div>
 
 
-    <div class="govuk-button-group">
-     <a href="./adding-address-1-search-box-way.html" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
-        Continue
-      </a>
-
-      <button id="clear-address" type="button" class="govuk-button govuk-button--secondary">
-        Clear address
-      </button>
-
-    </div>
+    <form method="post" novalidate>
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+        {{ govukButton({
+          text: "Clear address",
+          classes: "govuk-button--secondary",
+          id: "clear-address",
+          type: "button"
+        }) }}
+      </div>
+    </form>
 
 
 
