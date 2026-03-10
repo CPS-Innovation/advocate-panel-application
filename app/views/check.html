@@ -15,6 +15,8 @@
 
     <h1 class="govuk-heading-l">Check your answers</h1>
 
+    <h3 class="govuk-heading-m">Name and bar number</h3>
+
     {{ govukSummaryList({
       rows: [
         {
@@ -22,7 +24,7 @@
           value: { text: data['fullName'] or "Not provided" },
           actions: {
             items: [{
-              href: "/personal/personal-details?returnUrl=/check",
+              href: "/personal-details/personal-details?returnUrl=/check",
               text: "Change",
               visuallyHiddenText: "full name"
             }]
@@ -33,12 +35,19 @@
           value: { text: data['barNumber'] or "Not provided" },
           actions: {
             items: [{
-              href: "/personal/personal-details?returnUrl=/check",
+              href: "/personal-details/personal-details?returnUrl=/check",
               text: "Change",
               visuallyHiddenText: "bar number"
             }]
           }
-        },
+        }
+      ]
+    }) }}
+
+    <h3 class="govuk-heading-m">Where you work</h3>
+
+    {{ govukSummaryList({
+      rows: [
         {
           key: { text: "Employment type" },
           value: { text: data['employmentType'] or "Not provided" },
@@ -60,7 +69,14 @@
               visuallyHiddenText: "chambers"
             }]
           }
-        },
+        }
+      ]
+    }) }}
+
+    <h3 class="govuk-heading-m">Preferred circuits and Crown Courts</h3>
+
+    {{ govukSummaryList({
+      rows: [
         {
           key: { text: "Preferred circuit" },
           value: { text: data['preferredCircuit'] or "Not provided" },
@@ -82,7 +98,14 @@
               visuallyHiddenText: "preferred Crown Courts"
             }]
           }
-        },
+        }
+      ]
+    }) }}
+
+    <h3 class="govuk-heading-m">Call to the bar and pupillage</h3>
+
+    {{ govukSummaryList({
+      rows: [
         {
           key: { text: "Called to the bar" },
           value: { text: data['calledToTheBar'] or "Not provided" },
@@ -104,7 +127,14 @@
               visuallyHiddenText: "start date of second six"
             }]
           }
-        },
+        }
+      ]
+    }) }}
+
+    <h3 class="govuk-heading-m">Degree and post-graduate qualifications</h3>
+
+    {{ govukSummaryList({
+      rows: [
         {
           key: { text: "Institution" },
           value: { text: data['institution'] or "Not provided" },
