@@ -30,6 +30,7 @@
               Name and bar number
             </a>
           </div>
+          {# status updated by macro in _includes #}
           <div class="govuk-task-list__status" id="personal-details-name">
             {{ taskStatus(data['personalDetailsStatus']) }}
           </div>
@@ -41,6 +42,7 @@
               Where you work
             </a>
           </div>
+          {# status updated by macro in _includes #}
           <div class="govuk-task-list__status" id="personal-details-work">
             {{ taskStatus(data['whereYouWorkStatus']) }}
           </div>
@@ -53,9 +55,7 @@
             </a>
           </div>
           <div class="govuk-task-list__status" id="personal-details-location">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+            {{ taskStatus(data['preferredCircuitStatus']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">

@@ -87,5 +87,16 @@ module.exports = router => {
     res.redirect('/task-list')
   })
 
+  ////////// PREFERRED CIRCUIT
+  router.post('/preferred-circuit/circuit-question-page', (req, res) => {
+    res.redirect('/preferred-circuit/crown-courts-circuit/crown-courts-select-page')
+  })
+
+  ////////// CROWN COURTS SELECT
+  router.post('/preferred-circuit/crown-courts-circuit/crown-courts-select-page', (req, res) => {
+    req.session.data['preferredCircuitStatus'] = 'completed'
+    res.redirect('/task-list')
+  })
+
 
 }
