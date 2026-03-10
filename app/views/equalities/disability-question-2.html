@@ -30,7 +30,7 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
     </p>
 
 
- <form action="/disability-question-answer" method="post">
+ <form method="post" novalidate>
 
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
@@ -77,9 +77,9 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
         </fieldset>
       </div>
 
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
+      {{ govukButton({
+        text: "Continue"
+      }) }}
 
     </form>
 

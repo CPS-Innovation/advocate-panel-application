@@ -3,235 +3,111 @@
 
 {% block content %}
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <form action="./#" method="get" novalidate>
+<h1 class="govuk-heading-l">Application form</h1>
 
-      <h1 class="govuk-heading-l">Application form</h1>
+<h2 class="govuk-heading-m govuk-!-static-padding-top-5">References</h2>
 
-      {# Optional help section (uncomment if needed)
-      <details class="govuk-details">
-        <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text">
-            Help with this application
-          </span>
-        </summary>
-        <div class="govuk-details__text">
-          We have generated this tailored application and you can now start the application
-        </div>
-      </details>
-      #}
+{{ govukTaskList({
+  items: [
+    {
+      title: { text: "Referee" },
+      hint: { text: "You can request the reference before you submit your application" },
+      href: "/references-questions/reference-page",
+      status: { tag: { text: "Not requested", classes: "govuk-tag--grey" } },
+      idPrefix: "references"
+    }
+  ]
+}) }}
 
-      {# Optional application reference summary (uncomment if needed)
-      <dl class="govuk-summary-list govuk-!-static-margin-top-9">
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Application reference number:
-          </dt>
-          <dd class="govuk-summary-list__value">
-            234567890
-          </dd>
-          <dd class="govuk-summary-list__actions"></dd>
-        </div>
-      </dl>
-      #}
+<h2 class="govuk-heading-m govuk-!-static-padding-top-5">Examples of your work</h2>
 
-      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">References</h2>
-      <ul class="govuk-task-list">
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./references-questions/reference-page.html"
-              aria-describedby="references-status references-hint">
-              Referee
-            </a>
-            <div id="references-hint" class="govuk-task-list__hint">
-              You can request the reference before you submit your application
-            </div>
-          </div>
-          <div class="govuk-task-list__status" id="references-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
-      </ul>
+  {% if data['advocacyStatus'] == 'completed' %}
+    {% set advocacyText = "Completed" %}
+    {% set advocacyClass = "govuk-tag--green" %}
+  {% elif data['advocacyStatus'] == 'inProgress' %}
+    {% set advocacyText = "In progress" %}
+    {% set advocacyClass = "govuk-tag--yellow" %}
+  {% else %}
+    {% set advocacyText = "Incomplete" %}
+    {% set advocacyClass = "govuk-tag--blue" %}
+  {% endif %}
 
-      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Examples of your work</h2>
+{{ govukTaskList({
+  items: [
+    {
+      title: { text: "Advocacy" },
+      href: "/examples-work/examples-work-advocacy",
+      status: {
+        tag: {
+          text: advocacyText,
+          classes: advocacyClass
+        }
+      },
+      idPrefix: "advocacy"
+    },
+    {
+      title: { text: "Advisory" },
+      href: "/examples-work/examples-work-advisory",
+      status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+      idPrefix: "advisory"
+    },
+    {
+      title: { text: "Advisory drafting examples (upload)" },
+      href: "/upload-page",
+      status: { text: "Example only" },
+      idPrefix: "upload"
+    },
+    {
+      title: { text: "Public interest immunity (PII) and disclosure" },
+      href: "/examples-work/examples-work-public-interest-immunity",
+      status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+      idPrefix: "pii"
+    },
+    {
+      title: { text: "Other relevant knowledge, skills and experience" },
+      href: "/examples-work/examples-work-knowledge-skills-experience",
+      status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+      idPrefix: "knowledge"
+    },
+    {
+      title: { text: "Appreciation of the role of a panel advocate" },
+      href: "/examples-work/examples-work-appreciation",
+      status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+      idPrefix: "appreciation"
+    },
+    {
+      title: { text: "Additional information" },
+      href: "/examples-work/examples-work-additional",
+      status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+      idPrefix: "additional"
+    }
+  ]
+}) }}
 
-      <ul class="govuk-task-list">
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./examples-work/examples-work-advocacy.html"
-              aria-describedby="examples-status">
-              Advocacy
-            </a>
-            {# Optional hint
-            <div id="examples-hint" class="govuk-task-list__hint">
-              About what examples of your work
-            </div>
-            #}
-          </div>
-          <div class="govuk-task-list__status" id="examples-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
+<h2 class="govuk-heading-m govuk-!-static-padding-top-5">Pre-qualification questionnaire</h2>
 
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./examples-work/examples-work-advisory.html"
-              aria-describedby="examples-status">
-              Advisory
-            </a>
-            {# Optional hint
-            <div id="examples-hint" class="govuk-task-list__hint">
-              About what examples of your work
-            </div>
-            #}
-          </div>
-          <div class="govuk-task-list__status" id="examples-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
+{{ govukTaskList({
+  items: [
+    {
+      title: { text: "Pre-qualification questionnaire" },
+      href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1",
+      status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+      idPrefix: "pqq"
+    }
+  ]
+}) }}
 
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./upload-page.html"
-              aria-describedby="upload-status">
-              Advisory drafting examples (upload)
-            </a>
-            {# Optional hint
-            <div id="upload-hint" class="govuk-task-list__hint">
-              Just an example of an upload pattern
-            </div>
-            #}
-          </div>
-          <div class="govuk-task-list__status" id="upload-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
+<h2 class="govuk-heading-m govuk-!-static-padding-top-5">Declaration</h2>
 
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./examples-work/examples-work-public-interest-immunity.html"
-              aria-describedby="examples-status">
-              Public interest immunity (PII) and disclosure
-            </a>
-            {# Optional hint
-            <div id="examples-hint" class="govuk-task-list__hint">
-              About what examples of your work
-            </div>
-            #}
-          </div>
-          <div class="govuk-task-list__status" id="examples-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
-
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./examples-work/examples-work-knowledge-skills-experience.html"
-              aria-describedby="examples-status">
-              Other relevent knowledge, skills and experience
-            </a>
-            {# Optional hint
-            <div id="examples-hint" class="govuk-task-list__hint">
-              About what examples of your work
-            </div>
-            #}
-          </div>
-          <div class="govuk-task-list__status" id="examples-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
-
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./examples-work/examples-work-appreciation.html"
-              aria-describedby="examples-status">
-              Appreciation of the role of a panel advocate
-            </a>
-            {# Optional hint
-            <div id="examples-hint" class="govuk-task-list__hint">
-              About what examples of your work
-            </div>
-            #}
-          </div>
-          <div class="govuk-task-list__status" id="examples-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
-
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./examples-work/examples-work-additional.html"
-              aria-describedby="examples-status">
-              Additional information
-            </a>
-            {# Optional hint
-            <div id="examples-hint" class="govuk-task-list__hint">
-              About what examples of your work
-            </div>
-            #}
-          </div>
-          <div class="govuk-task-list__status" id="examples-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
-
-      </ul>
-
-      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Pre-qualification questionnaire</h2>
-      <ul class="govuk-task-list">
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1.html"
-              aria-describedby="pqq-status">
-              Pre-qualification questionnaire
-            </a>
-            {# Optional hint
-            <div id="pqq-hint" class="govuk-task-list__hint">
-              About questionnaire
-            </div>
-            #}
-          </div>
-          <div class="govuk-task-list__status" id="pqq-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
-      </ul>
-
-      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Declaration</h2>
-      <ul class="govuk-task-list">
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link"
-              href="./declaration.html"
-              aria-describedby="declaration-status">
-              Declaration
-            </a>
-            {# Optional hint
-            <div id="declaration-hint" class="govuk-task-list__hint">
-              About item 1
-            </div>
-            #}
-          </div>
-          <div class="govuk-task-list__status" id="declaration-status">
-            <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
-          </div>
-        </li>
-      </ul>
-
-    </form>
-  
-  </div>
-
-</div>
+{{ govukTaskList({
+  items: [
+    {
+      title: { text: "Declaration" },
+      href: "/declaration",
+      status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+      idPrefix: "declaration"
+    }
+  ]
+}) }}
 
 {% endblock %}

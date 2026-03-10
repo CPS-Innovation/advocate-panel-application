@@ -1,0 +1,221 @@
+.app-header {
+  @include govuk-font($size: 16);
+  color: govuk-colour("white");
+  background: govuk-colour("blue");
+}
+
+.app-header__container {
+  @include govuk-clearfix;
+  position: relative;
+  padding-top: govuk-spacing(2);
+  padding-bottom: govuk-spacing(2);
+  
+}
+
+.app-header__logo,
+.app-header__content {
+  box-sizing: border-box;
+}
+
+.app-header__logo {
+  @include govuk-responsive-margin(1, "bottom");
+  padding-right: govuk-spacing(8);
+  padding-top: govuk-spacing(1);
+
+  @include govuk-media-query($from: tablet) {
+    width: 60%;
+  }
+
+  @include govuk-media-query($from: desktop) {
+    width: 33.33%;
+    padding-right: $govuk-gutter-half;
+    float: left;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+}
+
+.app-header__content {
+  @include govuk-media-query($from: tablet) {
+    width: 40%;
+  }
+
+  @include govuk-media-query($from: desktop) {
+    width: 66.66%;
+    padding-left: $govuk-gutter-half;
+    float: left;
+  }
+}
+
+.app-header__logo a,
+.app-header__navigation-item a {
+  @include govuk-typography-common;
+  @include govuk-link-style-inverse;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+
+    @if $govuk-link-underline-offset {
+      text-underline-offset: $govuk-link-underline-offset;
+    }
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+}
+
+.app-header__logo a {
+  @include govuk-font($size: false, $weight: bold);
+  display: inline-block;
+  margin-right: govuk-spacing(2);
+  font-size: 30px;
+  line-height: 1;
+
+  @include govuk-media-query($from: tablet) {
+    display: inline;
+  }
+
+  &:link,
+  &:visited {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:active {
+    margin-bottom: -3px;
+    border-bottom: 3px solid;
+  }
+
+  &:focus {
+    margin-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+.app-header__product-name {
+  @include govuk-font($size: 24, $line-height: 1);
+  display: inline-table;
+}
+
+.app-header__menu-button {
+  @include govuk-font($size: 16);
+  display: none;
+  position: absolute;
+  top: govuk-spacing(4);
+  right: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: govuk-colour("white");
+  background: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: solid underline 3px;
+
+    @if $govuk-link-underline-offset {
+      text-underline-offset: $govuk-link-underline-offset;
+    }
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+
+  &::after {
+    @include govuk-shape-arrow($direction: down, $base: 10px, $display: inline-block);
+    content: "";
+    margin-left: govuk-spacing(1);
+  }
+
+  &[aria-expanded="true"]::after {
+    @include govuk-shape-arrow($direction: up, $base: 10px, $display: inline-block);
+  }
+
+  @include govuk-media-query($from: tablet) {
+    top: govuk-spacing(3);
+  }
+
+  .app-header--with-js-navigation & {
+    display: block;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.app-header__navigation {
+  @include govuk-media-query($from: desktop) {
+    margin: 0;
+    padding: govuk-spacing(1) 0;
+    text-align: right;
+  }
+}
+
+.app-header__navigation-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.app-header__navigation-item {
+  padding: govuk-spacing(2) 0;
+  border-bottom: 1px solid govuk-colour("white");
+
+  @include govuk-media-query($from: desktop) {
+    display: inline-block;
+    margin-right: govuk-spacing(3);
+    padding: govuk-spacing(1) 0;
+    border: 0;
+  }
+
+  a {
+    @include govuk-font($size: 16);
+    white-space: nowrap;
+  }
+}
+
+.app-header__navigation-item--active {
+  a {
+    @include govuk-media-query($media-type: print) {
+      color: $govuk-brand-colour;
+    }
+
+    &:focus {
+      color: $govuk-focus-text-colour;
+    }
+  }
+}
+
+.app-header__navigation-item:last-child {
+  margin-right: 0;
+  border-bottom: 0;
+}
+
+@include govuk-media-query($media-type: print) {
+  .app-header {
+    border-bottom-width: 0;
+    color: govuk-colour("black");
+    background: transparent;
+  }
+
+  .app-header__logo a,
+  .app-header__navigation-item a {
+    &:link,
+    &:visited {
+      color: govuk-colour("black");
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+}

@@ -24,7 +24,7 @@ href: "javascript:window.history.back()"
       Degree and post-graduate qualifications
     </h1>
 
-    <form action="./crown-courts-circuit/crown-courts-select-page.html" method="get" novalidate>
+    <form method="post" novalidate>
 
       <h2 class="govuk-heading-m">Date of completion</h2>
       <div class="govuk-form-group">
@@ -79,17 +79,15 @@ href: "javascript:window.history.back()"
         <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
       </div>
 
-
-      
       <div class="govuk-button-group">
-        <a href="./year-call-degree-qualifications-2.html" role="button" draggable="false" class="govuk-button"
-          data-module="govuk-button">
-          Save qualification
-        </a>
+        {{ govukButton({
+          text: "Save qualification"
+        }) }}
 
-        <button id="clear-address" type="button" class="govuk-button govuk-button--secondary">
-          Add new
-        </button>
+        {{ govukButton({
+          text: "Add new",
+          classes: "govuk-button--secondary"
+        }) }}
       </div>
 
     </form>

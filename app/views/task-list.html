@@ -1,7 +1,17 @@
 {% extends "layouts/main.html" %}
+{% from "_includes/task-status.njk" import taskStatus %}
 {% block pageTitle %}Your MTD property tasks{% endblock %}
 
 {% block content %}
+
+
+{% if data['personalDetailsStatus'] == 'completed' %}
+  {% set personalDetailsText = "Completed" %}
+  {% set personalDetailsClass = "govuk-tag--green" %}
+{% else %}
+  {% set personalDetailsText = "Incomplete" %}
+  {% set personalDetailsClass = "govuk-tag--blue" %}
+{% endif %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -15,15 +25,14 @@
       <ul class="govuk-task-list">
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
           <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link" href="./personal details/personal-details.html"
+            <a class="govuk-link govuk-task-list__link" href="./personal-details/personal-details.html"
               aria-describedby="personal-details-name">
               Name and bar number
             </a>
           </div>
+          {# status updated by macro in _includes #}
           <div class="govuk-task-list__status" id="personal-details-name">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+            {{ taskStatus(data['personalDetailsStatus']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -33,10 +42,9 @@
               Where you work
             </a>
           </div>
+          {# status updated by macro in _includes #}
           <div class="govuk-task-list__status" id="personal-details-work">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+            {{ taskStatus(data['whereYouWorkStatus']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -46,10 +54,9 @@
               Preferred circuits and Crown Courts
             </a>
           </div>
+           {# status updated by macro in _includes #}
           <div class="govuk-task-list__status" id="personal-details-location">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+            {{ taskStatus(data['preferredCircuitStatus']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -59,10 +66,9 @@
               Call to the bar and pupillage
             </a>
           </div>
-          <div class="govuk-task-list__status" id="personal-details-qualifications">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+          {# status updated by macro in _includes #}
+          <div class="govuk-task-list__status" id="personal-details-location">
+            {{ taskStatus(data['callToBarAndPupilage']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -72,10 +78,9 @@
               Degree and post-graduate qualifications
             </a>
           </div>
-          <div class="govuk-task-list__status" id="personal-details-qualifications">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+          {# status updated by macro in _includes #}
+          <div class="govuk-task-list__status" id="personal-details-location">
+            {{ taskStatus(data['degreeAndPostGradQualifications']) }}
           </div>
         </li>
         <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -85,13 +90,17 @@
               Equality monitoring
             </a>
           </div>
-          <div class="govuk-task-list__status" id="personal-details-equality">
-            <strong class="govuk-tag govuk-tag--blue">
-              Incomplete
-            </strong>
+          {# status updated by macro in _includes #}
+          <div class="govuk-task-list__status" id="personal-details-location">
+            {{ taskStatus(data['equalityInformation']) }}
           </div>
         </li>
       </ul>
+
+      {{ govukButton({
+        text: "Review registration details",
+        href: "./check"
+      }) }}
 
     </form>
 

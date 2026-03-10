@@ -135,17 +135,19 @@ href: "javascript:window.history.back()"
     </div>
 
 
+   <form method="post" novalidate>
     <div class="govuk-button-group">
-     <a href="../../start-application-4.html" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
-        Continue
-      </a>
-
-      <button id="clear-address" type="button" class="govuk-button govuk-button--secondary">
-        Clear address
-      </button>
-
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+      {{ govukButton({
+        text: "Clear address",
+        classes: "govuk-button--secondary",
+        id: "clear-address",
+        type: "button"
+      }) }}
     </div>
-
+  </form>
 
 
   </div>

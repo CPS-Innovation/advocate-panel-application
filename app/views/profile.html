@@ -1,0 +1,106 @@
+{# app/views/profile.html #}
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Profile – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Your profile and applications</h1>
+
+    <h2 class="govuk-heading-m">Personal details</h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Name" },
+            value: { text: data.fullName or "Not provided" }
+          },
+          {
+            key: { text: "Bar number" },
+            value: { text: data.barNumber or "Not provided" }
+          },
+          {
+            key: { text: "Place of work" },
+            value: { text: data.employmentType or "Not provided" }
+          },
+          {
+            key: { text: "Member of chambers" },
+            value: { html: data.memberOfChambers or "Not provided" }
+          },
+          {
+            key: { text: "Chambers address" },
+            value: { html: data.chambersAddress or "Not provided" }
+          },
+          {
+            key: { text: "Preferred circuit" },
+            value: { html: data.preferredCircuit or "Not provided" }
+          },
+          {
+            key: { text: "Preferred crown court" },
+            value: { html: data.preferredCrownCourt or "Not provided" }
+          },
+          {
+            key: { text: "Year of call" },
+            value: { html: data.yearOfCall or "Not provided" }
+          },
+          {
+            key: { text: "Qualifications" },
+            value: { html: data.qualifications or "Not provided" }
+          }
+        ]
+      }) }}
+
+    <h2 class="govuk-heading-m">Applications</h2>
+
+    {% if data.applications %}
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header">Application</th>
+            <th class="govuk-table__header">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for application in data.applications %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="/application/{{ application.id }}" class="govuk-link">{{ application.name }}</a>
+            </td>
+            <td class="govuk-table__cell">{{ application.status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      {{ govukInsetText({
+        html: "You have not made any applications yet."
+      }) }}
+
+      {{ govukButton({
+        text: "Add court panel information",
+        href: "/about-you-questions/question-court-panel"
+      }) }}
+
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

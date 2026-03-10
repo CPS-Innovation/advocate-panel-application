@@ -37,7 +37,7 @@ href: "javascript:window.history.back()"
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form action="/socio-economic-status-answer" method="post">
+    <form method="post" novalidate>
 
       <h1 class="govuk-heading-l">
         Self-Assessment of Socio-Economic Background Status
@@ -100,9 +100,9 @@ href: "javascript:window.history.back()"
 
 
 
-      <button type="submit" class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
-        Continue
-      </button>
+      {{ govukButton({
+        text: "Continue"
+      }) }}
 
     </form>
   </div>

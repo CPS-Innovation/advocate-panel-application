@@ -52,11 +52,9 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
         </label>
       </div>
       
-
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Start application
-      </button>
-
+        {{ govukButton({
+          text: "Continue"
+        }) }}
     </form>
 
 

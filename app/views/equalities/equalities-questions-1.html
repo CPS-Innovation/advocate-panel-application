@@ -37,7 +37,7 @@ href: "javascript:window.history.back()"
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form action="./disability-question-2.html" method="get">
+    <form method="post" novalidate>
 
       <h1 class="govuk-heading-l">
         Equalities monitoring
@@ -880,9 +880,9 @@ href: "javascript:window.history.back()"
         </tbody>
       </table>
 
-      <button type="submit" class="govuk-button govuk-!-margin-top-6" data-module="govuk-button">
-        Continue
-      </button>
+      {{ govukButton({
+        text: "Continue"
+      }) }}
 
     </form>
   </div>
