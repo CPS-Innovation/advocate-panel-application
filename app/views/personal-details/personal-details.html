@@ -1,5 +1,6 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
+
 {% block header %}
 {% include "_includes/header-internal.njk" %}
 {% endblock %}
@@ -28,7 +29,7 @@ href: "javascript:window.history.back()"
       Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum </a>.
     </p> -->
 
-    <form action="../start-application-2.html" method="get" novalidate>
+    <form  method="post" novalidate>
 
       <div class="govuk-form-group">
         <label class="govuk-label govuk-label--m" for="full-name">
@@ -47,12 +48,12 @@ href: "javascript:window.history.back()"
             This is a 5 digit number. It is not the same as your bar ID.
         </div>
 
-        <input class="govuk-input govuk-input--width-10" id="full-name" name="fullName" type="text">
+       <input class="govuk-input govuk-input--width-10" id="bar-number" name="barNumber" type="text">
       </div>
 
-      <button type="submit" class="govuk-button govuk-!-static-margin-right-5" data-module="govuk-button">
-        Submit personal details
-      </button>
+      {{ govukButton({
+        text: "Submit personal details"
+      }) }}
     </form>
 
   </div>

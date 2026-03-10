@@ -58,6 +58,12 @@ module.exports = router => {
     }
   })
 
+  ////////// PERSONAL DETAILS - NAME AND BAR NUMBER
+  router.post('/personal-details/personal-details', (req, res) => {
+    req.session.data['personalDetailsStatus'] = 'completed'
+    res.redirect('/task-list')
+  })
+
   ////////// EMPLOYMENT TYPE 
   router.post('/current-chambers/employment-type', (req, res) => {
     const employmentType = req.session.data['employmentType']
