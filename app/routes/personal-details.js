@@ -15,7 +15,7 @@ module.exports = router => {
     }
   })
 
-    ////////// CHECK - PERSONAL DETAILS
+  ////////// CHECK - PERSONAL DETAILS
   router.post('/check', (req, res) => {
     res.redirect('/profile')
   })
@@ -61,56 +61,61 @@ module.exports = router => {
   ////////// PERSONAL DETAILS - NAME AND BAR NUMBER
   router.post('/personal-details/personal-details', (req, res) => {
     req.session.data['personalDetailsStatus'] = 'completed'
-    res.redirect('/task-list')
+    const returnUrl = req.query.returnUrl
+    res.redirect(returnUrl || '/task-list')
   })
 
   ////////// EMPLOYMENT TYPE 
   router.post('/current-chambers/employment-type', (req, res) => {
     const employmentType = req.session.data['employmentType']
+    const returnUrl = req.query.returnUrl
 
-    // Redirect depending on the value
     if (employmentType === 'memberChambers') {
-      res.redirect('../current-chambers/name-chambers')
+      res.redirect(returnUrl || '/current-chambers/name-chambers')
     } else if (employmentType === 'soleTrader') {
-      res.redirect('../current-chambers/sole-trader-adding-address')
+      res.redirect(returnUrl || '/current-chambers/sole-trader-adding-address')
     } else if (employmentType === 'solicitorsFirm') {
-      res.redirect('../current-chambers/solicitor-firm-adding-address')
+      res.redirect(returnUrl || '/current-chambers/solicitor-firm-adding-address')
     } else {
-      // If nothing selected, redirect back or show an error page
-      res.redirect('/#')
+      res.redirect('/current-chambers/employment-type')
     }  
   })
 
   ////////// NAME OF CHAMBERS
   router.post('/current-chambers/name-chambers', (req, res) => {
     req.session.data['whereYouWorkStatus'] = 'completed'
-    res.redirect('/task-list')
+    const returnUrl = req.query.returnUrl
+    res.redirect(returnUrl || '/task-list')
   })
 
   ////////// PREFERRED CIRCUIT
   router.post('/preferred-circuit/circuit-question-page', (req, res) => {
-    res.redirect('/preferred-circuit/crown-courts-circuit/crown-courts-select-page')
+    const returnUrl = req.query.returnUrl
+    res.redirect(returnUrl || '/preferred-circuit/crown-courts-circuit/crown-courts-select-page')
   })
 
   ////////// CROWN COURTS SELECT
   router.post('/preferred-circuit/crown-courts-circuit/crown-courts-select-page', (req, res) => {
     req.session.data['preferredCircuitStatus'] = 'completed'
-    res.redirect('/task-list')
+    const returnUrl = req.query.returnUrl
+    res.redirect(returnUrl || '/task-list')
   })
 
   ////////// CALL TO BAR AND PUPILAGE
   router.post('/year-call-degree-qualifications/year-call', (req, res) => {
     req.session.data['callToBarAndPupilage'] = 'completed'
-    res.redirect('/task-list')
+    const returnUrl = req.query.returnUrl
+    res.redirect(returnUrl || '/task-list')
   })
 
   ////////// DEGREE AND POSTGRAD QUALS
   router.post('/year-call-degree-qualifications/degree-qualifications', (req, res) => {
     req.session.data['degreeAndPostGradQualifications'] = 'completed'
-    res.redirect('/task-list')
+    const returnUrl = req.query.returnUrl
+    res.redirect(returnUrl || '/task-list')
   })
 
-   ////////// EQUALITIES MONITORING
+////////// EQUALITIES MONITORING
   router.post('/equalities/equalities-questions-1', (req, res) => {
     res.redirect('/equalities/disability-question-2')
   })
@@ -120,7 +125,7 @@ module.exports = router => {
     res.redirect('/equalities/socio-economic-background-3')
   })
 
-  ////////// SOCIO ECONOMINC
+  ////////// SOCIO ECONOMIC
   router.post('/equalities/socio-economic-background-3', (req, res) => {
     res.redirect('/equalities/occupation-questions-4')
   })
@@ -135,32 +140,30 @@ module.exports = router => {
     res.redirect('/equalities/occupation-parents-6')
   })
 
-    ////////// HIGHEST INCOME IN HOUSEHOLD
+  ////////// HIGHEST INCOME IN HOUSEHOLD
   router.post('/equalities/occupation-parents-6', (req, res) => {
     res.redirect('/equalities/occupation-parents-7')
   })
 
-      ////////// HOW MANY EMPLOYED IN PARETNTS COMPANY
+  ////////// HOW MANY EMPLOYED IN PARENTS COMPANY
   router.post('/equalities/occupation-parents-7', (req, res) => {
     res.redirect('/equalities/occupation-parents-8')
   })
 
-        ////////// HIGHEST INCOME SUPERVISOR
+  ////////// HIGHEST INCOME SUPERVISOR
   router.post('/equalities/occupation-parents-8', (req, res) => {
     res.redirect('/equalities/school-meals-9')
   })
 
-          ////////// FREE SCHOOL MEALS
+  ////////// FREE SCHOOL MEALS
   router.post('/equalities/school-meals-9', (req, res) => {
     res.redirect('/equalities/assessment-10')
   })
-
 
   ////////// SELF ASSESSMENT
   router.post('/equalities/assessment-10', (req, res) => {
     req.session.data['equalityInformation'] = 'completed'
     res.redirect('/task-list')
   })
-
 
 }
