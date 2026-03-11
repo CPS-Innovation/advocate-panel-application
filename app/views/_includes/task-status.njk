@@ -7,3 +7,11 @@
     <strong class="govuk-tag govuk-tag--blue">Incomplete</strong>
   {% endif %}
 {% endmacro %}
+
+{% macro taskStatusText(status) -%}
+  {%- if status == 'completed' %}Completed{%- elif status == 'inProgress' %}In progress{%- else %}Incomplete{%- endif %}
+{%- endmacro %}
+
+{% macro taskStatusClass(status) -%}
+  {%- if status == 'completed' %}govuk-tag--green{%- elif status == 'inProgress' %}govuk-tag--yellow{%- else %}govuk-tag--blue{%- endif %}
+{%- endmacro %}
