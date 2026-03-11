@@ -20,27 +20,6 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">
-      Apply for the CPS Advocate Panel
-    </h1>
-
-    <details class="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          Help with something
-        </span>
-      </summary>
-      <div class="govuk-details__text">
-        We need to know your nationality so we can work out which elections you’re entitled to vote in.
-      </div>
-    </details>
-
-    <p class="govuk-body">Lorem ipsum loremn ipum lorem</p>
-    <p class="govuk-body">
-      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum</a>.
-    </p>
-
-
     <form method="post" novalidate>
 
       <div class="govuk-form-group">
@@ -48,8 +27,9 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
         name: "courtPanel",
         fieldset: {
           legend: {
-            text: "Select a panel to apply for:",
-            classes: "govuk-fieldset__legend--m"
+            text: "Panel",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
           }
         },
         items: [
@@ -58,16 +38,12 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
             text: "Crown Court General Crime"
           },
           {
-            value: "Rape and serious sexual offences",
-            text: "Rape and serious sexual offences"
+            value: "Rape and serious sexual offences (RASSO)",
+            text: "Rape and serious sexual offences (RASSO)"
           },
           {
             value: "Specialist",
             text: "Specialist"
-          },
-          {
-            value: "Other",
-            text: "Other"
           }
         ]
       }) }}
