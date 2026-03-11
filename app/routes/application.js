@@ -22,7 +22,7 @@ module.exports = router => {
     const crownCourtLevel = req.session.data['crownCourtLevel']
 
     if (crownCourtLevel === 'Level 1') {
-      res.redirect('/about-you-questions/new-joiner-level-1')
+      res.redirect('/about-you-questions/check-answers')
     } else if (crownCourtLevel === 'Level 4') {
       res.redirect('/about-you-questions/london-secondee')
     } else {

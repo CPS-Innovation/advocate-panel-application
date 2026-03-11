@@ -86,18 +86,20 @@
       ]
     }) }}
 
-    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Pre-qualification questionnaire</h2>
+    {% if data.crownCourtLevel !== 'Level 4' %}
+      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Pre-qualification questionnaire</h2>
 
-    {{ govukTaskList({
-      items: [
-        {
-          title: { text: "Pre-qualification questionnaire" },
-          href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1",
-          status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
-          idPrefix: "pqq"
-        }
-      ]
-    }) }}
+      {{ govukTaskList({
+        items: [
+          {
+            title: { text: "Pre-qualification questionnaire" },
+            href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1",
+            status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+            idPrefix: "pqq"
+          }
+        ]
+      }) }}
+    {% endif %}
 
     <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Declaration</h2>
 

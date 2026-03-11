@@ -34,14 +34,7 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
         actions: {
           items: [{ href: "/about-you-questions/crown-court-levels", text: "Change", visuallyHiddenText: "court level" }]
         }
-      },
-      {
-        key: { text: "Membership type" },
-        value: { text: data['membership'] },
-        actions: {
-          items: [{ href: "/about-you-questions/new-joiner-level-2-4", text: "Change", visuallyHiddenText: "membership type" }]
-        } 
-      } if data.crownCourtLevel === 'Level 1'
+      }
     ] %}
 
     {% if data['crownCourtLevel'] === 'Level 4' %}
