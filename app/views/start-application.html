@@ -1,10 +1,13 @@
 {% extends "layouts/main.html" %}
-{% block pageTitle %}Task-list application{% endblock %}
+{% from "_includes/task-status.njk" import taskStatusText, taskStatusClass %}
+
+{% block pageTitle %}Task-list application – {{ serviceName }} – GOV.UK Prototype Kit{% endblock %}
 
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+
     <h1 class="govuk-heading-l">Application form</h1>
 
     <h2 class="govuk-heading-m govuk-!-static-padding-top-5">References</h2>
@@ -15,7 +18,7 @@
           title: { text: "Referee" },
           hint: { text: "You can request the reference before you submit your application" },
           href: "/references-questions/reference-page",
-          status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+          status: { tag: { text: taskStatusText(data['refereeStatus']), classes: taskStatusClass(data['refereeStatus']) } },
           idPrefix: "references"
         }
       ]
@@ -23,64 +26,48 @@
 
     <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Examples of your work</h2>
 
-      {% if data['advocacyStatus'] == 'completed' %}
-        {% set advocacyText = "Completed" %}
-        {% set advocacyClass = "govuk-tag--green" %}
-      {% elif data['advocacyStatus'] == 'inProgress' %}
-        {% set advocacyText = "In progress" %}
-        {% set advocacyClass = "govuk-tag--yellow" %}
-      {% else %}
-        {% set advocacyText = "Incomplete" %}
-        {% set advocacyClass = "govuk-tag--blue" %}
-      {% endif %}
-
     {{ govukTaskList({
       items: [
         {
           title: { text: "Advocacy" },
           href: "/examples-work/examples-work-advocacy",
-          status: {
-            tag: {
-              text: advocacyText,
-              classes: advocacyClass
-            }
-          },
+          status: { tag: { text: taskStatusText(data['advocacyStatus']), classes: taskStatusClass(data['advocacyStatus']) } },
           idPrefix: "advocacy"
         },
         {
           title: { text: "Advisory" },
           href: "/examples-work/examples-work-advisory",
-          status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+          status: { tag: { text: taskStatusText(data['advisoryStatus']), classes: taskStatusClass(data['advisoryStatus']) } },
           idPrefix: "advisory"
         },
         {
           title: { text: "Advisory drafting examples (upload)" },
           href: "/upload-page",
-          status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+          status: { tag: { text: taskStatusText(data['uploadStatus']), classes: taskStatusClass(data['uploadStatus']) } },
           idPrefix: "upload"
         },
         {
           title: { text: "Public interest immunity (PII) and disclosure" },
           href: "/examples-work/examples-work-public-interest-immunity",
-          status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+          status: { tag: { text: taskStatusText(data['piiStatus']), classes: taskStatusClass(data['piiStatus']) } },
           idPrefix: "pii"
         },
         {
           title: { text: "Other relevant knowledge, skills and experience" },
           href: "/examples-work/examples-work-knowledge-skills-experience",
-          status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+          status: { tag: { text: taskStatusText(data['knowledgeStatus']), classes: taskStatusClass(data['knowledgeStatus']) } },
           idPrefix: "knowledge"
         },
         {
           title: { text: "Appreciation of the role of a panel advocate" },
           href: "/examples-work/examples-work-appreciation",
-          status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+          status: { tag: { text: taskStatusText(data['appreciationStatus']), classes: taskStatusClass(data['appreciationStatus']) } },
           idPrefix: "appreciation"
         },
         {
           title: { text: "Additional information" },
           href: "/examples-work/examples-work-additional",
-          status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+          status: { tag: { text: taskStatusText(data['additionalStatus']), classes: taskStatusClass(data['additionalStatus']) } },
           idPrefix: "additional"
         }
       ]
@@ -94,7 +81,7 @@
           {
             title: { text: "Pre-qualification questionnaire" },
             href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1",
-            status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+            status: { tag: { text: taskStatusText(data['pqqStatus']), classes: taskStatusClass(data['pqqStatus']) } },
             idPrefix: "pqq"
           }
         ]
@@ -108,16 +95,17 @@
         {
           title: { text: "Declaration" },
           href: "/declaration",
-          status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } },
+          status: { tag: { text: taskStatusText(data['declarationStatus']), classes: taskStatusClass(data['declarationStatus']) } },
           idPrefix: "declaration"
         }
       ]
     }) }}
 
-      {{ govukButton({
-        text: "Review application details",
-        href: "/finish-application"
-      }) }}
+    {{ govukButton({
+      text: "Review application details",
+      href: "/finish-application"
+    }) }}
+
   </div>
 </div>
 

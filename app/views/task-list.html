@@ -1,111 +1,64 @@
 {% extends "layouts/main.html" %}
-{% from "_includes/task-status.njk" import taskStatus %}
-{% block pageTitle %}Your MTD property tasks{% endblock %}
+{% from "_includes/task-status.njk" import taskStatusText, taskStatusClass %}
+
+{% block pageTitle %}Personal details – {{ serviceName }} – GOV.UK Prototype Kit{% endblock %}
 
 {% block content %}
-
-
-{% if data['personalDetailsStatus'] == 'completed' %}
-  {% set personalDetailsText = "Completed" %}
-  {% set personalDetailsClass = "govuk-tag--green" %}
-{% else %}
-  {% set personalDetailsText = "Incomplete" %}
-  {% set personalDetailsClass = "govuk-tag--blue" %}
-{% endif %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <form action="./check-answers.html" method="get" novalidate></form>
+    <h1 class="govuk-heading-l">Give information to finish registering your account</h1>
 
-      <h1 class="govuk-heading-l">Give information to finish registering your account</h1>
+    <p class="govuk-body">You need to give details about yourself before you can start your application.</p>
 
-      <p class="govuk-body">You need to give details about yourself before you can start your application.</p>
+    {{ govukTaskList({
+      items: [
+        {
+          title: { text: "Name and bar number" },
+          href: "/personal-details/personal-details",
+          status: { tag: { text: taskStatusText(data['personalDetailsStatus']), classes: taskStatusClass(data['personalDetailsStatus']) } },
+          idPrefix: "personal-details-name"
+        },
+        {
+          title: { text: "Where you work" },
+          href: "/current-chambers/employment-type",
+          status: { tag: { text: taskStatusText(data['whereYouWorkStatus']), classes: taskStatusClass(data['whereYouWorkStatus']) } },
+          idPrefix: "personal-details-work"
+        },
+        {
+          title: { text: "Preferred circuits and Crown Courts" },
+          href: "/preferred-circuit/circuit-question-page",
+          status: { tag: { text: taskStatusText(data['preferredCircuitStatus']), classes: taskStatusClass(data['preferredCircuitStatus']) } },
+          idPrefix: "personal-details-location"
+        },
+        {
+          title: { text: "Call to the bar and pupillage" },
+          href: "/year-call-degree-qualifications/year-call",
+          status: { tag: { text: taskStatusText(data['callToBarAndPupilage']), classes: taskStatusClass(data['callToBarAndPupilage']) } },
+          idPrefix: "personal-details-qualifications"
+        },
+        {
+          title: { text: "Degree and post-graduate qualifications" },
+          href: "/year-call-degree-qualifications/degree-qualifications",
+          status: { tag: { text: taskStatusText(data['degreeAndPostGradQualifications']), classes: taskStatusClass(data['degreeAndPostGradQualifications']) } },
+          idPrefix: "personal-details-degree"
+        },
+        {
+          title: { text: "Equality monitoring" },
+          href: "/equalities/equalities-questions-1",
+          status: { tag: { text: taskStatusText(data['equalityInformation']), classes: taskStatusClass(data['equalityInformation']) } },
+          idPrefix: "personal-details-equality"
+        }
+      ]
+    }) }}
 
-      <ul class="govuk-task-list">
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link" href="./personal-details/personal-details.html"
-              aria-describedby="personal-details-name">
-              Name and bar number
-            </a>
-          </div>
-          {# status updated by macro in _includes #}
-          <div class="govuk-task-list__status" id="personal-details-name">
-            {{ taskStatus(data['personalDetailsStatus']) }}
-          </div>
-        </li>
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link" href="./current-chambers/employment-type.html"
-              aria-describedby="personal-details-work">
-              Where you work
-            </a>
-          </div>
-          {# status updated by macro in _includes #}
-          <div class="govuk-task-list__status" id="personal-details-work">
-            {{ taskStatus(data['whereYouWorkStatus']) }}
-          </div>
-        </li>
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link" href="./preferred-circuit/circuit-question-page.html"
-              aria-describedby="personal-details-location">
-              Preferred circuits and Crown Courts
-            </a>
-          </div>
-           {# status updated by macro in _includes #}
-          <div class="govuk-task-list__status" id="personal-details-location">
-            {{ taskStatus(data['preferredCircuitStatus']) }}
-          </div>
-        </li>
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link" href="./year-call-degree-qualifications/year-call.html"
-              aria-describedby="personal-details-qualifications">
-              Call to the bar and pupillage
-            </a>
-          </div>
-          {# status updated by macro in _includes #}
-          <div class="govuk-task-list__status" id="personal-details-location">
-            {{ taskStatus(data['callToBarAndPupilage']) }}
-          </div>
-        </li>
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link" href="./year-call-degree-qualifications/degree-qualifications.html"
-              aria-describedby="personal-details-qualifications">
-              Degree and post-graduate qualifications
-            </a>
-          </div>
-          {# status updated by macro in _includes #}
-          <div class="govuk-task-list__status" id="personal-details-location">
-            {{ taskStatus(data['degreeAndPostGradQualifications']) }}
-          </div>
-        </li>
-        <li class="govuk-task-list__item govuk-task-list__item--with-link">
-          <div class="govuk-task-list__name-and-hint">
-            <a class="govuk-link govuk-task-list__link" href="./equalities/equalities-questions-1.html"
-              aria-describedby="personal-details-equality">
-              Equality monitoring
-            </a>
-          </div>
-          {# status updated by macro in _includes #}
-          <div class="govuk-task-list__status" id="personal-details-location">
-            {{ taskStatus(data['equalityInformation']) }}
-          </div>
-        </li>
-      </ul>
-
-      {{ govukButton({
-        text: "Review registration details",
-        href: "./check"
-      }) }}
-
-    </form>
+    {{ govukButton({
+      text: "Review registration details",
+      href: "/check"
+    }) }}
 
   </div>
-
 </div>
 
 {% endblock %}

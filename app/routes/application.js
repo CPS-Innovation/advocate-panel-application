@@ -2,6 +2,17 @@
 
 module.exports = router => {
 
+
+  ////////// CLEAR COMPLETION FLAG ON EVERY POST
+  router.use((req, res, next) => {
+    if (req.method === 'POST') {
+      const completed = req.session.data['haveYouCompletedThisSection']
+      res.locals.haveYouCompletedThisSection = completed
+      req.session.data['haveYouCompletedThisSection'] = null
+    }
+    next()
+  })
+
    ////////// COURT PANEL
   router.post('/about-you-questions/question-court-panel', (req, res) => {
     const courtPanel = req.session.data['courtPanel']
@@ -40,9 +51,26 @@ module.exports = router => {
     res.redirect('/about-you-questions/check-answers')
   })
 
+  ////////// REFEREE
+  router.post('/references-questions/reference-page', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const refereeFullName = req.session.data['refereeFullName']
+
+    if (completed === 'yes') {
+      req.session.data['refereeStatus'] = 'completed'
+      res.redirect('/examples-work/examples-work-advocacy')
+    } else if (refereeFullName && refereeFullName.trim() !== '') {
+      req.session.data['refereeStatus'] = 'inProgress'
+      res.redirect('/start-application')
+    } else {
+      req.session.data['refereeStatus'] = 'notStarted'
+      res.redirect('/start-application')
+    }
+  })
+
   ////////// EXAMPLES OF WORK - ADVOCACY
   router.post('/examples-work/examples-work-advocacy', (req, res) => {
-    const completed = req.session.data['haveYouCompletedThisSection']
+    const completed = res.locals.haveYouCompletedThisSection
     const advocacy = req.session.data['advocacyExample']
 
     if (completed === 'yes') {
@@ -55,6 +83,5 @@ module.exports = router => {
 
     res.redirect('/start-application')
   })
-  
 
 }
