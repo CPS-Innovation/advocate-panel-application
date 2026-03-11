@@ -20,24 +20,6 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
-    <h1 class="govuk-heading-l">
-      General Crime Panel
-    </h1>
-    <details class="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          Help with something
-        </span>
-      </summary>
-      <div class="govuk-details__text">
-        Something about levels explanation
-      </div>
-    </details>
-    <p class="govuk-body">
-      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum </a>.
-    </p>
-
     
     <form  method="post">
       <div class="govuk-form-group">
@@ -45,8 +27,9 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
           name: "crownCourtLevel",
           fieldset: {
             legend: {
-              text: "Select a level:",
-              classes: "govuk-fieldset__legend--m"
+              text: "Level",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
             }
           },
           items: [
