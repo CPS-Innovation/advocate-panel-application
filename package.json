@@ -9,6 +9,7 @@
     "@govuk-prototype-kit/common-templates": "3.0.0",
     "@govuk-prototype-kit/step-by-step": "3.0.0",
     "@govuk-prototype-kit/task-list": "2.0.0",
+    "@x-govuk/govuk-prototype-components": "^6.0.0",
     "accessible-autocomplete": "^3.0.1",
     "govuk-frontend": "6.0.0",
     "govuk-prototype-kit": "13.19.0",

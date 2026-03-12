@@ -2,153 +2,83 @@
 
 {% block header %}
 {% include "_includes/header-internal.njk" %}
-
-<style>
-  /* ------------------------------------
-        COMPANIES HOUSE STYLE SEARCH BOX
-     ------------------------------------ */
-  .search-container {
-    display: flex;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .filter-search {
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    border: 3px solid #0b0c0c;
-    font-size: 1.1875rem;
-    border-right: none;
-  }
-
-  .filter-search:focus,
-  .search-button:focus,
-  .filter-item:focus {
-    outline: 4px solid #ffdd00 !important;
-    outline-offset: 0;
-  }
-
-  .search-button {
-    background: #1a65a6;
-    border: 2px solid #1a65a6;
-    color: white;
-    height: 3rem;
-    width: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .search-button:hover {
-    background: #0f385c;
-    border: 2px solid #0f385c;
-  }
-
-  .filter-box {
-    width: calc(100% - 3rem);
-    display: none;
-    border: 1px solid #f3f2f1;
-    background: #fff;
-    max-height: 20rem;
-    overflow-y: auto;
-    position: relative;
-    z-index: 10;
-  }
-
-  .filter-item {
-    padding: 1rem;
-    cursor: pointer;
-    border-bottom: 1px solid #e5e5e5;
-    background: white;
-    font-size: 1.1875rem;
-  }
-
-  .filter-item:nth-child(even) {
-    background: #f3f2f1;
-  }
-
-  .filter-item:hover {
-    background: #e5e5e5;
-  }
-</style>
 {% endblock %}
 
 {% block pageTitle %}
-Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
+Crown courts – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block containerStart %}
 {{ govukBackLink({
-text: "Back",
-href: "javascript:window.history.back()"
+  text: "Back",
+  href: "javascript:window.history.back()"
 }) }}
 {% endblock %}
 
 {% block content %}
 
+{% set crownCourts = [
+  { text: "Birmingham Crown Court" },
+  { text: "Bristol Crown Court" },
+  { text: "Cambridge Crown Court" },
+  { text: "Canterbury Crown Court" },
+  { text: "Cardiff Crown Court" },
+  { text: "Central Criminal Court" },
+  { text: "Chelmsford Crown Court" },
+  { text: "Derby Crown Court" },
+  { text: "Inner London Crown Court" },
+  { text: "Leeds Crown Court" },
+  { text: "Liverpool Crown Court" },
+  { text: "Manchester Crown Court (Crown Square)" },
+  { text: "Newcastle Crown Court" },
+  { text: "Nottingham Crown Court" },
+  { text: "Oxford Crown Court" },
+  { text: "Reading Crown Court" },
+  { text: "Sheffield Crown Court" },
+  { text: "Snaresbrook Crown Court" },
+  { text: "Southwark Crown Court" },
+  { text: "Wood Green Crown Court" }
+] %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">Preferred Crown Courts</h1>
+    <h1 class="govuk-heading-l">Select Crown Court</h1>
 
-    <!-- <p class="govuk-body">
-      Choose up to 3 Crown Courts
-    </p> -->
-
-    <div class="govuk-form-group" id="country-group">
-
-      <label class="govuk-label" for="country-filter">
-        Select up to 3 Crown Courts
-      </label>
-
-      <div class="search-container">
-        <input id="country-filter" type="text" class="filter-search" placeholder="Search Chambers…">
-
-        <button class="search-button" type="button" aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-      </div>
-
-      <div id="country-list" class="filter-box" role="listbox"></div>
-
-      <p class="govuk-body">
-        <a href="https://find-and-update.company-information.service.gov.uk/advanced-search" class="govuk-link">Advanced search</a>
-      </p>
+    {{ xGovukAutocomplete({
+      id: "court",
+      name: "court",
+      label: {
+        text: "Select a Crown Court"
+      },
+      items: crownCourts
+    }) }}
 
 
-      <!-- Selected chamber info -->
-      <div id="selected-chamber" class="govuk-!-margin-top-6" aria-live="polite"></div>
+    <p class="govuk-body">
+      <a href="#" class="govuk-link">I can't see my Crown Court in the list</a>
+    </p>
 
-      <!-- Extra address container -->
-      <div id="extra-address-container" class="govuk-!-margin-top-6 govuk-!-display-none">
-        {{ govukInput({
-        label: { text: "Additional address" },
-        id: "extra-address",
-        name: "extraAddress"
+    <div id="selected-courts" class="govuk-!-margin-top-6 govuk-!-margin-bottom-6" aria-live="polite"></div>
+
+    <form method="post" novalidate>
+
+      <div class="govuk-button-group govuk-!-margin-top-6">
+
+        {{ govukButton({
+          text: "Continue"
         }) }}
+
+        {{ govukButton({
+          text: "Clear courts",
+          classes: "govuk-button--secondary",
+          id: "clear-courts",
+          type: "button"
+        }) }}
+
       </div>
 
-    </div>
-
-
-   <form method="post" novalidate>
-    <div class="govuk-button-group">
-      {{ govukButton({
-        text: "Continue"
-      }) }}
-      {{ govukButton({
-        text: "Clear address",
-        classes: "govuk-button--secondary",
-        id: "clear-address",
-        type: "button"
-      }) }}
-    </div>
-  </form>
-
+    </form>
 
   </div>
 </div>
@@ -157,134 +87,145 @@ href: "javascript:window.history.back()"
 
 {% block pageScripts %}
 {{ super() }}
+
 <script>
-/* ----------------------------------------
-   CHAMBERS LIST SOURCE
------------------------------------------ */
-const allChambers = [
-  "Redbridge Court Chambers", "Harborstone Chambers", "Northgate Square Chambers",
-  "Crownwell Chambers", "Elm & Ivory Chambers", "Westminster Gate Chambers",
-  "Blackthorne Walk Chambers", "Stonemount Chambers", "Marble Court Chambers",
-  "Eastbridge Inn Chambers", "Winterfield Chambers", "Hamilton Crest Chambers",
-  "Ironwood Court Chambers", "Templefield Chambers", "Oakshire Chambers",
-  "Silverbrook Chambers", "Ashbury Court Chambers", "Briarstone Chambers"
-];
 
-const chamberAddresses = {
-  "Redbridge Court Chambers": "12 Market Street, London SW1A 1AA",
-  "Harborstone Chambers": "88 Crown Lane, Bristol BS1 3QF",
-  "Northgate Square Chambers": "5 Northgate Square, Manchester M2 4GH",
-  "Templefield Chambers": "1 Inner Temple Lane, London EC4Y 7HL",
-  "default": "101 Example Road, London W1A 2BC"
-};
-
-const listEl = document.getElementById("country-list");
-const inputEl = document.getElementById("country-filter");
-const buttonEl = document.querySelector(".search-button");
-const chosenEl = document.getElementById("selected-chamber");
-
-// 👉 NEW: store up to 3 selections
-let selectedCourts = [];
-
-/* ----------------------------------------
-   RENDER SEARCH LIST
------------------------------------------ */
-function renderList(filter = "") {
-  listEl.innerHTML = "";
-  const filtered = allChambers.filter(ch =>
-    ch.toLowerCase().includes(filter.toLowerCase())
-  );
-  filtered.forEach(ch => {
-    listEl.insertAdjacentHTML(
-      "beforeend",
-      `<div class="filter-item" tabindex="0">${ch}</div>`
-    );
-  });
+const courtAddresses = {
+  "Birmingham Crown Court": "1 Newton Street, Birmingham B4 7DJ",
+  "Bristol Crown Court": "Small Street, Bristol BS1 1DA",
+  "Cambridge Crown Court": "1 Crown Court, Cambridge CB1 1BS",
+  "Canterbury Crown Court": "The Law Courts, Chaucer Road, Canterbury CT1 1ZA",
+  "Cardiff Crown Court": "The Law Courts, Cathays Park, Cardiff CF10 3PG",
+  "Central Criminal Court": "Old Bailey, London EC4M 7EH",
+  "Chelmsford Crown Court": "New Street, Chelmsford CM1 1NT",
+  "Derby Crown Court": "Morledge, Derby DE1 2XE",
+  "Inner London Crown Court": "Sessions House, Newington Causeway, London SE1 6AZ",
+  "Leeds Crown Court": "1 Oxford Row, Leeds LS1 3BG",
+  "Liverpool Crown Court": "St George's Hall, St George's Place, Liverpool L1 1QQ",
+  "Manchester Crown Court (Crown Square)": "Crown Square, Manchester M60 1PR",
+  "Newcastle Crown Court": "The Law Courts, Quayside, Newcastle upon Tyne NE1 3LA",
+  "Nottingham Crown Court": "High Pavement, Nottingham NG1 1HN",
+  "Oxford Crown Court": "St Aldates, Oxford OX1 1TL",
+  "Reading Crown Court": "The Old Shire Hall, The Forbury, Reading RG1 3EH",
+  "Sheffield Crown Court": "The Law Courts, 50 West Bar, Sheffield S3 8PH",
+  "Snaresbrook Crown Court": "100 Snaresbrook Road, London E11 1QW",
+  "Southwark Crown Court": "English Grounds, London SE1 2HU",
+  "Wood Green Crown Court": "Lordship Lane, London N22 5LF"
 }
 
-renderList();
+const selectedContainer = document.getElementById("selected-courts")
+let selectedCourts = []
 
-/* ----------------------------------------
-   INPUT + SEARCH BEHAVIOUR
------------------------------------------ */
-inputEl.addEventListener("focus", () => listEl.style.display = "block");
+function renderCourts() {
 
-inputEl.addEventListener("input", e => {
-  renderList(e.target.value);
-  listEl.style.display = e.target.value.trim() ? "block" : "none";
-});
-
-buttonEl.addEventListener("click", () => {
-  renderList(inputEl.value);
-  listEl.style.display = inputEl.value.trim() ? "block" : "none";
-});
-
-/* ----------------------------------------
-   HANDLE SELECTING A COURT Up to 3 addresses!
------------------------------------------ */
-listEl.addEventListener("click", e => {
-  if (e.target.classList.contains("filter-item")) {
-    addCourt(e.target.textContent.trim());
+  if (selectedCourts.length === 0) {
+    selectedContainer.innerHTML = ""
+    return
   }
-});
+
+  selectedContainer.innerHTML = `
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
+      Selected courts
+    </h2>
+
+    <ul class="govuk-list govuk-!-margin-bottom-2">
+      ${selectedCourts.map((court, i) => `
+        <li class="govuk-!-margin-bottom-2 app-selected-court">
+
+          <span class="app-selected-court__text">
+            <strong>${court}</strong>, ${courtAddresses[court] || ""}
+          </span>
+
+          <a
+            href="#"
+            class="govuk-link app-selected-court__remove"
+            data-remove="${i}"
+          >
+            Remove
+          </a>
+
+        </li>
+      `).join("")}
+    </ul>
+
+    <p class="govuk-body">
+      <a href="#" class="govuk-link" id="add-another-court">
+        Add another court
+      </a>
+    </p>
+  `
+}
+
 
 function addCourt(name) {
-  if (selectedCourts.length >= 3) {
-    alert("You can only select 3 Crown Courts");
-    return;
+  if (!name) return
+  if (selectedCourts.includes(name)) return
+  selectedCourts.push(name)
+  renderCourts()
+}
+
+selectedContainer.addEventListener("click", function(e) {
+
+  if (e.target.dataset.remove) {
+
+    e.preventDefault()
+    selectedCourts.splice(e.target.dataset.remove, 1)
+    renderCourts()
+    return
+
   }
 
-  if (selectedCourts.includes(name)) return;
+  if (e.target.id === "add-another-court") {
 
-  selectedCourts.push(name);
-  inputEl.value = "";
-  listEl.style.display = "none";
+    e.preventDefault()
 
-  renderSelected();
-}
+    const autoInput =
+      document.querySelector("input[id='court__input']") ||
+      document.querySelector("input[id='court']")
 
-/* ----------------------------------------
-   RENDER SELECTED COURTS
------------------------------------------ */
-function renderSelected() {
-  chosenEl.innerHTML = "";
+    if (autoInput) {
+      autoInput.focus()
+    }
 
-  selectedCourts.forEach((name, index) => {
-    const address = chamberAddresses[name] || chamberAddresses.default;
+  }
 
-    chosenEl.insertAdjacentHTML(
-      "beforeend",
-      `
-      <div class="govuk-inset-text">
-        <strong>${name}</strong><br>
-        ${address}<br>
-        <button 
-          class="govuk-button govuk-button--secondary govuk-!-margin-top-2" 
-          type="button" 
-          onclick="removeCourt(${index})">
-          Add another
-        </button>
-      </div>
-      `
-    );
-  });
-}
+})
 
-window.removeCourt = function(index) {
-  selectedCourts.splice(index, 1);
-  renderSelected();
-};
+// Wait for accessible-autocomplete to finish rendering
+const domObserver = new MutationObserver(() => {
+  const autoInput = document.querySelector("input[id='court__input']")
+                 || document.querySelector("input[id='court']")
+  if (autoInput) {
+    domObserver.disconnect()
 
-/* ----------------------------------------
-   CLEAR ALL
------------------------------------------ */
-document.getElementById("clear-address").addEventListener("click", () => {
-  selectedCourts = [];
-  renderSelected();
-  inputEl.value = "";
-});
+    // Watch aria-expanded: true → false means item was selected
+    const ariaObserver = new MutationObserver(() => {
+      if (autoInput.getAttribute("aria-expanded") === "false") {
+        const val = autoInput.value.trim()
+        if (val) {
+          addCourt(val)
+          autoInput.value = ""
+        }
+      }
+    })
+    ariaObserver.observe(autoInput, { attributes: true, attributeFilter: ["aria-expanded"] })
+
+    // Fallback for keyboard users
+    autoInput.addEventListener("change", () => {
+      const val = autoInput.value.trim()
+      if (val) { addCourt(val); autoInput.value = "" }
+    })
+
+    document.getElementById("clear-courts").addEventListener("click", () => {
+      selectedCourts = []
+      renderCourts()
+      autoInput.value = ""
+    })
+  }
+})
+
+domObserver.observe(document.body, { childList: true, subtree: true })
+
 </script>
-
-
 
 {% endblock %}
