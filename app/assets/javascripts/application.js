@@ -3,6 +3,6 @@
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
 //
 
-import accessibleAutocomplete from "accessible-autocomplete";
+import accessibleAutocomplete from 'accessible-autocomplete'
 
 window.accessibleAutocomplete = accessibleAutocomplete;

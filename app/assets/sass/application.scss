@@ -5,7 +5,7 @@
 
 // Add extra styles here
 @import "components/header.scss";
-@import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
+
 
 .govuk-tag {
     white-space: nowrap;
@@ -54,56 +54,21 @@
   flex: 1;
 }
 
-/* Accessible autocomplete tweaks */
-.autocomplete__wrapper * {
-  @include govuk-typography-common();
+
+// court autocomplete styles
+
+.app-selected-court {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 }
 
-.autocomplete__input {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: none !important;
-  border: 2px solid #505a5f;
-  padding-left: 2.2rem;
-  height: 2.5rem;
-  border-radius: 0;
-  font-size: 1.1875rem;
+.app-selected-court__text {
+  flex: 1;
 }
 
-.autocomplete__input:focus {
-  border-color: #fd0;
-  box-shadow: 0 0 0 3px #fd0;
-  outline: none;
-}
-
-.autocomplete__wrapper {
-  position: relative;
-}
-
-.autocomplete__wrapper::before {
-  content: "🔍";
-  position: absolute;
-  left: 0.6rem;
-  top: 0.55rem;
-  font-size: 1.2rem;
-  pointer-events: none;
-  color: #505a5f;
-}
-
-.autocomplete__menu {
-  border: 2px solid #b1b4b6;
-  box-shadow: none;
-  max-height: 14rem;
-  overflow-y: auto;
-}
-
-.autocomplete__option,
-.autocomplete__option--highlighted {
-  padding: 0.6rem 1rem;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.autocomplete__option--highlighted {
-  background-color: #f3f2f1;
+.app-selected-court__remove {
+  flex: 0 0 auto;
+  margin-left: auto;
+  white-space: nowrap;
 }
