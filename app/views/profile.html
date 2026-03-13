@@ -21,6 +21,9 @@
 
     <h2 class="govuk-heading-m">Personal details</h2>
 
+    {% set preferredCircuit = data['preferredCircuit'] if data['preferredCircuit'] else [] %}
+    {% set secondaryCircuit = data['secondaryCircuit'] if data['secondaryCircuit'] else [] %}
+
     {{ govukSummaryList({
       rows: [
         {
@@ -41,11 +44,11 @@
         },
         {
           key: { text: "Primary circuit" },
-          value: { text: data['preferredCircuit'] | join(", ") or "Not provided" }
+          value: { text: preferredCircuit | join(", ") or "Not provided" }
         },
         {
           key: { text: "Secondary circuit" },
-          value: { text: data['secondaryCircuit'] | join(", ") or "Not provided" }
+          value: { text: secondaryCircuit | join(", ") or "Not provided" }
         },
         {
           key: { text: "Preferred Crown Courts" },

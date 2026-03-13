@@ -26,7 +26,8 @@ module.exports = router => {
   })
 
   router.post('/login', (req, res) => {
-    req.session.data.user = {}
+    const accountProfile = require('../data/profile.json')
+    Object.assign(req.session.data, accountProfile)
     res.redirect('/profile')
   })
 
