@@ -69,12 +69,12 @@ Crown courts – {{ serviceName }} – GOV.UK Prototype Kit
           text: "Continue"
         }) }}
 
-        {{ govukButton({
+        {# {{ govukButton({
           text: "Clear courts",
           classes: "govuk-button--secondary",
           id: "clear-courts",
           type: "button"
-        }) }}
+        }) }} #}
 
       </div>
 
@@ -148,7 +148,7 @@ function renderCourts() {
       `).join("")}
     </ul>
 
-    <p class="govuk-body">
+    <p class="govuk-body govuk-!-margin-top-6 govuk-!-margin-bottom-6">
       <a href="#" class="govuk-link" id="add-another-court">
         Add another court
       </a>
