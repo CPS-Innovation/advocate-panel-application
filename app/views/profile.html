@@ -5,14 +5,12 @@
   Profile – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
-
 {% block containerStart %}
   {{ govukBackLink({
     text: "Back",
     href: "javascript:window.history.back()"
   }) }}
 {% endblock %}
-
 
 {% block content %}
 
@@ -23,46 +21,62 @@
 
     <h2 class="govuk-heading-m">Personal details</h2>
 
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: { text: "Name" },
-            value: { text: data.fullName or "Not provided" }
-          },
-          {
-            key: { text: "Bar number" },
-            value: { text: data.barNumber or "Not provided" }
-          },
-          {
-            key: { text: "Place of work" },
-            value: { text: data.employmentType or "Not provided" }
-          },
-          {
-            key: { text: "Member of chambers" },
-            value: { html: data.memberOfChambers or "Not provided" }
-          },
-          {
-            key: { text: "Chambers address" },
-            value: { html: data.chambersAddress or "Not provided" }
-          },
-          {
-            key: { text: "Preferred circuit" },
-            value: { html: data.preferredCircuit or "Not provided" }
-          },
-          {
-            key: { text: "Preferred crown court" },
-            value: { html: data.preferredCrownCourt or "Not provided" }
-          },
-          {
-            key: { text: "Year of call" },
-            value: { html: data.yearOfCall or "Not provided" }
-          },
-          {
-            key: { text: "Qualifications" },
-            value: { html: data.qualifications or "Not provided" }
-          }
-        ]
-      }) }}
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Name" },
+          value: { text: data['fullName'] or "Not provided" }
+        },
+        {
+          key: { text: "Bar number" },
+          value: { text: data['barNumber'] or "Not provided" }
+        },
+        {
+          key: { text: "Place of work" },
+          value: { text: data['employmentType'] or "Not provided" }
+        },
+        {
+          key: { text: "Member of chambers" },
+          value: { text: data['chambersName'] or "Not provided" }
+        },
+        {
+          key: { text: "Primary circuit" },
+          value: { text: data['preferredCircuit'] | join(", ") or "Not provided" }
+        },
+        {
+          key: { text: "Secondary circuit" },
+          value: { text: data['secondaryCircuit'] | join(", ") or "Not provided" }
+        },
+        {
+          key: { text: "Preferred Crown Courts" },
+          value: { text: data['preferredCrownCourts'] or "Not provided" }
+        },
+        {
+          key: { text: "Year of call" },
+          value: { text: data['calledToTheBar'] or "Not provided" }
+        },
+        {
+          key: { text: "Start date of second six" },
+          value: { text: data | isoDateFromDateInput("secondSixStartDate") | govukDate or "Not provided" }
+        },
+        {
+          key: { text: "Institution" },
+          value: { text: data['institution'] or "Not provided" }
+        },
+        {
+          key: { text: "Course or subject" },
+          value: { text: data['courseOrSubject'] or "Not provided" }
+        },
+        {
+          key: { text: "Grade or result" },
+          value: { text: data['gradeOrResult'] or "Not provided" }
+        },
+        {
+          key: { text: "Date of completion" },
+          value: { text: data | isoDateFromDateInput("dateOfCompletion") | govukDate or "Not provided" }
+        }
+      ]
+    }) }}
 
     <h2 class="govuk-heading-m">Applications</h2>
 

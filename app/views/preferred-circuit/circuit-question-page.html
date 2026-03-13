@@ -10,8 +10,8 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
 {% block containerStart %}
 {{ govukBackLink({
-text: "Back",
-href: "javascript:window.history.back()"
+  text: "Back",
+  href: "javascript:window.history.back()"
 }) }}
 {% endblock %}
 
@@ -20,116 +20,54 @@ href: "javascript:window.history.back()"
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">
-      Preferred circuits
-    </h1>
+    <h1 class="govuk-heading-l">Preferred circuits</h1>
 
-    <!-- <p class="govuk-body">Select your primary first choice Circuit where you intend to practice predominantly and, optionally your second Circuit.</p> -->
+    <form method="post" novalidate>
 
-    <form action="./crown-courts-circuit/crown-courts-select-page.html" method="get" novalidate>
+      {% set preferredCircuit = data['preferredCircuit'] if data['preferredCircuit'] else [] %}
 
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-            <h2 class="govuk-heading-m">Primary circuit</h2>
-          </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries" name="countries" type="checkbox" value="france">
-              <label class="govuk-label govuk-radios__label" for="countries">
-                Midlands
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-2" name="countries" type="checkbox" value="portugal">
-              <label class="govuk-label govuk-radios__label" for="countries-2">
-                North Eastern
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-radios__label" for="countries-3">
-                Northern
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-radios__label" for="countries-3">
-                South Eastern
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-radios__label" for="countries-3">
-                Wales and Chester
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-radios__label" for="countries-3">
-                Western
-              </label>
-            </div>
-          </div>
-        </fieldset>
-      </div>
+      {{ govukCheckboxes({
+        name: "preferredCircuit",
+        fieldset: {
+          legend: {
+            text: "Primary circuit",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          { value: "Midlands",          text: "Midlands",          checked: true if "Midlands"          in preferredCircuit },
+          { value: "North Eastern",     text: "North Eastern",     checked: true if "North Eastern"     in preferredCircuit },
+          { value: "Northern",          text: "Northern",          checked: true if "Northern"           in preferredCircuit },
+          { value: "South Eastern",     text: "South Eastern",     checked: true if "South Eastern"     in preferredCircuit },
+          { value: "Wales and Chester", text: "Wales and Chester", checked: true if "Wales and Chester" in preferredCircuit },
+          { value: "Western",           text: "Western",           checked: true if "Western"           in preferredCircuit }
+        ]
+      }) }}
 
+      {% set secondaryCircuit = data['secondaryCircuit'] if data['secondaryCircuit'] else [] %}
 
-      <h2 class="govuk-heading-m">Secondary circuit (optional)</h2>
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries" name="countries" type="checkbox" value="france">
-              <label class="govuk-label govuk-radios__label" for="countries">
-                Midlands
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-2" name="countries" type="checkbox" value="portugal">
-              <label class="govuk-label govuk-radios__label" for="countries-2">
-                North Eastern
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-radios__label" for="countries-3">
-                Northern
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-radios__label" for="countries-3">
-                South Eastern
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-radios__label" for="countries-3">
-                Wales and Chester
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-radios__label" for="countries-3">
-                Western
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-radios__label" for="countries-3">
-                No preference
-              </label>
-            </div>
-          </div>
-        </fieldset>
-      </div>
+      {{ govukCheckboxes({
+        name: "secondaryCircuit",
+        fieldset: {
+          legend: {
+            text: "Secondary circuit (optional)",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          { value: "Midlands",          text: "Midlands",          checked: true if "Midlands"          in secondaryCircuit },
+          { value: "North Eastern",     text: "North Eastern",     checked: true if "North Eastern"     in secondaryCircuit },
+          { value: "Northern",          text: "Northern",          checked: true if "Northern"           in secondaryCircuit },
+          { value: "South Eastern",     text: "South Eastern",     checked: true if "South Eastern"     in secondaryCircuit },
+          { value: "Wales and Chester", text: "Wales and Chester", checked: true if "Wales and Chester" in secondaryCircuit },
+          { value: "Western",           text: "Western",           checked: true if "Western"           in secondaryCircuit },
+          { value: "No preference",     text: "No preference",     checked: true if "No preference"     in secondaryCircuit }
+        ]
+      }) }}
 
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
 
     </form>
 

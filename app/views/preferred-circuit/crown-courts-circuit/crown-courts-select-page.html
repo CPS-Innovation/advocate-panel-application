@@ -54,7 +54,6 @@ Crown courts – {{ serviceName }} – GOV.UK Prototype Kit
       items: crownCourts
     }) }}
 
-
     <p class="govuk-body">
       <a href="#" class="govuk-link">I can't see my Crown Court in the list</a>
     </p>
@@ -62,22 +61,11 @@ Crown courts – {{ serviceName }} – GOV.UK Prototype Kit
     <div id="selected-courts" class="govuk-!-margin-top-6 govuk-!-margin-bottom-6" aria-live="polite"></div>
 
     <form method="post" novalidate>
+      <input type="hidden" id="preferredCrownCourts" name="preferredCrownCourts" value="{{ data['preferredCrownCourts'] }}">
 
-      <div class="govuk-button-group govuk-!-margin-top-6">
-
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-
-        {# {{ govukButton({
-          text: "Clear courts",
-          classes: "govuk-button--secondary",
-          id: "clear-courts",
-          type: "button"
-        }) }} #}
-
-      </div>
-
+      {{ govukButton({
+        text: "Continue"
+      }) }}
     </form>
 
   </div>
@@ -114,12 +102,22 @@ const courtAddresses = {
 }
 
 const selectedContainer = document.getElementById("selected-courts")
-let selectedCourts = []
+
+// Initialise from session so returning via change link restores previous selection
+let selectedCourts = "{{ data['preferredCrownCourts'] }}"
+  ? "{{ data['preferredCrownCourts'] }}".split(", ").filter(Boolean)
+  : []
+
+function syncHiddenInput() {
+  const hidden = document.getElementById("preferredCrownCourts")
+  if (hidden) hidden.value = selectedCourts.join(", ")
+}
 
 function renderCourts() {
 
   if (selectedCourts.length === 0) {
     selectedContainer.innerHTML = ""
+    syncHiddenInput()
     return
   }
 
@@ -130,20 +128,13 @@ function renderCourts() {
 
     <ul class="govuk-list govuk-!-margin-bottom-2">
       ${selectedCourts.map((court, i) => `
-        <li class="govuk-!-margin-bottom-2 app-selected-court">
-
+        <li class="govuk-!-margin-bottom-2 app-selected-court" style="border-bottom: 1px solid #b1b4b6; padding-bottom: 10px;">
           <span class="app-selected-court__text">
             <strong>${court}</strong>, ${courtAddresses[court] || ""}
           </span>
-
-          <a
-            href="#"
-            class="govuk-link app-selected-court__remove"
-            data-remove="${i}"
-          >
+          <a href="#" class="govuk-link app-selected-court__remove" data-remove="${i}">
             Remove
           </a>
-
         </li>
       `).join("")}
     </ul>
@@ -154,8 +145,8 @@ function renderCourts() {
       </a>
     </p>
   `
+  syncHiddenInput()
 }
-
 
 function addCourt(name) {
   if (!name) return
@@ -167,26 +158,18 @@ function addCourt(name) {
 selectedContainer.addEventListener("click", function(e) {
 
   if (e.target.dataset.remove) {
-
     e.preventDefault()
     selectedCourts.splice(e.target.dataset.remove, 1)
     renderCourts()
     return
-
   }
 
   if (e.target.id === "add-another-court") {
-
     e.preventDefault()
-
     const autoInput =
       document.querySelector("input[id='court__input']") ||
       document.querySelector("input[id='court']")
-
-    if (autoInput) {
-      autoInput.focus()
-    }
-
+    if (autoInput) autoInput.focus()
   }
 
 })
@@ -198,7 +181,6 @@ const domObserver = new MutationObserver(() => {
   if (autoInput) {
     domObserver.disconnect()
 
-    // Watch aria-expanded: true → false means item was selected
     const ariaObserver = new MutationObserver(() => {
       if (autoInput.getAttribute("aria-expanded") === "false") {
         const val = autoInput.value.trim()
@@ -210,21 +192,17 @@ const domObserver = new MutationObserver(() => {
     })
     ariaObserver.observe(autoInput, { attributes: true, attributeFilter: ["aria-expanded"] })
 
-    // Fallback for keyboard users
     autoInput.addEventListener("change", () => {
       const val = autoInput.value.trim()
       if (val) { addCourt(val); autoInput.value = "" }
-    })
-
-    document.getElementById("clear-courts").addEventListener("click", () => {
-      selectedCourts = []
-      renderCourts()
-      autoInput.value = ""
     })
   }
 })
 
 domObserver.observe(document.body, { childList: true, subtree: true })
+
+// Render any previously selected courts on page load
+renderCourts()
 
 </script>
 

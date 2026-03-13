@@ -1,6 +1,5 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
-
 {% block header %}
 {% include "_includes/header-internal.njk" %}
 {% endblock %}
@@ -11,8 +10,8 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
 {% block containerStart %}
 {{ govukBackLink({
-text: "Back",
-href: "javascript:window.history.back()"
+  text: "Back",
+  href: "javascript:window.history.back()"
 }) }}
 {% endblock %}
 
@@ -21,39 +20,38 @@ href: "javascript:window.history.back()"
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">
-      Personal details
-    </h1>
+    <h1 class="govuk-heading-l">Personal details</h1>
 
-    <!-- <p class="govuk-body">
-      Lorem ipsum loremn ipum lorem <a href="#" class="govuk-link">lorem ipsum </a>.
-    </p> -->
+    <form method="post" novalidate>
 
-    <form  method="post" novalidate>
+      {{ govukInput({
+        label: {
+          text: "Full name",
+          classes: "govuk-label--m"
+        },
+        id: "fullName",
+        name: "fullName",
+        value: data['fullName']
+      }) }}
 
-      <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--m" for="full-name">
-          Full name
-        </label>
-        <input class="govuk-input" id="full-name" name="fullName" type="text">
-      </div>
-
-<!-- Barristers are asked about their bar number. Solicitors would instead be asked to enter their Solicitors' Regulation Authority (SRA) number. -->
-
-      <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--m" for="full-name">
-          Bar number
-        </label>
-        <div id="passport-number-hint" class="govuk-hint">
-            This is a 5 digit number. It is not the same as your bar ID.
-        </div>
-
-       <input class="govuk-input govuk-input--width-10" id="bar-number" name="barNumber" type="text">
-      </div>
+      {{ govukInput({
+        label: {
+          text: "Bar number",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "This is a 5 digit number. It is not the same as your bar ID."
+        },
+        id: "barNumber",
+        name: "barNumber",
+        classes: "govuk-input--width-10",
+        value: data['barNumber']
+      }) }}
 
       {{ govukButton({
-        text: "Submit personal details"
+        text: "Save and continue"
       }) }}
+
     </form>
 
   </div>

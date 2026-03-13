@@ -70,11 +70,11 @@ module.exports = router => {
     const employmentType = req.session.data['employmentType']
     const returnUrl = req.query.returnUrl
 
-    if (employmentType === 'memberChambers') {
+    if (employmentType === 'Member of chambers') {
       res.redirect(returnUrl || '/current-chambers/name-chambers')
-    } else if (employmentType === 'soleTrader') {
+    } else if (employmentType === 'Sole trader') {
       res.redirect(returnUrl || '/current-chambers/sole-trader-adding-address')
-    } else if (employmentType === 'solicitorsFirm') {
+    } else if (employmentType === 'Member of a solicitors firm') {
       res.redirect(returnUrl || '/current-chambers/solicitor-firm-adding-address')
     } else {
       res.redirect('/current-chambers/employment-type')

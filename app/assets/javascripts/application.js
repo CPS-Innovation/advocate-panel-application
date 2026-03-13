@@ -6,3 +6,7 @@
 import accessibleAutocomplete from 'accessible-autocomplete'
 
 window.accessibleAutocomplete = accessibleAutocomplete;
+
+
+const { dateFilters } = require('@x-govuk/govuk-prototype-filters')
+app.get('locals.filters', () => ({ ...dateFilters }))

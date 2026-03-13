@@ -78,13 +78,24 @@
     {{ govukSummaryList({
       rows: [
         {
-          key: { text: "Preferred circuit" },
+          key: { text: "Primary circuit" },
           value: { text: data['preferredCircuit'] or "Not provided" },
           actions: {
             items: [{
               href: "/preferred-circuit/circuit-question-page?returnUrl=/check",
               text: "Change",
-              visuallyHiddenText: "preferred circuit"
+              visuallyHiddenText: "primary circuit"
+            }]
+          }
+        },
+        {
+          key: { text: "Secondary circuit" },
+          value: { text: data['secondaryCircuit'] or "Not provided" },
+          actions: {
+            items: [{
+              href: "/preferred-circuit/circuit-question-page?returnUrl=/check",
+              text: "Change",
+              visuallyHiddenText: "secondary circuit"
             }]
           }
         },
@@ -117,9 +128,9 @@
             }]
           }
         },
-        {
+          {
           key: { text: "Start date of 'second six'" },
-          value: { text: data['secondSixStartDate'] or "Not provided" },
+          value: { html: data | isoDateFromDateInput("secondSixStartDate") | govukDate or "Not provided" },
           actions: {
             items: [{
               href: "/year-call-degree-qualifications/year-call?returnUrl=/check",
@@ -170,7 +181,7 @@
         },
         {
           key: { text: "Date of completion" },
-          value: { text: data['dateOfCompletion'] or "Not provided" },
+          value: { html: data | isoDateFromDateInput("dateOfCompletion") | govukDate or "Not provided" },
           actions: {
             items: [{
               href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
