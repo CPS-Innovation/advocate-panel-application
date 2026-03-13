@@ -59,20 +59,20 @@ Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
     <h1 class="govuk-heading-l">Chambers name</h1>
     
 
-    {{ xGovukAutocomplete({
-      id: "chambers",
-      name: "chambers",
-      label: {
-        text: "Name of chambers"
-      },
-      items: barristerChambers
-    }) }}
+    <form method="post" novalidate>
 
-    <p class="govuk-body">
-      <a href="./adding-address-2.html" class="govuk-link">I can't see my chambers in the list</a>
-    </p>
+      {{ xGovukAutocomplete({
+        id: "chambersName",
+        name: "chambersName",
+        label: { text: "Name of chambers" },
+        value: data['chambersName'],
+        items: barristerChambers
+      }) }}
 
-       <!-- Selected chamber info -->
+      <p class="govuk-body">
+        <a href="./adding-address-2.html" class="govuk-link">I can't see my chambers in the list</a>
+      </p>
+
       <div id="selected-chamber" class="govuk-!-margin-top-6" aria-live="polite"></div>
 
       <div id="extra-address-container" class="govuk-!-margin-top-6 govuk-!-display-none">
@@ -83,12 +83,8 @@ Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
         }) }}
       </div>
 
-    <form method="post" novalidate>
       <div class="govuk-button-group">
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-
+        {{ govukButton({ text: "Continue" }) }}
         {{ govukButton({
           text: "Clear address",
           classes: "govuk-button--secondary",
@@ -96,6 +92,7 @@ Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
           type: "button"
         }) }}
       </div>
+
     </form>
 
   </div>

@@ -1,0 +1,19 @@
+{
+  "fullName": "Sarah Mitchell",
+  "barNumber": "42891",
+  "employmentType": "Member of chambers",
+  "chambersName": "Doughty Street Chambers",
+  "preferredCircuit": ["South Eastern", "Northern"],
+  "secondaryCircuit": ["Midlands", "Western"],
+  "preferredCrownCourts": "Central Criminal Court, Southwark Crown Court, Inner London Crown Court",
+  "calledToTheBar": "2014",
+  "secondSixStartDate-day": "12",
+  "secondSixStartDate-month": "03",
+  "secondSixStartDate-year": "2014",
+  "institution": "University of Edinburgh",
+  "courseOrSubject": "Law (LLB)",
+  "gradeOrResult": "First Class Honours",
+  "dateOfCompletion-day": "15",
+  "dateOfCompletion-month": "06",
+  "dateOfCompletion-year": "2012"
+}

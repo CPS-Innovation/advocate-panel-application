@@ -20,45 +20,42 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">
-      Where you work
-    </h1>
+    <form method="post" novalidate>
 
-    <p class="govuk-body">Choose the most appropriate description of your employment type.</p>
-
-
-      <form method="post" novalidate>
-
-        {{ govukRadios({
-          name: "employmentType",
-          fieldset: {
-            legend: {
-              text: "What best describes your employment type?",
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--m govuk-visually-hidden"
-            }
+      {{ govukRadios({
+        name: "employmentType",
+        value: data['employmentType'],
+        fieldset: {
+          legend: {
+            text: "Where you work",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        hint: {
+          text: "Choose the most appropriate description of your employment type."
+        },
+        items: [
+          {
+            value: "Member of chambers",
+            text: "Member of chambers"
           },
-          items: [
-            {
-              value: "memberChambers",
-              text: "Member of chambers"
-            },
-            {
-              value: "soleTrader",
-              text: "Sole trader"
-            },
-            {
-              value: "solicitorsFirm",
-              text: "Member of a solicitors' firm"
-            }
-          ]
-        }) }}
+          {
+            value: "Sole trader",
+            text: "Sole trader"
+          },
+          {
+            value: "Member of a solicitors' firm",
+            text: "Member of a solicitors' firm"
+          }
+        ]
+      }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
 
-      </form>
+    </form>
 
   </div>
 </div>

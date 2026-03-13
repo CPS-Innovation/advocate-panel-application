@@ -10,8 +10,8 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
 {% block containerStart %}
 {{ govukBackLink({
-text: "Back",
-href: "javascript:window.history.back()"
+  text: "Back",
+  href: "javascript:window.history.back()"
 }) }}
 {% endblock %}
 
@@ -20,75 +20,82 @@ href: "javascript:window.history.back()"
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">
-      Degree and post-graduate qualifications
-    </h1>
+    <h1 class="govuk-heading-l">Degree and post-graduate qualifications</h1>
 
     <form method="post" novalidate>
 
-      <h2 class="govuk-heading-m">Date of completion</h2>
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint">
-          <div class="govuk-date-input" id="passport-issued">
-            <div class="govuk-date-input__item">
-              <div class="govuk-form-group">
-                <label class="govuk-label govuk-date-input__label" for="passport-issued-day">
-                  Day
-                </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-day"
-                  name="passport-issued-day" type="text" inputmode="numeric">
-              </div>
-            </div>
-            <div class="govuk-date-input__item">
-              <div class="govuk-form-group">
-                <label class="govuk-label govuk-date-input__label" for="passport-issued-month">
-                  Month
-                </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-month"
-                  name="passport-issued-month" type="text" inputmode="numeric">
-              </div>
-            </div>
-            <div class="govuk-date-input__item">
-              <div class="govuk-form-group">
-                <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
-                  Year
-                </label>
-                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="passport-issued-year"
-                  name="passport-issued-year" type="text" inputmode="numeric">
-              </div>
-            </div>
-          </div>
-        </fieldset>
-      </div>
-      <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--m" for="full-name">
-          Institution
-        </label>
-        <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
-      </div>
-      <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--m" for="full-name">
-          Course or subject
-        </label>
-        <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
-      </div>
-      <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--m" for="full-name">
-          Grade or result
-        </label>
-        <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
-      </div>
+      {{ govukDateInput({
+        id: "dateOfCompletion",
+        namePrefix: "dateOfCompletion",
+        fieldset: {
+          legend: {
+            text: "Date of completion",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          {
+            name: "day",
+            classes: "govuk-input--width-2",
+            inputmode: "numeric",
+            value: data['dateOfCompletion-day']
+          },
+          {
+            name: "month",
+            classes: "govuk-input--width-2",
+            inputmode: "numeric",
+            value: data['dateOfCompletion-month']
+          },
+          {
+            name: "year",
+            classes: "govuk-input--width-4",
+            inputmode: "numeric",
+            value: data['dateOfCompletion-year']
+          }
+        ]
+      }) }}
 
-      <div class="govuk-button-group">
-        {{ govukButton({
-          text: "Save qualification"
-        }) }}
+      {{ govukInput({
+        label: {
+          text: "Institution",
+          classes: "govuk-label--m"
+        },
+        id: "institution",
+        name: "institution",
+        spellcheck: false,
+        value: data['institution']
+      }) }}
 
-        {{ govukButton({
-          text: "Add new",
-          classes: "govuk-button--secondary"
-        }) }}
-      </div>
+      {{ govukInput({
+        label: {
+          text: "Course or subject",
+          classes: "govuk-label--m"
+        },
+        id: "courseOrSubject",
+        name: "courseOrSubject",
+        spellcheck: false,
+        value: data['courseOrSubject']
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "Grade or result",
+          classes: "govuk-label--m"
+        },
+        id: "gradeOrResult",
+        name: "gradeOrResult",
+        spellcheck: false,
+        value: data['gradeOrResult']
+      }) }}
+
+      {{ govukButton({
+        text: "Save qualification"
+      }) }}
+
+      {{ govukButton({
+        text: "Add new",
+        classes: "govuk-button--secondary"
+      }) }}
 
     </form>
 
