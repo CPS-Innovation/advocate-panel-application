@@ -116,7 +116,13 @@ module.exports = router => {
     res.redirect(returnUrl || '/task-list')
   })
 
-////////// EQUALITIES MONITORING
+  ////////// CHECK - PERSONAL DETAILS
+  router.post('/check', (req, res) => {
+    req.session.data.user = {}
+    res.redirect('/profile')
+  })
+
+  ////////// EQUALITIES MONITORING
   router.post('/equalities/equalities-questions-1', (req, res) => {
     res.redirect('/equalities/disability-question-2')
   })
