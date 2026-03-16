@@ -84,4 +84,20 @@ module.exports = router => {
     res.redirect('/start-application')
   })
 
+  ////////// EXAMPLES OF WORK - ADVISORY
+  router.post('/examples-work/examples-work-advisory', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const advisory = req.session.data['advisoryWork']
+
+    if (completed === 'yes') {
+      req.session.data['advisoryStatus'] = 'completed'
+    } else if (advisory && advisory.trim() !== '') {
+      req.session.data['advisoryStatus'] = 'inProgress'
+    } else {
+      req.session.data['advisoryStatus'] = 'notStarted'
+    }
+
+    res.redirect('/start-application')
+  })
+
 }

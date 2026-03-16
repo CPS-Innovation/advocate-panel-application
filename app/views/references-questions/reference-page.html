@@ -1,8 +1,4 @@
-{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
-
-{% block header %}
-{% include "_includes/header-internal.njk" %}
-{% endblock %}
+{% extends "layouts/main.html" %}
 
 {% block pageTitle %}
 Question page template – {{ serviceName }} – GOV.UK Prototype Kit
@@ -55,14 +51,16 @@ href: "javascript:window.history.back()"
         id: "refereeFullName",
         name: "refereeFullName",
         type: "text",
-        autocomplete: "name"
+        autocomplete: "name",
+        value: data['refereeFullName']
       }) }}
 
       {{ govukInput({
         label: { text: "Referee job title" },
         id: "refereeJobTitle",
         name: "refereeJobTitle",
-        type: "text"
+        type: "text",
+        value: data['refereeJobTitle']
       }) }}
 
       {{ govukInput({
@@ -70,7 +68,8 @@ href: "javascript:window.history.back()"
         id: "refereeEmail",
         name: "refereeEmail",
         type: "email",
-        autocomplete: "email"
+        autocomplete: "email",
+        value: data['refereeEmail']
       }) }}
 
 
@@ -78,6 +77,7 @@ href: "javascript:window.history.back()"
       <div class="govuk-form-group">
         {{ govukRadios({
           name: "refereeRole",
+          value: data['refereeRole'],
           fieldset: {
             legend: {
               text: "Referee role",
@@ -109,24 +109,21 @@ href: "javascript:window.history.back()"
         <li>cases which you’ve worked on with the referee</li>
       </ul>
 
-      <div class="govuk-form-group">
-        <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"
-          aria-describedby="more-detail-hint"></textarea>
-      </div>
-
-      {# <div class="govuk-button-group">
-        {{ govukButton({
-          text: "Save and continue"
-        }) }}
-
-        {{ govukButton({
-          text: "Save as draft",
-          classes: "govuk-button--secondary"
-        }) }}
-      </div> #}
+      {{ govukTextarea({
+        name: "messageToReferee",
+        id: "message-to-referee",
+        rows: "10",
+        value: data['messageToReferee'],
+        label: {
+          text: "Message to referee",
+          classes: "govuk-label--l govuk-visually-hidden",
+          isPageHeading: false
+        }
+      }) }}
 
       {{ govukRadios({
         name: "haveYouCompletedThisSection",
+        value: data['haveYouCompletedThisSection'],
         fieldset: {
           legend: {
             text: "Have you completed this section?",
@@ -135,14 +132,8 @@ href: "javascript:window.history.back()"
           }
         },
         items: [
-          {
-            value: "yes",
-            text: "Yes, I've completed this section"
-          },
-          {
-            value: "no",
-            text: "No, I'll come back to it later"
-          }
+          { value: "yes", text: "Yes, I've completed this section" },
+          { value: "no", text: "No, I'll come back to it later" }
         ]
       }) }}
 
