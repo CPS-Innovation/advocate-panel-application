@@ -1,8 +1,4 @@
-{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
-
-{% block header %}
-{% include "_includes/header-internal.njk" %}
-{% endblock %}
+{% extends "layouts/main.html" %}
 
 {% block pageTitle %}
 Question page template – {{ serviceName }} – GOV.UK Prototype Kit
@@ -10,8 +6,8 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
 {% block containerStart %}
 {{ govukBackLink({
-text: "Back",
-href: "javascript:window.history.back()"
+  text: "Back",
+  href: "javascript:window.history.back()"
 }) }}
 {% endblock %}
 
@@ -20,33 +16,18 @@ href: "javascript:window.history.back()"
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">
-      Referee
-    </h1>
+    <h1 class="govuk-heading-l">Referee</h1>
 
-    <!-- <details class="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          Help with references
-        </span>
-      </summary>
-      <div class="govuk-details__text">
-      </div>
-    </details> -->
+    <p class="govuk-body">The referee will be sent an email asking them to give you a reference.</p>
 
-      <p class="govuk-body">The referee will be sent an email asking them to give you a reference.</p>
-
-      <!-- <p class="govuk-body">We must receive the reference by 30 September. You should give your referee enough time to write and submit the reference.</p> -->
-      <p class="govuk-body">You can ask anyone who you can support your application and is prepared to stand as a referee. Suitable referees for your panel and level include:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>pupil supervisors</li>
-        <li>heads of chambers</li>
-        <li>chambers advocacy trainers</li>
-      </ul>
-
+    <p class="govuk-body">You can ask anyone who can support your application and is prepared to stand as a referee. Suitable referees for your panel and level include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>pupil supervisors</li>
+      <li>heads of chambers</li>
+      <li>chambers advocacy trainers</li>
+    </ul>
 
     <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Referee details</h2>
-    <!-- <p class="govuk-body">Please provide the details of the referee you wish to use in support of your application.</p> -->
 
     <form method="post" novalidate>
 
@@ -55,14 +36,16 @@ href: "javascript:window.history.back()"
         id: "refereeFullName",
         name: "refereeFullName",
         type: "text",
-        autocomplete: "name"
+        autocomplete: "name",
+        value: data['refereeFullName']
       }) }}
 
       {{ govukInput({
         label: { text: "Referee job title" },
         id: "refereeJobTitle",
         name: "refereeJobTitle",
-        type: "text"
+        type: "text",
+        value: data['refereeJobTitle']
       }) }}
 
       {{ govukInput({
@@ -70,14 +53,15 @@ href: "javascript:window.history.back()"
         id: "refereeEmail",
         name: "refereeEmail",
         type: "email",
-        autocomplete: "email"
+        autocomplete: "email",
+        value: data['refereeEmail']
       }) }}
 
+      {% if data['crownCourtLevel'] === 'Level 1' %}
 
-      {# <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Referee role</h2> #}
-      <div class="govuk-form-group">
         {{ govukRadios({
           name: "refereeRole",
+          value: data['refereeRole'],
           fieldset: {
             legend: {
               text: "Referee role",
@@ -85,48 +69,122 @@ href: "javascript:window.history.back()"
             }
           },
           items: [
-            { value: "pupilSupervisor", text: "Pupil supervisor" },
-            { value: "headOfChambers", text: "Head of chambers" },
-            { value: "chambersAdvocacyTrainer", text: "Chambers advocacy trainer" },
-            { value: "instructingSolicitor", text: "Instructing solicitor" },
-            { value: "leadingOrOpposingAdvocate", text: "Leading or opposing advocate" },
-            { value: "instructingMember", text: "Instructing member of another prosecuting authority" },
-            { value: "advocacyAssessor", text: "Advocacy assessor" },
-            { value: "fullTimeJudiciary", text: "Current or retired member of the full time judiciary" },
-            { value: "partTimeJudiciary", text: "Member of the part time judiciary" },
-            { value: "cpsLawyer", text: "CPS lawyer" },
-            { value: "other", text: "Other" }
+            { value: "pupilSupervisor",         text: "Pupil supervisor" },
+            { value: "headOfChambers",           text: "Head of chambers" },
+            { value: "chambersAdvocacyTrainer",  text: "Chambers advocacy trainer" },
+            {
+              value: "other",
+              text: "Other",
+              conditional: {
+                html: govukInput({
+                  label: { text: "Please specify" },
+                  id: "refereeRoleOther",
+                  name: "refereeRoleOther",
+                  classes: "govuk-input--width-20",
+                  value: data['refereeRoleOther']
+                })
+              }
+            }
           ]
         }) }}
-      </div>
 
+      {% elif data['crownCourtLevel'] === 'Level 4' %}
+
+        {{ govukRadios({
+          name: "refereeRole",
+          value: data['refereeRole'],
+          fieldset: {
+            legend: {
+              text: "Referee role",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            { value: "fullTimeJudiciary",        text: "Current or retired member of the full-time judiciary" },
+            { value: "partTimeJudiciary",         text: "Member of the part-time judiciary" },
+            { value: "headOfChambers",            text: "Head of chambers" },
+            { value: "instructingSolicitor",      text: "Instructing solicitor" },
+            { value: "leadingOrOpposingAdvocate", text: "Leading or opposing advocate" },
+            { value: "cpsLawyer",                 text: "CPS lawyer or lawyer from another prosecuting authority" },
+            { value: "advocacyAssessor",          text: "Advocacy assessor" },
+            {
+              value: "other",
+              text: "Other",
+              conditional: {
+                html: govukInput({
+                  label: { text: "Please specify" },
+                  id: "refereeRoleOther",
+                  name: "refereeRoleOther",
+                  classes: "govuk-input--width-20",
+                  value: data['refereeRoleOther']
+                })
+              }
+            }
+          ]
+        }) }}
+
+      {% else %}
+
+        {# Fallback if level is not yet set — show full list #}
+        {{ govukRadios({
+          name: "refereeRole",
+          value: data['refereeRole'],
+          fieldset: {
+            legend: {
+              text: "Referee role",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            { value: "pupilSupervisor",           text: "Pupil supervisor" },
+            { value: "headOfChambers",             text: "Head of chambers" },
+            { value: "chambersAdvocacyTrainer",    text: "Chambers advocacy trainer" },
+            { value: "instructingSolicitor",       text: "Instructing solicitor" },
+            { value: "leadingOrOpposingAdvocate",  text: "Leading or opposing advocate" },
+            { value: "advocacyAssessor",           text: "Advocacy assessor" },
+            { value: "fullTimeJudiciary",          text: "Current or retired member of the full-time judiciary" },
+            { value: "partTimeJudiciary",          text: "Member of the part-time judiciary" },
+            { value: "cpsLawyer",                  text: "CPS lawyer or lawyer from another prosecuting authority" },
+            {
+              value: "other",
+              text: "Other",
+              conditional: {
+                html: govukInput({
+                  label: { text: "Please specify" },
+                  id: "refereeRoleOther",
+                  name: "refereeRoleOther",
+                  classes: "govuk-input--width-20",
+                  value: data['refereeRoleOther']
+                })
+              }
+            }
+          ]
+        }) }}
+
+      {% endif %}
 
       <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Your message to the referee</h2>
       <p class="govuk-body">This will be included in the email which is sent to the referee. You should include:</p>
-
       <ul class="govuk-list govuk-list--bullet">
-        <li>why you’re applying for the panel</li>
-        <li>cases which you’ve worked on with the referee</li>
+        <li>why you're applying for the panel</li>
+        <li>cases which you've worked on with the referee</li>
       </ul>
 
-      <div class="govuk-form-group">
-        <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"
-          aria-describedby="more-detail-hint"></textarea>
-      </div>
-
-      {# <div class="govuk-button-group">
-        {{ govukButton({
-          text: "Save and continue"
-        }) }}
-
-        {{ govukButton({
-          text: "Save as draft",
-          classes: "govuk-button--secondary"
-        }) }}
-      </div> #}
+      {{ govukTextarea({
+        name: "messageToReferee",
+        id: "message-to-referee",
+        rows: "10",
+        value: data['messageToReferee'],
+        label: {
+          text: "Message to referee",
+          classes: "govuk-label--l govuk-visually-hidden",
+          isPageHeading: false
+        }
+      }) }}
 
       {{ govukRadios({
         name: "haveYouCompletedThisSection",
+        value: data['haveYouCompletedThisSection'],
         fieldset: {
           legend: {
             text: "Have you completed this section?",
@@ -135,14 +193,8 @@ href: "javascript:window.history.back()"
           }
         },
         items: [
-          {
-            value: "yes",
-            text: "Yes, I've completed this section"
-          },
-          {
-            value: "no",
-            text: "No, I'll come back to it later"
-          }
+          { value: "yes", text: "Yes, I've completed this section" },
+          { value: "no",  text: "No, I'll come back to it later" }
         ]
       }) }}
 
