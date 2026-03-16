@@ -26,54 +26,61 @@
 
     <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Examples of your work</h2>
 
-    {{ govukTaskList({
-      items: [
-        {
-          title: { text: "Advocacy" },
-          href: "/examples-work/examples-work-advocacy",
-          status: { tag: { text: taskStatusText(data['advocacyStatus']), classes: taskStatusClass(data['advocacyStatus']) } },
-          idPrefix: "advocacy"
-        },
-        {
-          title: { text: "Advisory" },
-          href: "/examples-work/examples-work-advisory",
-          status: { tag: { text: taskStatusText(data['advisoryStatus']), classes: taskStatusClass(data['advisoryStatus']) } },
-          idPrefix: "advisory"
-        },
-        {
-          title: { text: "Advisory drafting examples (upload)" },
-          href: "/upload-page",
-          status: { tag: { text: taskStatusText(data['uploadStatus']), classes: taskStatusClass(data['uploadStatus']) } },
-          idPrefix: "upload"
-        },
-        {
-          title: { text: "Public interest immunity (PII) and disclosure" },
-          href: "/examples-work/examples-work-public-interest-immunity",
-          status: { tag: { text: taskStatusText(data['piiStatus']), classes: taskStatusClass(data['piiStatus']) } },
-          idPrefix: "pii"
-        },
-        {
-          title: { text: "Other relevant knowledge, skills and experience" },
-          href: "/examples-work/examples-work-knowledge-skills-experience",
-          status: { tag: { text: taskStatusText(data['knowledgeStatus']), classes: taskStatusClass(data['knowledgeStatus']) } },
-          idPrefix: "knowledge"
-        },
-        {
-          title: { text: "Appreciation of the role of a panel advocate" },
-          href: "/examples-work/examples-work-appreciation",
-          status: { tag: { text: taskStatusText(data['appreciationStatus']), classes: taskStatusClass(data['appreciationStatus']) } },
-          idPrefix: "appreciation"
-        },
-        {
-          title: { text: "Additional information" },
-          href: "/examples-work/examples-work-additional",
-          status: { tag: { text: taskStatusText(data['additionalStatus']), classes: taskStatusClass(data['additionalStatus']) } },
-          idPrefix: "additional"
-        }
-      ]
-    }) }}
+    {% set examplesItems = [
+      {
+        title: { text: "Advocacy" },
+        href: "/examples-work/examples-work-advocacy",
+        status: { tag: { text: taskStatusText(data['advocacyStatus']), classes: taskStatusClass(data['advocacyStatus']) } },
+        idPrefix: "advocacy"
+      },
+      {
+        title: { text: "Advisory" },
+        href: "/examples-work/examples-work-advisory",
+        status: { tag: { text: taskStatusText(data['advisoryStatus']), classes: taskStatusClass(data['advisoryStatus']) } },
+        idPrefix: "advisory"
+      }
+    ] %}
 
-    {% if data.crownCourtLevel !== 'Level 4' %}
+    {% if data['crownCourtLevel'] !== 'Level 1' %}
+      {% set examplesItems = (examplesItems.push({
+        title: { text: "Advisory drafting examples (upload)" },
+        href: "/upload-page",
+        status: { tag: { text: taskStatusText(data['uploadStatus']), classes: taskStatusClass(data['uploadStatus']) } },
+        idPrefix: "upload"
+      }), examplesItems) %}
+
+      {% set examplesItems = (examplesItems.push({
+        title: { text: "Public interest immunity (PII) and disclosure" },
+        href: "/examples-work/examples-work-public-interest-immunity",
+        status: { tag: { text: taskStatusText(data['piiStatus']), classes: taskStatusClass(data['piiStatus']) } },
+        idPrefix: "pii"
+      }), examplesItems) %}
+    {% endif %}
+
+    {% set examplesItems = (examplesItems.push({
+      title: { text: "Other relevant knowledge, skills and experience" },
+      href: "/examples-work/examples-work-knowledge-skills-experience",
+      status: { tag: { text: taskStatusText(data['knowledgeStatus']), classes: taskStatusClass(data['knowledgeStatus']) } },
+      idPrefix: "knowledge"
+    }), examplesItems) %}
+
+    {% set examplesItems = (examplesItems.push({
+      title: { text: "Appreciation of the role of a panel advocate" },
+      href: "/examples-work/examples-work-appreciation",
+      status: { tag: { text: taskStatusText(data['appreciationStatus']), classes: taskStatusClass(data['appreciationStatus']) } },
+      idPrefix: "appreciation"
+    }), examplesItems) %}
+
+    {% set examplesItems = (examplesItems.push({
+      title: { text: "Additional information" },
+      href: "/examples-work/examples-work-additional",
+      status: { tag: { text: taskStatusText(data['additionalStatus']), classes: taskStatusClass(data['additionalStatus']) } },
+      idPrefix: "additional"
+    }), examplesItems) %}
+
+    {{ govukTaskList({ items: examplesItems }) }}
+
+    {% if data['crownCourtLevel'] !== 'Level 4' %}
       <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Pre-qualification questionnaire</h2>
 
       {{ govukTaskList({
