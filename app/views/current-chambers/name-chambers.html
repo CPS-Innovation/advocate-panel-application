@@ -174,8 +174,8 @@ function attachListeners(autoInput) {
 
 // Wait for accessible-autocomplete to finish rendering
 const domObserver = new MutationObserver(() => {
-  const autoInput = document.querySelector("input[id='chambers__input']")
-                 || document.querySelector("input[id='chambers']")
+  const autoInput = document.querySelector("input[id='chambersName__input']")
+                 || document.querySelector("input[id='chambersName']")
   if (autoInput) {
     domObserver.disconnect()
     attachListeners(autoInput)
