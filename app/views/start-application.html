@@ -12,13 +12,26 @@
 
     <h2 class="govuk-heading-m govuk-!-static-padding-top-5">References</h2>
 
+    {% set refereeHint = "" %}
+
+    {% if data['crownCourtLevel'] == "Level 1" %}
+      {% set refereeHint = "You can request the reference before you submit your application." %}
+    {% else %}
+      {% set refereeHint = "You can request the reference before you submit your application. We must receive the reference by 30 September." %}
+    {% endif %}
+
     {{ govukTaskList({
       items: [
         {
           title: { text: "Referee" },
-          hint: { text: "You can request the reference before you submit your application" },
+          hint: { text: refereeHint },
           href: "/references-questions/reference-page",
-          status: { tag: { text: taskStatusText(data['refereeStatus']), classes: taskStatusClass(data['refereeStatus']) } },
+          status: {
+            tag: {
+              text: taskStatusText(data['refereeStatus']),
+              classes: taskStatusClass(data['refereeStatus'])
+            }
+          },
           idPrefix: "references"
         }
       ]
@@ -81,12 +94,12 @@
     {{ govukTaskList({ items: examplesItems }) }}
 
     {% if data['crownCourtLevel'] !== 'Level 4' %}
-      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Pre-qualification questionnaire</h2>
+      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Background disclosure</h2>
 
       {{ govukTaskList({
         items: [
           {
-            title: { text: "Pre-qualification questionnaire" },
+            title: { text: "Background disclosure" },
             href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1",
             status: { tag: { text: taskStatusText(data['pqqStatus']), classes: taskStatusClass(data['pqqStatus']) } },
             idPrefix: "pqq"

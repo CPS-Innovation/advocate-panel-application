@@ -58,7 +58,7 @@ module.exports = router => {
     if (role === 'Barrister') {
       res.redirect('/task-list')
     } else if (role === 'Solicitor') {
-      res.redirect('/question-what-describes-you')
+      res.redirect('/solicitor-court')
     } else {
       res.redirect('/question-what-describes-you')
     }

@@ -20,13 +20,20 @@ href: "javascript:window.history.back()"
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        <h1 class="govuk-heading-l">What is your new address?</h1>
+        <h1 class="govuk-heading-l">Chambers details</h1>
 
         <p class="govuk-body">
-            Add a new address here to be added to the main list of member of Chambers lorem ipsum lorem
+            We’ll add your chambers to the list if it is not already there.
         </p>
 
         <fieldset class="govuk-fieldset">
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="name">
+                    Chambers name
+                </label>
+                <input class="govuk-input" id="name" name="name" type="text" 
+                    autocomplete="organization">
+            </div>            
             <div class="govuk-form-group">
                 <label class="govuk-label" for="address-line-1">
                     Address line 1
@@ -65,7 +72,7 @@ href: "javascript:window.history.back()"
         </fieldset>
 
         <div class="govuk-button-group">
-            <a href="./adding-address-3.html" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+            <a href="/task-list.html" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
                 Continue
             </a>
         </div>
