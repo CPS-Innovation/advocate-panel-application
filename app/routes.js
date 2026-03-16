@@ -8,7 +8,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 //Add your routes here
 require('./routes/personal-details')(router)
-require('./routes/application')(router)
+require('./routes/application-flow')(router)
 
 
 module.exports = router

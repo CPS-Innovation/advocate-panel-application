@@ -1,7 +1,5 @@
 /////////// app/routes/app.js
 
-const { route } = require("../routes-old")
-
 module.exports = router => {
 
   ////////// START PAGE
@@ -17,7 +15,10 @@ module.exports = router => {
 
   ////////// CHECK - PERSONAL DETAILS
   router.post('/check', (req, res) => {
-    res.redirect('/profile')
+    req.session.data.user = { loggedIn: true }
+    req.session.save(() => {
+      res.redirect('/profile')
+    })
   })
 
   ////////// LOGIN
@@ -25,10 +26,14 @@ module.exports = router => {
     res.render('login')
   })
 
+  ////////// LOGIN
   router.post('/login', (req, res) => {
     const accountProfile = require('../data/profile.json')
-    Object.assign(req.session.data, accountProfile)
-    res.redirect('/profile')
+    req.session.data.accountProfile = accountProfile
+    req.session.data.user = { loggedIn: true }
+    req.session.save(() => {
+      res.redirect('/profile')
+    })
   })
 
   ////////// SIGN OUT
@@ -116,7 +121,8 @@ module.exports = router => {
     res.redirect(returnUrl || '/task-list')
   })
 
-////////// EQUALITIES MONITORING
+
+  ////////// EQUALITIES MONITORING
   router.post('/equalities/equalities-questions-1', (req, res) => {
     res.redirect('/equalities/disability-question-2')
   })
