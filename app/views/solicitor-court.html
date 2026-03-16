@@ -1,16 +1,18 @@
-{# app/views/account.html #}
+{# app/views/question-what-describes-you.html #}
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
-{% block containerStart %}
+
+{% block beforeContent %}
   {{ govukBackLink({
     text: "Back",
-    href: "javascript:window.history.back()"
+    href: returnUrl or "javascript:window.history.back()"
   }) }}
 {% endblock %}
+
 
 {% block content %}
 
@@ -21,25 +23,25 @@
       <div class="govuk-form-group">
 
         {{ govukRadios({
-          name: "new[hasAccount]",
+          name: "courtType",
           fieldset: {
             legend: {
-              text: "Do you have an account?",
-              isPageHeading: true,
+              text: "Court type",
+              isPageHeading: false,
               classes: "govuk-fieldset__legend--l"
             }
           },
-          hint: {
-            text: "You’ll have an account if you’ve ever started an application for a CPS advocate panel"
-          },
           items: [
             {
-              value: "yes",
-              text: "Yes"
+              value: "Crown Court",
+              text: "Crown Court",
+              hint: {
+                text: "You must have higher rights of audience"
+              }
             },
             {
-              value: "no",
-              text: "No"
+              value: "Magistrates’ or Youth Courts",
+              text: "Magistrates’ or Youth Courts"
             }
           ]
         }) }}
@@ -50,8 +52,8 @@
       }) }}
 
     </form>
+  
 
   </div>
 </div>
-
 {% endblock %}

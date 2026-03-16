@@ -64,6 +64,19 @@ module.exports = router => {
     }
   })
 
+  ////////// SOLICITOR COURT 
+  router.post('/solicitor-court', (req, res) => {
+    const court = req.session.data['courtType']
+
+    if (court === 'Crown Court') {
+      res.redirect('/task-list')
+    } else if (court === 'Magistrates’ or Youth Courts') {
+      res.redirect('/solicitor-court')
+    } else {
+      res.redirect('/solicitor-court')
+    }
+  })
+
   ////////// PERSONAL DETAILS - NAME AND BAR NUMBER
   router.post('/personal-details/personal-details', (req, res) => {
     req.session.data['personalDetailsStatus'] = 'completed'
