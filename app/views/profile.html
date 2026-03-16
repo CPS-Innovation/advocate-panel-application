@@ -18,6 +18,43 @@
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l">Your profile and applications</h1>
+    
+    <h2 class="govuk-heading-m">Applications</h2>
+
+    {% if data.applications %}
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header">Application</th>
+            <th class="govuk-table__header">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for application in data.applications %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="/application/{{ application.id }}" class="govuk-link">{{ application.name }}</a>
+            </td>
+            <td class="govuk-table__cell">{{ application.status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      {{ govukInsetText({
+        html: "You have not made any applications yet."
+      }) }}
+
+      {{ govukButton({
+        text: "Start application",
+        href: "/about-you-questions/question-court-panel"
+      }) }}
+
+    {% endif %}
+
 
     <h2 class="govuk-heading-m">Personal details</h2>
 
