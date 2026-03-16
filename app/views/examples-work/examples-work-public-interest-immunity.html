@@ -1,9 +1,4 @@
-{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
-
-{% block header %}
-{% include "_includes/header-internal.njk" %}
-{% endblock %}
-
+{% extends "layouts/main.html" %}
 {% block pageTitle %}
 Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
@@ -19,7 +14,7 @@ href: "javascript:window.history.back()"
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-        <form action="./examples-work-2.html" method="get">
+  
 
     <h1 class="govuk-heading-l">
       Examples of public interest immunity (PII) and disclosure work 
@@ -32,18 +27,51 @@ href: "javascript:window.history.back()"
           tab)</a>
     </p>
 
-      <div class="govuk-form-group">
-        <div id="publicinterestWork-hint" class="govuk-hint">Please do not include maximum of 400 words
+    <form method="post" novalidate>
+
+        <div class="govuk-form-group">
+          {{ govukTextarea({
+            name: "publicInterestImmunity",
+            id: "public-interest-immunity",
+            rows: 10,
+            value: data['publicInterestImmunity'],
+            hint: {
+              text: "Please do not include more than 400 words"
+            },
+            label: {
+              text: "Advisory work",
+              classes: "govuk-visually-hidden"
+            }
+          }) }}
         </div>
-        <textarea class="govuk-textarea" id="publicinterestWork" name="publicinterestWork" rows="5"
-          aria-describedby="publicinterestWork-hint"></textarea>
-      </div>
 
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
+        {{ govukRadios({
+            name: "haveYouCompletedThisSection",
+            value: data['haveYouCompletedThisSection'],
+            fieldset: {
+              legend: {
+                text: "Have you completed this section?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "yes",
+                text: "Yes, I've completed this section"
+              },
+              {
+                value: "no",
+                text: "No, I'll come back to it later"
+              }
+            ]
+          }) }}
 
-    </form>
+          {{ govukButton({
+            text: "Save and continue"
+          }) }}
+
+      </form>
 
   </div>
 </div>

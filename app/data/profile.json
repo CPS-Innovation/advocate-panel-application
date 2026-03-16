@@ -15,5 +15,8 @@
   "gradeOrResult": "First Class Honours",
   "dateOfCompletion-day": "15",
   "dateOfCompletion-month": "06",
-  "dateOfCompletion-year": "2012"
+  "dateOfCompletion-year": "2012",
+  "seriousCrimeLevel": "Level 3",
+  "hasRasso": "Yes",
+  "hasGeneralCrime": "No"
 }

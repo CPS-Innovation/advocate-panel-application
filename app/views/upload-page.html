@@ -6,8 +6,8 @@ Upload patterns page – {{ serviceName }} – GOV.UK Prototype Kit
 
 {% block containerStart %}
 {{ govukBackLink({
-text: "Back",
-href: "javascript:window.history.back()"
+  text: "Back",
+  href: "javascript:window.history.back()"
 }) }}
 {% endblock %}
 
@@ -15,66 +15,116 @@ href: "javascript:window.history.back()"
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    
 
-    <form action="./start-application-5.html" method="get" novalidate>
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
-          <h1 class="govuk-heading-l">Upload receipts</h1>
+    <h1 class="govuk-heading-l">Advisory drafting examples</h1>
 
-          <div id="file-upload-1-hint" class="govuk-hint">
-            You can upload your receipt as a scanned copy or photo of the original. The selected file must be smaller
-            than 100MB.
-          </div>
+    <p class="govuk-hint">You can upload your examples as a scanned copy or photo of the original. The selected file must be smaller than 100MB.</p>
 
-          <p class="govuk-body" aria-live="polite">1 of 2 files uploaded</p>
+    <form method="post" novalidate id="upload-form">
 
-          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-            Upload another receipt
-          </button>
+      <input type="file" id="file-picker" class="govuk-!-display-none" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
 
-          <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh
-              page to update file upload progress</a></p>
+      <div id="hidden-inputs"></div>
 
-          <dl class="govuk-summary-list govuk-summary-list--long-key">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                receipt2.jpg
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <strong class="govuk-tag govuk-tag--yellow">
-                  Uploading
-                </strong>
+      <div id="uploaded-files" class="govuk-!-margin-bottom-4"></div>
 
-              </dd>
-              <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> receipt1.jpg</span></a>
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                <a class="govuk-link" href="#">receipt1.jpg</a>
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <strong class="govuk-tag govuk-tag--green">
-                  Uploaded
-                </strong>
 
-              </dd>
-              <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> receipt1.jpg</span></a>
-              </dd>
-            </div>
-          </dl>
+      {{ govukButton({
+        text: "Upload example",
+        classes: "govuk-button--secondary",
+        type: "button",
+        attributes: { id: "upload-btn" }
+      }) }}
 
-          <button type="submit" class="govuk-button" data-module="govuk-button">
-            Continue
-          </button>
-        </div>
+
+      <div class="govuk-form-group govuk-!-margin-top-7">
+        {{ govukRadios({
+          name: "haveYouCompletedThisSection",
+          value: data['haveYouCompletedThisSection'],
+          fieldset: {
+            legend: {
+              text: "Have you completed this section?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            { value: "yes", text: "Yes, I've completed this section" },
+            { value: "no",  text: "No, I'll come back to it later" }
+          ]
+        }) }}
       </div>
+
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
+
     </form>
 
   </div>
 </div>
 
+{% endblock %}
+
+{% block pageScripts %}
+{{ super() }}
+<script>
+
+  const uploadBtn  = document.getElementById('upload-btn')
+  const filePicker = document.getElementById('file-picker')
+  const filesDiv   = document.getElementById('uploaded-files')
+  const hiddenDiv  = document.getElementById('hidden-inputs')
+
+  let uploadedFiles = "{{ data['uploadedFiles'] or '' }}".split(',').filter(Boolean)
+
+  function renderFiles() {
+    hiddenDiv.innerHTML = ''
+
+    if (uploadedFiles.length === 0) {
+      filesDiv.innerHTML = ''
+      return
+    }
+
+    const rows = uploadedFiles.map((name, i) => `
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">${name}</dt>
+        <dd class="govuk-summary-list__value"></dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#" data-remove="${i}">Remove <span class="govuk-visually-hidden">${name}</span></a>
+        </dd>
+      </div>
+    `).join('')
+
+    filesDiv.innerHTML = `<dl class="govuk-summary-list govuk-!-margin-bottom-4">${rows}</dl>`
+
+    const hidden = document.createElement('input')
+    hidden.type  = 'hidden'
+    hidden.name  = 'uploadedFiles'
+    hidden.value = uploadedFiles.join(',')
+    hiddenDiv.appendChild(hidden)
+  }
+
+  uploadBtn.addEventListener('click', () => filePicker.click())
+
+  filePicker.addEventListener('change', () => {
+    const file = filePicker.files[0]
+    if (!file) return
+    if (!uploadedFiles.includes(file.name)) {
+      uploadedFiles.push(file.name)
+      renderFiles()
+    }
+    filePicker.value = ''
+  })
+
+  filesDiv.addEventListener('click', (e) => {
+    const removeLink = e.target.closest('[data-remove]')
+    if (!removeLink) return
+    e.preventDefault()
+    uploadedFiles.splice(removeLink.dataset.remove, 1)
+    renderFiles()
+  })
+
+  renderFiles()
+
+</script>
 {% endblock %}

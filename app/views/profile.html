@@ -14,6 +14,8 @@
 
 {% block content %}
 
+ {% set profile = data.accountProfile or {} %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
@@ -55,10 +57,32 @@
 
     {% endif %}
 
+   
+
+    {% if data.accountProfile %}
+      <h2 class="govuk-heading-m">Panel membership</h2>
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "General crime" },
+            value: { text: profile.hasGeneralCrime or "Not provided" }
+          },
+          {
+            key: { text: "RASSO" },
+            value: { text: profile.hasRasso or "Not provided" }
+          },
+          {
+            key: { text: "Serious crime" },
+            value: { text: profile.seriousCrimeLevel or "Not provided" }
+          }
+        ]
+      }) }}
+    {% endif %}
+
 
     <h2 class="govuk-heading-m">Personal details</h2>
 
-    {% set profile = data.accountProfile or {} %}
+   
     {% set preferredCircuit = data['preferredCircuit'] if data['preferredCircuit'] else (profile.preferredCircuit if profile.preferredCircuit else []) %}
     {% set secondaryCircuit = data['secondaryCircuit'] if data['secondaryCircuit'] else (profile.secondaryCircuit if profile.secondaryCircuit else []) %}
 
@@ -122,42 +146,6 @@
         }
       ]
     }) }}
-
-    <h2 class="govuk-heading-m">Applications</h2>
-
-    {% if data.applications %}
-
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header">Application</th>
-            <th class="govuk-table__header">Status</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          {% for application in data.applications %}
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="/application/{{ application.id }}" class="govuk-link">{{ application.name }}</a>
-            </td>
-            <td class="govuk-table__cell">{{ application.status }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-
-    {% else %}
-
-      {{ govukInsetText({
-        html: "You have not made any applications yet."
-      }) }}
-
-      {{ govukButton({
-        text: "Add court panel information",
-        href: "/about-you-questions/question-court-panel"
-      }) }}
-
-    {% endif %}
 
   </div>
 </div>
