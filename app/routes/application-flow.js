@@ -116,4 +116,36 @@ module.exports = router => {
     res.redirect('/start-application')
   })
 
+  ////////// PUBLIC INTEREST IMMUNITY
+  router.post('/examples-work/examples-work-public-interest-immunity', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const immunity = req.session.data['publicInterestImmunity']
+
+    if (completed === 'yes') {
+      req.session.data['piiStatus'] = 'completed'
+    } else if (immunity && immunity.trim() !== '') {
+      req.session.data['piiStatus'] = 'inProgress'
+    } else {
+      req.session.data['piiStatus'] = 'notStarted'
+    }
+
+    res.redirect('/start-application')
+  })
+
+  ////////// OTHER RELEVANT KNOWLEDGE, SKILLS & EXPERIENCE
+  router.post('/examples-work/examples-work-knowledge-skills-experience', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const knowledge = req.session.data['otherRelevantSkills']
+
+    if (completed === 'yes') {
+      req.session.data['knowledgeStatus'] = 'completed'
+    } else if (knowledge && knowledge.trim() !== '') {
+      req.session.data['knowledgeStatus'] = 'inProgress'
+    } else {
+      req.session.data['knowledgeStatus'] = 'notStarted'
+    }
+
+    res.redirect('/start-application')
+  })
+
 }
