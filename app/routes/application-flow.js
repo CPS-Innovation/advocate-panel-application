@@ -58,7 +58,7 @@ module.exports = router => {
 
     if (completed === 'yes') {
       req.session.data['refereeStatus'] = 'completed'
-      res.redirect('/examples-work/examples-work-advocacy')
+      res.redirect('/start-application')
     } else if (refereeFullName && refereeFullName.trim() !== '') {
       req.session.data['refereeStatus'] = 'inProgress'
       res.redirect('/start-application')
@@ -95,6 +95,22 @@ module.exports = router => {
       req.session.data['advisoryStatus'] = 'inProgress'
     } else {
       req.session.data['advisoryStatus'] = 'notStarted'
+    }
+
+    res.redirect('/start-application')
+  })
+
+  ////////// ADVISORY DRAFTING EXAMPLES (UPLOAD)
+  router.post('/upload-page', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const uploadedFiles = req.session.data['uploadedFiles']
+
+    if (completed === 'yes') {
+      req.session.data['uploadStatus'] = 'completed'
+    } else if (uploadedFiles && uploadedFiles.trim() !== '') {
+      req.session.data['uploadStatus'] = 'inProgress'
+    } else {
+      req.session.data['uploadStatus'] = 'notStarted'
     }
 
     res.redirect('/start-application')
