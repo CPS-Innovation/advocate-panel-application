@@ -285,4 +285,17 @@ module.exports = router => {
     res.redirect('/year-call-degree-qualifications/mini-questionnaire/check-answers')
   })
 
+
+  ////////// PQQ - CHECK ANSWERS
+  router.post('/year-call-degree-qualifications/mini-questionnaire/check-answers', (req, res) => {
+    req.session.data['pqqStatus'] = 'completed'
+    res.redirect('/start-application')
+  })
+
+  ////////// DECLARATION
+  router.post('/declaration', (req, res) => {
+    req.session.data['declarationStatus'] = 'completed'
+    res.redirect('/finish-application')
+  })
+
 }
