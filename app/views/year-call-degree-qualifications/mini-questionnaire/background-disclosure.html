@@ -1,0 +1,155 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+{% include "_includes/header-internal.njk" %}
+{% endblock %}
+
+{% block pageTitle %}
+Background disclosure – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Background disclosure</h1>
+
+    <form method="post" novalidate>
+
+      {{ govukRadios({
+        name: "criminalInvestigation",
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "1. Have you ever been the subject of a criminal investigation by the police, Serious Fraud Office or any other prosecuting authority in the United Kingdom or abroad?",
+            classes: "govuk-fieldset__legend--s govuk-!-font-weight-regular"
+          }
+        },
+        value: data['criminalInvestigation'],
+        items: [
+          { value: "yes", text: "Yes" },
+          { value: "no",  text: "No" }
+        ]
+      }) }}
+
+      {{ govukRadios({
+        name: "criminalOffence",
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "2. Have you ever been charged with and/or prosecuted for a criminal offence in the United Kingdom or abroad?",
+            classes: "govuk-fieldset__legend--s govuk-!-font-weight-regular"
+          }
+        },
+        value: data['criminalOffence'],
+        items: [
+          { value: "yes", text: "Yes" },
+          { value: "no",  text: "No" }
+        ]
+      }) }}
+
+      {{ govukRadios({
+        name: "convictionOrCaution",
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "3. Have you ever been convicted, cautioned, reprimanded or been subject to any out of Court disposals for a criminal offence in the United Kingdom or abroad, or by any court martial?",
+            classes: "govuk-fieldset__legend--s govuk-!-font-weight-regular"
+          }
+        },
+        value: data['convictionOrCaution'],
+        items: [
+          { value: "yes", text: "Yes" },
+          { value: "no",  text: "No" }
+        ]
+      }) }}
+
+      {{ govukRadios({
+        name: "disciplinaryProceedings",
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "4. Have you ever been the subject of disciplinary proceedings or enquiry by your professional body, regulator, or any former employer?",
+            classes: "govuk-fieldset__legend--s govuk-!-font-weight-regular"
+          }
+        },
+        value: data['disciplinaryProceedings'],
+        items: [
+          { value: "yes", text: "Yes" },
+          { value: "no",  text: "No" }
+        ]
+      }) }}
+
+      {{ govukRadios({
+        name: "civilProceedings",
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "5. Have you ever been the subject of civil proceedings for negligence or breach of trust?",
+            classes: "govuk-fieldset__legend--s govuk-!-font-weight-regular"
+          }
+        },
+        value: data['civilProceedings'],
+        items: [
+          { value: "yes", text: "Yes" },
+          { value: "no",  text: "No" }
+        ]
+      }) }}
+
+      {{ govukRadios({
+        name: "removalOfInstructions",
+        classes: "govuk-radios--inline",
+        fieldset: {
+          legend: {
+            text: "6. Has the CPS or other Prosecuting Authority ever had occasion to remove instructions from you?",
+            classes: "govuk-fieldset__legend--s govuk-!-font-weight-regular"
+          }
+        },
+        value: data['removalOfInstructions'],
+        items: [
+          { value: "yes", text: "Yes" },
+          { value: "no",  text: "No" }
+        ]
+      }) }}
+
+      {{ govukTextarea({
+        id: "backgroundDisclosureDetails",
+        name: "backgroundDisclosureDetails",
+        rows: 13,
+        value: data['backgroundDisclosureDetails'],
+        label: {
+          text: "If the answer to any of the questions above is yes, provide full anonymised details and dates here",
+          classes: "govuk-label--s"
+        }
+      }) }}
+
+      {{ govukRadios({
+        name: "haveYouCompletedThisSection",
+        fieldset: {
+          legend: {
+            text: "Have you completed this section?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          { value: "yes", text: "Yes, I've completed this section" },
+          { value: "no",  text: "No, I'll come back to it later" }
+        ]
+      }) }}
+
+      {{ govukButton({ text: "Save and continue" }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -181,4 +181,31 @@ module.exports = router => {
     res.redirect('/start-application')
   })
 
+  ////////// BACKGROUND DISCLOSURE (PQQ)
+  router.post('/year-call-degree-qualifications/mini-questionnaire/background-disclosure', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const data = req.session.data
+
+    const details = data['backgroundDisclosureDetails']
+
+    const anyRadioAnswered = [
+      data['criminalInvestigation'],
+      data['criminalOffence'],
+      data['convictionOrCaution'],
+      data['disciplinaryProceedings'],
+      data['civilProceedings'],
+      data['removalOfInstructions']
+    ].some(val => val === 'yes' || val === 'no')
+
+    if (completed === 'yes') {
+      data['bgDisclosureStatus'] = 'completed'
+    } else if (anyRadioAnswered || (details && details.trim() !== '')) {
+      data['bgDisclosureStatus'] = 'inProgress'
+    } else {
+      data['bgDisclosureStatus'] = 'notStarted'
+    }
+
+    res.redirect('/start-application')
+  })
+
 }
