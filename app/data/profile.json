@@ -18,5 +18,12 @@
   "dateOfCompletion-year": "2012",
   "seriousCrimeLevel": "Level 3",
   "hasRasso": "Yes",
-  "hasGeneralCrime": "No"
+  "hasGeneralCrime": "No",
+  "previousApplication": "Yes",
+  "applicationReferenceNumber": "54321",
+  "applicationLevel": "Level 3",
+  "applicationPanel": "Serious crime",
+  "applicationStatus": "Advise tag pls",
+  "applicationDate": "54321"
+
 }

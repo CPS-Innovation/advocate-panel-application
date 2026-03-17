@@ -21,28 +21,40 @@
 
     <h1 class="govuk-heading-l">Your profile and applications</h1>
     
-    <h2 class="govuk-heading-m">Applications</h2>
+    {% if data.accountProfile %}
 
-    {% if data.applications %}
+      {{ govukButton({
+        text: "Start new application",
+        href: "/about-you-questions/question-court-panel"
+      }) }}
 
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header">Application</th>
-            <th class="govuk-table__header">Status</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          {% for application in data.applications %}
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="/application/{{ application.id }}" class="govuk-link">{{ application.name }}</a>
-            </td>
-            <td class="govuk-table__cell">{{ application.status }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <h2 class="govuk-heading-m">Panel applications</h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Reference number" },
+            value: { html: "<a href='/application/" + profile.applicationReferenceNumber + "' class='govuk-link'>" + profile.applicationReferenceNumber + "</a>" }
+          },
+          {
+            key: { text: "Panel" },
+            value: { text: profile.applicationPanel or "Not provided" }
+          },
+          {
+            key: { text: "Level" },
+            value: { text: profile.applicationLevel or "Not provided" }
+          },
+          {
+            key: { text: "Date" },
+            value: { text: profile.applicationDate or "Not provided" }
+          },
+          {
+            key: { text: "Status" },
+            value: { html: "<strong class='govuk-tag govuk-tag--blue'>" + (profile.applicationStatus or "In progress") + "</strong>" }
+          }
+        ]
+      }) }}
+
 
     {% else %}
 
@@ -57,10 +69,8 @@
 
     {% endif %}
 
-   
-
     {% if data.accountProfile %}
-      <h2 class="govuk-heading-m">Panel membership</h2>
+      <h2 class="govuk-heading-m">Panel memberships</h2>
       {{ govukSummaryList({
         rows: [
           {
@@ -77,8 +87,14 @@
           }
         ]
       }) }}
-    {% endif %}
 
+    {% else %}
+
+      {{ govukInsetText({
+        html: "You are not currently a member of any panels."
+      }) }}
+
+    {% endif %}
 
     <h2 class="govuk-heading-m">Personal details</h2>
 
