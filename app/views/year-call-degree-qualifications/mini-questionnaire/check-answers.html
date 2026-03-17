@@ -1,73 +1,100 @@
-{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
-
-{% block header %}
-  {% include "_includes/header-internal.njk" %}
-{% endblock %}
+{% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+  Check your answers – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({ text: "Back", href: "javascript:window.history.back()" }) }}
 {% endblock %}
 
 {% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
 
-<h1 class="govuk-heading-l">Check your answers</h1>
+    <h1 class="govuk-heading-l">Check your answers</h1>
 
-<dl class="govuk-summary-list">
+    {% set row1Html %}
+      {{ data['CriminalInvestigation'] or "Not provided" }}
+      {% if data['CriminalInvestigation'] === "Yes" and data['criminalInvestigationDetails'] %}
+        <p class="govuk-body govuk-!-margin-top-2 govuk-!-margin-bottom-0">{{ data['criminalInvestigationDetails'] }}</p>
+      {% endif %}
+    {% endset %}
 
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Criminal investigation</dt>
-    <dd class="govuk-summary-list__value">{{ data['CriminalInvestigation'] }}</dd>
-    <dd class="govuk-summary-list__actions">
-      <a href="./pre-qualification-questionnaire-1.html">Change<span class="govuk-visually-hidden">Criminal investigation</span></a>
-    </dd>
+    {% set row2Html %}
+      {{ data['CriminalOffence'] or "Not provided" }}
+      {% if data['CriminalOffence'] === "Yes" and data['criminalOffenceDetails'] %}
+        <p class="govuk-body govuk-!-margin-top-2 govuk-!-margin-bottom-0">{{ data['criminalOffenceDetails'] }}</p>
+      {% endif %}
+    {% endset %}
+
+    {% set row3Html %}
+      {{ data['convinctionCautionReprimend'] or "Not provided" }}
+      {% if data['convinctionCautionReprimend'] === "Yes" and data['convictionOrCautionDetails'] %}
+        <p class="govuk-body govuk-!-margin-top-2 govuk-!-margin-bottom-0">{{ data['convictionOrCautionDetails'] }}</p>
+      {% endif %}
+    {% endset %}
+
+    {% set row4Html %}
+      {{ data['DisciplinaryProceedings'] or "Not provided" }}
+      {% if data['DisciplinaryProceedings'] === "Yes" and data['disciplinaryProceedingsDetails'] %}
+        <p class="govuk-body govuk-!-margin-top-2 govuk-!-margin-bottom-0">{{ data['disciplinaryProceedingsDetails'] }}</p>
+      {% endif %}
+    {% endset %}
+
+    {% set row5Html %}
+      {{ data['CivilProceedings'] or "Not provided" }}
+      {% if data['CivilProceedings'] === "Yes" and data['civilProceedingsDetails'] %}
+        <p class="govuk-body govuk-!-margin-top-2 govuk-!-margin-bottom-0">{{ data['civilProceedingsDetails'] }}</p>
+      {% endif %}
+    {% endset %}
+
+    {% set row6Html %}
+      {{ data['ProsecutingAuthority'] or "Not provided" }}
+      {% if data['ProsecutingAuthority'] === "Yes" and data['removalOfInstructionsDetails'] %}
+        <p class="govuk-body govuk-!-margin-top-2 govuk-!-margin-bottom-0">{{ data['removalOfInstructionsDetails'] }}</p>
+      {% endif %}
+    {% endset %}
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Criminal investigation" },
+          value: { html: row1Html },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1", text: "Change", visuallyHiddenText: "criminal investigation" }] }
+        },
+        {
+          key: { text: "Criminal offence" },
+          value: { html: row2Html },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-2", text: "Change", visuallyHiddenText: "criminal offence" }] }
+        },
+        {
+          key: { text: "Conviction, caution or reprimand" },
+          value: { html: row3Html },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-3", text: "Change", visuallyHiddenText: "conviction, caution or reprimand" }] }
+        },
+        {
+          key: { text: "Disciplinary proceedings" },
+          value: { html: row4Html },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-4", text: "Change", visuallyHiddenText: "disciplinary proceedings" }] }
+        },
+        {
+          key: { text: "Civil proceedings" },
+          value: { html: row5Html },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-5", text: "Change", visuallyHiddenText: "civil proceedings" }] }
+        },
+        {
+          key: { text: "Removal of instructions" },
+          value: { html: row6Html },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-6", text: "Change", visuallyHiddenText: "removal of instructions" }] }
+        }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and continue" }) }}
+    </form>
+
   </div>
-
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Criminal offence</dt>
-    <dd class="govuk-summary-list__value">{{ data['CriminalOffence'] }}</dd>
-    <dd class="govuk-summary-list__actions">
-      <a href="./pre-qualification-questionnaire-2.html">Change<span class="govuk-visually-hidden"> Criminal offence</span></a>
-    </dd>
-  </div>
-
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Convinction, caution or reprimend</dt>
-    <dd class="govuk-summary-list__value">{{ data['convinctionCautionReprimend'] }}</dd>
-    <dd class="govuk-summary-list__actions">
-      <a href="./pre-qualification-questionnaire-3.html">Change<span class="govuk-visually-hidden">Convinction, caution or reprimend</span></a>
-    </dd>
-  </div>
-
-
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Disciplinary proceedings</dt>
-    <dd class="govuk-summary-list__value">{{ data['DisciplinaryProceedings'] }}</dd>
-    <dd class="govuk-summary-list__actions">
-      <a href="./pre-qualification-questionnaire-4.html">Change<span class="govuk-visually-hidden"> Disciplinary proceedings</span></a>
-    </dd>
-  </div>
-
-    <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Civil proceedings</dt>
-    <dd class="govuk-summary-list__value">{{ data['CivilProceedings'] }}</dd>
-    <dd class="govuk-summary-list__actions">
-      <a href="./pre-qualification-questionnaire-5.html">Change<span class="govuk-visually-hidden"> Civil proceedings</span></a>
-    </dd>
-  </div>
-
-    <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">Prosecuting Authority</dt>
-    <dd class="govuk-summary-list__value">{{ data['ProsecutingAuthority'] }}</dd>
-    <dd class="govuk-summary-list__actions">
-      <a href="./pre-qualification-questionnaire-6.html">Change<span class="govuk-visually-hidden">   Prosecuting Authority</span></a>
-    </dd>
-  </div>
-
-
-</dl>
-
-<form action="../../start-application-6.html" method="get">
-  <button class="govuk-button">Confirm and continue</button>
-</form>
-
+</div>
 {% endblock %}

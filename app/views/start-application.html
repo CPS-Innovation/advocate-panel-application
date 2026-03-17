@@ -96,11 +96,12 @@
     {% if data['crownCourtLevel'] !== 'Level 4' %}
       <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Background disclosure</h2>
 
+      {# Change the HREF below to /year-call-degree-qualifications/mini-questionnaire/backgroun-disclosure for single page version #}
       {{ govukTaskList({
         items: [
           {
             title: { text: "Background disclosure" },
-            href: "/year-call-degree-qualifications/mini-questionnaire/background-disclosure",
+            href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1",
             status: { tag: { text: taskStatusText(data['bgDisclosureStatus']), classes: taskStatusClass(data['bgDisclosureStatus']) } },
             idPrefix: "pqq"
           }
