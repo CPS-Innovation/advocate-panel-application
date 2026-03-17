@@ -142,7 +142,7 @@
       ]
     }) }}
 
-    
+
     <h3 class="govuk-heading-m">Degree and post-graduate qualifications</h3>
 
     {% if data['degreeQualifications'] and data['degreeQualifications'].length %}
@@ -189,7 +189,7 @@
             },
             {
               key: { text: "Date of completion" },
-              value: { text: (qual.dateDay + "/" + qual.dateMonth + "/" + qual.dateYear) if (qual.dateDay and qual.dateMonth and qual.dateYear) else "Not provided" },
+              value: { text: qual.dateDisplay or "Not provided" },
               actions: {
                 items: [{
                   href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",

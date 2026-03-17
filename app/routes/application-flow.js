@@ -148,4 +148,37 @@ module.exports = router => {
     res.redirect('/start-application')
   })
 
+  ////////// APPRECIATION OF THE ROLE OF A PANEL ADVOCATE
+  router.post('/examples-work/examples-work-appreciation', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const appreciation = req.session.data['apreciationExample']
+
+    if (completed === 'yes') {
+      req.session.data['appreciationStatus'] = 'completed'
+    } else if (appreciation && appreciation.trim() !== '') {
+      req.session.data['appreciationStatus'] = 'inProgress'
+    } else {
+      req.session.data['appreciationStatus'] = 'notStarted'
+    }
+
+    res.redirect('/start-application')
+  })
+
+
+  ////////// ADDITIONAL INFORMATION
+  router.post('/examples-work/examples-work-additional', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const additional = req.session.data['additionalInfoExample']
+
+    if (completed === 'yes') {
+      req.session.data['additionalStatus'] = 'completed'
+    } else if (additional && additional.trim() !== '') {
+      req.session.data['additionalStatus'] = 'inProgress'
+    } else {
+      req.session.data['additionalStatus'] = 'notStarted'
+    }
+
+    res.redirect('/start-application')
+  })
+
 }
