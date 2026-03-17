@@ -129,7 +129,30 @@ module.exports = router => {
 
   ////////// DEGREE AND POSTGRAD QUALS
   router.post('/year-call-degree-qualifications/degree-qualifications', (req, res) => {
+    const data = req.session.data
+
+    // Normalise: single submission = string, multiple = array
+    const toArray = val => val ? (Array.isArray(val) ? val : [val]) : []
+
+    const institutions = toArray(data['institution'])
+    const courses      = toArray(data['courseOrSubject'])
+    const grades       = toArray(data['gradeOrResult'])
+    const days         = toArray(data['dateOfCompletion-day'])
+    const months       = toArray(data['dateOfCompletion-month'])
+    const years        = toArray(data['dateOfCompletion-year'])
+
+    // Zip parallel arrays into qualification objects
+    req.session.data['degreeQualifications'] = institutions.map((inst, i) => ({
+      institution:    inst,
+      courseOrSubject: courses[i] || '',
+      gradeOrResult:  grades[i]  || '',
+      dateDay:   days[i]   || '',
+      dateMonth: months[i] || '',
+      dateYear:  years[i]  || ''
+    }))
+
     req.session.data['degreeAndPostGradQualifications'] = 'completed'
+
     const returnUrl = req.query.returnUrl
     res.redirect(returnUrl || '/task-list')
   })

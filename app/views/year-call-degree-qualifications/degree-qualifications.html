@@ -1,18 +1,14 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+  Degree and post-graduate qualifications – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block containerStart %}
-{{ govukBackLink({
-  text: "Back",
-  href: "javascript:window.history.back()"
-}) }}
+  {{ govukBackLink({ text: "Back", href: "javascript:window.history.back()" }) }}
 {% endblock %}
 
 {% block content %}
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
@@ -20,82 +16,91 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
     <form method="post" novalidate>
 
-      {{ govukDateInput({
-        id: "dateOfCompletion",
-        namePrefix: "dateOfCompletion",
-        fieldset: {
-          legend: {
-            text: "Date of completion",
-            classes: "govuk-fieldset__legend--m"
-          }
-        },
-        items: [
-          {
-            name: "day",
-            classes: "govuk-input--width-2",
-            inputmode: "numeric",
-            value: data['dateOfCompletion-day']
-          },
-          {
-            name: "month",
-            classes: "govuk-input--width-2",
-            inputmode: "numeric",
-            value: data['dateOfCompletion-month']
-          },
-          {
-            name: "year",
-            classes: "govuk-input--width-4",
-            inputmode: "numeric",
-            value: data['dateOfCompletion-year']
-          }
-        ]
-      }) }}
+      <div id="qualifications-container">
+        <div class="add-another__item">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="govuk-heading-m add-another__heading govuk-!-margin-bottom-4" style="margin-bottom: 0">Qualification 1</h2>
+            <button type="button" class="govuk-button govuk-button--secondary add-another__remove" style="display:none; margin-bottom: 0">
+              Remove
+            </button>
+          </div>
 
-      {{ govukInput({
-        label: {
-          text: "Institution",
-          classes: "govuk-label--m"
-        },
-        id: "institution",
-        name: "institution",
-        spellcheck: false,
-        value: data['institution']
-      }) }}
+          {{ govukDateInput({
+            id: "dateOfCompletion",
+            namePrefix: "dateOfCompletion",
+            fieldset: {
+              legend: {
+                text: "Date of completion",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              { name: "day",   classes: "govuk-input--width-2", inputmode: "numeric", value: data['dateOfCompletion-day'] },
+              { name: "month", classes: "govuk-input--width-2", inputmode: "numeric", value: data['dateOfCompletion-month'] },
+              { name: "year",  classes: "govuk-input--width-4", inputmode: "numeric", value: data['dateOfCompletion-year'] }
+            ]
+          }) }}
 
-      {{ govukInput({
-        label: {
-          text: "Course or subject",
-          classes: "govuk-label--m"
-        },
-        id: "courseOrSubject",
-        name: "courseOrSubject",
-        spellcheck: false,
-        value: data['courseOrSubject']
-      }) }}
+          {{ govukInput({ label: { text: "Institution",     classes: "govuk-label--s" }, id: "institution",    name: "institution",    spellcheck: false, value: data['institution'] }) }}
+          {{ govukInput({ label: { text: "Course or subject", classes: "govuk-label--s" }, id: "courseOrSubject", name: "courseOrSubject", spellcheck: false, value: data['courseOrSubject'] }) }}
+          {{ govukInput({ label: { text: "Grade or result", classes: "govuk-label--s" }, id: "gradeOrResult",  name: "gradeOrResult",  spellcheck: false, value: data['gradeOrResult'] }) }}
 
-      {{ govukInput({
-        label: {
-          text: "Grade or result",
-          classes: "govuk-label--m"
-        },
-        id: "gradeOrResult",
-        name: "gradeOrResult",
-        spellcheck: false,
-        value: data['gradeOrResult']
-      }) }}
 
-      {{ govukButton({
-        text: "Save qualification"
-      }) }}
+        </div>
+      </div>
 
-      {{ govukButton({
-        text: "Add new",
-        classes: "govuk-button--secondary"
-      }) }}
+      <div class="govuk-button-group" style="flex-direction: column; align-items: flex-start;">
+        <button type="button" id="add-qualification-btn" class="govuk-button govuk-button--secondary">
+          Add another qualification
+        </button>
+        {{ govukButton({ text: "Save and continue" }) }}
+      </div>
 
     </form>
-
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var container = document.getElementById('qualifications-container')
+    var addBtn    = document.getElementById('add-qualification-btn')
+
+    function updateHeadings() {
+      container.querySelectorAll('.add-another__item').forEach(function (item, i) {
+        item.querySelector('.add-another__heading').textContent = 'Qualification ' + (i + 1)
+      })
+    }
+
+    function updateRemoveButtons() {
+      var items = container.querySelectorAll('.add-another__item')
+      items.forEach(function (item) {
+        item.querySelector('.add-another__remove').style.display = items.length > 1 ? '' : 'none'
+      })
+    }
+
+    function attachRemoveListener(item) {
+      item.querySelector('.add-another__remove').addEventListener('click', function () {
+        item.remove()
+        updateHeadings()
+        updateRemoveButtons()
+      })
+    }
+
+    addBtn.addEventListener('click', function () {
+      var items   = container.querySelectorAll('.add-another__item')
+      var newItem = items[items.length - 1].cloneNode(true)
+
+      newItem.querySelectorAll('input').forEach(function (input) { input.value = '' })
+
+      container.appendChild(newItem)
+      attachRemoveListener(newItem)
+      updateHeadings()
+      updateRemoveButtons()
+      newItem.querySelector('input').focus()
+    })
+
+    container.querySelectorAll('.add-another__item').forEach(attachRemoveListener)
+  })
+</script>
 
 {% endblock %}
