@@ -186,8 +186,6 @@ module.exports = router => {
     const completed = res.locals.haveYouCompletedThisSection
     const data = req.session.data
 
-    const details = data['backgroundDisclosureDetails']
-
     const anyRadioAnswered = [
       data['criminalInvestigation'],
       data['criminalOffence'],
@@ -197,9 +195,18 @@ module.exports = router => {
       data['removalOfInstructions']
     ].some(val => val === 'yes' || val === 'no')
 
+    const anyDetailsEntered = [
+      data['criminalInvestigationDetails'],
+      data['criminalOffenceDetails'],
+      data['convictionOrCautionDetails'],
+      data['disciplinaryProceedingsDetails'],
+      data['civilProceedingsDetails'],
+      data['removalOfInstructionsDetails']
+    ].some(val => val && val.trim() !== '')
+
     if (completed === 'yes') {
       data['bgDisclosureStatus'] = 'completed'
-    } else if (anyRadioAnswered || (details && details.trim() !== '')) {
+    } else if (anyRadioAnswered || anyDetailsEntered) {
       data['bgDisclosureStatus'] = 'inProgress'
     } else {
       data['bgDisclosureStatus'] = 'notStarted'

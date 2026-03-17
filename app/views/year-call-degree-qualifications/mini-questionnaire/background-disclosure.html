@@ -26,7 +26,6 @@ Background disclosure – {{ serviceName }} – GOV.UK Prototype Kit
 
       {{ govukRadios({
         name: "criminalInvestigation",
-        classes: "govuk-radios--inline",
         fieldset: {
           legend: {
             text: "1. Have you ever been the subject of a criminal investigation by the police, Serious Fraud Office or any other prosecuting authority in the United Kingdom or abroad?",
@@ -35,14 +34,25 @@ Background disclosure – {{ serviceName }} – GOV.UK Prototype Kit
         },
         value: data['criminalInvestigation'],
         items: [
-          { value: "yes", text: "Yes" },
-          { value: "no",  text: "No" }
+          {
+            value: "yes",
+            text: "Yes",
+            conditional: {
+              html: govukTextarea({
+                id: "criminalInvestigationDetails",
+                name: "criminalInvestigationDetails",
+                rows: 8,
+                value: data['criminalInvestigationDetails'],
+                label: { text: "Provide full anonymised details and dates", classes: "govuk-label--s" }
+              })
+            }
+          },
+          { value: "no", text: "No" }
         ]
       }) }}
 
       {{ govukRadios({
         name: "criminalOffence",
-        classes: "govuk-radios--inline",
         fieldset: {
           legend: {
             text: "2. Have you ever been charged with and/or prosecuted for a criminal offence in the United Kingdom or abroad?",
@@ -51,14 +61,25 @@ Background disclosure – {{ serviceName }} – GOV.UK Prototype Kit
         },
         value: data['criminalOffence'],
         items: [
-          { value: "yes", text: "Yes" },
-          { value: "no",  text: "No" }
+          {
+            value: "yes",
+            text: "Yes",
+            conditional: {
+              html: govukTextarea({
+                id: "criminalOffenceDetails",
+                name: "criminalOffenceDetails",
+                rows: 8,
+                value: data['criminalOffenceDetails'],
+                label: { text: "Provide full anonymised details and dates", classes: "govuk-label--s" }
+              })
+            }
+          },
+          { value: "no", text: "No" }
         ]
       }) }}
 
       {{ govukRadios({
         name: "convictionOrCaution",
-        classes: "govuk-radios--inline",
         fieldset: {
           legend: {
             text: "3. Have you ever been convicted, cautioned, reprimanded or been subject to any out of Court disposals for a criminal offence in the United Kingdom or abroad, or by any court martial?",
@@ -67,14 +88,25 @@ Background disclosure – {{ serviceName }} – GOV.UK Prototype Kit
         },
         value: data['convictionOrCaution'],
         items: [
-          { value: "yes", text: "Yes" },
-          { value: "no",  text: "No" }
+          {
+            value: "yes",
+            text: "Yes",
+            conditional: {
+              html: govukTextarea({
+                id: "convictionOrCautionDetails",
+                name: "convictionOrCautionDetails",
+                rows: 8,
+                value: data['convictionOrCautionDetails'],
+                label: { text: "Provide full anonymised details and dates", classes: "govuk-label--s" }
+              })
+            }
+          },
+          { value: "no", text: "No" }
         ]
       }) }}
 
       {{ govukRadios({
         name: "disciplinaryProceedings",
-        classes: "govuk-radios--inline",
         fieldset: {
           legend: {
             text: "4. Have you ever been the subject of disciplinary proceedings or enquiry by your professional body, regulator, or any former employer?",
@@ -83,14 +115,25 @@ Background disclosure – {{ serviceName }} – GOV.UK Prototype Kit
         },
         value: data['disciplinaryProceedings'],
         items: [
-          { value: "yes", text: "Yes" },
-          { value: "no",  text: "No" }
+          {
+            value: "yes",
+            text: "Yes",
+            conditional: {
+              html: govukTextarea({
+                id: "disciplinaryProceedingsDetails",
+                name: "disciplinaryProceedingsDetails",
+                rows: 8,
+                value: data['disciplinaryProceedingsDetails'],
+                label: { text: "Provide full anonymised details and dates", classes: "govuk-label--s" }
+              })
+            }
+          },
+          { value: "no", text: "No" }
         ]
       }) }}
 
       {{ govukRadios({
         name: "civilProceedings",
-        classes: "govuk-radios--inline",
         fieldset: {
           legend: {
             text: "5. Have you ever been the subject of civil proceedings for negligence or breach of trust?",
@@ -99,14 +142,25 @@ Background disclosure – {{ serviceName }} – GOV.UK Prototype Kit
         },
         value: data['civilProceedings'],
         items: [
-          { value: "yes", text: "Yes" },
-          { value: "no",  text: "No" }
+          {
+            value: "yes",
+            text: "Yes",
+            conditional: {
+              html: govukTextarea({
+                id: "civilProceedingsDetails",
+                name: "civilProceedingsDetails",
+                rows: 8,
+                value: data['civilProceedingsDetails'],
+                label: { text: "Provide full anonymised details and dates", classes: "govuk-label--s" }
+              })
+            }
+          },
+          { value: "no", text: "No" }
         ]
       }) }}
 
       {{ govukRadios({
         name: "removalOfInstructions",
-        classes: "govuk-radios--inline",
         fieldset: {
           legend: {
             text: "6. Has the CPS or other Prosecuting Authority ever had occasion to remove instructions from you?",
@@ -115,20 +169,21 @@ Background disclosure – {{ serviceName }} – GOV.UK Prototype Kit
         },
         value: data['removalOfInstructions'],
         items: [
-          { value: "yes", text: "Yes" },
-          { value: "no",  text: "No" }
+          {
+            value: "yes",
+            text: "Yes",
+            conditional: {
+              html: govukTextarea({
+                id: "removalOfInstructionsDetails",
+                name: "removalOfInstructionsDetails",
+                rows: 8,
+                value: data['removalOfInstructionsDetails'],
+                label: { text: "Provide full anonymised details and dates", classes: "govuk-label--s" }
+              })
+            }
+          },
+          { value: "no", text: "No" }
         ]
-      }) }}
-
-      {{ govukTextarea({
-        id: "backgroundDisclosureDetails",
-        name: "backgroundDisclosureDetails",
-        rows: 13,
-        value: data['backgroundDisclosureDetails'],
-        label: {
-          text: "If the answer to any of the questions above is yes, provide full anonymised details and dates here",
-          classes: "govuk-label--s"
-        }
       }) }}
 
       {{ govukRadios({
