@@ -142,56 +142,83 @@
       ]
     }) }}
 
+    
     <h3 class="govuk-heading-m">Degree and post-graduate qualifications</h3>
 
-    {{ govukSummaryList({
-      rows: [
-        {
-          key: { text: "Institution" },
-          value: { text: data['institution'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "institution"
-            }]
+    {% if data['degreeQualifications'] and data['degreeQualifications'].length %}
+      {% for qual in data['degreeQualifications'] %}
+
+        {% if data['degreeQualifications'].length > 1 %}
+          <h4 class="govuk-heading-s">Qualification {{ loop.index }}</h4>
+        {% endif %}
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: { text: "Institution" },
+              value: { text: qual.institution or "Not provided" },
+              actions: {
+                items: [{
+                  href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
+                  text: "Change",
+                  visuallyHiddenText: "institution, qualification " + loop.index
+                }]
+              }
+            },
+            {
+              key: { text: "Course or subject" },
+              value: { text: qual.courseOrSubject or "Not provided" },
+              actions: {
+                items: [{
+                  href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
+                  text: "Change",
+                  visuallyHiddenText: "course or subject, qualification " + loop.index
+                }]
+              }
+            },
+            {
+              key: { text: "Grade or result" },
+              value: { text: qual.gradeOrResult or "Not provided" },
+              actions: {
+                items: [{
+                  href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
+                  text: "Change",
+                  visuallyHiddenText: "grade or result, qualification " + loop.index
+                }]
+              }
+            },
+            {
+              key: { text: "Date of completion" },
+              value: { text: (qual.dateDay + "/" + qual.dateMonth + "/" + qual.dateYear) if (qual.dateDay and qual.dateMonth and qual.dateYear) else "Not provided" },
+              actions: {
+                items: [{
+                  href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
+                  text: "Change",
+                  visuallyHiddenText: "date of completion, qualification " + loop.index
+                }]
+              }
+            }
+          ]
+        }) }}
+
+      {% endfor %}
+    {% else %}
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Qualifications" },
+            value: { text: "Not provided" },
+            actions: {
+              items: [{
+                href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
+                text: "Add",
+                visuallyHiddenText: "degree qualifications"
+              }]
+            }
           }
-        },
-        {
-          key: { text: "Course or subject" },
-          value: { text: data['courseOrSubject'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "course or subject"
-            }]
-          }
-        },
-        {
-          key: { text: "Grade or result" },
-          value: { text: data['gradeOrResult'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "grade or result"
-            }]
-          }
-        },
-        {
-          key: { text: "Date of completion" },
-          value: { html: data | isoDateFromDateInput("dateOfCompletion") | govukDate or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "date of completion"
-            }]
-          }
-        }
-      ]
-    }) }}
+        ]
+      }) }}
+    {% endif %}
 
     <form action="/check" method="post" novalidate>
       {{ govukButton({
