@@ -31,19 +31,48 @@ href: "javascript:window.history.back()"
     </p>
 
 
-    <form action="./check-answers.html" method="get">
-
-
+    <form method="post" novalidate>
+      
       <div class="govuk-form-group">
-        <div id="additionalInfo-hint" class="govuk-hint">Please do not include maximum of 400 words
-        </div>
-        <textarea class="govuk-textarea" id="additionalInfo" name="additionalInfo" rows="5"
-          aria-describedby="additionalInfo-hint"></textarea>
+        {{ govukTextarea({
+          id: "additional-info",
+          name: "additionalInfoExample",
+          rows: 10,
+          value: data['additionalInfoExample'],
+          label: {
+            text: "Example of additional Info",
+            classes: "govuk-label--m govuk-visually-hidden"
+          },
+          hint: {
+            text: "You can write up to 400 words."
+          }
+        }) }}
       </div>
 
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
+        {{ govukRadios({
+          name: "haveYouCompletedThisSection",
+          fieldset: {
+            legend: {
+              text: "Have you completed this section?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes, I've completed this section"
+            },
+            {
+              value: "no",
+              text: "No, I'll come back to it later"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
 
     </form>
 
