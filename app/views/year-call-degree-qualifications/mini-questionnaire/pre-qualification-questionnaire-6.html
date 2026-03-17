@@ -1,8 +1,4 @@
-{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
-
-{% block header %}
-{% include "_includes/header-internal.njk" %}
-{% endblock %}
+{% extends "layouts/main.html" %}
 
 {% block pageTitle %}
 Question page template – {{ serviceName }} – GOV.UK Prototype Kit
@@ -26,35 +22,37 @@ href: "javascript:window.history.back()"
 
     <p class="govuk-body">Has the CPS or other prosecuting authority ever removed instructions from you?</p>
 
-    <form action="./check-answers.html" method="get">
+    <form method="post" novalidate>
 
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset">
-          <div class="govuk-radios" data-module="govuk-radios">
+      {{ govukRadios({
+        name: "ProsecutingAuthority",
+        fieldset: {
+          legend: {
+            text: "Has the CPS or other Prosecuting Authority ever had occasion to remove instructions from you?",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--s govuk-visually-hidden"
+          }
+        },
+        value: data['ProsecutingAuthority'],
+        items: [
+          {
+            value: "Yes",
+            text: "Yes",
+            conditional: {
+              html: govukTextarea({
+                id: "removalOfInstructionsDetails",
+                name: "removalOfInstructionsDetails",
+                rows: 8,
+                value: data['removalOfInstructionsDetails'],
+                label: { text: "Provide full anonymised details and dates", classes: "govuk-label--s" }
+              })
+            }
+          },
+          { value: "No", text: "No" }
+        ]
+      }) }}
 
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="yesProsecutingAuthority" name="ProsecutingAuthority" type="radio"
-                value="Yes">
-              <label class="govuk-label govuk-radios__label" for="yesProsecutingAuthority">
-                Yes
-              </label>
-            </div>
-
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="noProsecutingAuthority" name="ProsecutingAuthority" type="radio"
-                value="No">
-              <label class="govuk-label govuk-radios__label" for="noProsecutingAuthority">
-                No
-              </label>
-            </div>
-
-          </div>
-        </fieldset>
-      </div>
-
-      <button type="submit" class="govuk-button" data-module="govuk-button">
-        Continue
-      </button>
+      {{ govukButton({ text: "Save and continue" }) }}
 
     </form>
 
