@@ -17,7 +17,7 @@ module.exports = router => {
   router.post('/about-you-questions/question-court-panel', (req, res) => {
     const courtPanel = req.session.data['courtPanel']
 
-    if (courtPanel === 'Crown Court General Crime') {
+    if (courtPanel === 'General crime') {
       res.redirect('/about-you-questions/crown-court-levels')
     } else if (courtPanel === 'Rape and serious sexual offences') {
       res.redirect('/about-you-questions/question-court-panel')
