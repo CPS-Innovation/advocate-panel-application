@@ -56,7 +56,7 @@
 
     {% if data['crownCourtLevel'] !== 'Level 1' %}
       {% set examplesItems = (examplesItems.push({
-        title: { text: "Advisory drafting examples (upload)" },
+        title: { text: "Advisory drafting (upload)" },
         href: "/upload-page",
         status: { tag: { text: taskStatusText(data['uploadStatus']), classes: taskStatusClass(data['uploadStatus']) } },
         idPrefix: "upload"
@@ -71,7 +71,7 @@
     {% endif %}
 
     {% set examplesItems = (examplesItems.push({
-      title: { text: "Other relevant knowledge, skills and experience" },
+      title: { text: "Other knowledge, skills and experience" },
       href: "/examples-work/examples-work-knowledge-skills-experience",
       status: { tag: { text: taskStatusText(data['knowledgeStatus']), classes: taskStatusClass(data['knowledgeStatus']) } },
       idPrefix: "knowledge"

@@ -18,7 +18,23 @@ Upload patterns page – {{ serviceName }} – GOV.UK Prototype Kit
 
     <h1 class="govuk-heading-l">Advisory drafting examples</h1>
 
-    <p class="govuk-hint">You can upload your examples as a scanned copy or photo of the original. The selected file must be smaller than 100MB.</p>
+    <p class="govuk-body">Upload a redacted version of a recent drafting example, such as a skeleton argument or sentencing note.</p>
+
+    <p class="govuk-body">You can upload a Word or PDF file of up to 5 pages.</p>
+
+        <p class="govuk-body">Do not include the names of:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>yourself</li>
+      <li>victims</li>
+      <li>witnesses</li>
+      <li>defendants</li>
+      <li>courts</li>
+      <li>judges</li>
+      <li>operations</li>
+    </ul>
+
+    <p class="govuk-body">Your application will be returned for you to change if you include identifying information.</p>
+
 
     <form method="post" novalidate id="upload-form">
 
@@ -27,7 +43,6 @@ Upload patterns page – {{ serviceName }} – GOV.UK Prototype Kit
       <div id="hidden-inputs"></div>
 
       <div id="uploaded-files" class="govuk-!-margin-bottom-4"></div>
-
 
       {{ govukButton({
         text: "Upload example",
