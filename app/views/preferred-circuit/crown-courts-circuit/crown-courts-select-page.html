@@ -41,18 +41,19 @@ Crown courts – {{ serviceName }} – GOV.UK Prototype Kit
 
     <h1 class="govuk-heading-l">Preferred Crown Courts</h1>
 
-    {{ xGovukAutocomplete({
-      id: "court",
-      name: "court",
-      label: {
-        text: "Crown Court",
-        classes: "govuk-!-font-weight-bold"
-      },
-      hint: {
-        text: "Select up to 3 courts"
-      },
-      items: crownCourts
-    }) }}
+      {{ xGovukAutocomplete({
+        id: "court",
+        name: "court",
+        label: {
+          text: "Crown Court",
+          classes: "govuk-!-font-weight-bold"
+        },
+        hint: {
+          text: "Select up to 3 courts"
+        },
+        minLength: 2,
+        items: crownCourts
+      }) }}
 
 
     <div id="selected-courts" class="govuk-!-margin-top-6 govuk-!-margin-bottom-6" aria-live="polite"></div>
@@ -145,14 +146,15 @@ function renderCourts() {
   syncHiddenInput()
 }
 
-function addCourt(name) {
-  if (!name) return
-  if (selectedCourts.includes(name)) return
-  selectedCourts.push(name)
-  renderCourts()
-}
+  function addCourt(name) {
+    if (!name) return
+    if (!courtAddresses[name]) return  // reject anything not in the known list
+    if (selectedCourts.includes(name)) return
+    selectedCourts.push(name)
+    renderCourts()
+  }
 
-selectedContainer.addEventListener("click", function(e) {
+  selectedContainer.addEventListener("click", function(e) {
 
   if (e.target.dataset.remove) {
     e.preventDefault()
