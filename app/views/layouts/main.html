@@ -12,6 +12,10 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
   {% include "_includes/header.njk" %}
 {% endblock %}
 
+{% block pageTitle %}
+  {{ pageTitle if pageTitle else "Apply for the CPS Advocate Panel — GOV.UK" }}
+{% endblock %}
+
 {% block stylesheets %}
   {{ super() }}
   <link href="../../../public/css/accessible-autocomplete.min.css" rel="stylesheet" type="text/css">

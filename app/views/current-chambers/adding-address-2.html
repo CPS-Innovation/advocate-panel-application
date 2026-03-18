@@ -1,12 +1,7 @@
-{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+{# app/views/current-chambers/name-chambers.html #}
+{% extends "layouts/main.html" %}
 
-{% block header %}
-{% include "_includes/header-internal.njk" %}
-{% endblock %}
-
-{% block pageTitle %}
-Member of Chambers – {{ serviceName }} – GOV.UK Prototype Kit
-{% endblock %}
+{% set pageTitle = "Chambers details — Apply for the CPS Advocate Panel — GOV.UK" %}
 
 {% block containerStart %}
 {{ govukBackLink({
