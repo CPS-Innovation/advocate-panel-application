@@ -243,54 +243,53 @@ module.exports = router => {
     res.redirect('/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-6')
   })
 
-  ////////// PQQ - REMOVAL OF INSTRUCTIONS (FINAL — sets status)
-  router.post('/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-6', (req, res) => {
-    const data = req.session.data
+ ////////// PQQ - REMOVAL OF INSTRUCTIONS (FINAL — sets status)
+router.post('/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-6', (req, res) => {
+  const data = req.session.data
 
-    const anyAnswered = [
-      data['CriminalInvestigation'],
-      data['CriminalOffence'],
-      data['convinctionCautionReprimend'],
-      data['DisciplinaryProceedings'],
-      data['CivilProceedings'],
-      data['ProsecutingAuthority']
-    ].some(val => val === 'Yes' || val === 'No')
+  const anyAnswered = [
+    data['CriminalInvestigation'],
+    data['CriminalOffence'],
+    data['convinctionCautionReprimend'],
+    data['DisciplinaryProceedings'],
+    data['CivilProceedings'],
+    data['ProsecutingAuthority']
+  ].some(val => val === 'Yes' || val === 'No')
 
-    const anyDetails = [
-      data['criminalInvestigationDetails'],
-      data['criminalOffenceDetails'],
-      data['convictionOrCautionDetails'],
-      data['disciplinaryProceedingsDetails'],
-      data['civilProceedingsDetails'],
-      data['removalOfInstructionsDetails']
-    ].some(val => val && val.trim() !== '')
+  const anyDetails = [
+    data['criminalInvestigationDetails'],
+    data['criminalOffenceDetails'],
+    data['convictionOrCautionDetails'],
+    data['disciplinaryProceedingsDetails'],
+    data['civilProceedingsDetails'],
+    data['removalOfInstructionsDetails']
+  ].some(val => val && val.trim() !== '')
 
-    const allAnswered = [
-      data['CriminalInvestigation'],
-      data['CriminalOffence'],
-      data['convinctionCautionReprimend'],
-      data['DisciplinaryProceedings'],
-      data['CivilProceedings'],
-      data['ProsecutingAuthority']
-    ].every(val => val === 'Yes' || val === 'No')
+  const allAnswered = [
+    data['CriminalInvestigation'],
+    data['CriminalOffence'],
+    data['convinctionCautionReprimend'],
+    data['DisciplinaryProceedings'],
+    data['CivilProceedings'],
+    data['ProsecutingAuthority']
+  ].every(val => val === 'Yes' || val === 'No')
 
-    if (allAnswered) {
-      data['pqqStatus'] = 'completed'
-    } else if (anyAnswered || anyDetails) {
-      data['pqqStatus'] = 'inProgress'
-    } else {
-      data['pqqStatus'] = 'notStarted'
-    }
+  if (allAnswered) {
+    data['bgDisclosureStatus'] = 'completed'
+  } else if (anyAnswered || anyDetails) {
+    data['bgDisclosureStatus'] = 'inProgress'
+  } else {
+    data['bgDisclosureStatus'] = 'notStarted'
+  }
 
-    res.redirect('/year-call-degree-qualifications/mini-questionnaire/check-answers')
-  })
+  res.redirect('/year-call-degree-qualifications/mini-questionnaire/check-answers')
+})
 
-
-  ////////// PQQ - CHECK ANSWERS
-  router.post('/year-call-degree-qualifications/mini-questionnaire/check-answers', (req, res) => {
-    req.session.data['pqqStatus'] = 'completed'
-    res.redirect('/start-application')
-  })
+////////// PQQ - CHECK ANSWERS
+router.post('/year-call-degree-qualifications/mini-questionnaire/check-answers', (req, res) => {
+  req.session.data['bgDisclosureStatus'] = 'completed'
+  res.redirect('/start-application')
+})
 
   ////////// DECLARATION
   router.post('/declaration', (req, res) => {
