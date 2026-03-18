@@ -24,28 +24,24 @@ href: "javascript:window.history.back()"
       Additional information
     </h1>
 
-    <p class="govuk-body">Please use the space below to provide any other additional information you consider relevant
-      in support of your application. Refer to the
-      <a href="https://www.cps.gov.uk/advocate-panels#sensitivecaseinfo" class="govuk-link" rel="noreferrer noopener"
-        target="_blank">Sensitive Identifying Case Information section (opens in new tab)</a>
+    <p class="govuk-body">Give any information that you consider relevant in support of your application. 
     </p>
 
 
     <form method="post" novalidate>
       
       <div class="govuk-form-group">
-        {{ govukTextarea({
-          id: "additional-info",
-          name: "additionalInfoExample",
+        {{ govukCharacterCount({
+          name: "additional-info",
+          id: "additionalInfoExample",
           rows: 10,
           value: data['additionalInfoExample'],
+          maxwords: 400,
           label: {
-            text: "Example of additional Info",
-            classes: "govuk-label--m govuk-visually-hidden"
-          },
-          hint: {
-            text: "You can write up to 400 words."
+            text: "Additional information",
+            classes: "govuk-label--m"
           }
+
         }) }}
       </div>
 

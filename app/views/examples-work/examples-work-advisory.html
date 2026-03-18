@@ -1,4 +1,5 @@
 {% extends "layouts/main.html" %}
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
 {% block pageTitle %}
 Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
@@ -16,34 +17,61 @@ href: "javascript:window.history.back()"
   <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">
-        Examples of Advisory work
+        Examples of advisory work
       </h1>
 
-      <p class="govuk-body">Please provide details of a question or problem you have had to advise on, what you advised
-        and why. Where possible, please provide more than one example. Identifying case information must not be included
-        in your application. Please refer to the Selection Criteria (specific to your level).
-        Review <a
-          href="https://www.cps.gov.uk/advocate-panels/advocate-panels-application-portal/advocate-panels-2020-panel-general-crime-and-rasso-list#selectioncriteriageneralcrimelevelone"
-          class="govuk-link" rel="noreferrer noopener" target="_blank">General Crime 1 Selection Criteria (opens in new
-          tab)</a>
-      </p>
+      <p class="govuk-body">Give details of questions or problems you’ve advised on. Include what you advised
+        and why.</p>
 
+    {% if data['crownCourtLevel'] !== 'Level 1' %}
+
+    <p class="govuk-body">You must show that you:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>can present highly proficient written submissions to a standard of excellence</li>
+      <li>have consistently sound judgement</li>
+      <li>have  expertise in law and practice and up-to-date knowledge of law relevant to prosecutions at this level</li>
+      <li>assimilate the relevance of evidence quickly, even when working with voluminous or complex evidence</li>
+    </ul>
+
+    {% else %}
+
+    <p class="govuk-body">You must show that you’re able to conduct advisory work for:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>magistrates’ court prosecutions</li>
+      <li>simple Crown Court cases</li>
+      <li>committals for sentence</li>
+      <li>appeals</li>
+    </ul>
+
+    {% endif %}
+
+    <p class="govuk-body">Do not include the names of:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>yourself</li>
+      <li>victims</li>
+      <li>witnesses</li>
+      <li>defendants</li>
+      <li>courts</li>
+      <li>judges</li>
+      <li>operations</li>
+    </ul>
+
+    <p class="govuk-body">Your application will be returned for you to change if you include identifying information.</p>
 
       <form method="post" novalidate>
 
         <div class="govuk-form-group">
-          {{ govukTextarea({
+          {{ govukCharacterCount({
             name: "advisoryWork",
             id: "advisoryWork",
             rows: 10,
             value: data['advisoryWork'],
-            hint: {
-              text: "Please do not include more than 400 words"
-            },
+            maxwords: 400,
             label: {
-              text: "Advisory work",
-              classes: "govuk-visually-hidden"
+              text: "Evidence of advisory work",
+              classes: "govuk-label--m"
             }
+
           }) }}
         </div>
 

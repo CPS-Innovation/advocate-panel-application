@@ -20,28 +20,35 @@ href: "javascript:window.history.back()"
       Examples of public interest immunity (PII) and disclosure work 
     </h1>
 
-    <p class="govuk-body">Please outline your knowledge and experience of the PII and Disclosure regime. When providing examples (no more than three), please give details of the issue you had to advise on, or address, and explain your approach and the outcome.</p>
+    <p class="govuk-body">Give up to 3 examples. Include details of the issue you had to advise on or address, your approach and the outcome.</p>
 
-    <p class="govuk-body">
-      <a href="https://www.cps.gov.uk/advocate-panels/advocate-panels-application-portal/advocate-panels-2020-panel-general-crime-and-rasso-list#selectioncriteriageneralcrimelevelfour" class="govuk-link" rel="noreferrer noopener" target="_blank">General Crime 4 Selection Criteria (opens in new
-          tab)</a>
-    </p>
+    <p class="govuk-body">Do not include the names of:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>yourself</li>
+      <li>victims</li>
+      <li>witnesses</li>
+      <li>defendants</li>
+      <li>courts</li>
+      <li>judges</li>
+      <li>operations</li>
+    </ul>
+
+    <p class="govuk-body">Your application will be returned for you to change if you include identifying information.</p>  
 
     <form method="post" novalidate>
 
         <div class="govuk-form-group">
-          {{ govukTextarea({
+          {{ govukCharacterCount({
             name: "publicInterestImmunity",
             id: "public-interest-immunity",
             rows: 10,
             value: data['publicInterestImmunity'],
-            hint: {
-              text: "Please do not include more than 400 words"
-            },
+            maxwords: 400,
             label: {
-              text: "Advisory work",
-              classes: "govuk-visually-hidden"
+              text: "Evidence of PII and disclosure work",
+              classes: "govuk-label--m"
             }
+
           }) }}
         </div>
 
