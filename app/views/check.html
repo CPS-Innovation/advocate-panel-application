@@ -69,6 +69,17 @@
               visuallyHiddenText: "chambers"
             }]
           }
+        },
+        {
+          key: { text: "Address" },
+          value: { text: data['chambersAddress'] or "Not provided" },
+          actions: {
+            items: [{
+              href: "/current-chambers/adding-address-2?returnUrl=/check",
+              text: "Change",
+              visuallyHiddenText: "chambers address"
+            }]
+          }
         }
       ]
     }) }}
@@ -128,7 +139,7 @@
             }]
           }
         },
-          {
+        {
           key: { text: "Start date of 'second six'" },
           value: { html: data | isoDateFromDateInput("secondSixStartDate") | govukDate or "Not provided" },
           actions: {
@@ -141,7 +152,6 @@
         }
       ]
     }) }}
-
 
     <h3 class="govuk-heading-m">Degree and post-graduate qualifications</h3>
 
@@ -220,7 +230,7 @@
       }) }}
     {% endif %}
 
-    <form action="/check" method="post" novalidate>
+    <form method="post" novalidate>
       {{ govukButton({
         text: "Save and confirm"
       }) }}

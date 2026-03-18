@@ -101,8 +101,68 @@ module.exports = router => {
   })
 
   ////////// NAME OF CHAMBERS
+  const chamberAddresses = {
+    "1 Crown Office Row": "1 Crown Office Row, Temple, London EC4Y 7HH",
+    "2 Bedford Row": "2 Bedford Row, London WC1R 4BU",
+    "2 Temple Gardens": "2 Temple Gardens, Temple, London EC4Y 9AY",
+    "25 Bedford Row": "25 Bedford Row, London WC1R 4HD",
+    "3 Verulam Buildings": "3 Verulam Buildings, Gray's Inn, London WC1R 5NT",
+    "4 New Square Chambers": "4 New Square, Lincoln's Inn, London WC2A 3RJ",
+    "5 Paper Buildings": "5 Paper Buildings, Temple, London EC4Y 7HB",
+    "5 Stone Buildings": "5 Stone Buildings, Lincoln's Inn, London WC2A 3XT",
+    "6KBW College Hill": "5-6 College Hill, London EC4R 2RP",
+    "7 King's Bench Walk": "7 King's Bench Walk, Temple, London EC4Y 7DS",
+    "Blackstone Chambers": "Blackstone House, Temple, London EC4Y 9BW",
+    "Brick Court Chambers": "7-8 Essex Street, London WC2R 3LD",
+    "Doughty Street Chambers": "54 Doughty Street, London WC1N 2LS",
+    "Essex Court Chambers": "24 Lincoln's Inn Fields, London WC2A 3EG",
+    "Exchange Chambers": "201 Deansgate, Manchester M3 3NW",
+    "Fountain Court Chambers": "Temple, London EC4Y 9DH",
+    "Garden Court Chambers": "57-60 Lincoln's Inn Fields, London WC2A 3LJ",
+    "Hardwicke Chambers": "New Square, Lincoln's Inn, London WC2A 3SZ",
+    "Matrix Chambers": "Griffin Building, Gray's Inn, London WC1R 5LN",
+    "Monckton Chambers": "1 Crown Office Row, Temple, London EC4Y 7HH",
+    "Mountford Chambers": "1-2 Pump Court, Temple, London EC4Y 7AR",
+    "New Square Chambers": "12 New Square, Lincoln's Inn, London WC2A 3SW",
+    "Pump Court Chambers": "Pump Court, Temple, London EC4Y 7AR",
+    "QEB Hollis Whiteman": "1 Crown Office Row, Temple, London EC4Y 7HH",
+    "Red Lion Chambers": "30 Red Lion Street, London WC1R 4GB",
+    "Serle Court": "6 New Square, Lincoln's Inn, London WC2A 3QS",
+    "South Square Chambers": "3-4 South Square, Gray's Inn, London WC1R 5HP",
+    "St John's Buildings": "24-28 Crown Street, Manchester M2 1RT",
+    "Twenty Essex": "Essex Court, Temple, London EC4Y 9AR",
+    "Wilberforce Chambers": "Lincoln's Inn, London WC2A 3QB"
+  }
+
   router.post('/current-chambers/name-chambers', (req, res) => {
+    const name = req.session.data['chambersName']
+
+    // Look up address from the known list; will be undefined if not found
+    const address = chamberAddresses[name]
+    if (address) {
+      req.session.data['chambersAddress'] = address
+    }
+
     req.session.data['whereYouWorkStatus'] = 'completed'
+    const returnUrl = req.query.returnUrl
+    res.redirect(returnUrl || '/task-list')
+  })
+
+  ////////// ADDING ADDRESS (can't see chambers in list)
+  router.post('/current-chambers/adding-address-2', (req, res) => {
+    const d = req.session.data
+
+    const parts = [
+      d['chambersAddressLine1'],
+      d['chambersAddressLine2'],
+      d['chambersAddressTown'],
+      d['chambersAddressCounty'],
+      d['chambersAddressPostcode']
+    ].filter(Boolean)
+
+    d['chambersAddress'] = parts.join(', ')
+
+    d['whereYouWorkStatus'] = 'completed'
     const returnUrl = req.query.returnUrl
     res.redirect(returnUrl || '/task-list')
   })
