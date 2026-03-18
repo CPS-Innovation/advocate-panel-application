@@ -93,7 +93,7 @@
           value: { text: data['preferredCircuit'] or "Not provided" },
           actions: {
             items: [{
-              href: "/preferred-circuit/circuit-question-page?returnUrl=/check",
+              href: "/preferred-circuit/primary-circuit?returnUrl=/check",
               text: "Change",
               visuallyHiddenText: "primary circuit"
             }]
@@ -104,7 +104,7 @@
           value: { text: data['secondaryCircuit'] or "Not provided" },
           actions: {
             items: [{
-              href: "/preferred-circuit/circuit-question-page?returnUrl=/check",
+              href: "/preferred-circuit/secondary-circuit?returnUrl=/check",
               text: "Change",
               visuallyHiddenText: "secondary circuit"
             }]

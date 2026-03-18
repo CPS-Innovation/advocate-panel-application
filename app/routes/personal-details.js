@@ -167,8 +167,15 @@ module.exports = router => {
     res.redirect(returnUrl || '/task-list')
   })
 
-  ////////// PREFERRED CIRCUIT
-  router.post('/preferred-circuit/circuit-question-page', (req, res) => {
+  ////////// PRIMARY CIRCUIT
+  router.post('/preferred-circuit/primary-circuit', (req, res) => {
+    req.session.data['preferredCircuitStatus'] = 'in-progress'
+    const returnUrl = req.query.returnUrl
+    res.redirect(returnUrl || '/preferred-circuit/secondary-circuit')
+  })
+
+  ////////// SECONDARY CIRCUIT
+  router.post('/preferred-circuit/secondary-circuit', (req, res) => {
     const returnUrl = req.query.returnUrl
     res.redirect(returnUrl || '/preferred-circuit/crown-courts-circuit/crown-courts-select-page')
   })
