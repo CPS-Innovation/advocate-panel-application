@@ -216,8 +216,10 @@ module.exports = router => {
 
       const monthNames = ['January','February','March','April','May','June',
                           'July','August','September','October','November','December']
-      const dateDisplay = (day && month && year)
-        ? `${parseInt(day)} ${monthNames[parseInt(month) - 1]} ${year}`
+      
+                          ///Removed 'Day' from date component                          
+      const dateDisplay = (month && year)
+        ? `${monthNames[parseInt(month) - 1]} ${year}`
         : ''
 
       return {

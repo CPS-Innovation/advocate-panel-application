@@ -41,7 +41,6 @@
               }
             },
             items: [
-              { name: "day",   classes: "govuk-input--width-2", inputmode: "numeric", value: data['dateOfCompletion-day'] },
               { name: "month", classes: "govuk-input--width-2", inputmode: "numeric", value: data['dateOfCompletion-month'] },
               { name: "year",  classes: "govuk-input--width-4", inputmode: "numeric", value: data['dateOfCompletion-year'] }
             ]
@@ -74,8 +73,8 @@
 
     function updateRemoveButtons() {
       var items = container.querySelectorAll('.add-another__item')
-      items.forEach(function (item) {
-        item.querySelector('.add-another__remove').style.display = items.length > 1 ? '' : 'none'
+      items.forEach(function (item, i) {
+        item.querySelector('.add-another__remove').style.display = i > 0 ? '' : 'none'
       })
     }
 
