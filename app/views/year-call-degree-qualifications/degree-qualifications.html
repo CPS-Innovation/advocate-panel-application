@@ -14,6 +14,8 @@
 
     <h1 class="govuk-heading-l">Degree and post-graduate qualifications</h1>
 
+    <p class="govuk-body">You can add your qualifications in any order.</p>
+
     <form method="post" novalidate>
 
       <div id="qualifications-container">
@@ -24,6 +26,10 @@
               Remove
             </button>
           </div>
+
+          {{ govukInput({ label: { text: "Course or subject", classes: "govuk-label--s" }, id: "courseOrSubject", name: "courseOrSubject", spellcheck: false, value: data['courseOrSubject'] }) }}
+          {{ govukInput({ label: { text: "Institution",     classes: "govuk-label--s" }, id: "institution",    name: "institution",    spellcheck: false, value: data['institution'] }) }}
+          {{ govukInput({ label: { text: "Grade or result", classes: "govuk-label--s" }, id: "gradeOrResult",  name: "gradeOrResult",  spellcheck: false, value: data['gradeOrResult'] }) }}
 
           {{ govukDateInput({
             id: "dateOfCompletion",
@@ -40,11 +46,6 @@
               { name: "year",  classes: "govuk-input--width-4", inputmode: "numeric", value: data['dateOfCompletion-year'] }
             ]
           }) }}
-
-          {{ govukInput({ label: { text: "Institution",     classes: "govuk-label--s" }, id: "institution",    name: "institution",    spellcheck: false, value: data['institution'] }) }}
-          {{ govukInput({ label: { text: "Course or subject", classes: "govuk-label--s" }, id: "courseOrSubject", name: "courseOrSubject", spellcheck: false, value: data['courseOrSubject'] }) }}
-          {{ govukInput({ label: { text: "Grade or result", classes: "govuk-label--s" }, id: "gradeOrResult",  name: "gradeOrResult",  spellcheck: false, value: data['gradeOrResult'] }) }}
-
 
         </div>
       </div>

@@ -18,31 +18,60 @@ href: "javascript:window.history.back()"
 
 
       <h1 class="govuk-heading-l">
-        Other Relevant Knowledge, Skills & Experience
+        Other knowledge, skills and experience
       </h1>
 
-      <p class="govuk-body">Please refer to the relevant Selection Criteria for information required for this section.
-        Refer to the
-        <a href="https://www.cps.gov.uk/advocate-panels#sensitivecaseinfo" class="govuk-link" rel="noreferrer noopener"
-          target="_blank">Sensitive Identifying Case Information section (opens in new tab)</a>
-      </p>
+    {% if data['crownCourtLevel'] !== 'Level 1' %}
 
+      <p class="govuk-body">Give examples of to show you:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>can prepare, prosecute and progress cases confidently and securely using digital technology</li>
+        <li>can conduct confiscation hearings in any of the proceedings in which the applicant may be instructed at Level 4</li>
+        <li>can obtain and use evidence from abroad, jurisdictional issues, human rights, restraint and confiscation</li>
+        <li>have sufficient knowledge of confiscation and POCA 2002 to be able to handle confiscation as it may arise in any of the cases which fall within your competency</li>
+        <li>have carried out relevant defence or regulatory work of an equivalent level, if this applies</li>
+      </ul>
+    
+    {% else %}  
+
+      <p class="govuk-body">Give examples of your:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>ability to prepare, prosecute and progress cases confidently and securely using digital technology</li>
+        <li>academic strength or compensating strength in other factors</li>
+        <li>relevant defence or regulatory work - if you have any</li>
+      </ul>
+
+    {% endif %}
+
+      <p class="govuk-body">Do not include the names of:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>yourself</li>
+        <li>victims</li>
+        <li>witnesses</li>
+        <li>defendants</li>
+        <li>courts</li>
+        <li>judges</li>
+        <li>operations</li>
+      </ul>
+
+    <p class="govuk-body">Your application will be returned for you to change if you include identifying information.</p>
 
      <form method="post" novalidate>
 
         <div class="govuk-form-group">
-          {{ govukTextarea({
+          {{ govukCharacterCount({
             name: "otherRelevantSkills",
             id: "other-relevant-skills",
             rows: 10,
             value: data['otherRelevantSkills'],
-            hint: {
-              text: "Please do not include more than 400 words"
-            },
+            maxwords: 400,
             label: {
-              text: "Advisory work",
-              classes: "govuk-visually-hidden"
+              text: "Evidence of other knowledge, skills and experience",
+              classes: "govuk-label--m"
             }
+
           }) }}
         </div>
 

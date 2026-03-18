@@ -22,29 +22,70 @@ href: "javascript:window.history.back()"
 
 
     <h1 class="govuk-heading-l">
-      Appreciation of the Role of a Panel Advocate
+      Appreciation of the role of a panel advocate
     </h1>
 
-    <p class="govuk-body">Please explain why you want to be on the CPS Advocate Panel, what you understand the role of a Panel advocate to be, and what qualities you possess which would make you a good prosecution advocate. Refer to the
-      <a href="https://www.cps.gov.uk/advocate-panels#sensitivecaseinfo" class="govuk-link" rel="noreferrer noopener"
-        target="_blank">Sensitive Identifying Case Information section (opens in new tab)</a>
-    </p>
+    <p class="govuk-body">You should say:</p>
+    
+    <ul class="govuk-list govuk-list--bullet">  
+      <li>why you want to be on the CPS advocate panel</li>
+      <li>your understanding of the role of a panel advocate</li>
+      <li>what qualities would make you a good prosecution advocate</li>
+    </ul>
+
+    {% if data['crownCourtLevel'] !== 'Level 1' %}
+
+    <p class="govuk-body">You should show:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>that you can act as a role model for others</li>
+      <li>a knowledge of ethical standards and a leader on issues of diversity and difference</li>
+      <li>you comprehend and successfully lead cases of the utmost gravity, complexity and sensitivity</li>
+      <li>familiarity with, and understanding of, CPS policy guidance including the Code, the Farquharson guidelines and policies in respect of victims and witnesses, hate crime and violence against women</li>
+      <li>an appropriate understanding of the professional relationship between the CPS, the police and the advocate, particularly in cases where there has been lengthy and complex police investigations</li>
+    </ul>
+
+
+    {% else %}
+
+    <p class="govuk-body">You should show:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>a knowledge of ethical standards</li>
+      <li>a knowledge of CPS values</li>
+      <li>a willingness to work as part of a prosecution team without compromising professional independence</li>
+      <li>understanding of the Code for Crown Prosecutors and the Farquharson guidelines on the role of the prosecution advocate</li>
+      <li>an appropriate understanding of the professional relationship between the CPS, the police and the advocate</li>
+      <li>an appreciation of the requirements when speaking to victims and witnesses</li>
+    </ul>
+
+    {% endif %}
+
+    <p class="govuk-body">Do not include the names of:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>yourself</li>
+      <li>victims</li>
+      <li>witnesses</li>
+      <li>defendants</li>
+      <li>courts</li>
+      <li>judges</li>
+      <li>operations</li>
+    </ul>
+
+    <p class="govuk-body">Your application will be returned for you to change if you include identifying information.</p>
 
     <form method="post" novalidate>
       
       <div class="govuk-form-group">
-        {{ govukTextarea({
-          id: "apreciation",
-          name: "apreciationExample",
+        {{ govukCharacterCount({
+          name: "appreciation",
+          id: "apreciationExample",
           rows: 10,
           value: data['apreciationExample'],
+          maxwords: 400,
           label: {
-            text: "Example of apreciation",
-            classes: "govuk-label--m govuk-visually-hidden"
-          },
-          hint: {
-            text: "You can write up to 400 words."
+            text: "Evidence of appreciation of the role of a panel advocate",
+            classes: "govuk-label--m"
           }
+
         }) }}
       </div>
 
