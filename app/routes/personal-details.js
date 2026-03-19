@@ -1,11 +1,11 @@
-/////////// app/routes/app.js
+/////////// app/routes/personal-details.js
 
 module.exports = router => {
 
   ////////// START PAGE
   router.post('/account', (req, res) => {
     const hasAccount = req.session.data['new']['hasAccount']
-    
+
     if (hasAccount === 'yes') {
       res.redirect('/login')
     } else {
@@ -30,7 +30,6 @@ module.exports = router => {
       res.redirect('/profile')
     })
   })
-
 
   ////////// LOGIN
   router.get('/login', (req, res) => {
@@ -57,12 +56,12 @@ module.exports = router => {
     res.render('sign-out')
   })
 
-  ////////// REGISTER 
+  ////////// REGISTER
   router.post('/create-account', (req, res) => {
     res.redirect('/question-what-describes-you')
   })
 
-  ////////// ROLE 
+  ////////// ROLE
   router.post('/question-what-describes-you', (req, res) => {
     const role = req.session.data['yourRoleIs']
 
@@ -75,7 +74,7 @@ module.exports = router => {
     }
   })
 
-  ////////// SOLICITOR COURT 
+  ////////// SOLICITOR COURT
   router.post('/solicitor-court', (req, res) => {
     const court = req.session.data['courtType']
 
@@ -95,7 +94,7 @@ module.exports = router => {
     res.redirect(returnUrl || '/task-list')
   })
 
-  ////////// EMPLOYMENT TYPE 
+  ////////// EMPLOYMENT TYPE
   router.post('/current-chambers/employment-type', (req, res) => {
     const employmentType = req.session.data['employmentType']
     const returnUrl = req.query.returnUrl
@@ -108,7 +107,7 @@ module.exports = router => {
       res.redirect(returnUrl || '/current-chambers/solicitor-firm-adding-address')
     } else {
       res.redirect('/current-chambers/employment-type')
-    }  
+    }
   })
 
   ////////// NAME OF CHAMBERS
@@ -147,13 +146,10 @@ module.exports = router => {
 
   router.post('/current-chambers/name-chambers', (req, res) => {
     const name = req.session.data['chambersName']
-
-    // Look up address from the known list; will be undefined if not found
     const address = chamberAddresses[name]
     if (address) {
       req.session.data['chambersAddress'] = address
     }
-
     req.session.data['whereYouWorkStatus'] = 'completed'
     const returnUrl = req.query.returnUrl
     res.redirect(returnUrl || '/task-list')
@@ -172,8 +168,28 @@ module.exports = router => {
     ].filter(Boolean)
 
     d['chambersAddress'] = parts.join(', ')
-
     d['whereYouWorkStatus'] = 'completed'
+    const returnUrl = req.query.returnUrl
+    res.redirect(returnUrl || '/task-list')
+  })
+
+  ////////// SOLE TRADER ADDING ADDRESS
+  router.post('/current-chambers/sole-trader-adding-address', (req, res) => {
+    const d = req.session.data
+
+    const parts = [
+      d['companyName'],
+      d['addressLine1'],
+      d['addressLine2'],
+      d['addressTown'],
+      d['addressCounty'],
+      d['addressPostcode']
+    ].filter(Boolean)
+
+    d['chambersAddress'] = parts.join(', ')
+    d['chambersName'] = d['companyName']
+    d['whereYouWorkStatus'] = 'completed'
+
     const returnUrl = req.query.returnUrl
     res.redirect(returnUrl || '/task-list')
   })
@@ -198,7 +214,7 @@ module.exports = router => {
     res.redirect(returnUrl || '/task-list')
   })
 
-  ////////// CALL TO BAR AND PUPILAGE
+  ////////// CALL TO BAR AND PUPILLAGE
   router.post('/year-call-degree-qualifications/year-call', (req, res) => {
     req.session.data['callToBarAndPupilage'] = 'completed'
     const returnUrl = req.query.returnUrl
@@ -209,7 +225,6 @@ module.exports = router => {
   router.post('/year-call-degree-qualifications/degree-qualifications', (req, res) => {
     const data = req.session.data
 
-    // Normalise: single submission = string, multiple = array
     const toArray = val => val ? (Array.isArray(val) ? val : [val]) : []
 
     const institutions = toArray(data['institution'])
@@ -219,7 +234,6 @@ module.exports = router => {
     const months       = toArray(data['dateOfCompletion-month'])
     const years        = toArray(data['dateOfCompletion-year'])
 
-    // Zip parallel arrays into qualification objects
     req.session.data['degreeQualifications'] = institutions.map((inst, i) => {
       const day   = days[i]   || ''
       const month = months[i] || ''
@@ -227,8 +241,7 @@ module.exports = router => {
 
       const monthNames = ['January','February','March','April','May','June',
                           'July','August','September','October','November','December']
-      
-                          ///Removed 'Day' from date component                          
+
       const dateDisplay = (month && year)
         ? `${monthNames[parseInt(month) - 1]} ${year}`
         : ''
@@ -245,11 +258,9 @@ module.exports = router => {
     })
 
     req.session.data['degreeAndPostGradQualifications'] = 'completed'
-
     const returnUrl = req.query.returnUrl
     res.redirect(returnUrl || '/task-list')
   })
-
 
   ////////// EQUALITIES MONITORING
   router.post('/equalities/equalities-questions-1', (req, res) => {

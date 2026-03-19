@@ -5,22 +5,15 @@
   Profile – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
-{# {% block containerStart %}
-  {{ govukBackLink({
-    text: "Back",
-    href: "javascript:window.history.back()"
-  }) }}
-{% endblock %} #}
-
 {% block content %}
 
- {% set profile = data.accountProfile or {} %}
+{% set profile = data.accountProfile or {} %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l">Your profile and applications</h1>
-    
+
     {% if data.accountProfile %}
 
       {{ govukButton({
@@ -55,7 +48,6 @@
         ]
       }) }}
 
-
     {% else %}
 
       {{ govukInsetText({
@@ -87,14 +79,9 @@
           }
         ]
       }) }}
-
     {% endif %}
 
     <h2 class="govuk-heading-m">Personal details</h2>
-
-   
-    {# {% set preferredCircuit = data['preferredCircuit'] if data['preferredCircuit'] else (profile.preferredCircuit if profile.preferredCircuit else []) %}
-    {% set secondaryCircuit = data['secondaryCircuit'] if data['secondaryCircuit'] else (profile.secondaryCircuit if profile.secondaryCircuit else []) %} #}
 
     {{ govukSummaryList({
       rows: [
@@ -109,130 +96,87 @@
         {
           key: { text: "Place of work" },
           value: { text: data['employmentType'] or profile.employmentType or "Not provided" },
-          actions: {
-            items: [{
-              href: "/current-chambers/employment-type?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "employment type"
-            }]
-          }
+          actions: { items: [{ href: "/current-chambers/employment-type?returnUrl=/profile", text: "Change", visuallyHiddenText: "employment type" }] }
         },
         {
           key: { text: "Member of chambers" },
           value: { text: data['chambersName'] or profile.chambersName or "Not provided" },
-          actions: {
-            items: [{
-              href: "/current-chambers/name-chambers?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "chambers"
-            }]
-          }
+          actions: { items: [{ href: "/current-chambers/name-chambers?returnUrl=/profile", text: "Change", visuallyHiddenText: "chambers" }] }
         },
         {
           key: { text: "Primary circuit" },
           value: { text: data['preferredCircuit'] or profile.preferredCircuit or "Not provided" },
-          actions: {
-            items: [{
-              href: "/preferred-circuit/primary-circuit?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "primary circuit"
-            }]
-          }
+          actions: { items: [{ href: "/preferred-circuit/primary-circuit?returnUrl=/profile", text: "Change", visuallyHiddenText: "primary circuit" }] }
         },
         {
           key: { text: "Secondary circuit" },
           value: { text: data['secondaryCircuit'] or profile.secondaryCircuit or "Not provided" },
-          actions: {
-            items: [{
-              href: "/preferred-circuit/secondary-circuit?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "secondary circuit"
-            }]
-          }
+          actions: { items: [{ href: "/preferred-circuit/secondary-circuit?returnUrl=/profile", text: "Change", visuallyHiddenText: "secondary circuit" }] }
         },
         {
           key: { text: "Preferred Crown Courts" },
           value: { text: data['preferredCrownCourts'] or profile.preferredCrownCourts or "Not provided" },
-          actions: {
-            items: [{
-              href: "/preferred-circuit/crown-courts-circuit/crown-courts-select-page?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "preferred Crown Courts"
-            }]
-          }
+          actions: { items: [{ href: "/preferred-circuit/crown-courts-circuit/crown-courts-select-page?returnUrl=/profile", text: "Change", visuallyHiddenText: "preferred Crown Courts" }] }
         },
         {
           key: { text: "Year of call" },
           value: { text: data['calledToTheBar'] or profile.calledToTheBar or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/year-call?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "called to the bar"
-            }]
-          }
+          actions: { items: [{ href: "/year-call-degree-qualifications/year-call?returnUrl=/profile", text: "Change", visuallyHiddenText: "year of call" }] }
         },
         {
           key: { text: "Start date of second six" },
-          value: { text: data | isoDateFromDateInput("secondSixStartDate") | govukDate
-                        or profile | isoDateFromDateInput("secondSixStartDate") | govukDate
-                        or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/year-call?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "called to the bar"
-            }]
-          }
-        },
-        {
-          key: { text: "Institution" },
-          value: { text: data['institution'] or profile.institution or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "institution, qualification " + loop.index
-            }]
-          }
-        },
-        {
-          key: { text: "Course or subject" },
-          value: { text: data['courseOrSubject'] or profile.courseOrSubject or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "institution, qualification " + loop.index
-            }]
-          }
-        },
-        {
-          key: { text: "Grade or result" },
-          value: { text: data['gradeOrResult'] or profile.gradeOrResult or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "institution, qualification " + loop.index
-            }]
-          }
-        },
-        {
-          key: { text: "Date of completion" },
-          value: { text: data | isoDateFromDateInput("dateOfCompletion") | govukDate
-                        or profile | isoDateFromDateInput("dateOfCompletion") | govukDate
-                        or "Not provided" },
-                        actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/profile",
-              text: "Change",
-              visuallyHiddenText: "institution, qualification " + loop.index
-            }]
-          }
+          value: { text: data | isoDateFromDateInput("secondSixStartDate") | govukDate or "Not provided" },
+          actions: { items: [{ href: "/year-call-degree-qualifications/year-call?returnUrl=/profile", text: "Change", visuallyHiddenText: "start date of second six" }] }
         }
       ]
     }) }}
+
+    <h2 class="govuk-heading-m">Degree and post-graduate qualifications</h2>
+
+    {% if data['degreeQualifications'] and data['degreeQualifications'].length %}
+      {% for qual in data['degreeQualifications'] %}
+
+        {% if data['degreeQualifications'].length > 1 %}
+          <h3 class="govuk-heading-s">Qualification {{ loop.index }}</h3>
+        {% endif %}
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: { text: "Institution" },
+              value: { text: qual.institution or "Not provided" },
+              actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/profile", text: "Change", visuallyHiddenText: "institution" }] }
+            },
+            {
+              key: { text: "Course or subject" },
+              value: { text: qual.courseOrSubject or "Not provided" },
+              actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/profile", text: "Change", visuallyHiddenText: "course or subject" }] }
+            },
+            {
+              key: { text: "Grade or result" },
+              value: { text: qual.gradeOrResult or "Not provided" },
+              actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/profile", text: "Change", visuallyHiddenText: "grade or result" }] }
+            },
+            {
+              key: { text: "Date of completion" },
+              value: { text: qual.dateDisplay or "Not provided" },
+              actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/profile", text: "Change", visuallyHiddenText: "date of completion" }] }
+            }
+          ]
+        }) }}
+
+      {% endfor %}
+    {% else %}
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Qualifications" },
+            value: { text: "Not provided" },
+            actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/profile", text: "Add", visuallyHiddenText: "degree qualifications" }] }
+          }
+        ]
+      }) }}
+    {% endif %}
 
   </div>
 </div>
