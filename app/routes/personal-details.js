@@ -42,9 +42,32 @@ module.exports = router => {
     const accountProfile = require('../data/profile.json')
     req.session.data.accountProfile = accountProfile
     req.session.data.user = { loggedIn: true }
-    req.session.save(() => {
-      res.redirect('/profile')
-    })
+
+    // Populate date fields so isoDateFromDateInput filter works on profile
+    req.session.data['secondSixStartDate-day']   = accountProfile['secondSixStartDate-day']
+    req.session.data['secondSixStartDate-month'] = accountProfile['secondSixStartDate-month']
+    req.session.data['secondSixStartDate-year']  = accountProfile['secondSixStartDate-year']
+
+    // Build degreeQualifications array that profile.html expects
+    const month = accountProfile['dateOfCompletion-month']
+    const year  = accountProfile['dateOfCompletion-year']
+    const monthNames = ['January','February','March','April','May','June',
+                        'July','August','September','October','November','December']
+    const dateDisplay = (month && year)
+      ? `${monthNames[parseInt(month, 10) - 1]} ${year}`
+      : ''
+
+    req.session.data['degreeQualifications'] = [{
+      institution:     accountProfile.institution,
+      courseOrSubject: accountProfile.courseOrSubject,
+      gradeOrResult:   accountProfile.gradeOrResult,
+      dateDay:         accountProfile['dateOfCompletion-day'],
+      dateMonth:       month,
+      dateYear:        year,
+      dateDisplay:     dateDisplay
+    }]
+
+    req.session.save(() => res.redirect('/profile'))
   })
 
   ////////// SIGN OUT
