@@ -15,151 +15,91 @@
 
     <h1 class="govuk-heading-l">Check your answers</h1>
 
-    <h3 class="govuk-heading-m">Name and bar number</h3>
+    <h2 class="govuk-heading-m">Name and bar number</h2>
 
     {{ govukSummaryList({
       rows: [
         {
           key: { text: "Full name" },
           value: { text: data['fullName'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/personal-details/personal-details?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "full name"
-            }]
-          }
+          actions: { items: [{ href: "/personal-details/personal-details?returnUrl=/check", text: "Change", visuallyHiddenText: "full name" }] }
         },
         {
           key: { text: "Bar number" },
           value: { text: data['barNumber'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/personal-details/personal-details?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "bar number"
-            }]
-          }
+          actions: { items: [{ href: "/personal-details/personal-details?returnUrl=/check", text: "Change", visuallyHiddenText: "bar number" }] }
         }
       ]
     }) }}
 
-    <h3 class="govuk-heading-m">Where you work</h3>
+    <h2 class="govuk-heading-m">Where you work</h2>
 
     {{ govukSummaryList({
       rows: [
         {
           key: { text: "Employment type" },
           value: { text: data['employmentType'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/current-chambers/employment-type?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "employment type"
-            }]
-          }
+          actions: { items: [{ href: "/current-chambers/employment-type?returnUrl=/check", text: "Change", visuallyHiddenText: "employment type" }] }
         },
         {
           key: { text: "Chambers" },
           value: { text: data['chambersName'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/current-chambers/name-chambers?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "chambers"
-            }]
-          }
+          actions: { items: [{ href: "/current-chambers/name-chambers?returnUrl=/check", text: "Change", visuallyHiddenText: "chambers" }] }
         },
         {
           key: { text: "Address" },
           value: { text: data['chambersAddress'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/current-chambers/adding-address-2?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "chambers address"
-            }]
-          }
+          actions: { items: [{ href: "/current-chambers/adding-address-2?returnUrl=/check", text: "Change", visuallyHiddenText: "chambers address" }] }
         }
       ]
     }) }}
 
-    <h3 class="govuk-heading-m">Preferred circuits and Crown Courts</h3>
+    <h2 class="govuk-heading-m">Preferred circuits and Crown Courts</h2>
 
     {{ govukSummaryList({
       rows: [
         {
           key: { text: "Primary circuit" },
           value: { text: data['preferredCircuit'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/preferred-circuit/primary-circuit?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "primary circuit"
-            }]
-          }
+          actions: { items: [{ href: "/preferred-circuit/primary-circuit?returnUrl=/check", text: "Change", visuallyHiddenText: "primary circuit" }] }
         },
         {
           key: { text: "Secondary circuit" },
           value: { text: data['secondaryCircuit'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/preferred-circuit/secondary-circuit?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "secondary circuit"
-            }]
-          }
+          actions: { items: [{ href: "/preferred-circuit/secondary-circuit?returnUrl=/check", text: "Change", visuallyHiddenText: "secondary circuit" }] }
         },
         {
           key: { text: "Preferred Crown Courts" },
           value: { text: data['preferredCrownCourts'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/preferred-circuit/crown-courts-circuit/crown-courts-select-page?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "preferred Crown Courts"
-            }]
-          }
+          actions: { items: [{ href: "/preferred-circuit/crown-courts-circuit/crown-courts-select-page?returnUrl=/check", text: "Change", visuallyHiddenText: "preferred Crown Courts" }] }
         }
       ]
     }) }}
 
-    <h3 class="govuk-heading-m">Call to the bar and pupillage</h3>
+    <h2 class="govuk-heading-m">Call to the bar and pupillage</h2>
 
     {{ govukSummaryList({
       rows: [
         {
           key: { text: "Called to the bar" },
           value: { text: data['calledToTheBar'] or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/year-call?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "called to the bar"
-            }]
-          }
+          actions: { items: [{ href: "/year-call-degree-qualifications/year-call?returnUrl=/check", text: "Change", visuallyHiddenText: "called to the bar" }] }
         },
         {
-          key: { text: "Start date of 'second six'" },
+          key: { text: "Start date of second six" },
           value: { html: data | isoDateFromDateInput("secondSixStartDate") | govukDate or "Not provided" },
-          actions: {
-            items: [{
-              href: "/year-call-degree-qualifications/year-call?returnUrl=/check",
-              text: "Change",
-              visuallyHiddenText: "start date of second six"
-            }]
-          }
+          actions: { items: [{ href: "/year-call-degree-qualifications/year-call?returnUrl=/check", text: "Change", visuallyHiddenText: "start date of second six" }] }
         }
       ]
     }) }}
 
-    <h3 class="govuk-heading-m">Degree and post-graduate qualifications</h3>
+    <h2 class="govuk-heading-m">Degree and post-graduate qualifications</h2>
 
     {% if data['degreeQualifications'] and data['degreeQualifications'].length %}
       {% for qual in data['degreeQualifications'] %}
 
         {% if data['degreeQualifications'].length > 1 %}
-          <h4 class="govuk-heading-s">Qualification {{ loop.index }}</h4>
+          <h3 class="govuk-heading-s">Qualification {{ loop.index }}</h3>
         {% endif %}
 
         {{ govukSummaryList({
@@ -167,46 +107,22 @@
             {
               key: { text: "Institution" },
               value: { text: qual.institution or "Not provided" },
-              actions: {
-                items: [{
-                  href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
-                  text: "Change",
-                  visuallyHiddenText: "institution, qualification " + loop.index
-                }]
-              }
+              actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check", text: "Change", visuallyHiddenText: "institution, qualification " + loop.index }] }
             },
             {
               key: { text: "Course or subject" },
               value: { text: qual.courseOrSubject or "Not provided" },
-              actions: {
-                items: [{
-                  href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
-                  text: "Change",
-                  visuallyHiddenText: "course or subject, qualification " + loop.index
-                }]
-              }
+              actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check", text: "Change", visuallyHiddenText: "course or subject, qualification " + loop.index }] }
             },
             {
               key: { text: "Grade or result" },
               value: { text: qual.gradeOrResult or "Not provided" },
-              actions: {
-                items: [{
-                  href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
-                  text: "Change",
-                  visuallyHiddenText: "grade or result, qualification " + loop.index
-                }]
-              }
+              actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check", text: "Change", visuallyHiddenText: "grade or result, qualification " + loop.index }] }
             },
             {
               key: { text: "Date of completion" },
               value: { text: qual.dateDisplay or "Not provided" },
-              actions: {
-                items: [{
-                  href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
-                  text: "Change",
-                  visuallyHiddenText: "date of completion, qualification " + loop.index
-                }]
-              }
+              actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check", text: "Change", visuallyHiddenText: "date of completion, qualification " + loop.index }] }
             }
           ]
         }) }}
@@ -218,22 +134,14 @@
           {
             key: { text: "Qualifications" },
             value: { text: "Not provided" },
-            actions: {
-              items: [{
-                href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check",
-                text: "Add",
-                visuallyHiddenText: "degree qualifications"
-              }]
-            }
+            actions: { items: [{ href: "/year-call-degree-qualifications/degree-qualifications?returnUrl=/check", text: "Add", visuallyHiddenText: "degree qualifications" }] }
           }
         ]
       }) }}
     {% endif %}
 
     <form method="post" novalidate>
-      {{ govukButton({
-        text: "Save and confirm"
-      }) }}
+      {{ govukButton({ text: "Save and confirm" }) }}
     </form>
 
   </div>
