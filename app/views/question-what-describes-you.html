@@ -1,7 +1,9 @@
 {# app/views/question-what-describes-you.html #}
 {% extends "layouts/main.html" %}
 
-{% set pageTitle = "Your role — Apply for the CPS Advocate Panel — GOV.UK" %}
+{% block pageTitle %}
+  Your role — Apply for the CPS Advocate Panel — GOV.UK
+{% endblock %}
 
 {% block beforeContent %}
   {{ govukBackLink({

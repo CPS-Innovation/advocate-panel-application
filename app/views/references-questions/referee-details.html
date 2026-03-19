@@ -1,0 +1,30 @@
+{% extends "layouts/main.html" %}
+{% block pageTitle %}Referee details – {{ serviceName }} – GOV.UK Prototype Kit{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({ text: "Back", href: "javascript:window.history.back()" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Referee details</h1>
+    <p class="govuk-body">The referee will be sent an email asking them to give you a reference.</p>
+    <p class="govuk-body">You can ask anyone who can support your application and is prepared to stand as a referee. Suitable referees for your panel and level include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>pupil supervisors</li>
+      <li>heads of chambers</li>
+      <li>chambers advocacy trainers</li>
+    </ul>
+
+    <form method="post" novalidate>
+      {{ govukInput({ label: { text: "Referee full name" }, id: "refereeFullName", name: "refereeFullName", type: "text", autocomplete: "name", value: data['refereeFullName'] }) }}
+      {{ govukInput({ label: { text: "Referee job title" }, id: "refereeJobTitle", name: "refereeJobTitle", type: "text", value: data['refereeJobTitle'] }) }}
+      {{ govukInput({ label: { text: "Referee email address" }, id: "refereeEmail", name: "refereeEmail", type: "email", autocomplete: "email", value: data['refereeEmail'] }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

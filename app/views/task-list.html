@@ -2,7 +2,11 @@
 {% extends "layouts/main.html" %}
 {% from "_includes/task-status.njk" import taskStatusText, taskStatusClass %}
 
-{% set pageTitle = "Finish creating your account — Apply for the CPS Advocate Panel — GOV.UK" %}
+
+{% block pageTitle %}
+  Finish creating your account — Apply for the CPS Advocate Panel — GOV.UK
+{% endblock %}
+
 
 {% block content %}
 

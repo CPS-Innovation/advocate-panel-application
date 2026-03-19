@@ -1,0 +1,40 @@
+{% extends "layouts/main.html" %}
+{% block pageTitle %}Message to referee – {{ serviceName }} – GOV.UK Prototype Kit{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({ text: "Back", href: "javascript:window.history.back()" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Your message to the referee</h1>
+    <p class="govuk-body">This will be included in the email which is sent to the referee. You should include:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>why you're applying for the panel</li>
+      <li>cases which you've worked on with the referee</li>
+    </ul>
+
+    <form method="post" novalidate>
+      {{ govukTextarea({
+        name: "messageToReferee", id: "message-to-referee", rows: "10",
+        value: data['messageToReferee'],
+        label: { text: "Message to referee", classes: "govuk-label--m" }
+      }) }}
+
+      {{ govukRadios({
+        name: "haveYouCompletedThisSection", value: data['haveYouCompletedThisSection'],
+        fieldset: { legend: { text: "Have you completed this section?", classes: "govuk-fieldset__legend--m" } },
+        items: [
+          { value: "yes", text: "Yes, send the reference request" },
+          { value: "no",  text: "No, I'll come back to it later" }
+        ]
+      }) }}
+
+      {{ govukButton({ text: "Save and continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

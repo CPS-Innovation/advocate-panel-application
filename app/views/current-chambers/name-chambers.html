@@ -1,7 +1,9 @@
 {# app/views/current-chambers/name-chambers.html #}
 {% extends "layouts/main.html" %}
 
-{% set pageTitle = "Chambers name — Apply for the CPS Advocate Panel — GOV.UK" %}
+{% block pageTitle %}
+  Chambers name — Finish creating your account —  GOV.UK
+{% endblock %}
 
 {% block containerStart %}
 {{ govukBackLink({
@@ -76,7 +78,7 @@
       </div>
 
       <div class="govuk-button-group">
-        {{ govukButton({ text: "Continue" }) }}
+        {{ govukButton({ text: "Save and continue" }) }}
         {{ govukButton({
           text: "Clear address",
           classes: "govuk-button--secondary",

@@ -12,8 +12,7 @@
 
     <h2 class="govuk-heading-m govuk-!-static-padding-top-5">References</h2>
 
-    {% set refereeHint = "" %}
-
+   {% set refereeHint = "" %}
     {% if data['crownCourtLevel'] == "Level 1" %}
       {% set refereeHint = "You can request the reference before you submit your application." %}
     {% else %}
@@ -23,16 +22,23 @@
     {{ govukTaskList({
       items: [
         {
-          title: { text: "Referee" },
+          title: { text: "Referee details" },
           hint: { text: refereeHint },
-          href: "/references-questions/reference-page",
-          status: {
-            tag: {
-              text: taskStatusText(data['refereeStatus']),
-              classes: taskStatusClass(data['refereeStatus'])
-            }
-          },
-          idPrefix: "references"
+          href: "/references-questions/referee-details",
+          status: { tag: { text: taskStatusText(data['refereeDetailsStatus']), classes: taskStatusClass(data['refereeDetailsStatus']) } },
+          idPrefix: "referee-details"
+        },
+        {
+          title: { text: "Referee role" },
+          href: "/references-questions/referee-role",
+          status: { tag: { text: taskStatusText(data['refereeRoleStatus']), classes: taskStatusClass(data['refereeRoleStatus']) } },
+          idPrefix: "referee-role"
+        },
+        {
+          title: { text: "Message to referee" },
+          href: "/references-questions/referee-message",
+          status: { tag: { text: taskStatusText(data['refereeMessageStatus']), classes: taskStatusClass(data['refereeMessageStatus']) } },
+          idPrefix: "referee-message"
         }
       ]
     }) }}
@@ -124,7 +130,7 @@
 
     {{ govukButton({
       text: "Review application details",
-      href: "/finish-application"
+      href: "/check-application"
     }) }}
 
   </div>
