@@ -15,7 +15,16 @@ module.exports = router => {
 
   ////////// CHECK - PERSONAL DETAILS
   router.post('/check', (req, res) => {
-    req.session.data.user = { loggedIn: true }
+    const data = req.session.data
+
+    ;['secondSixStartDate', 'dateOfCompletion'].forEach(prefix => {
+      ;['day', 'month', 'year'].forEach(part => {
+        const key = `${prefix}-${part}`
+        if (!data[key]) data[key] = ''
+      })
+    })
+
+    data.user = { loggedIn: true }
 
     req.session.save(() => {
       res.redirect('/profile')
@@ -72,7 +81,7 @@ module.exports = router => {
 
     if (court === 'Crown Court') {
       res.redirect('/task-list')
-    } else if (court === 'Magistrates’ or Youth Courts') {
+    } else if (court === "Magistrates' or Youth Courts") {
       res.redirect('/solicitor-court')
     } else {
       res.redirect('/solicitor-court')
@@ -95,7 +104,7 @@ module.exports = router => {
       res.redirect(returnUrl || '/current-chambers/name-chambers')
     } else if (employmentType === 'Sole trader') {
       res.redirect(returnUrl || '/current-chambers/sole-trader-adding-address')
-    } else if (employmentType === 'Solicitors’ firm') {
+    } else if (employmentType === "Solicitors' firm") {
       res.redirect(returnUrl || '/current-chambers/solicitor-firm-adding-address')
     } else {
       res.redirect('/current-chambers/employment-type')

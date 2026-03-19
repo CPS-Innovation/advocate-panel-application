@@ -39,13 +39,24 @@
       ]
     }) }}
 
-
     {% if data['refereeRole'] === 'pupilSupervisor' %}
       {% set refereeRoleText = "Pupil supervisor" %}
     {% elif data['refereeRole'] === 'headOfChambers' %}
       {% set refereeRoleText = "Head of chambers" %}
     {% elif data['refereeRole'] === 'chambersAdvocacyTrainer' %}
       {% set refereeRoleText = "Chambers advocacy trainer" %}
+    {% elif data['refereeRole'] === 'fullTimeJudiciary' %}
+      {% set refereeRoleText = "Current or retired member of the full-time judiciary" %}
+    {% elif data['refereeRole'] === 'partTimeJudiciary' %}
+      {% set refereeRoleText = "Member of the part-time judiciary" %}
+    {% elif data['refereeRole'] === 'instructingSolicitor' %}
+      {% set refereeRoleText = "Instructing solicitor" %}
+    {% elif data['refereeRole'] === 'leadingOrOpposingAdvocate' %}
+      {% set refereeRoleText = "Leading or opposing advocate" %}
+    {% elif data['refereeRole'] === 'cpsLawyer' %}
+      {% set refereeRoleText = "CPS lawyer or lawyer from another prosecuting authority" %}
+    {% elif data['refereeRole'] === 'advocacyAssessor' %}
+      {% set refereeRoleText = "Advocacy assessor" %}
     {% elif data['refereeRole'] === 'other' %}
       {% set refereeRoleText = "Other – " + (data['refereeRoleOther'] or "not specified") %}
     {% else %}
@@ -61,7 +72,6 @@
         }
       ]
     }) }}
-
 
     {{ govukSummaryList({
       rows: [
@@ -80,7 +90,6 @@
 
     <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Examples of your work</h2>
 
-    <h3 class="govuk-heading-s">Advocacy</h3>
     {{ govukSummaryList({
       rows: [
         {
@@ -91,7 +100,6 @@
       ]
     }) }}
 
-   
     {{ govukSummaryList({
       rows: [
         {
@@ -102,28 +110,49 @@
       ]
     }) }}
 
+    {% if data['crownCourtLevel'] !== 'Level 1' %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Advisory drafting (upload)" },
+            value: { text: data['uploadedFiles'] or "Not provided" },
+            actions: { items: [{ href: "/upload-page?returnUrl=/check-application", text: "Change", visuallyHiddenText: "advisory drafting upload" }] }
+          }
+        ]
+      }) }}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Public interest immunity (PII) and disclosure" },
+            value: { text: data['publicInterestImmunity'] or "Not provided" },
+            actions: { items: [{ href: "/examples-work/examples-work-public-interest-immunity?returnUrl=/check-application", text: "Change", visuallyHiddenText: "public interest immunity and disclosure" }] }
+          }
+        ]
+      }) }}
+
+    {% endif %}
 
     {{ govukSummaryList({
       rows: [
         {
-          key: { text: "Evidence" },
+          key: { text: "Other knowledge, skills and experience" },
           value: { text: data['otherRelevantSkills'] or "Not provided" },
           actions: { items: [{ href: "/examples-work/examples-work-knowledge-skills-experience?returnUrl=/check-application", text: "Change", visuallyHiddenText: "other knowledge, skills and experience" }] }
         }
       ]
     }) }}
 
-   
     {{ govukSummaryList({
       rows: [
         {
-          key: { text: "Evidence" },
+          key: { text: "Appreciation of the role of a panel advocate" },
           value: { text: data['appreciation'] or "Not provided" },
           actions: { items: [{ href: "/examples-work/examples-work-appreciation?returnUrl=/check-application", text: "Change", visuallyHiddenText: "appreciation of the role" }] }
         }
       ]
     }) }}
-
 
     {{ govukSummaryList({
       rows: [
@@ -137,78 +166,74 @@
 
 
     {# ======================================================
-       BACKGROUND DISCLOSURE
+       BACKGROUND DISCLOSURE — Level 1 and 2/3 only, not Level 4
     ====================================================== #}
 
-    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Background disclosure</h2>
+    {% if data['crownCourtLevel'] !== 'Level 4' %}
 
-    {# Helper: show Yes/No answer plus conditional detail text if answered Yes #}
+      <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Background disclosure</h2>
 
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Subject of a criminal investigation?" },
+            value: { html: (data['CriminalInvestigation'] or "Not provided") + ("<br><br>" + data['criminalInvestigationDetails'] if data['CriminalInvestigation'] === 'Yes' and data['criminalInvestigationDetails'] else "") },
+            actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1?returnUrl=/check-application", text: "Change", visuallyHiddenText: "criminal investigation" }] }
+          }
+        ]
+      }) }}
 
-    {{ govukSummaryList({
-      rows: [
-        {
-          key: { text: "Subject of a criminal investigation?" },
-          value: { html: (data['CriminalInvestigation'] or "Not provided") + ("<br><br>" + data['criminalInvestigationDetails'] if data['CriminalInvestigation'] === 'Yes' and data['criminalInvestigationDetails'] else "") },
-          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1?returnUrl=/check-application", text: "Change", visuallyHiddenText: "criminal investigation" }] }
-        }
-      ]
-    }) }}
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Charged with or prosecuted for a criminal offence?" },
+            value: { html: (data['CriminalOffence'] or "Not provided") + ("<br><br>" + data['criminalOffenceDetails'] if data['CriminalOffence'] === 'Yes' and data['criminalOffenceDetails'] else "") },
+            actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-2?returnUrl=/check-application", text: "Change", visuallyHiddenText: "criminal offence" }] }
+          }
+        ]
+      }) }}
 
-   
-    {{ govukSummaryList({
-      rows: [
-        {
-          key: { text: "Charged with or prosecuted for a criminal offence?" },
-          value: { html: (data['CriminalOffence'] or "Not provided") + ("<br><br>" + data['criminalOffenceDetails'] if data['CriminalOffence'] === 'Yes' and data['criminalOffenceDetails'] else "") },
-          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-2?returnUrl=/check-application", text: "Change", visuallyHiddenText: "criminal offence" }] }
-        }
-      ]
-    }) }}
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Convicted, cautioned or reprimanded?" },
+            value: { html: (data['convinctionCautionReprimend'] or "Not provided") + ("<br><br>" + data['convictionOrCautionDetails'] if data['convinctionCautionReprimend'] === 'Yes' and data['convictionOrCautionDetails'] else "") },
+            actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-3?returnUrl=/check-application", text: "Change", visuallyHiddenText: "conviction, caution or reprimand" }] }
+          }
+        ]
+      }) }}
 
-    
-    {{ govukSummaryList({
-      rows: [
-        {
-          key: { text: "Convicted, cautioned or reprimanded?" },
-          value: { html: (data['convinctionCautionReprimend'] or "Not provided") + ("<br><br>" + data['convictionOrCautionDetails'] if data['convinctionCautionReprimend'] === 'Yes' and data['convictionOrCautionDetails'] else "") },
-          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-3?returnUrl=/check-application", text: "Change", visuallyHiddenText: "conviction, caution or reprimand" }] }
-        }
-      ]
-    }) }}
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Subject of disciplinary proceedings?" },
+            value: { html: (data['DisciplinaryProceedings'] or "Not provided") + ("<br><br>" + data['disciplinaryProceedingsDetails'] if data['DisciplinaryProceedings'] === 'Yes' and data['disciplinaryProceedingsDetails'] else "") },
+            actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-4?returnUrl=/check-application", text: "Change", visuallyHiddenText: "disciplinary proceedings" }] }
+          }
+        ]
+      }) }}
 
-    
-    {{ govukSummaryList({
-      rows: [
-        {
-          key: { text: "Subject of disciplinary proceedings?" },
-          value: { html: (data['DisciplinaryProceedings'] or "Not provided") + ("<br><br>" + data['disciplinaryProceedingsDetails'] if data['DisciplinaryProceedings'] === 'Yes' and data['disciplinaryProceedingsDetails'] else "") },
-          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-4?returnUrl=/check-application", text: "Change", visuallyHiddenText: "disciplinary proceedings" }] }
-        }
-      ]
-    }) }}
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "Subject of civil proceedings?" },
+            value: { html: (data['CivilProceedings'] or "Not provided") + ("<br><br>" + data['civilProceedingsDetails'] if data['CivilProceedings'] === 'Yes' and data['civilProceedingsDetails'] else "") },
+            actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-5?returnUrl=/check-application", text: "Change", visuallyHiddenText: "civil proceedings" }] }
+          }
+        ]
+      }) }}
 
-   
-    {{ govukSummaryList({
-      rows: [
-        {
-          key: { text: "Subject of civil proceedings?" },
-          value: { html: (data['CivilProceedings'] or "Not provided") + ("<br><br>" + data['civilProceedingsDetails'] if data['CivilProceedings'] === 'Yes' and data['civilProceedingsDetails'] else "") },
-          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-5?returnUrl=/check-application", text: "Change", visuallyHiddenText: "civil proceedings" }] }
-        }
-      ]
-    }) }}
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: { text: "CPS or prosecuting authority removed instructions?" },
+            value: { html: (data['ProsecutingAuthority'] or "Not provided") + ("<br><br>" + data['removalOfInstructionsDetails'] if data['ProsecutingAuthority'] === 'Yes' and data['removalOfInstructionsDetails'] else "") },
+            actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-6?returnUrl=/check-application", text: "Change", visuallyHiddenText: "removal of instructions" }] }
+          }
+        ]
+      }) }}
 
-   
-    {{ govukSummaryList({
-      rows: [
-        {
-          key: { text: "CPS or prosecuting authority removed instructions?" },
-          value: { html: (data['ProsecutingAuthority'] or "Not provided") + ("<br><br>" + data['removalOfInstructionsDetails'] if data['ProsecutingAuthority'] === 'Yes' and data['removalOfInstructionsDetails'] else "") },
-          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-6?returnUrl=/check-application", text: "Change", visuallyHiddenText: "removal of instructions" }] }
-        }
-      ]
-    }) }}
+    {% endif %}
 
 
     {# ======================================================
