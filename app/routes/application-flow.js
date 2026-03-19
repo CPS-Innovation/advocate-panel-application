@@ -34,6 +34,10 @@ module.exports = router => {
 
     if (crownCourtLevel === 'Level 1') {
       res.redirect('/about-you-questions/check-answers')
+    } else if (crownCourtLevel === 'Level 2') {
+      res.redirect('/about-you-questions/crown-court-levels')
+    } else if (crownCourtLevel === 'Level 3') {
+      res.redirect('/about-you-questions/crown-court-levels')
     } else if (crownCourtLevel === 'Level 4') {
       res.redirect('/about-you-questions/london-secondee')
     } else {
