@@ -1,8 +1,7 @@
 {% extends "layouts/main.html" %}
 
-{% block pageTitle %}
-Crown courts – {{ serviceName }} – GOV.UK Prototype Kit
-{% endblock %}
+{% block pageTitle %}Preferred Crown Courts — Apply for the CPS Advocate Panel — GOV.UK{% endblock %}
+
 
 {% block containerStart %}
 {{ govukBackLink({
@@ -14,26 +13,26 @@ Crown courts – {{ serviceName }} – GOV.UK Prototype Kit
 {% block content %}
 
 {% set crownCourts = [
-  { text: "Birmingham Crown Court" },
-  { text: "Bristol Crown Court" },
-  { text: "Cambridge Crown Court" },
-  { text: "Canterbury Crown Court" },
-  { text: "Cardiff Crown Court" },
-  { text: "Central Criminal Court" },
-  { text: "Chelmsford Crown Court" },
-  { text: "Derby Crown Court" },
-  { text: "Inner London Crown Court" },
-  { text: "Leeds Crown Court" },
-  { text: "Liverpool Crown Court" },
-  { text: "Manchester Crown Court (Crown Square)" },
-  { text: "Newcastle Crown Court" },
-  { text: "Nottingham Crown Court" },
-  { text: "Oxford Crown Court" },
-  { text: "Reading Crown Court" },
-  { text: "Sheffield Crown Court" },
-  { text: "Snaresbrook Crown Court" },
-  { text: "Southwark Crown Court" },
-  { text: "Wood Green Crown Court" }
+  { text: "Birmingham Crown Court", value: "Birmingham Crown Court" },
+  { text: "Bristol Crown Court", value: "Bristol Crown Court" },
+  { text: "Cambridge Crown Court", value: "Cambridge Crown Court" },
+  { text: "Canterbury Crown Court", value: "Canterbury Crown Court" },
+  { text: "Cardiff Crown Court", value: "Cardiff Crown Court" },
+  { text: "Central Criminal Court", value: "Central Criminal Court" },
+  { text: "Chelmsford Crown Court", value: "Chelmsford Crown Court" },
+  { text: "Derby Crown Court", value: "Derby Crown Court" },
+  { text: "Inner London Crown Court", value: "Inner London Crown Court" },
+  { text: "Leeds Crown Court", value: "Leeds Crown Court" },
+  { text: "Liverpool Crown Court", value: "Liverpool Crown Court" },
+  { text: "Manchester Crown Court (Crown Square)", value: "Manchester Crown Court (Crown Square)" },
+  { text: "Newcastle Crown Court", value: "Newcastle Crown Court" },
+  { text: "Nottingham Crown Court", value: "Nottingham Crown Court" },
+  { text: "Oxford Crown Court", value: "Oxford Crown Court" },
+  { text: "Reading Crown Court", value: "Reading Crown Court" },
+  { text: "Sheffield Crown Court", value: "Sheffield Crown Court" },
+  { text: "Snaresbrook Crown Court", value: "Snaresbrook Crown Court" },
+  { text: "Southwark Crown Court", value: "Southwark Crown Court" },
+  { text: "Wood Green Crown Court", value: "Wood Green Crown Court" }
 ] %}
 
 <div class="govuk-grid-row">
@@ -51,7 +50,7 @@ Crown courts – {{ serviceName }} – GOV.UK Prototype Kit
         hint: {
           text: "Select up to 3 courts"
         },
-        minLength: 2,
+        minLength: 1,
         items: crownCourts
       }) }}
 

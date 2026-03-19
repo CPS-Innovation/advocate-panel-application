@@ -1,7 +1,7 @@
 {# current-chambers/employment-type.html #}
 {% extends "layouts/main.html" %}
 
-{% set pageTitle = "Where you work — Apply for the CPS Advocate Panel — GOV.UK" %}
+{% block pageTitle %}Where you work — Apply for the CPS Advocate Panel — GOV.UK{% endblock %}
 
 {% block containerStart %}
 {{ govukBackLink({
@@ -37,8 +37,8 @@
             text: "Sole trader"
           },
           {
-            value: "Solicitors’ firm",
-            text: "Solicitors’ firm"
+            value: "Solicitors firm",
+            text: "Solicitors firm"
           }
         ]
       }) }}
