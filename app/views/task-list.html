@@ -1,7 +1,8 @@
+{# task-list.html #}
 {% extends "layouts/main.html" %}
 {% from "_includes/task-status.njk" import taskStatusText, taskStatusClass %}
 
-{% block pageTitle %}Personal details – {{ serviceName }} – GOV.UK Prototype Kit{% endblock %}
+{% set pageTitle = "Finish creating your account — Apply for the CPS Advocate Panel — GOV.UK" %}
 
 {% block content %}
 
@@ -28,7 +29,7 @@
         },
         {
           title: { text: "Preferred circuits and Crown Courts" },
-          href: "/preferred-circuit/circuit-question-page",
+          href: "/preferred-circuit/primary-circuit",
           status: { tag: { text: taskStatusText(data['preferredCircuitStatus']), classes: taskStatusClass(data['preferredCircuitStatus']) } },
           idPrefix: "personal-details-location"
         },

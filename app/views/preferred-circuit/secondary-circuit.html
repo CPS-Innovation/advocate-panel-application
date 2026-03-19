@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Secondary circuit – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Preferred circuits</h1>
+
+    <form method="post" novalidate>
+
+      {{ govukRadios({
+        name: "secondaryCircuit",
+        fieldset: {
+          legend: {
+            text: "Secondary circuit (optional)",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        value: data['secondaryCircuit'],
+        items: [
+          { value: "Midlands",          text: "Midlands" },
+          { value: "North Eastern",     text: "North Eastern" },
+          { value: "Northern",          text: "Northern" },
+          { value: "South Eastern",     text: "South Eastern" },
+          { value: "Wales and Chester", text: "Wales and Chester" },
+          { value: "Western",           text: "Western" },
+          { value: "No preference",     text: "No preference" }
+        ]
+      }) }}
+
+      {{ govukButton({ text: "Save and continue" }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

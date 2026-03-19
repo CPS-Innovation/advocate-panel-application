@@ -243,7 +243,7 @@ module.exports = router => {
     res.redirect('/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-6')
   })
 
-  ////////// PQQ - REMOVAL OF INSTRUCTIONS (FINAL — sets status)
+ ////////// PQQ - REMOVAL OF INSTRUCTIONS (FINAL — sets status)
   router.post('/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-6', (req, res) => {
     const data = req.session.data
 
@@ -275,20 +275,19 @@ module.exports = router => {
     ].every(val => val === 'Yes' || val === 'No')
 
     if (allAnswered) {
-      data['pqqStatus'] = 'completed'
+      data['bgDisclosureStatus'] = 'completed'
     } else if (anyAnswered || anyDetails) {
-      data['pqqStatus'] = 'inProgress'
+      data['bgDisclosureStatus'] = 'inProgress'
     } else {
-      data['pqqStatus'] = 'notStarted'
+      data['bgDisclosureStatus'] = 'notStarted'
     }
 
     res.redirect('/year-call-degree-qualifications/mini-questionnaire/check-answers')
   })
 
-
   ////////// PQQ - CHECK ANSWERS
   router.post('/year-call-degree-qualifications/mini-questionnaire/check-answers', (req, res) => {
-    req.session.data['pqqStatus'] = 'completed'
+    req.session.data['bgDisclosureStatus'] = 'completed'
     res.redirect('/start-application')
   })
 
