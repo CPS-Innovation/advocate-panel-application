@@ -1,0 +1,228 @@
+{# app/views/check-application.html #}
+{% extends "layouts/main.html" %}
+{% block pageTitle %}Check your answers – {{ serviceName }} – GOV.UK Prototype Kit{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: "Back", href: "javascript:window.history.back()" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Check your answers before submitting your application</h1>
+
+
+    {# ======================================================
+       REFERENCES
+    ====================================================== #}
+
+    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Referee</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Full name" },
+          value: { text: data['refereeFullName'] or "Not provided" },
+          actions: { items: [{ href: "/references-questions/referee-details?returnUrl=/check-application", text: "Change", visuallyHiddenText: "referee full name" }] }
+        },
+        {
+          key: { text: "Job title" },
+          value: { text: data['refereeJobTitle'] or "Not provided" },
+          actions: { items: [{ href: "/references-questions/referee-details?returnUrl=/check-application", text: "Change", visuallyHiddenText: "referee job title" }] }
+        },
+        {
+          key: { text: "Email address" },
+          value: { text: data['refereeEmail'] or "Not provided" },
+          actions: { items: [{ href: "/references-questions/referee-details?returnUrl=/check-application", text: "Change", visuallyHiddenText: "referee email address" }] }
+        }
+      ]
+    }) }}
+
+
+    {% if data['refereeRole'] === 'pupilSupervisor' %}
+      {% set refereeRoleText = "Pupil supervisor" %}
+    {% elif data['refereeRole'] === 'headOfChambers' %}
+      {% set refereeRoleText = "Head of chambers" %}
+    {% elif data['refereeRole'] === 'chambersAdvocacyTrainer' %}
+      {% set refereeRoleText = "Chambers advocacy trainer" %}
+    {% elif data['refereeRole'] === 'other' %}
+      {% set refereeRoleText = "Other – " + (data['refereeRoleOther'] or "not specified") %}
+    {% else %}
+      {% set refereeRoleText = "Not provided" %}
+    {% endif %}
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Role" },
+          value: { text: refereeRoleText },
+          actions: { items: [{ href: "/references-questions/referee-role?returnUrl=/check-application", text: "Change", visuallyHiddenText: "referee role" }] }
+        }
+      ]
+    }) }}
+
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Message" },
+          value: { text: data['messageToReferee'] or "Not provided" },
+          actions: { items: [{ href: "/references-questions/referee-message?returnUrl=/check-application", text: "Change", visuallyHiddenText: "message to referee" }] }
+        }
+      ]
+    }) }}
+
+
+    {# ======================================================
+       EXAMPLES OF YOUR WORK
+    ====================================================== #}
+
+    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Examples of your work</h2>
+
+    <h3 class="govuk-heading-s">Advocacy</h3>
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Evidence of advocacy" },
+          value: { text: data['advocacy'] or "Not provided" },
+          actions: { items: [{ href: "/examples-work/examples-work-advocacy?returnUrl=/check-application", text: "Change", visuallyHiddenText: "evidence of advocacy" }] }
+        }
+      ]
+    }) }}
+
+   
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Evidence of advisory work" },
+          value: { text: data['advisoryWork'] or "Not provided" },
+          actions: { items: [{ href: "/examples-work/examples-work-advisory?returnUrl=/check-application", text: "Change", visuallyHiddenText: "evidence of advisory work" }] }
+        }
+      ]
+    }) }}
+
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Evidence" },
+          value: { text: data['otherRelevantSkills'] or "Not provided" },
+          actions: { items: [{ href: "/examples-work/examples-work-knowledge-skills-experience?returnUrl=/check-application", text: "Change", visuallyHiddenText: "other knowledge, skills and experience" }] }
+        }
+      ]
+    }) }}
+
+   
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Evidence" },
+          value: { text: data['appreciation'] or "Not provided" },
+          actions: { items: [{ href: "/examples-work/examples-work-appreciation?returnUrl=/check-application", text: "Change", visuallyHiddenText: "appreciation of the role" }] }
+        }
+      ]
+    }) }}
+
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Additional information" },
+          value: { text: data['additional-info'] or "Not provided" },
+          actions: { items: [{ href: "/examples-work/examples-work-additional?returnUrl=/check-application", text: "Change", visuallyHiddenText: "additional information" }] }
+        }
+      ]
+    }) }}
+
+
+    {# ======================================================
+       BACKGROUND DISCLOSURE
+    ====================================================== #}
+
+    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Background disclosure</h2>
+
+    {# Helper: show Yes/No answer plus conditional detail text if answered Yes #}
+
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Subject of a criminal investigation?" },
+          value: { html: (data['CriminalInvestigation'] or "Not provided") + ("<br><br>" + data['criminalInvestigationDetails'] if data['CriminalInvestigation'] === 'Yes' and data['criminalInvestigationDetails'] else "") },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-1?returnUrl=/check-application", text: "Change", visuallyHiddenText: "criminal investigation" }] }
+        }
+      ]
+    }) }}
+
+   
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Charged with or prosecuted for a criminal offence?" },
+          value: { html: (data['CriminalOffence'] or "Not provided") + ("<br><br>" + data['criminalOffenceDetails'] if data['CriminalOffence'] === 'Yes' and data['criminalOffenceDetails'] else "") },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-2?returnUrl=/check-application", text: "Change", visuallyHiddenText: "criminal offence" }] }
+        }
+      ]
+    }) }}
+
+    
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Convicted, cautioned or reprimanded?" },
+          value: { html: (data['convinctionCautionReprimend'] or "Not provided") + ("<br><br>" + data['convictionOrCautionDetails'] if data['convinctionCautionReprimend'] === 'Yes' and data['convictionOrCautionDetails'] else "") },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-3?returnUrl=/check-application", text: "Change", visuallyHiddenText: "conviction, caution or reprimand" }] }
+        }
+      ]
+    }) }}
+
+    
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Subject of disciplinary proceedings?" },
+          value: { html: (data['DisciplinaryProceedings'] or "Not provided") + ("<br><br>" + data['disciplinaryProceedingsDetails'] if data['DisciplinaryProceedings'] === 'Yes' and data['disciplinaryProceedingsDetails'] else "") },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-4?returnUrl=/check-application", text: "Change", visuallyHiddenText: "disciplinary proceedings" }] }
+        }
+      ]
+    }) }}
+
+   
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Subject of civil proceedings?" },
+          value: { html: (data['CivilProceedings'] or "Not provided") + ("<br><br>" + data['civilProceedingsDetails'] if data['CivilProceedings'] === 'Yes' and data['civilProceedingsDetails'] else "") },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-5?returnUrl=/check-application", text: "Change", visuallyHiddenText: "civil proceedings" }] }
+        }
+      ]
+    }) }}
+
+   
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "CPS or prosecuting authority removed instructions?" },
+          value: { html: (data['ProsecutingAuthority'] or "Not provided") + ("<br><br>" + data['removalOfInstructionsDetails'] if data['ProsecutingAuthority'] === 'Yes' and data['removalOfInstructionsDetails'] else "") },
+          actions: { items: [{ href: "/year-call-degree-qualifications/mini-questionnaire/pre-qualification-questionnaire-6?returnUrl=/check-application", text: "Change", visuallyHiddenText: "removal of instructions" }] }
+        }
+      ]
+    }) }}
+
+
+    {# ======================================================
+       SUBMIT
+    ====================================================== #}
+
+    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Submit your application</h2>
+
+    <p class="govuk-body">By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Accept and submit application" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

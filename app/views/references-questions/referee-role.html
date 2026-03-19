@@ -1,0 +1,68 @@
+{% extends "layouts/main.html" %}
+{% block pageTitle %}Referee role – {{ serviceName }} – GOV.UK Prototype Kit{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({ text: "Back", href: "javascript:window.history.back()" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Referee role</h1>
+
+    <form method="post" novalidate>
+
+      {% if data['crownCourtLevel'] === 'Level 1' %}
+        {{ govukRadios({
+          name: "refereeRole", value: data['refereeRole'],
+          fieldset: { legend: { text: "What is the referee's role?", classes: "govuk-fieldset__legend--m" } },
+          items: [
+            { value: "pupilSupervisor", text: "Pupil supervisor" },
+            { value: "headOfChambers", text: "Head of chambers" },
+            { value: "chambersAdvocacyTrainer", text: "Chambers advocacy trainer" },
+            { value: "other", text: "Other", conditional: { html: govukInput({ label: { text: "Please specify" }, id: "refereeRoleOther", name: "refereeRoleOther", classes: "govuk-input--width-20", value: data['refereeRoleOther'] }) } }
+          ]
+        }) }}
+
+      {% elif data['crownCourtLevel'] === 'Level 4' %}
+        {{ govukRadios({
+          name: "refereeRole", value: data['refereeRole'],
+          fieldset: { legend: { text: "What is the referee's role?", classes: "govuk-fieldset__legend--m" } },
+          items: [
+            { value: "fullTimeJudiciary", text: "Current or retired member of the full-time judiciary" },
+            { value: "partTimeJudiciary", text: "Member of the part-time judiciary" },
+            { value: "headOfChambers", text: "Head of chambers" },
+            { value: "instructingSolicitor", text: "Instructing solicitor" },
+            { value: "leadingOrOpposingAdvocate", text: "Leading or opposing advocate" },
+            { value: "cpsLawyer", text: "CPS lawyer or lawyer from another prosecuting authority" },
+            { value: "advocacyAssessor", text: "Advocacy assessor" },
+            { value: "other", text: "Other", conditional: { html: govukInput({ label: { text: "Please specify" }, id: "refereeRoleOther", name: "refereeRoleOther", classes: "govuk-input--width-20", value: data['refereeRoleOther'] }) } }
+          ]
+        }) }}
+
+      {% else %}
+        {{ govukRadios({
+          name: "refereeRole", value: data['refereeRole'],
+          fieldset: { legend: { text: "What is the referee's role?", classes: "govuk-fieldset__legend--m" } },
+          items: [
+            { value: "pupilSupervisor", text: "Pupil supervisor" },
+            { value: "headOfChambers", text: "Head of chambers" },
+            { value: "chambersAdvocacyTrainer", text: "Chambers advocacy trainer" },
+            { value: "instructingSolicitor", text: "Instructing solicitor" },
+            { value: "leadingOrOpposingAdvocate", text: "Leading or opposing advocate" },
+            { value: "advocacyAssessor", text: "Advocacy assessor" },
+            { value: "fullTimeJudiciary", text: "Current or retired member of the full-time judiciary" },
+            { value: "partTimeJudiciary", text: "Member of the part-time judiciary" },
+            { value: "cpsLawyer", text: "CPS lawyer or lawyer from another prosecuting authority" },
+            { value: "other", text: "Other", conditional: { html: govukInput({ label: { text: "Please specify" }, id: "refereeRoleOther", name: "refereeRoleOther", classes: "govuk-input--width-20", value: data['refereeRoleOther'] }) } }
+          ]
+        }) }}
+      {% endif %}
+
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

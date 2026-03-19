@@ -52,20 +52,53 @@ module.exports = router => {
   })
 
   ////////// REFEREE
-  router.post('/references-questions/reference-page', (req, res) => {
+  // router.post('/references-questions/reference-page', (req, res) => {
+  //   const completed = res.locals.haveYouCompletedThisSection
+  //   const refereeFullName = req.session.data['refereeFullName']
+
+  //   if (completed === 'yes') {
+  //     req.session.data['refereeStatus'] = 'completed'
+  //     res.redirect('/start-application')
+  //   } else if (refereeFullName && refereeFullName.trim() !== '') {
+  //     req.session.data['refereeStatus'] = 'inProgress'
+  //     res.redirect('/start-application')
+  //   } else {
+  //     req.session.data['refereeStatus'] = 'notStarted'
+  //     res.redirect('/start-application')
+  //   }
+  // })
+
+  ////////// REFEREE DETAILS
+  router.post('/references-questions/referee-details', (req, res) => {
+    const { refereeFullName, refereeJobTitle, refereeEmail } = req.session.data
+    const filled = [refereeFullName, refereeJobTitle, refereeEmail].some(v => v && v.trim() !== '')
+    req.session.data['refereeDetailsStatus'] = filled ? 'inProgress' : 'notStarted'
+    res.redirect('/references-questions/referee-role')
+  })
+
+  ////////// REFEREE ROLE
+  router.post('/references-questions/referee-role', (req, res) => {
+    const role = req.session.data['refereeRole']
+    req.session.data['refereeRoleStatus'] = role ? 'inProgress' : 'notStarted'
+    res.redirect('/references-questions/referee-message')
+  })
+
+  ////////// REFEREE MESSAGE
+  router.post('/references-questions/referee-message', (req, res) => {
     const completed = res.locals.haveYouCompletedThisSection
-    const refereeFullName = req.session.data['refereeFullName']
+    const message = req.session.data['messageToReferee']
 
     if (completed === 'yes') {
-      req.session.data['refereeStatus'] = 'completed'
-      res.redirect('/start-application')
-    } else if (refereeFullName && refereeFullName.trim() !== '') {
-      req.session.data['refereeStatus'] = 'inProgress'
-      res.redirect('/start-application')
+      req.session.data['refereeDetailsStatus'] = 'completed'
+      req.session.data['refereeRoleStatus']    = 'completed'
+      req.session.data['refereeMessageStatus'] = 'completed'
+    } else if (message && message.trim() !== '') {
+      req.session.data['refereeMessageStatus'] = 'inProgress'
     } else {
-      req.session.data['refereeStatus'] = 'notStarted'
-      res.redirect('/start-application')
+      req.session.data['refereeMessageStatus'] = 'notStarted'
     }
+
+    res.redirect('/start-application')
   })
 
   ////////// EXAMPLES OF WORK - ADVOCACY
@@ -294,6 +327,11 @@ module.exports = router => {
   ////////// DECLARATION
   router.post('/declaration', (req, res) => {
     req.session.data['declarationStatus'] = 'completed'
+    res.redirect('/start-application')
+  })
+
+  ////////// CHECK APPLICATION (LEVEL 1)
+  router.post('/check-application', (req, res) => {
     res.redirect('/finish-application')
   })
 
