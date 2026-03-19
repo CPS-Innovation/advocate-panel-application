@@ -16,10 +16,12 @@ module.exports = router => {
   ////////// CHECK - PERSONAL DETAILS
   router.post('/check', (req, res) => {
     req.session.data.user = { loggedIn: true }
+
     req.session.save(() => {
       res.redirect('/profile')
     })
   })
+
 
   ////////// LOGIN
   router.get('/login', (req, res) => {
