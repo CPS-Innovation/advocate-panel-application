@@ -177,42 +177,68 @@
          ETHNIC GROUP
       ====================================================== #}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-9">Ethnic group</h2>
+ <h2 class="govuk-heading-m govuk-!-margin-top-9">Ethnic group</h2>
+      <p class="govuk-body">What is your ethnic group?</p>
 
-      {{ govukCheckboxes({
+      <h3 class="govuk-heading-s">Asian</h3>
+      {{ govukRadios({
         name: "ethnicity",
-        values: data['ethnicity'],
-        fieldset: {
-          legend: { text: "What is your ethnic group? Select all that apply.", classes: "govuk-fieldset__legend--s" }
-        },
+        value: data['ethnicity'],
         items: [
-          { value: "Asian or Asian British", text: "Asian or Asian British" },
-          { value: "asian-bangladeshi",  text: "Bangladeshi" },
-          { value: "asian-indian",       text: "Indian" },
-          { value: "asian-pakistani",    text: "Pakistani" },
-          { value: "asian-chinese",      text: "Chinese" },
-          { value: "asian-any-other",    text: "Any other Asian background" },
-          { value: "Black, Black British, Caribbean or African", text: "Black, Black British, Caribbean or African" },
-          { value: "black-african",      text: "African" },
-          { value: "black-caribbean",    text: "Caribbean" },
-          { value: "black-any-other",    text: "Any other Black background" },
-          { value: "Mixed or multiple ethnic groups", text: "Mixed or multiple ethnic groups" },
-          { value: "mixed-black-african-white",    text: "Black African and White" },
-          { value: "mixed-black-caribbean-white",  text: "Black Caribbean and White" },
-          { value: "mixed-other",                  text: "Any other Mixed background" },
-          { value: "White", text: "White" },
-          { value: "white-english",              text: "English" },
-          { value: "white-scottish",             text: "Scottish" },
-          { value: "white-welsh",                text: "Welsh" },
-          { value: "white-northern-irish",       text: "Northern Irish" },
-          { value: "white-irish",                text: "Irish" },
-          { value: "white-british",              text: "British" },
+          { value: "asian-bangladeshi", text: "Bangladeshi" },
+          { value: "asian-indian",      text: "Indian" },
+          { value: "asian-pakistani",   text: "Pakistani" },
+          { value: "asian-chinese",     text: "Chinese" },
+          { value: "asian-any-other",   text: "Any other Asian background" }
+        ]
+      }) }}
+
+      <h3 class="govuk-heading-s">Black, Black British, Caribbean or African</h3>
+      {{ govukRadios({
+        name: "ethnicity",
+        value: data['ethnicity'],
+        items: [
+          { value: "black-african",   text: "African" },
+          { value: "black-caribbean", text: "Caribbean" },
+          { value: "black-any-other", text: "Any other Black background" }
+        ]
+      }) }}
+
+      <h3 class="govuk-heading-s">Mixed or multiple ethnic groups</h3>
+      {{ govukRadios({
+        name: "ethnicity",
+        value: data['ethnicity'],
+        items: [
+          { value: "mixed-black-african-white",   text: "Black African and White" },
+          { value: "mixed-black-caribbean-white", text: "Black Caribbean and White" },
+          { value: "mixed-other",                 text: "Any other Mixed background" }
+        ]
+      }) }}
+
+      <h3 class="govuk-heading-s">White</h3>
+      {{ govukRadios({
+        name: "ethnicity",
+        value: data['ethnicity'],
+        items: [
+          { value: "white-english",                  text: "English" },
+          { value: "white-scottish",                 text: "Scottish" },
+          { value: "white-welsh",                    text: "Welsh" },
+          { value: "white-northern-irish",           text: "Northern Irish" },
+          { value: "white-irish",                    text: "Irish" },
+          { value: "white-british",                  text: "British" },
           { value: "white-gypsy-or-irish-traveller", text: "Gypsy or Irish Traveller" },
-          { value: "white-roma",                 text: "Roma" },
-          { value: "white-any-other",            text: "Any other White background" },
-          { value: "Other ethnic group", text: "Other ethnic group" },
-          { value: "other-arab",             text: "Arab" },
-          { value: "other-other",            text: "Other" },
+          { value: "white-roma",                     text: "Roma" },
+          { value: "white-any-other",                text: "Any other White background" }
+        ]
+      }) }}
+
+      <h3 class="govuk-heading-s">Other ethnic group</h3>
+      {{ govukRadios({
+        name: "ethnicity",
+        value: data['ethnicity'],
+        items: [
+          { value: "other-arab",              text: "Arab" },
+          { value: "other-other",             text: "Other" },
           { value: "other-prefer-not-to-say", text: "Prefer not to say" }
         ]
       }) }}
