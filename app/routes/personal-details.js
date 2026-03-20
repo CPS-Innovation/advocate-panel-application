@@ -127,7 +127,7 @@ module.exports = router => {
       res.redirect(returnUrl || '/current-chambers/name-chambers')
     } else if (employmentType === 'Sole trader') {
       res.redirect(returnUrl || '/current-chambers/sole-trader-adding-address')
-    } else if (employmentType === "Solicitors' firm") {
+    } else if (employmentType === "Solicitors’ firm") {
       res.redirect(returnUrl || '/current-chambers/solicitor-firm-adding-address')
     } else {
       res.redirect('/current-chambers/employment-type')
