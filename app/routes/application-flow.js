@@ -76,14 +76,12 @@ module.exports = router => {
   router.post('/references-questions/referee-details', (req, res) => {
     const { refereeFullName, refereeJobTitle, refereeEmail } = req.session.data
     const filled = [refereeFullName, refereeJobTitle, refereeEmail].some(v => v && v.trim() !== '')
-    req.session.data['refereeDetailsStatus'] = filled ? 'inProgress' : 'notStarted'
+    if (filled) req.session.data['refereeStatus'] = 'inProgress'
     res.redirect('/references-questions/referee-role')
   })
 
   ////////// REFEREE ROLE
   router.post('/references-questions/referee-role', (req, res) => {
-    const role = req.session.data['refereeRole']
-    req.session.data['refereeRoleStatus'] = role ? 'inProgress' : 'notStarted'
     res.redirect('/references-questions/referee-message')
   })
 
@@ -93,13 +91,11 @@ module.exports = router => {
     const message = req.session.data['messageToReferee']
 
     if (completed === 'yes') {
-      req.session.data['refereeDetailsStatus'] = 'completed'
-      req.session.data['refereeRoleStatus']    = 'completed'
-      req.session.data['refereeMessageStatus'] = 'completed'
+      req.session.data['refereeStatus'] = 'completed'
     } else if (message && message.trim() !== '') {
-      req.session.data['refereeMessageStatus'] = 'inProgress'
+      req.session.data['refereeStatus'] = 'inProgress'
     } else {
-      req.session.data['refereeMessageStatus'] = 'notStarted'
+      req.session.data['refereeStatus'] = 'notStarted'
     }
 
     res.redirect('/start-application')
