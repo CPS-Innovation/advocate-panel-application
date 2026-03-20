@@ -10,7 +10,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">Check your answers before submitting your application</h1>
+    <h1 class="govuk-heading-l">Check your answers before sending your application</h1>
 
 
     {# ======================================================
@@ -240,12 +240,18 @@
        SUBMIT
     ====================================================== #}
 
-    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Submit your application</h2>
+    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Send your application</h2>
 
-    <p class="govuk-body">By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.</p>
-
+    <p class="govuk-body">By sending this application you are confirming that:
+      
+    <ul class="govuk-list govuk-list--bullet">
+      <li>you’ve removed all personal and case identifying details</li>
+      <li>the examples you’ve given are true and your own</li>
+      <li>you will work in accordance with the advocate panel members’ commitment</li>
+    </ul>
+    
     <form method="post" novalidate>
-      {{ govukButton({ text: "Accept and submit application" }) }}
+      {{ govukButton({ text: "Confirm and send" }) }}
     </form>
 
   </div>

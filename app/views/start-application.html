@@ -19,7 +19,7 @@
       {% set refereeHint = "You can request the reference before you submit your application. We must receive the reference by 30 September." %}
     {% endif %}
 
-    {# {{ govukTaskList({
+    {{ govukTaskList({
       items: [
         {
           title: { text: "Referee details" },
@@ -39,18 +39,6 @@
           href: "/references-questions/referee-message",
           status: { tag: { text: taskStatusText(data['refereeMessageStatus']), classes: taskStatusClass(data['refereeMessageStatus']) } },
           idPrefix: "referee-message"
-        }
-      ]
-    }) }} #}
-
-    {{ govukTaskList({
-      items: [
-        {
-          title: { text: "Referee" },
-          hint: { text: refereeHint },
-          href: "/references-questions/referee-details",
-          status: { tag: { text: taskStatusText(data['refereeStatus']), classes: taskStatusClass(data['refereeStatus']) } },
-          idPrefix: "referee"
         }
       ]
     }) }}
@@ -127,7 +115,7 @@
       }) }}
     {% endif %}
 
-    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Declaration</h2>
+    <!-- <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Declaration</h2>
 
     {{ govukTaskList({
       items: [
@@ -138,10 +126,14 @@
           idPrefix: "declaration"
         }
       ]
-    }) }}
+    }) }} -->
+
+    <h2 class="govuk-heading-m">Check your answers</h2>
+
+    <p class="govuk-body">After you’ve completed all sections of the application form, you can check your answers then send the application.</p>
 
     {{ govukButton({
-      text: "Review application details",
+      text: "Check answers",
       href: "/check-application"
     }) }}
 

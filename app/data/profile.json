@@ -17,11 +17,11 @@
   "dateOfCompletion-month": "06",
   "dateOfCompletion-year": "2012",
   "seriousCrimeLevel": "Level 3",
-  "hasGeneralCrime": "Yes",
+  "generalCrimeLevel": "Level 3",
   "previousApplication": "Yes",
   "applicationReferenceNumber": "54321",
   "applicationLevel": "Level 3",
   "applicationPanel": "General crime",
   "applicationStatus": "Successful",
-  "applicationDate": "11 September 2016"
+  "applicationDate": "3 March 2019"
 }
