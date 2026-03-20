@@ -67,7 +67,11 @@
         rows: [
           {
             key: { text: "General crime" },
-            value: { text: profile.generalCrimeLevel or "Not provided" }
+            value: { text: profile.hasGeneralCrime or "Not provided" }
+          },
+          {
+            key: { text: "Serious crime" },
+            value: { text: profile.seriousCrimeLevel or "Not provided" }
           }
         ]
       }) }}
