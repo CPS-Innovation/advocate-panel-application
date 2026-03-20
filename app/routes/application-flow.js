@@ -100,23 +100,29 @@ module.exports = router => {
 
   ////////// REFEREE MESSAGE
   router.post('/references-questions/referee-message', (req, res) => {
-    const completed = res.locals.haveYouCompletedThisSection
-    const message = req.session.data['messageToReferee']
     const returnUrl = req.session.data['returnUrl']
-
     if (returnUrl) {
       req.session.data['returnUrl'] = null
       res.redirect(returnUrl)
-    } else if (completed === 'yes') {
+    } else {
+      res.redirect('/references-questions/check')
+    }
+  })
+
+  ////////// REFEREE CHECK
+  router.post('/references-questions/check', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const message = req.session.data['messageToReferee']
+
+    if (completed === 'yes') {
       req.session.data['refereeStatus'] = 'completed'
-      res.redirect('/start-application')
     } else if (message && message.trim() !== '') {
       req.session.data['refereeStatus'] = 'inProgress'
-      res.redirect('/start-application')
     } else {
       req.session.data['refereeStatus'] = 'notStarted'
-      res.redirect('/start-application')
     }
+
+    res.redirect('/start-application')
   })
 
   ////////// EXAMPLES OF WORK - ADVOCACY

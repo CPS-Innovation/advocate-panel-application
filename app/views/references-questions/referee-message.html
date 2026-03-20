@@ -16,9 +16,8 @@
       <li>cases which you've worked on with the referee</li>
     </ul>
 
-    <form method="post" novalidate>
-
-      <input type="hidden" name="returnUrl" value="{{ data['returnUrl'] or query.returnUrl }}">
+   <form method="post" novalidate>
+      <input type="hidden" name="returnUrl" value="{{ query.returnUrl }}">
 
       {{ govukCharacterCount({
         name: "messageToReferee", id: "message-to-referee", rows: "10",
@@ -27,19 +26,7 @@
         label: { text: "Message to referee", classes: "govuk-label--m" }
       }) }}
 
-      {% if not (data['returnUrl'] or query.returnUrl) %}
-        {{ govukRadios({
-          name: "haveYouCompletedThisSection", value: data['haveYouCompletedThisSection'],
-          fieldset: { legend: { text: "Have you completed this section?", classes: "govuk-fieldset__legend--m" } },
-          items: [
-            { value: "yes", text: "Yes, send the reference request" },
-            { value: "no",  text: "No, I'll come back to it later" }
-          ]
-        }) }}
-      {% endif %}
-
-      {{ govukButton({ text: (data['returnUrl'] or query.returnUrl) and "Save and continue" or "Save and continue" }) }}
-
+      {{ govukButton({ text: "Continue" }) }}
     </form>
 
   </div>

@@ -1,0 +1,100 @@
+{% extends "layouts/main.html" %}
+{% block pageTitle %}Check referee details – {{ serviceName }} – GOV.UK Prototype Kit{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({ text: "Back", href: "javascript:window.history.back()" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Check referee details</h1>
+
+    <h2 class="govuk-heading-m">Referee details</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Full name" },
+          value: { text: data['refereeFullName'] or "Not provided" },
+          actions: { items: [{ href: "/references-questions/referee-details?returnUrl=/references-questions/check", text: "Change", visuallyHiddenText: "referee full name" }] }
+        },
+        {
+          key: { text: "Job title" },
+          value: { text: data['refereeJobTitle'] or "Not provided" },
+          actions: { items: [{ href: "/references-questions/referee-details?returnUrl=/references-questions/check", text: "Change", visuallyHiddenText: "referee job title" }] }
+        },
+        {
+          key: { text: "Email address" },
+          value: { text: data['refereeEmail'] or "Not provided" },
+          actions: { items: [{ href: "/references-questions/referee-details?returnUrl=/references-questions/check", text: "Change", visuallyHiddenText: "referee email address" }] }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">Referee role</h2>
+
+    {% if data['refereeRole'] === 'pupilSupervisor' %}
+      {% set refereeRoleText = "Pupil supervisor" %}
+    {% elif data['refereeRole'] === 'headOfChambers' %}
+      {% set refereeRoleText = "Head of chambers" %}
+    {% elif data['refereeRole'] === 'chambersAdvocacyTrainer' %}
+      {% set refereeRoleText = "Chambers advocacy trainer" %}
+    {% elif data['refereeRole'] === 'fullTimeJudiciary' %}
+      {% set refereeRoleText = "Current or retired member of the full-time judiciary" %}
+    {% elif data['refereeRole'] === 'partTimeJudiciary' %}
+      {% set refereeRoleText = "Member of the part-time judiciary" %}
+    {% elif data['refereeRole'] === 'instructingSolicitor' %}
+      {% set refereeRoleText = "Instructing solicitor" %}
+    {% elif data['refereeRole'] === 'leadingOrOpposingAdvocate' %}
+      {% set refereeRoleText = "Leading or opposing advocate" %}
+    {% elif data['refereeRole'] === 'cpsLawyer' %}
+      {% set refereeRoleText = "CPS lawyer or lawyer from another prosecuting authority" %}
+    {% elif data['refereeRole'] === 'advocacyAssessor' %}
+      {% set refereeRoleText = "Advocacy assessor" %}
+    {% elif data['refereeRole'] === 'other' %}
+      {% set refereeRoleText = "Other – " + (data['refereeRoleOther'] or "not specified") %}
+    {% else %}
+      {% set refereeRoleText = "Not provided" %}
+    {% endif %}
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Role" },
+          value: { text: refereeRoleText },
+          actions: { items: [{ href: "/references-questions/referee-role?returnUrl=/references-questions/check", text: "Change", visuallyHiddenText: "referee role" }] }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">Message to referee</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Message" },
+          value: { text: data['messageToReferee'] or "Not provided" },
+          actions: { items: [{ href: "/references-questions/referee-message?returnUrl=/references-questions/check", text: "Change", visuallyHiddenText: "message to referee" }] }
+        }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+
+      {{ govukRadios({
+        name: "haveYouCompletedThisSection", value: data['haveYouCompletedThisSection'],
+        fieldset: { legend: { text: "Have you completed this section?", classes: "govuk-fieldset__legend--m" } },
+        items: [
+          { value: "yes", text: "Yes, send the reference request" },
+          { value: "no",  text: "No, I'll come back to it later" }
+        ]
+      }) }}
+
+      {{ govukButton({ text: "Save and continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
