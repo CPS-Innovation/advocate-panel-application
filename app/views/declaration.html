@@ -14,32 +14,36 @@
 
     <form method="post" novalidate>
 
-      {{ govukWarningText({
+      <!-- {{ govukWarningText({
         text: "Your application may be delayed if you include sensitive or identifying information in your application.",
         iconFallbackText: "Warning"
       }) }}
 
-      <p class="govuk-body">False, misleading or plagiarised work may result in disqualification from the application process or lead to removal from any existing panels.</p>
+      <p class="govuk-body">False, misleading or plagiarised work may result in disqualification from the application process or lead to removal from any existing panels.</p> -->
 
       {{ govukCheckboxes({
         name: "declaration",
         fieldset: {
           legend: {
-            text: "Applicant declaration",
+            text: "Declaration",
             isPageHeading: true,
             classes: "govuk-fieldset__legend--l"
           }
         },
-        hint: { text: "Select all that apply" },
+        hint: { text: "" },
         values: data['declaration'],
         items: [
           {
             value: "redacted",
-            text: "I confirm that all personal and case-identifying details are redacted, and the examples provided are true and my own"
+            text: "I confirm that I’ve removed all personal and case-identifying details"
+          },
+          {
+            value: "examples",
+            text: "I confirm that the examples I’ve given are true and my own"
           },
           {
             value: "commitment",
-            html: "I confirm that I will work in accordance with the Advocate Panel Members' Commitment. <a href='#' class='govuk-link' rel='noreferrer noopener' target='_blank'>The Advocate Panel Members' Commitment can be found here (opens in new tab)</a>"
+            html: "I confirm that I will work in accordance with the <a href='https://www.cps.gov.uk/advocate-panels#memberscommitment' class='govuk-link' rel='noreferrer noopener' target='_blank'>advocate panel members’ commitment (opens in new tab)</a>"
           }
         ]
       }) }}

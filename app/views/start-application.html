@@ -127,7 +127,7 @@
       }) }}
     {% endif %}
 
-    <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Declaration</h2>
+    <!-- <h2 class="govuk-heading-m govuk-!-static-padding-top-5">Declaration</h2>
 
     {{ govukTaskList({
       items: [
@@ -138,10 +138,14 @@
           idPrefix: "declaration"
         }
       ]
-    }) }}
+    }) }} -->
+
+    <h2 class="govuk-heading-m">Check your answers</h2>
+
+    <p class="govuk-body">After you’ve completed all sections of the application form, you can check your answers then send the application.</p>
 
     {{ govukButton({
-      text: "Review application details",
+      text: "Check answers",
       href: "/check-application"
     }) }}
 
