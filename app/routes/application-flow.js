@@ -77,28 +77,46 @@ module.exports = router => {
     const { refereeFullName, refereeJobTitle, refereeEmail } = req.session.data
     const filled = [refereeFullName, refereeJobTitle, refereeEmail].some(v => v && v.trim() !== '')
     if (filled) req.session.data['refereeStatus'] = 'inProgress'
-    res.redirect('/references-questions/referee-role')
+
+    const returnUrl = req.session.data['returnUrl']
+    if (returnUrl) {
+      req.session.data['returnUrl'] = null
+      res.redirect(returnUrl)
+    } else {
+      res.redirect('/references-questions/referee-role')
+    }
   })
 
   ////////// REFEREE ROLE
   router.post('/references-questions/referee-role', (req, res) => {
-    res.redirect('/references-questions/referee-message')
+    const returnUrl = req.session.data['returnUrl']
+    if (returnUrl) {
+      req.session.data['returnUrl'] = null
+      res.redirect(returnUrl)
+    } else {
+      res.redirect('/references-questions/referee-message')
+    }
   })
 
   ////////// REFEREE MESSAGE
   router.post('/references-questions/referee-message', (req, res) => {
     const completed = res.locals.haveYouCompletedThisSection
     const message = req.session.data['messageToReferee']
+    const returnUrl = req.session.data['returnUrl']
 
-    if (completed === 'yes') {
+    if (returnUrl) {
+      req.session.data['returnUrl'] = null
+      res.redirect(returnUrl)
+    } else if (completed === 'yes') {
       req.session.data['refereeStatus'] = 'completed'
+      res.redirect('/start-application')
     } else if (message && message.trim() !== '') {
       req.session.data['refereeStatus'] = 'inProgress'
+      res.redirect('/start-application')
     } else {
       req.session.data['refereeStatus'] = 'notStarted'
+      res.redirect('/start-application')
     }
-
-    res.redirect('/start-application')
   })
 
   ////////// EXAMPLES OF WORK - ADVOCACY
