@@ -26,15 +26,19 @@ Application complete – {{ serviceName }} – GOV.UK Prototype Kit
         We’ll send you an email when we receive your reference.
       </p>
 
-      <p class="govuk-body">
-        We’ll then assess your application and contact you within one month.
-      </p>
+      {% if data['crownCourtLevel'] == "Level 1" %}
 
-<!-- Not for level 1 or magistrates’ or youth court
+        <p class="govuk-body">
+          We’ll then assess your application and email you with the result within one month.
+        </p>
 
-      <p class="govuk-body">
-          Your referee must submit your reference by 11:59pm on 30 September 2026. If they do not do this then you will need to apply again next year. 
-        </p> -->
+      {% else %}
+
+        <p class="govuk-body">
+            We’ll send you another email with the result of your application by the end of January 2027.
+        </p>
+
+      {% endif %}
     
       <p class="govuk-body"><a href="./dashboard.html">Visit your profile</a> to:</p>
 
@@ -43,21 +47,7 @@ Application complete – {{ serviceName }} – GOV.UK Prototype Kit
         <li>check the status of your application</li>
         <li>check if we’ve received your reference</li>
     </ul>
-
-
-       <!-- <p class="govuk-body">
-        <a href="./start-application-9.html">
-         Return to the task-list
-        </a>
-      </p> -->
-
-          <!-- <p class="govuk-body">
-        <a href="#">
-          What did you think of this service?
-        </a> (takes 30 seconds)
-      </p> -->
-
-
+    
     </div>
   </div>
 
