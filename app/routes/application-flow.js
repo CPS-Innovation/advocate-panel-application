@@ -128,7 +128,7 @@ module.exports = router => {
   ////////// EXAMPLES OF WORK - ADVOCACY
   router.post('/examples-work/examples-work-advocacy', (req, res) => {
     const completed = res.locals.haveYouCompletedThisSection
-    const advocacy = req.session.data['advocacyExample']
+    const advocacy = req.session.data['advocacy']
 
     if (completed === 'yes') {
       req.session.data['advocacyStatus'] = 'completed'
@@ -152,6 +152,40 @@ module.exports = router => {
       req.session.data['advisoryStatus'] = 'inProgress'
     } else {
       req.session.data['advisoryStatus'] = 'notStarted'
+    }
+
+    res.redirect('/start-application')
+  })
+
+
+  ////////// EXAMPLES OF WORK - APPRECIATION
+  router.post('/examples-work/examples-work-appreciation', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const appreciation = req.session.data['appreciation']
+
+    if (completed === 'yes') {
+      req.session.data['appreciationStatus'] = 'completed'
+    } else if (appreciation && appreciation.trim() !== '') {
+      req.session.data['appreciationStatus'] = 'inProgress'
+    } else {
+      req.session.data['appreciationStatus'] = 'notStarted'
+    }
+
+    res.redirect('/start-application')
+  })
+
+
+  ////////// ADDITIONAL INFORMATION
+  router.post('/examples-work/examples-work-additional', (req, res) => {
+    const completed = res.locals.haveYouCompletedThisSection
+    const additional = req.session.data['additionalInfo']
+
+    if (completed === 'yes') {
+      req.session.data['additionalStatus'] = 'completed'
+    } else if (additional && additional.trim() !== '') {
+      req.session.data['additionalStatus'] = 'inProgress'
+    } else {
+      req.session.data['additionalStatus'] = 'notStarted'
     }
 
     res.redirect('/start-application')

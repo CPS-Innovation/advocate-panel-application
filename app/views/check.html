@@ -44,7 +44,15 @@
         {
           key: { text: "Chambers" },
           value: { text: data['chambersName'] or "Not provided" },
-          actions: { items: [{ href: "/current-chambers/name-chambers?returnUrl=/check", text: "Change", visuallyHiddenText: "chambers" }] }
+          actions: { items: [{
+            href: (
+              "/current-chambers/adding-address-2?returnUrl=/check"
+              if data['chambersSource'] === 'manual' else
+              "/current-chambers/name-chambers?returnUrl=/check"
+            ),
+            text: "Change",
+            visuallyHiddenText: "chambers"
+          }] }
         },
         {
           key: { text: "Address" },

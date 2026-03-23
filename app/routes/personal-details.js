@@ -168,12 +168,14 @@ module.exports = router => {
     "Wilberforce Chambers": "Lincoln's Inn, London WC2A 3QB"
   }
 
+  // NAME OF CHAMBERS (autocomplete route)
   router.post('/current-chambers/name-chambers', (req, res) => {
     const name = req.session.data['chambersName']
     const address = chamberAddresses[name]
     if (address) {
       req.session.data['chambersAddress'] = address
     }
+    req.session.data['chambersSource'] = 'autocomplete'  // ← add this
     req.session.data['whereYouWorkStatus'] = 'completed'
     const returnUrl = req.query.returnUrl
     res.redirect(returnUrl || '/task-list')
@@ -193,6 +195,7 @@ module.exports = router => {
 
     d['chambersAddress'] = parts.join(', ')
     d['whereYouWorkStatus'] = 'completed'
+    req.session.data['chambersSource'] = 'manual'  // ← add this
     const returnUrl = req.query.returnUrl
     res.redirect(returnUrl || '/task-list')
   })
