@@ -90,6 +90,19 @@
           value: { text: data['barNumber'] or profile.barNumber or "Not provided" }
         },
         {
+          key: { text: "Email" },
+          value: { text: data.signIn.emailAddress or profile.applicantEmail or "Not provided" },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                visuallyHiddenText: "name"
+              }
+            ]
+          }
+        },
+        {
           key: { text: "Place of work" },
           value: { text: data['employmentType'] or profile.employmentType or "Not provided" },
           actions: { items: [{ href: "/current-chambers/employment-type?returnUrl=/profile", text: "Change", visuallyHiddenText: "employment type" }] }
