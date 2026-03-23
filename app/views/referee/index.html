@@ -1,0 +1,91 @@
+{# app/views/referee/index.html #}
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Reference form — Apply for the CPS Advocate Panel — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+     Referee task list
+    </h1>
+
+    <p class="govuk-body">Some stuff:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Blah blah blah</li>
+      <li>Blah blah blah</li>
+    </ul>
+
+    {{ govukTaskList({
+      idPrefix: "company-details",
+      items: [
+        {
+          title: {
+            text: "Company Directors"
+          },
+          href: "#",
+          status: {
+            text: "Completed"
+          }
+        },
+        {
+          title: {
+            text: "Registered company details"
+          },
+          href: "#",
+          status: {
+            tag: {
+              text: "Incomplete",
+              classes: "govuk-tag--blue"
+            }
+          }
+        },
+        {
+          title: {
+            text: "Financial history"
+          },
+          hint: {
+            text: "Include 5 years of the company’s relevant financial information"
+          },
+          href: "#",
+          status: {
+            tag: {
+              text: "Incomplete",
+              classes: "govuk-tag--blue"
+            }
+          }
+        },
+        {
+          title: {
+            text: "Business plan"
+          },
+          href: "#",
+          status: {
+            tag: {
+              text: "Incomplete",
+              classes: "govuk-tag--blue"
+            }
+          }
+        },
+        {
+          title: {
+            text: "References"
+          },
+          href: "#",
+          status: {
+            tag: {
+              text: "Incomplete",
+              classes: "govuk-tag--blue"
+            }
+          }
+        }
+      ]
+    }) }}
+
+  </div>
+
+{% endblock %}
