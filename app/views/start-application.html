@@ -13,10 +13,11 @@
     <h2 class="govuk-heading-m govuk-!-static-padding-top-5">References</h2>
 
    {% set refereeHint = "" %}
+   {% set refereeOptional = "" %}
     {% if data['crownCourtLevel'] == "Level 1" %}
-      {% set refereeHint = "You can request the reference before you submit your application." %}
+      {% set refereeOptional = "Referee" %}  
     {% else %}
-      {% set refereeHint = "You can request the reference before you submit your application. We must receive the reference by 30 September." %}
+      {% set refereeOptional = "Referee (optional)" %}  
     {% endif %}
 
     {# {{ govukTaskList({
@@ -46,8 +47,8 @@
     {{ govukTaskList({
       items: [
         {
-          title: { text: "Referee" },
-          hint: { text: refereeHint },
+          title: { text: refereeOptional },
+          hint: { text: "You can request the reference before you submit your application." },
           href: "/references-questions/referee-details",
           status: { tag: { text: taskStatusText(data['refereeStatus']), classes: taskStatusClass(data['refereeStatus']) } },
           idPrefix: "referee"
