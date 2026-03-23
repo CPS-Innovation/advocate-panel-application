@@ -15,10 +15,8 @@
    {% set refereeHint = "" %}
    {% set refereeOptional = "" %}
     {% if data['crownCourtLevel'] == "Level 1" %}
-      {% set refereeHint = "You can request the reference before you submit your application." %}
       {% set refereeOptional = "Referee" %}  
     {% else %}
-      {% set refereeHint = "You can request the reference before you submit your application. We must receive the reference by 30 September." %}
       {% set refereeOptional = "Referee (optional)" %}  
     {% endif %}
 
@@ -50,7 +48,7 @@
       items: [
         {
           title: { text: refereeOptional },
-          hint: { text: refereeHint },
+          hint: { text: "You can request the reference before you submit your application." },
           href: "/references-questions/referee-details",
           status: { tag: { text: taskStatusText(data['refereeStatus']), classes: taskStatusClass(data['refereeStatus']) } },
           idPrefix: "referee"
