@@ -1,0 +1,118 @@
+{# app/views/referee/check.html #}
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Check your answers — Reference form — Apply for the CPS Advocate Panel — GOV.UK
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
+    <h1 class="govuk-heading-l">Check your answers before submitting</h1>
+
+    {# Resolve relationToApplicant display label #}
+    {% if data['relationToApplicant'] === "pupilSupervisor" %}
+      {% set relationToApplicantLabel = "Pupil supervisor" %}
+    {% elif data['relationToApplicant'] === "headOfChambers" %}
+      {% set relationToApplicantLabel = "Head of chambers" %}
+    {% elif data['relationToApplicant'] === "chambersAdvocacyTrainer" %}
+      {% set relationToApplicantLabel = "Chambers advocacy trainer" %}
+    {% elif data['relationToApplicant'] === "instructingSolicitor" %}
+      {% set relationToApplicantLabel = "Instructing solicitor" %}
+    {% elif data['relationToApplicant'] === "leadingOrOpposingAdvocate" %}
+      {% set relationToApplicantLabel = "Leading or opposing advocate" %}
+    {% elif data['relationToApplicant'] === "advocacyAssessor" %}
+      {% set relationToApplicantLabel = "Advocacy assessor" %}
+    {% elif data['relationToApplicant'] === "fullTimeJudiciary" %}
+      {% set relationToApplicantLabel = "Current or retired member of the full-time judiciary" %}
+    {% elif data['relationToApplicant'] === "partTimeJudiciary" %}
+      {% set relationToApplicantLabel = "Member of the part-time judiciary" %}
+    {% elif data['relationToApplicant'] === "cpsLawyer" %}
+      {% set relationToApplicantLabel = "CPS lawyer or lawyer from another prosecuting authority" %}
+    {% elif data['relationToApplicant'] === "other" %}
+      {% set relationToApplicantLabel = data['refereeRoleOther'] %}
+    {% else %}
+      {% set relationToApplicantLabel = "Not provided" %}
+    {% endif %}
+
+    <h2 class="govuk-heading-m">Role in relation to applicant</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Your role" },
+          value: { text: relationToApplicantLabel },
+          actions: { items: [{ href: "/referee/relation-to-applicant?returnUrl=/referee/check-answers", text: "Change", visuallyHiddenText: "your role" }] }
+        },
+        {
+          key: { text: "Details of your knowledge of the applicant" },
+          value: { text: data['relationToApplicantInfo'] or "Not provided" },
+          actions: { items: [{ href: "/referee/relation-to-applicant?returnUrl=/referee/check-answers", text: "Change", visuallyHiddenText: "details of your knowledge" }] }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">Decision making and strategy</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Legal decision making and case strategy" },
+          value: { text: data['legalDecisionMaking'] or "Not provided" },
+          actions: { items: [{ href: "/referee/legal-decision-making-and-strategy?returnUrl=/referee/check-answers", text: "Change", visuallyHiddenText: "legal decision making and strategy" }] }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">Advocacy skills</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Advocacy skills" },
+          value: { text: data['advocacySkillsReference'] or "Not provided" },
+          actions: { items: [{ href: "/referee/advocacy-skills?returnUrl=/referee/check-answers", text: "Change", visuallyHiddenText: "advocacy skills" }] }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">Interpersonal skills</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Interpersonal skills" },
+          value: { text: data['interpersonalSkillsReference'] or "Not provided" },
+          actions: { items: [{ href: "/referee/interpersonal-skills?returnUrl=/referee/check-answers", text: "Change", visuallyHiddenText: "interpersonal skills" }] }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">Additional information</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Additional information" },
+          value: { text: data['additionalInformationForReference'] or "Not provided" },
+          actions: { items: [{ href: "/referee/additional-information?returnUrl=/referee/check-answers", text: "Change", visuallyHiddenText: "additional information" }] }
+        }
+      ]
+    }) }}
+
+    <form method="post" action="/referee/confirm" novalidate>
+      {{ govukButton({ text: "Submit reference" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

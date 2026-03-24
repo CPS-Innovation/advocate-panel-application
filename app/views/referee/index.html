@@ -9,83 +9,150 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">
-     Referee task list
-    </h1>
+    <span class="govuk-caption-l">Ref / application number </span>
+    <h1 class="govuk-heading-l">Reference for [applicant_name]</h1>
 
-    <p class="govuk-body">Some stuff:</p>
+    <h2 class="govuk-heading-m">Referee details</h2>
 
-    <ul class="govuk-list govuk-list--bullet">
-      <li>Blah blah blah</li>
-      <li>Blah blah blah</li>
-    </ul>
-
-    {{ govukTaskList({
-      idPrefix: "company-details",
-      items: [
-        {
-          title: {
-            text: "Company Directors"
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "First name"
+            },
+            value: {
+              text: "Sarah Philips"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
           },
-          href: "#",
-          status: {
-            text: "Completed"
-          }
-        },
-        {
-          title: {
-            text: "Registered company details"
+          {
+            key: {
+              text: "Surname"
+            },
+            value: {
+              text: "5 January 1978"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "date of birth"
+                }
+              ]
+            }
           },
-          href: "#",
-          status: {
-            tag: {
-              text: "Incomplete",
-              classes: "govuk-tag--blue"
+          {
+            key: {
+              text: "Job title"
+            },
+            value: {
+              html: "72 Guild Street<br>London<br>SE23 6FH"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "address"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Referee role"
+            },
+            value: {
+              html: "72 Guild Street<br>London<br>SE23 6FH"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "address"
+                }
+              ]
             }
           }
-        },
-        {
-          title: {
-            text: "Financial history"
+        ]
+      }) }}
+    
+      
+      <h2 class="govuk-heading-m">Reference questions</h2> 
+      
+      {{ govukTaskList({
+        idPrefix: "referee-task-list",
+        items: [
+          {
+            title: {
+              text: "Role in relation to applicant"
+            },
+            href: "/referee/relation-to-applicant",
+            status: {
+              text: "Completed"
+            }
           },
-          hint: {
-            text: "Include 5 years of the company’s relevant financial information"
+          {
+            title: {
+              text: "Applicant decision making and strategy"
+            },
+            href: "/referee/legal-decision-making-and-strategy",
+            status: {
+              tag: {
+                text: "Incomplete",
+                classes: "govuk-tag--blue"
+              }
+            }
           },
-          href: "#",
-          status: {
-            tag: {
-              text: "Incomplete",
-              classes: "govuk-tag--blue"
+          {
+            title: {
+              text: "Applicant advocacy skills"
+            },
+            href: "/referee/advocacy-skills",
+            status: {
+              tag: {
+                text: "Incomplete",
+                classes: "govuk-tag--blue"
+              }
+            }
+          },
+          {
+            title: {
+              text: "Applicant interpersonal skills"
+            },
+            href: "/referee/interpersonal-skills",
+            status: {
+              tag: {
+                text: "Incomplete",
+                classes: "govuk-tag--blue"
+              }
+            }
+          },
+          {
+            title: {
+              text: "Additional information"
+            },
+            href: "/referee/additional-information",
+            status: {
+              tag: {
+                text: "Incomplete",
+                classes: "govuk-tag--blue"
+              }
             }
           }
-        },
-        {
-          title: {
-            text: "Business plan"
-          },
-          href: "#",
-          status: {
-            tag: {
-              text: "Incomplete",
-              classes: "govuk-tag--blue"
-            }
-          }
-        },
-        {
-          title: {
-            text: "References"
-          },
-          href: "#",
-          status: {
-            tag: {
-              text: "Incomplete",
-              classes: "govuk-tag--blue"
-            }
-          }
-        }
-      ]
-    }) }}
+        ]
+      }) }}
 
   </div>
-
+</div>
 {% endblock %}
