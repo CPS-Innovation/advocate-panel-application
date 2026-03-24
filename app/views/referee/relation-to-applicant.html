@@ -5,11 +5,18 @@
   Reference form — Apply for the CPS Advocate Panel — GOV.UK
 {% endblock %}
 
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <span class="govuk-caption-l">Ref / application number </span>
+    <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
     <h1 class="govuk-heading-l">What is your relationships to the applicant</h1>
 
     <form method="post" novalidate>
@@ -30,23 +37,49 @@
             { value: "other", text: "Other", conditional: { html: govukInput({ label: { text: "Please specify" }, id: "refereeRoleOther", name: "refereeRoleOther", classes: "govuk-input--width-20", value: data['refereeRoleOther'] }) } }
           ]
         }) }}
-    
+          
+        <h3 class="govuk-heading-m">More information</h3>
 
-        {{ govukTextarea({
+        {{ govukCharacterCount({
           id: "relation-to-applicant-info",
           name: "relationToApplicantInfo",
+          maxwords: 150,
+          rows: "10",
           label: {
             text: "What is your relationships to the applicant",
             isPageHeading: false,
             classes: "govuk-label--s govuk-visually-hidden"
           },
           hint: {
-            text: "More info Hint text here"
+            text: "Include details of your knowledge of the applicant's work"
           },
           value: data['relationToApplicantInfo']
         }) }}
 
-       {{ govukButton({ text: "Continue" }) }}
+        {{ govukRadios({
+          name: "haveYouCompletedThisSection",
+          fieldset: {
+            legend: {
+              text: "Have you completed this section?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes, I've completed this section"
+            },
+            {
+              value: "no",
+              text: "No, I'll come back to it later"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
     </form>
   </div>
 </div>  
