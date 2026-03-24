@@ -1,0 +1,53 @@
+{# app/views/referee/relation-to-applicant.html #}
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Reference form — Apply for the CPS Advocate Panel — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <span class="govuk-caption-l">Ref / application number </span>
+    <h1 class="govuk-heading-l">What is your relationships to the applicant</h1>
+
+    <form method="post" novalidate>
+
+      {{ govukRadios({
+          name: "relationToApplicant", value: data['relationToApplicant'],
+          fieldset: { legend: { text: "Your role?", classes: "govuk-fieldset__legend--m govuk-visually-hidden" } },
+          items: [
+            { value: "pupilSupervisor", text: "Pupil supervisor" },
+            { value: "headOfChambers", text: "Head of chambers" },
+            { value: "chambersAdvocacyTrainer", text: "Chambers advocacy trainer" },
+            { value: "instructingSolicitor", text: "Instructing solicitor" },
+            { value: "leadingOrOpposingAdvocate", text: "Leading or opposing advocate" },
+            { value: "advocacyAssessor", text: "Advocacy assessor" },
+            { value: "fullTimeJudiciary", text: "Current or retired member of the full-time judiciary" },
+            { value: "partTimeJudiciary", text: "Member of the part-time judiciary" },
+            { value: "cpsLawyer", text: "CPS lawyer or lawyer from another prosecuting authority" },
+            { value: "other", text: "Other", conditional: { html: govukInput({ label: { text: "Please specify" }, id: "refereeRoleOther", name: "refereeRoleOther", classes: "govuk-input--width-20", value: data['refereeRoleOther'] }) } }
+          ]
+        }) }}
+    
+
+        {{ govukTextarea({
+          id: "relation-to-applicant-info",
+          name: "relationToApplicantInfo",
+          label: {
+            text: "What is your relationships to the applicant",
+            isPageHeading: false,
+            classes: "govuk-label--s govuk-visually-hidden"
+          },
+          hint: {
+            text: "More info Hint text here"
+          },
+          value: data['relationToApplicantInfo']
+        }) }}
+
+       {{ govukButton({ text: "Continue" }) }}
+    </form>
+  </div>
+</div>  
+{% endblock %}
