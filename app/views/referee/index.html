@@ -18,7 +18,7 @@
         rows: [
           {
             key: {
-              text: "First name"
+              text: "Name"
             },
             value: {
               text: "Sarah Philips"
@@ -35,19 +35,10 @@
           },
           {
             key: {
-              text: "Surname"
+              text: "Email"
             },
             value: {
-              text: "5 January 1978"
-            },
-            actions: {
-              items: [
-                {
-                  href: "#",
-                  text: "Change",
-                  visuallyHiddenText: "date of birth"
-                }
-              ]
+              text: "email@name.com"
             }
           },
           {
@@ -55,14 +46,14 @@
               text: "Job title"
             },
             value: {
-              html: "72 Guild Street<br>London<br>SE23 6FH"
+              html: "Barrister"
             },
             actions: {
               items: [
                 {
                   href: "#",
                   text: "Change",
-                  visuallyHiddenText: "address"
+                  visuallyHiddenText: "job title"
                 }
               ]
             }
@@ -72,12 +63,12 @@
               text: "Referee role"
             },
             value: {
-              html: "72 Guild Street<br>London<br>SE23 6FH"
+              html: "Some role"
             },
             actions: {
               items: [
                 {
-                  href: "#",
+                  href: "/referee/role",
                   text: "Change",
                   visuallyHiddenText: "address"
                 }
@@ -90,68 +81,8 @@
       
       <h2 class="govuk-heading-m">Reference questions</h2> 
       
-      {{ govukTaskList({
-        idPrefix: "referee-task-list",
-        items: [
-          {
-            title: {
-              text: "Role in relation to applicant"
-            },
-            href: "/referee/relation-to-applicant",
-            status: {
-              text: "Completed"
-            }
-          },
-          {
-            title: {
-              text: "Applicant decision making and strategy"
-            },
-            href: "/referee/legal-decision-making-and-strategy",
-            status: {
-              tag: {
-                text: "Incomplete",
-                classes: "govuk-tag--blue"
-              }
-            }
-          },
-          {
-            title: {
-              text: "Applicant advocacy skills"
-            },
-            href: "/referee/advocacy-skills",
-            status: {
-              tag: {
-                text: "Incomplete",
-                classes: "govuk-tag--blue"
-              }
-            }
-          },
-          {
-            title: {
-              text: "Applicant interpersonal skills"
-            },
-            href: "/referee/interpersonal-skills",
-            status: {
-              tag: {
-                text: "Incomplete",
-                classes: "govuk-tag--blue"
-              }
-            }
-          },
-          {
-            title: {
-              text: "Additional information"
-            },
-            href: "/referee/additional-information",
-            status: {
-              tag: {
-                text: "Incomplete",
-                classes: "govuk-tag--blue"
-              }
-            }
-          }
-        ]
-      }) }}
+      {% include "/_includes/referee/task-list.njk" %}
+      
 
   </div>
 </div>

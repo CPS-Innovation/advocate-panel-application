@@ -1,0 +1,63 @@
+{# app/views/referee/includes/referee/task-list.njk #}
+
+{% if data['refereeJourneyLevel'] === "Level 1" %}
+
+  {{ govukTaskList({
+    idPrefix: "referee-task-list",
+    items: [
+      {
+        title: { text: "Role description" },
+        href: "/referee/role-description",
+        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+      },
+      {
+        title: { text: "Suitability" },
+        href: "/referee/suitability",
+        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+      },
+      {
+        title: { text: "Ability" },
+        href: "/referee/ability",
+        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+      }
+    ]
+  }) }}
+
+{% elif data['refereeJourneyLevel'] === "Level 4" %}
+
+  {{ govukTaskList({
+    idPrefix: "referee-task-list",
+    items: [
+      {
+        title: { text: "Role description" },
+        href: "/referee/role-description",
+        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+      },
+      {
+        title: { text: "Ability" },
+        href: "/referee/ability",
+        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+      },
+      {
+        title: { text: "Effectiveness" },
+        href: "/referee/effectiveness",
+        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+      },
+      {
+        title: { text: "Interpersonal skills" },
+        href: "/referee/interpersonal-skills",
+        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+      },
+      {
+        title: { text: "Additional information" },
+        href: "/referee/additional-information",
+        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+      }
+    ]
+  }) }}
+
+{% else %}
+
+  <p class="govuk-body">No task list available. Please go back and select a level.</p>
+
+{% endif %}

@@ -1,0 +1,92 @@
+{# app/views/referee/role-description.html #}
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Reference form — Apply for the CPS Advocate Panel — GOV.UK
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
+    <h1 class="govuk-heading-l">What is your relationships to the applicant</h1>
+
+    <form method="post" novalidate>
+
+      {{ govukRadios({
+          name: "relationToApplicant", value: data['relationToApplicant'],
+          fieldset: { legend: { text: "Your role?", classes: "govuk-fieldset__legend--m govuk-visually-hidden" } },
+          items: [
+            { value: "pupilSupervisor", text: "Pupil supervisor" },
+            { value: "headOfChambers", text: "Head of chambers" },
+            { value: "chambersAdvocacyTrainer", text: "Chambers advocacy trainer" },
+            { value: "instructingSolicitor", text: "Instructing solicitor" },
+            { value: "leadingOrOpposingAdvocate", text: "Leading or opposing advocate" },
+            { value: "advocacyAssessor", text: "Advocacy assessor" },
+            { value: "fullTimeJudiciary", text: "Current or retired member of the full-time judiciary" },
+            { value: "partTimeJudiciary", text: "Member of the part-time judiciary" },
+            { value: "cpsLawyer", text: "CPS lawyer or lawyer from another prosecuting authority" },
+            { value: "other", text: "Other", conditional: { html: govukInput({ label: { text: "Please specify" }, id: "refereeRoleOther", name: "refereeRoleOther", classes: "govuk-input--width-20", value: data['refereeRoleOther'] }) } }
+          ]
+        }) }}
+          
+        <h3 class="govuk-heading-m">More information</h3>
+
+        {% if data['refereeJourneyLevel'] === "Level 1" %}
+          {% set roleDescriptionHint = "How would you describe your role in relation to the applicant e.g. Pupil Supervisor, Head of Chambers, Chambers Advocacy Assessor etc.? Please include details of your knowledge of the applicant's work" %}
+        {% else %}
+          {% set roleDescriptionHint = "How would you describe your role in relation to the applicant e.g. judicial referee, head of chambers, instructing solicitor etc.? Please include details of your knowledge of the applicant's work." %}
+        {% endif %}
+
+        {{ govukCharacterCount({
+          id: "relation-to-applicant-info",
+          name: "relationToApplicantInfo",
+          maxwords: 150,
+          rows: "10",
+          label: {
+            text: "What is your relationship to the applicant",
+            isPageHeading: false,
+            classes: "govuk-label--s govuk-visually-hidden"
+          },
+          hint: {
+            text: roleDescriptionHint
+          },
+          value: data['relationToApplicantInfo']
+        }) }}
+
+        {{ govukRadios({
+          name: "haveYouCompletedThisSection",
+          fieldset: {
+            legend: {
+              text: "Have you completed this section?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes, I've completed this section"
+            },
+            {
+              value: "no",
+              text: "No, I'll come back to it later"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+    </form>
+  </div>
+</div>  
+{% endblock %}
