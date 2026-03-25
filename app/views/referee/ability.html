@@ -22,51 +22,51 @@
     <form method="post" novalidate>
 
       {% if data['refereeJourneyLevel'] === "Level 1" %}
-        {% set abilityDescriptionHint = "How would you assess the applicant's ability in respect of advocacy and advisory work?" %}
+        {% set abilityHint = "How would you assess the applicant's ability in respect of advocacy and advisory work?" %}
       {% else %}
-        {% set abilityDescriptionHint = "How would you assess the applicant's advocacy skills in relation to casework at the level applied for?" %}
+        {% set abilityHint = "How would you assess the applicant's advocacy skills in relation to casework at the level applied for?" %}
       {% endif %}
 
-        {{ govukCharacterCount({
-          id: "advocacy-skills",
-          name: "advocacySkillsReference",
-          maxwords: 500,
-          rows: "15",
-          label: {
-            text: "How would you assess the applicant ability",
+      {{ govukCharacterCount({
+        id: "ability",
+        name: "abilityReference",
+        maxwords: 500,
+        rows: "15",
+        label: {
+          text: "How would you assess the applicant's ability",
+          isPageHeading: false,
+          classes: "govuk-label--s govuk-visually-hidden"
+        },
+        hint: {
+          text: abilityHint
+        },
+        value: data['abilityReference']
+      }) }}
+
+      {{ govukRadios({
+        name: "haveYouCompletedThisSection",
+        fieldset: {
+          legend: {
+            text: "Have you completed this section?",
             isPageHeading: false,
-            classes: "govuk-label--s govuk-visually-hidden"
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          {
+            value: "yes",
+            text: "Yes, I've completed this section"
           },
-          hint: {
-            text: abilityDescriptionHint
-          },
-          value: data['advocacySkillsReference']
-        }) }}
+          {
+            value: "no",
+            text: "No, I'll come back to it later"
+          }
+        ]
+      }) }}
 
-        {{ govukRadios({
-          name: "haveYouCompletedThisSection",
-          fieldset: {
-            legend: {
-              text: "Have you completed this section?",
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
-            {
-              value: "yes",
-              text: "Yes, I've completed this section"
-            },
-            {
-              value: "no",
-              text: "No, I'll come back to it later"
-            }
-          ]
-        }) }}
-
-        {{ govukButton({
-          text: "Save and continue"
-        }) }}
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
     </form>
   </div>
 </div>  

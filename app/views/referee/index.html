@@ -82,6 +82,12 @@
       <h2 class="govuk-heading-m">Reference questions</h2> 
       
       {% include "/_includes/referee/task-list.njk" %}
+
+
+      {{ govukButton({
+        text: "Check answers",
+        href: "/referee/check"
+      }) }}
       
 
   </div>

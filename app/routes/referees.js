@@ -13,6 +13,10 @@ module.exports = router => {
     res.redirect('/referee')
   })
 
+  router.get('/referee/check', (req, res) => {
+    res.render('referee/check')
+  })
+
   router.post('/referee/job-title', (req, res) => {
     res.redirect('/referee')
   })
@@ -57,6 +61,8 @@ module.exports = router => {
     req.session.data['additionalInformationStatus'] = completed ? 'completed' : 'inProgress'
     res.redirect('/referee')
   })
+
+
 
   // Check and confirm
   router.post('/referee/confirm', (req, res) => {

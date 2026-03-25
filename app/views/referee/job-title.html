@@ -17,24 +17,24 @@
   <div class="govuk-grid-column-two-thirds">
 
     <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
-    <h1 class="govuk-heading-l">What is your name?</h1>
+    <h1 class="govuk-heading-l">What is your job title?</h1>
 
     <form method="post" novalidate>
 
-        {{ govukInput({
-          label: {
-            text: "What is your name?",
-            classes: "govuk-label--l",
-            isPageHeading: true
-          },
-          id: "referee-name",
-          name: "refereeName"
-        }) }}
-        
+      {{ govukInput({
+        label: {
+          text: "What is your job title?",
+          classes: "govuk-label--l govuk-visually-hidden",
+          isPageHeading: false
+        },
+        id: "referee-job-title",
+        name: "refereeJobTitle",
+        value: data['refereeJobTitle']
+      }) }}
 
-        {{ govukButton({
-          text: "Save and continue"
-        }) }}
+      {{ govukButton({
+        text: "Save and continue"
+      }) }}
     </form>
   </div>
 </div>  

@@ -1,11 +1,9 @@
 {# app/views/_includes/referee/task-list.njk #}
 
-{# ---- Resolve status objects via set blocks ---- #}
-
 {% if data['roleDescriptionStatus'] === 'completed' %}
   {% set roleDescriptionStatus = { text: "Completed" } %}
 {% elif data['roleDescriptionStatus'] === 'inProgress' %}
-  {% set roleDescriptionStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+  {% set roleDescriptionStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
   {% set roleDescriptionStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
 {% endif %}
@@ -13,7 +11,7 @@
 {% if data['suitabilityStatus'] === 'completed' %}
   {% set suitabilityStatus = { text: "Completed" } %}
 {% elif data['suitabilityStatus'] === 'inProgress' %}
-  {% set suitabilityStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+  {% set suitabilityStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
   {% set suitabilityStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
 {% endif %}
@@ -21,7 +19,7 @@
 {% if data['abilityStatus'] === 'completed' %}
   {% set abilityStatus = { text: "Completed" } %}
 {% elif data['abilityStatus'] === 'inProgress' %}
-  {% set abilityStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+  {% set abilityStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
   {% set abilityStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
 {% endif %}
@@ -29,7 +27,7 @@
 {% if data['effectivenessStatus'] === 'completed' %}
   {% set effectivenessStatus = { text: "Completed" } %}
 {% elif data['effectivenessStatus'] === 'inProgress' %}
-  {% set effectivenessStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+  {% set effectivenessStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
   {% set effectivenessStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
 {% endif %}
@@ -37,7 +35,7 @@
 {% if data['interpersonalSkillsStatus'] === 'completed' %}
   {% set interpersonalSkillsStatus = { text: "Completed" } %}
 {% elif data['interpersonalSkillsStatus'] === 'inProgress' %}
-  {% set interpersonalSkillsStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+  {% set interpersonalSkillsStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
   {% set interpersonalSkillsStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
 {% endif %}
@@ -45,7 +43,7 @@
 {% if data['additionalInformationStatus'] === 'completed' %}
   {% set additionalInformationStatus = { text: "Completed" } %}
 {% elif data['additionalInformationStatus'] === 'inProgress' %}
-  {% set additionalInformationStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+  {% set additionalInformationStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
   {% set additionalInformationStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
 {% endif %}
