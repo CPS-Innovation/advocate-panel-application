@@ -13,6 +13,7 @@ module.exports = router => {
     const filePath = path.join(__dirname, '../data', fileName)
     const seedData = JSON.parse(fs.readFileSync(filePath, 'utf8'))
 
+    // create a new object containing all the existing session data properties, then add all the seed data properties on top
     req.session.data = { ...req.session.data, ...seedData }
 
     res.redirect('/referee')
