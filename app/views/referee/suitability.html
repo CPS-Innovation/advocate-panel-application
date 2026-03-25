@@ -1,4 +1,4 @@
-{# app/views/referee/advocacy-skills.html #}
+{# app/views/referee/suitability.html #}
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
@@ -17,7 +17,7 @@
   <div class="govuk-grid-column-two-thirds">
 
     <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
-    <h1 class="govuk-heading-l">Advocacy skills</h1>
+    <h1 class="govuk-heading-l">Suitabilty</h1>
 
     <form method="post" novalidate>
 
@@ -32,7 +32,7 @@
             classes: "govuk-label--s govuk-visually-hidden"
           },
           hint: {
-            text: "How would you assess the applicant's advocacy skills in relation to casework"
+            text: "How would you assess the applicant’s suitability to conduct prosecution work?"
           },
           value: data['advocacySkillsReference']
         }) }}

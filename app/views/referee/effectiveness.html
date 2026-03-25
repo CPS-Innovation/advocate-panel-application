@@ -1,4 +1,4 @@
-{# app/views/referee/advocacy-skills.html #}
+{# app/views/referee/effectiveness.html #}
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
@@ -17,24 +17,24 @@
   <div class="govuk-grid-column-two-thirds">
 
     <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
-    <h1 class="govuk-heading-l">Advocacy skills</h1>
+    <h1 class="govuk-heading-l">Effectiveness</h1>
 
     <form method="post" novalidate>
 
         {{ govukCharacterCount({
-          id: "advocacy-skills",
-          name: "advocacySkillsReference",
+          id: "legal-decision-making",
+          name: "legalDecisionMaking",
           maxwords: 500,
           rows: "15",
           label: {
-            text: "How would you assess the applicant's advocacy skills",
+            text: "How would you assess the applicant's effectiveness in legal decision making and case strategy at the level applied for?",
             isPageHeading: false,
             classes: "govuk-label--s govuk-visually-hidden"
           },
           hint: {
-            text: "How would you assess the applicant's advocacy skills in relation to casework"
+            text: "How would you assess the applicant's effectiveness in legal decision making and case strategy at the level applied for?"
           },
-          value: data['advocacySkillsReference']
+          value: data['applicantEffectiveness']
         }) }}
 
         {{ govukRadios({

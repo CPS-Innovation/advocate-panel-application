@@ -1,4 +1,4 @@
-{# app/views/referee/legal-decision-making-and-strategy.html #}
+{# app/views/referee/ability.html #}
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
@@ -17,24 +17,30 @@
   <div class="govuk-grid-column-two-thirds">
 
     <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
-    <h1 class="govuk-heading-l">Legal decision making and strategy</h1>
+    <h1 class="govuk-heading-l">Ability</h1>
 
     <form method="post" novalidate>
 
+      {% if data['refereeJourneyLevel'] === "Level 1" %}
+        {% set abilityDescriptionHint = "How would you assess the applicant's ability in respect of advocacy and advisory work?" %}
+      {% else %}
+        {% set abilityDescriptionHint = "How would you assess the applicant's advocacy skills in relation to casework at the level applied for?" %}
+      {% endif %}
+
         {{ govukCharacterCount({
-          id: "legal-decision-making",
-          name: "legalDecisionMaking",
+          id: "advocacy-skills",
+          name: "advocacySkillsReference",
           maxwords: 500,
           rows: "15",
           label: {
-            text: "How would you assess the applicant's legal decision making and case strategy in casework",
+            text: "How would you assess the applicant ability",
             isPageHeading: false,
             classes: "govuk-label--s govuk-visually-hidden"
           },
           hint: {
-            text: "How would you assess the applicant's legal decision making and case strategy in casework"
+            text: abilityDescriptionHint
           },
-          value: data['legalDecisionMaking']
+          value: data['advocacySkillsReference']
         }) }}
 
         {{ govukRadios({

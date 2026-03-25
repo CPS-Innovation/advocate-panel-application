@@ -1,4 +1,57 @@
-{# app/views/referee/includes/referee/task-list.njk #}
+{# app/views/_includes/referee/task-list.njk #}
+
+{# ---- Resolve status objects via set blocks ---- #}
+
+{% if data['roleDescriptionStatus'] === 'completed' %}
+  {% set roleDescriptionStatus = { text: "Completed" } %}
+{% elif data['roleDescriptionStatus'] === 'inProgress' %}
+  {% set roleDescriptionStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+{% else %}
+  {% set roleDescriptionStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
+{% endif %}
+
+{% if data['suitabilityStatus'] === 'completed' %}
+  {% set suitabilityStatus = { text: "Completed" } %}
+{% elif data['suitabilityStatus'] === 'inProgress' %}
+  {% set suitabilityStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+{% else %}
+  {% set suitabilityStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
+{% endif %}
+
+{% if data['abilityStatus'] === 'completed' %}
+  {% set abilityStatus = { text: "Completed" } %}
+{% elif data['abilityStatus'] === 'inProgress' %}
+  {% set abilityStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+{% else %}
+  {% set abilityStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
+{% endif %}
+
+{% if data['effectivenessStatus'] === 'completed' %}
+  {% set effectivenessStatus = { text: "Completed" } %}
+{% elif data['effectivenessStatus'] === 'inProgress' %}
+  {% set effectivenessStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+{% else %}
+  {% set effectivenessStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
+{% endif %}
+
+{% if data['interpersonalSkillsStatus'] === 'completed' %}
+  {% set interpersonalSkillsStatus = { text: "Completed" } %}
+{% elif data['interpersonalSkillsStatus'] === 'inProgress' %}
+  {% set interpersonalSkillsStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+{% else %}
+  {% set interpersonalSkillsStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
+{% endif %}
+
+{% if data['additionalInformationStatus'] === 'completed' %}
+  {% set additionalInformationStatus = { text: "Completed" } %}
+{% elif data['additionalInformationStatus'] === 'inProgress' %}
+  {% set additionalInformationStatus = { tag: { text: "In progress", classes: "govuk-tag--light-blue" } } %}
+{% else %}
+  {% set additionalInformationStatus = { tag: { text: "Incomplete", classes: "govuk-tag--blue" } } %}
+{% endif %}
+
+
+{# ---- Level 1 ---- #}
 
 {% if data['refereeJourneyLevel'] === "Level 1" %}
 
@@ -8,20 +61,22 @@
       {
         title: { text: "Role description" },
         href: "/referee/role-description",
-        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+        status: roleDescriptionStatus
       },
       {
         title: { text: "Suitability" },
         href: "/referee/suitability",
-        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+        status: suitabilityStatus
       },
       {
         title: { text: "Ability" },
         href: "/referee/ability",
-        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+        status: abilityStatus
       }
     ]
   }) }}
+
+{# ---- Level 4 ---- #}
 
 {% elif data['refereeJourneyLevel'] === "Level 4" %}
 
@@ -31,33 +86,31 @@
       {
         title: { text: "Role description" },
         href: "/referee/role-description",
-        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+        status: roleDescriptionStatus
       },
       {
         title: { text: "Ability" },
         href: "/referee/ability",
-        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+        status: abilityStatus
       },
       {
         title: { text: "Effectiveness" },
         href: "/referee/effectiveness",
-        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+        status: effectivenessStatus
       },
       {
         title: { text: "Interpersonal skills" },
         href: "/referee/interpersonal-skills",
-        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+        status: interpersonalSkillsStatus
       },
       {
         title: { text: "Additional information" },
         href: "/referee/additional-information",
-        status: { tag: { text: "Incomplete", classes: "govuk-tag--blue" } }
+        status: additionalInformationStatus
       }
     ]
   }) }}
 
 {% else %}
-
   <p class="govuk-body">No task list available. Please go back and select a level.</p>
-
 {% endif %}
