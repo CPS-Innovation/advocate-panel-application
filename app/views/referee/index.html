@@ -9,86 +9,73 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <span class="govuk-caption-l">Ref / application number </span>
-    <h1 class="govuk-heading-l">Reference for [applicant_name]</h1>
+    <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
+    <h1 class="govuk-heading-l">Reference for {{ data['applicantName'] }}</h1>
 
     <h2 class="govuk-heading-m">Referee details</h2>
+
+    {% if data['relationToApplicant'] === "pupilSupervisor" %}
+      {% set relationToApplicantLabel = "Pupil supervisor" %}
+    {% elif data['relationToApplicant'] === "headOfChambers" %}
+      {% set relationToApplicantLabel = "Head of chambers" %}
+    {% elif data['relationToApplicant'] === "chambersAdvocacyTrainer" %}
+      {% set relationToApplicantLabel = "Chambers advocacy trainer" %}
+    {% elif data['relationToApplicant'] === "instructingSolicitor" %}
+      {% set relationToApplicantLabel = "Instructing solicitor" %}
+    {% elif data['relationToApplicant'] === "leadingOrOpposingAdvocate" %}
+      {% set relationToApplicantLabel = "Leading or opposing advocate" %}
+    {% elif data['relationToApplicant'] === "advocacyAssessor" %}
+      {% set relationToApplicantLabel = "Advocacy assessor" %}
+    {% elif data['relationToApplicant'] === "fullTimeJudiciary" %}
+      {% set relationToApplicantLabel = "Current or retired member of the full-time judiciary" %}
+    {% elif data['relationToApplicant'] === "partTimeJudiciary" %}
+      {% set relationToApplicantLabel = "Member of the part-time judiciary" %}
+    {% elif data['relationToApplicant'] === "cpsLawyer" %}
+      {% set relationToApplicantLabel = "CPS lawyer or lawyer from another prosecuting authority" %}
+    {% elif data['relationToApplicant'] === "other" %}
+      {% set relationToApplicantLabel = data['refereeRoleOther'] %}
+    {% else %}
+      {% set relationToApplicantLabel = "Not provided" %}
+    {% endif %}
 
       {{ govukSummaryList({
         rows: [
           {
-            key: {
-              text: "Name"
-            },
-            value: {
-              text: "Sarah Philips"
-            },
+            key: { text: "Name" },
+            value: { text: data['refereeName'] },
             actions: {
-              items: [
-                {
-                  href: "/referee/name",
-                  text: "Change",
-                  visuallyHiddenText: "name"
-                }
-              ]
+              items: [{ href: "/referee/name", text: "Change", visuallyHiddenText: "name" }]
             }
           },
           {
-            key: {
-              text: "Email"
-            },
-            value: {
-              text: "email@name.com"
+            key: { text: "Email" },
+            value: { text: "email@name.com" }
+          },
+          {
+            key: { text: "Job title" },
+            value: { text: data['refereeJobTitle'] },
+            actions: {
+              items: [{ href: "/referee/job-title", text: "Change", visuallyHiddenText: "job title" }]
             }
           },
           {
-            key: {
-              text: "Job title"
-            },
-            value: {
-              html: "Barrister"
-            },
+            key: { text: "Referee role" },
+            value: { text: relationToApplicantLabel },
             actions: {
-              items: [
-                {
-                  href: "/referee/job-title",
-                  text: "Change",
-                  visuallyHiddenText: "job title"
-                }
-              ]
-            }
-          },
-          {
-            key: {
-              text: "Referee role"
-            },
-            value: {
-              html: "Some role"
-            },
-            actions: {
-              items: [
-                {
-                  href: "/referee/role",
-                  text: "Change",
-                  visuallyHiddenText: "address"
-                }
-              ]
+              items: [{ href: "/referee/role", text: "Change", visuallyHiddenText: "referee role" }]
             }
           }
         ]
       }) }}
-    
-      
-      <h2 class="govuk-heading-m">Reference questions</h2> 
-      
-      {% include "/_includes/referee/task-list.njk" %}
 
+      <h2 class="govuk-heading-m govuk-!-margin-top-9">Reference questions</h2>
+
+      {% include "/_includes/referee/task-list.njk" %}
 
       {{ govukButton({
         text: "Check answers",
         href: "/referee/check"
       }) }}
-      
 
   </div>
 </div>
