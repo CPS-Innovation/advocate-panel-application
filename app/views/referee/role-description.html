@@ -1,4 +1,4 @@
-{# app/views/referee/advocacy-skills.html #}
+{# app/views/referee/role-description.html #}
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
@@ -17,24 +17,32 @@
   <div class="govuk-grid-column-two-thirds">
 
     <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
-    <h1 class="govuk-heading-l">Advocacy skills</h1>
+    <h1 class="govuk-heading-l">Role description</h1>
 
     <form method="post" novalidate>
+          
+        <h3 class="govuk-heading-m">More information</h3>
+
+        {% if data['refereeJourneyLevel'] === "Level 1" %}
+          {% set roleDescriptionHint = "How would you describe your role in relation to the applicant e.g. Pupil Supervisor, Head of Chambers, Chambers Advocacy Assessor etc.? Please include details of your knowledge of the applicant's work" %}
+        {% else %}
+          {% set roleDescriptionHint = "How would you describe your role in relation to the applicant e.g. judicial referee, head of chambers, instructing solicitor etc.? Please include details of your knowledge of the applicant's work." %}
+        {% endif %}
 
         {{ govukCharacterCount({
-          id: "advocacy-skills",
-          name: "advocacySkillsReference",
-          maxwords: 500,
-          rows: "15",
+          id: "relation-to-applicant-info",
+          name: "relationToApplicantInfo",
+          maxwords: 150,
+          rows: "10",
           label: {
-            text: "How would you assess the applicant's advocacy skills",
+            text: "What is your relationship to the applicant",
             isPageHeading: false,
             classes: "govuk-label--s govuk-visually-hidden"
           },
           hint: {
-            text: "How would you assess the applicant's advocacy skills in relation to casework"
+            text: roleDescriptionHint
           },
-          value: data['advocacySkillsReference']
+          value: data['relationToApplicantInfo']
         }) }}
 
         {{ govukRadios({
