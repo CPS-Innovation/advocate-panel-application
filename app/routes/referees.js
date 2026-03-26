@@ -1,10 +1,21 @@
 /////////// app/routes/referees.js
 
+const path = require('path')
+const fs = require('fs')
+
 module.exports = router => {
 
   // Level selector (not part of referee journey proper)
   router.post('/referee/level', (req, res) => {
-    req.session.data['refereeJourneyLevel'] = req.body['refereeJourneyLevel']
+    const level = req.body['refereeJourneyLevel']
+
+    const fileName = level === 'Level 1' ? 'referee-level-1.json' : 'referee-level-4.json'
+    const filePath = path.join(__dirname, '../data', fileName)
+    const seedData = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+
+    // create a new object containing all the existing session data properties, then add all the seed data properties on top
+    req.session.data = { ...req.session.data, ...seedData }
+
     res.redirect('/referee')
   })
 
