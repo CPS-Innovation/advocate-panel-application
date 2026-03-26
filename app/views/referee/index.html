@@ -48,10 +48,6 @@
             }
           },
           {
-            key: { text: "Email" },
-            value: { text: "email@name.com" }
-          },
-          {
             key: { text: "Job title" },
             value: { text: data['refereeJobTitle'] },
             actions: {
@@ -60,10 +56,11 @@
           },
           {
             key: { text: "Referee role" },
-            value: { text: relationToApplicantLabel },
-            actions: {
-              items: [{ href: "/referee/role", text: "Change", visuallyHiddenText: "referee role" }]
-            }
+            value: { text: relationToApplicantLabel }
+          },
+           {
+            key: { text: "Email" },
+            value: { text: "email@name.com" }
           }
         ]
       }) }}
