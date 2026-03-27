@@ -16,7 +16,7 @@ module.exports = router => {
     // create a new object containing all the existing session data properties, then add all the seed data properties on top
     req.session.data = { ...req.session.data, ...seedData }
 
-    res.redirect('/referee/start')
+    res.redirect('/referee')
   })
 
   // Referee details
