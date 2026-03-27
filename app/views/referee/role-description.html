@@ -16,31 +16,23 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
-    <h1 class="govuk-heading-l">Role description</h1>
+    <!-- <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span> -->
+    <!-- <h1 class="govuk-heading-l">Role description</h1> -->
 
     <form method="post" novalidate>
           
-        <h3 class="govuk-heading-m">More information</h3>
-
-        {% if data['refereeJourneyLevel'] === "Level 1" %}
-          {% set roleDescriptionHint = "How would you describe your role in relation to the applicant e.g. Pupil Supervisor, Head of Chambers, Chambers Advocacy Assessor etc.? Please include details of your knowledge of the applicant's work" %}
-        {% else %}
-          {% set roleDescriptionHint = "How would you describe your role in relation to the applicant e.g. judicial referee, head of chambers, instructing solicitor etc.? Please include details of your knowledge of the applicant's work." %}
-        {% endif %}
-
-        {{ govukCharacterCount({
+      {{ govukCharacterCount({
           id: "relation-to-applicant-info",
           name: "relationToApplicantInfo",
           maxwords: 150,
           rows: "10",
           label: {
-            text: "What is your relationship to the applicant",
+            text: "How you know the applicant",
             isPageHeading: false,
-            classes: "govuk-label--s govuk-visually-hidden"
+            classes: "govuk-label--l"
           },
           hint: {
-            text: roleDescriptionHint
+            text: "Include details of how you know about the applicant’s work"
           },
           value: data['relationToApplicantInfo']
         }) }}

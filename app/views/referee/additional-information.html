@@ -16,7 +16,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
+    <!-- <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span> -->
     <h1 class="govuk-heading-l">Additional information</h1>
 
     <form method="post" novalidate>
@@ -30,9 +30,6 @@
             text: "Please add any additional information which might assist.",
             isPageHeading: false,
             classes: "govuk-label--s govuk-visually-hidden"
-          },
-          hint: {
-            text: "Please add any additional information which might assist."
           },
           value: data['additionalInformationForReference']
         }) }}

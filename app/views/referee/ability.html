@@ -16,15 +16,49 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
+    <!-- <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span> -->
     <h1 class="govuk-heading-l">Ability</h1>
+
+    {% if data['refereeJourneyLevel'] === "Level 1" %}
+
+      <p class="govuk-body">The applicant has been asked to show that they’re able to conduct advocacy for:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>magistrates’ court prosecutions</li>
+        <li>straightforward Youth Court cases</li>
+        <li>simple Crown Court mention hearings</li>
+        <li>plea and case management hearings</li>
+        <li>committals for sentence</li>
+        <li>appeals to the crown court</li>
+      </ul>
+
+      <p class="govuk-body">They also must show that they:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>can present highly proficient written submissions to a standard of excellence</li>
+        <li>have consistently sound judgement</li>
+        <li>have  expertise in law and practice and up-to-date knowledge of law relevant to prosecutions at this level</li>
+        <li>assimilate the relevance of evidence quickly, even when working with voluminous or complex evidence</li>
+      </ul>
+    
+     {% else %}
+
+      <p class="govuk-body">The applicant has been asked to show that they:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>can conduct highest quality advocacy in the range of cases identified in 'Casework at Level 4', often of the utmost gravity</li>
+        <li>have a superior grasp of trial advocacy skills for sensitive, high profile jury trials in the Crown Court including opening, closing, witness handling and legal argument often in complex multi-handed cases</li>
+        <li>can deal with highly complicating factors such as special measures, presenting or challenging complex expert evidence and difficult or sensitive issues of law and/or fact</li>
+        <li>can present highly proficient submissions to a standard of excellence before any tribunal including the Crown Court and Higher Courts</li>
+        <li>can lead a prosecution case with skill and diplomacy in the face of hostile opponents</li>
+        <li>are a fluid, articulate and intuitive advocate</li>
+      </ul>
+
+     {% endif %}
 
     <form method="post" novalidate>
 
       {% if data['refereeJourneyLevel'] === "Level 1" %}
-        {% set abilityHint = "How would you assess the applicant's ability in respect of advocacy and advisory work?" %}
+        {% set abilityHint = "Your assessment of the applicant’s ability with advocacy and advisory work" %}
       {% else %}
-        {% set abilityHint = "How would you assess the applicant's advocacy skills in relation to casework at the level applied for?" %}
+        {% set abilityHint = "Your assessment of the applicant’s ability with advocacy" %}
       {% endif %}
 
       {{ govukCharacterCount({
@@ -33,12 +67,9 @@
         maxwords: 500,
         rows: "15",
         label: {
-          text: "How would you assess the applicant's ability",
+          text: abilityHint,
           isPageHeading: false,
-          classes: "govuk-label--s govuk-visually-hidden"
-        },
-        hint: {
-          text: abilityHint
+          classes: "govuk-label--m"
         },
         value: data['abilityReference']
       }) }}
