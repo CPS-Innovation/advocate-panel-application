@@ -1,7 +1,7 @@
 {# app/views/_includes/referee/task-list.njk #}
 
 {% if data['roleDescriptionStatus'] === 'completed' %}
-  {% set roleDescriptionStatus = { text: "Completed" } %}
+  {% set roleDescriptionStatus = { tag: { text: "Completed", classes: "govuk-tag--green" } } %}
 {% elif data['roleDescriptionStatus'] === 'inProgress' %}
   {% set roleDescriptionStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
@@ -9,7 +9,7 @@
 {% endif %}
 
 {% if data['suitabilityStatus'] === 'completed' %}
-  {% set suitabilityStatus = { text: "Completed" } %}
+  {% set suitabilityStatus = { tag: { text: "Completed", classes: "govuk-tag--green" } } %}
 {% elif data['suitabilityStatus'] === 'inProgress' %}
   {% set suitabilityStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
@@ -17,7 +17,7 @@
 {% endif %}
 
 {% if data['abilityStatus'] === 'completed' %}
-  {% set abilityStatus = { text: "Completed" } %}
+  {% set abilityStatus = { tag: { text: "Completed", classes: "govuk-tag--green" } } %}
 {% elif data['abilityStatus'] === 'inProgress' %}
   {% set abilityStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
@@ -25,7 +25,7 @@
 {% endif %}
 
 {% if data['effectivenessStatus'] === 'completed' %}
-  {% set effectivenessStatus = { text: "Completed" } %}
+  {% set effectivenessStatus = { tag: { text: "Completed", classes: "govuk-tag--green" } } %}
 {% elif data['effectivenessStatus'] === 'inProgress' %}
   {% set effectivenessStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
@@ -33,7 +33,7 @@
 {% endif %}
 
 {% if data['interpersonalSkillsStatus'] === 'completed' %}
-  {% set interpersonalSkillsStatus = { text: "Completed" } %}
+  {% set interpersonalSkillsStatus = { tag: { text: "Completed", classes: "govuk-tag--green" } } %}
 {% elif data['interpersonalSkillsStatus'] === 'inProgress' %}
   {% set interpersonalSkillsStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
@@ -41,7 +41,7 @@
 {% endif %}
 
 {% if data['additionalInformationStatus'] === 'completed' %}
-  {% set additionalInformationStatus = { text: "Completed" } %}
+  {% set additionalInformationStatus = { tag: { text: "Completed", classes: "govuk-tag--green" } } %}
 {% elif data['additionalInformationStatus'] === 'inProgress' %}
   {% set additionalInformationStatus = { tag: { text: "In progress", classes: "govuk-tag--yellow" } } %}
 {% else %}
