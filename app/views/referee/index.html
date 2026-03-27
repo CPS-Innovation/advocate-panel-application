@@ -12,7 +12,7 @@
     <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
     <h1 class="govuk-heading-l">Reference for {{ data['applicantName'] }}</h1>
 
-    <h2 class="govuk-heading-m">Referee details</h2>
+    <h2 class="govuk-heading-m">Your details</h2>
 
     {% if data['relationToApplicant'] === "pupilSupervisor" %}
       {% set relationToApplicantLabel = "Pupil supervisor" %}
@@ -55,7 +55,7 @@
             }
           },
           {
-            key: { text: "Referee role" },
+            key: { text: "Role as referee" },
             value: { text: relationToApplicantLabel }
           },
            {
