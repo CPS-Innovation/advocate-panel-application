@@ -9,6 +9,7 @@ module.exports = router => {
   router.post('/referee/level', (req, res) => {
     const level = req.body['refereeJourneyLevel']
 
+
     const fileName = level === 'Level 1' ? 'referee-level-1.json' : 'referee-level-4.json'
     const filePath = path.join(__dirname, '../data', fileName)
     const seedData = JSON.parse(fs.readFileSync(filePath, 'utf8'))
