@@ -26,6 +26,20 @@
       {{ govukSummaryList({
         rows: [
           {
+            key: { text: "Name" },
+            value: { text: data['refereeName'] },
+            actions: {
+              items: [{ href: "/referee/name", text: "Change", visuallyHiddenText: "name" }]
+            }
+          },
+          {
+            key: { text: "Job title" },
+            value: { text: data['refereeJobTitle'] },
+            actions: {
+              items: [{ href: "/referee/job-title", text: "Change", visuallyHiddenText: "job title" }]
+            }
+          },
+          {
             key: { text: "Role description" },
             value: { text: data['relationToApplicantInfo'] or "Not provided" },
             actions: { items: [{ href: "/referee/role-description", text: "Change", visuallyHiddenText: "role description" }] }
@@ -49,6 +63,20 @@
 
       {{ govukSummaryList({
         rows: [
+         {
+            key: { text: "Name" },
+            value: { text: data['refereeName'] },
+            actions: {
+              items: [{ href: "/referee/name", text: "Change", visuallyHiddenText: "name" }]
+            }
+          },
+          {
+            key: { text: "Job title" },
+            value: { text: data['refereeJobTitle'] },
+            actions: {
+              items: [{ href: "/referee/job-title", text: "Change", visuallyHiddenText: "job title" }]
+            }
+          },
           {
             key: { text: "Role description" },
             value: { text: data['relationToApplicantInfo'] or "Not provided" },
