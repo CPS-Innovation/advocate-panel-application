@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CPS Advocate Panel – Reference Request</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    /* Reset */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+    body { margin: 0 !important; padding: 0 !important; background-color: #f3f2f1; }
+
+    /* Responsive */
+    @media only screen and (max-width: 600px) {
+      .email-wrapper { width: 100% !important; }
+      .email-body { padding: 24px 20px !important; }
+      .header-logo-cell { padding: 16px 20px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f3f2f1;">
+
+  <!-- Outer wrapper -->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f3f2f1;">
+    <tr>
+      <td align="center" style="padding: 24px 12px;">
+
+        <!-- Email card -->
+        <table class="email-wrapper" role="presentation" border="0" cellpadding="0" cellspacing="0" width="620" style="background-color:#ffffff; max-width:620px; width:100%;">
+
+          <!-- Header -->
+          <tr>
+            <td class="header-logo-cell" style="background-color:#1d70b8; padding: 20px 32px; text-align:center;">
+              
+                <img src="/public/images/cps/logo.png"
+                     alt="Crown Prosecution Service"
+                     width="auto" height="48"
+                     style="display:block; margin:0 auto;">
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td class="email-body" style="padding: 40px 48px 48px; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5; color: #0b0c0c;">
+
+              <!-- Salutation -->
+              <p style="margin: 0 0 20px;">Dear {{ data['refereeName'] }}</p>
+
+              <!-- Opening -->
+              <p style="margin: 0 0 20px;">{{ data['applicantName'] }} has requested a reference to join General Crime panel at level {{ data.refereeJourneyLevel }}.</p>
+
+
+              <!-- Magic link -->
+              <p style="margin: 0 0 20px;"><a href="/referee" style="color: #1d70b8; text-decoration: underline;">Start reference</a></p>
+              
+
+              <!-- What happens next -->
+              <h2 style="margin: 0 0 12px; font-family: Arial, Helvetica, sans-serif; font-size: 19px; font-weight: bold; color: #0b0c0c;">What happens next</h2>
+
+              <p style="margin: 0 0 20px;">We'll do something blah blah when you send your reference.</p>
+
+
+              
+
+              <ul style="margin: 0 0 32px; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">blah blah yadda</li>
+                <li style="margin-bottom: 0;">some other stuff blah</li>
+              </ul>
+
+              <!-- Get help -->
+              <h2 style="margin: 0 0 12px; font-family: Arial, Helvetica, sans-serif; font-size: 19px; font-weight: bold; color: #0b0c0c;">Get help</h2>
+
+              <p style="margin: 0 0 20px;">Email <a href="mailto:advocate.panels@cps.gov.uk" style="color: #1d70b8; text-decoration: underline;">advocate.panels@cps.gov.uk</a> if you need help.</p>
+
+              <p style="margin: 0 0 32px;">The application reference number is {{ data.applicationNumber}}.</p>
+
+              <!-- Sign-off -->
+              <p style="margin: 0 0 4px;">Regards</p>
+              <p style="margin: 0; font-weight: bold;">Advocate Panel Team<br>Crown Prosecution Service</p>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 20px 48px; background-color: #f3f2f1; border-top: 1px solid #b1b4b6; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #505a5f; line-height: 1.5;">
+              This email was sent to {{ applicant_email_address }}. Do not reply to this email.
+            </td>
+          </tr>
+
+        </table>
+        <!-- /Email card -->
+
+      </td>
+    </tr>
+  </table>
+  <!-- /Outer wrapper -->
+
+</body>
+</html>
