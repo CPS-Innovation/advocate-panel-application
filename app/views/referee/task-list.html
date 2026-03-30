@@ -1,0 +1,32 @@
+{# app/views/referee/task-list.html #}
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Reference form — Apply for the CPS Advocate Panel — GOV.UK
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/referee"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Reference for {{ data['applicantName'] }}</h1>
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-9">Reference questions</h2>
+
+    {% include "/_includes/referee/task-list.njk" %}
+
+    {{ govukButton({
+      text: "Check answers",
+      href: "/referee/check"
+    }) }}
+
+  </div>
+</div>
+{% endblock %}

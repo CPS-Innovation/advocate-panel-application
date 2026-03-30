@@ -9,10 +9,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <span class="govuk-caption-l">{{ data['applicationNumber'] }}</span>
     <h1 class="govuk-heading-l">Reference for {{ data['applicantName'] }}</h1>
-
-    <h2 class="govuk-heading-m">Your details</h2>
 
     {% if data['relationToApplicant'] === "pupilSupervisor" %}
       {% set relationToApplicantLabel = "Pupil supervisor" %}
@@ -38,41 +35,53 @@
       {% set relationToApplicantLabel = "Not provided" %}
     {% endif %}
 
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: { text: "Name" },
-            value: { text: data['refereeName'] },
-            actions: {
-              items: [{ href: "/referee/name", text: "Change", visuallyHiddenText: "name" }]
-            }
-          },
-          {
-            key: { text: "Job title" },
-            value: { text: data['refereeJobTitle'] },
-            actions: {
-              items: [{ href: "/referee/job-title", text: "Change", visuallyHiddenText: "job title" }]
-            }
-          },
-          {
-            key: { text: "Role as referee" },
-            value: { text: relationToApplicantLabel }
-          },
-           {
-            key: { text: "Email" },
-            value: { text: "email@name.com" }
+    <p class="govuk-body"><a href="/referee/task-list" class="govuk-link">Answer reference questions</a></p>
+
+    <h2 class="govuk-heading-m">Applicant details</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Name" },
+          value: { text: data['applicantName'] }
+        },
+        {
+          key: { text: "Reference" },
+          value: { text: data['applicationNumber'] }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">Your details</h2>
+
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: { text: "Name" },
+          value: { text: data['refereeName'] },
+          actions: {
+            items: [{ href: "/referee/name", text: "Change", visuallyHiddenText: "name" }]
           }
-        ]
-      }) }}
+        },
+        {
+          key: { text: "Job title" },
+          value: { text: data['refereeJobTitle'] },
+          actions: {
+            items: [{ href: "/referee/job-title", text: "Change", visuallyHiddenText: "job title" }]
+          }
+        },
+        {
+          key: { text: "Role as referee" },
+          value: { text: relationToApplicantLabel }
+        },
+        {
+          key: { text: "Email" },
+          value: { text: "email@name.com" }
+        }
+      ]
+    }) }}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-9">Reference questions</h2>
-
-      {% include "/_includes/referee/task-list.njk" %}
-
-      {{ govukButton({
-        text: "Check answers",
-        href: "/referee/check"
-      }) }}
+   
 
   </div>
 </div>
