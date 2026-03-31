@@ -15,13 +15,11 @@
   </noscript>
   <![endif]-->
   <style>
-    /* Reset */
     body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
     table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
     img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
     body { margin: 0 !important; padding: 0 !important; background-color: #f3f2f1; }
 
-    /* Responsive */
     @media only screen and (max-width: 600px) {
       .email-wrapper { width: 100% !important; }
       .email-body { padding: 24px 20px !important; }
@@ -31,22 +29,47 @@
 </head>
 <body style="margin:0; padding:0; background-color:#f3f2f1;">
 
-  <!-- Outer wrapper -->
   <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f3f2f1;">
     <tr>
       <td align="center" style="padding: 24px 12px;">
 
-        <!-- Email card -->
         <table class="email-wrapper" role="presentation" border="0" cellpadding="0" cellspacing="0" width="620" style="background-color:#ffffff; max-width:620px; width:100%;">
 
           <!-- Header -->
           <tr>
             <td class="header-logo-cell" style="background-color:#1d70b8; padding: 20px 32px; text-align:center;">
-              
-                <img src="/public/images/cps/logo.png"
-                     alt="Crown Prosecution Service"
-                     width="auto" height="48"
-                     style="display:block; margin:0 auto;">
+              <img src="/public/images/cps/logo.png"
+                   alt="Crown Prosecution Service"
+                   width="auto" height="48"
+                   style="display:block; margin:0 auto;">
+            </td>
+          </tr>
+
+          <!-- From / To / Subject block -->
+          <tr>
+            <td style="border-bottom: 1px solid #b1b4b6;">
+
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="padding: 12px 32px; border-bottom: 1px solid #b1b4b6; font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #0b0c0c;">
+                    <span style="color: #505a5f; display: inline-block; width: 60px;">From</span>
+                    Advocate panel application - DISCOVERY
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 32px; border-bottom: 1px solid #b1b4b6; font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #0b0c0c;">
+                    <span style="color: #505a5f; display: inline-block; width: 60px;">To</span>
+                    <span style="padding: 2px 4px;">{{ data['refereeEmail'] }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 32px; font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #0b0c0c;">
+                    <span style="color: #505a5f; display: inline-block; width: 60px;">Subject</span>
+                    Reference request for {{ data['applicantName'] }}
+                  </td>
+                </tr>
+              </table>
+
             </td>
           </tr>
 
@@ -54,40 +77,57 @@
           <tr>
             <td class="email-body" style="padding: 40px 48px 48px; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5; color: #0b0c0c;">
 
-              <!-- Salutation -->
               <p style="margin: 0 0 20px;">Dear {{ data['refereeName'] }}</p>
 
-              <!-- Opening -->
-              <p style="margin: 0 0 20px;">{{ data['applicantName'] }} has requested a reference to join General Crime panel at level {{ data.refereeJourneyLevel }}.</p>
+              <p style="margin: 0 0 20px;">{{ data['applicantName'] }} has requested a reference for their application to join the general crime CPS advocate panel at {{ data['refereeJourneyLevel'] }}.</p>
 
+              <p style="margin: 0 0 16px;">They added the following message.</p>
 
-              <!-- Magic link -->
-              <p style="margin: 0 0 20px;"><a href="/referee" style="color: #1d70b8; text-decoration: underline;">Start reference</a></p>
-              
+              <!-- GOV.UK inset text -->
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0 0 28px;">
+                <tr>
+                  <td width="5" style="background-color: #b1b4b6;">&nbsp;</td>
+                  <td style="padding: 12px 0 12px 16px; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5; color: #0b0c0c;">
+                    {{ data['refereePersonalMessage'] }}
+                  </td>
+                </tr>
+              </table>
 
-              <!-- What happens next -->
-              <h2 style="margin: 0 0 12px; font-family: Arial, Helvetica, sans-serif; font-size: 19px; font-weight: bold; color: #0b0c0c;">What happens next</h2>
+              <!-- What you need to do -->
+              <h2 style="margin: 0 0 12px; font-family: Arial, Helvetica, sans-serif; font-size: 19px; font-weight: bold; color: #0b0c0c;">What you need to do</h2>
 
-              <p style="margin: 0 0 20px;">We'll do something blah blah when you send your reference.</p>
+              <p style="margin: 0 0 16px;">
+                <a href="/referee" style="color: #1d70b8; text-decoration: underline;">Give a reference to {{ data['applicantName'] }}</a>.
+              </p>
 
+              <p style="margin: 0 0 8px;">You'll be asked to comment on:</p>
 
-              
-
+              {% if data['refereeJourneyLevel'] === "level 4" %}
               <ul style="margin: 0 0 32px; padding-left: 20px;">
-                <li style="margin-bottom: 8px;">blah blah yadda</li>
-                <li style="margin-bottom: 0;">some other stuff blah</li>
+                <li style="margin-bottom: 8px;">how you know the applicant</li>
+                <li style="margin-bottom: 8px;">their ability as an advocate</li>
+                <li style="margin-bottom: 8px;">their effectiveness in legal decision making and case strategy</li>
+                <li style="margin-bottom: 0;">how they interact with the judiciary, jury and witnesses</li>
               </ul>
+              {% else %}
+              <ul style="margin: 0 0 32px; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">how you know the applicant</li>
+                <li style="margin-bottom: 8px;">their suitability for prosecution work</li>
+                <li style="margin-bottom: 0;">their ability as an advocate</li>
+              </ul>
+              {% endif %}
 
               <!-- Get help -->
               <h2 style="margin: 0 0 12px; font-family: Arial, Helvetica, sans-serif; font-size: 19px; font-weight: bold; color: #0b0c0c;">Get help</h2>
 
+              <p style="margin: 0 0 20px;">Contact {{ data['applicantName'] }} if you cannot give a reference. They will be able to ask someone else for a reference.</p>
+
               <p style="margin: 0 0 20px;">Email <a href="mailto:advocate.panels@cps.gov.uk" style="color: #1d70b8; text-decoration: underline;">advocate.panels@cps.gov.uk</a> if you need help.</p>
 
-              <p style="margin: 0 0 32px;">The application reference number is {{ data.applicationNumber}}.</p>
+              <p style="margin: 0 0 32px;">The application reference number is {{ data['applicationNumber'] }}.</p>
 
-              <!-- Sign-off -->
               <p style="margin: 0 0 4px;">Regards</p>
-              <p style="margin: 0; font-weight: bold;">Advocate Panel Team<br>Crown Prosecution Service</p>
+              <p style="margin: 0;">Advocate Panel Team<br>Crown Prosecution Service</p>
 
             </td>
           </tr>
@@ -95,17 +135,15 @@
           <!-- Footer -->
           <tr>
             <td style="padding: 20px 48px; background-color: #f3f2f1; border-top: 1px solid #b1b4b6; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #505a5f; line-height: 1.5;">
-              This email was sent to {{ applicant_email_address }}. Do not reply to this email.
+              This email was sent to {{ data['refereeEmail'] }}. Do not reply to this email.
             </td>
           </tr>
 
         </table>
-        <!-- /Email card -->
 
       </td>
     </tr>
   </table>
-  <!-- /Outer wrapper -->
 
 </body>
 </html>
