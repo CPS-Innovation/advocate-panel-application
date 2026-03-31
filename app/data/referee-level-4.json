@@ -1,6 +1,6 @@
 { 
   "applicantName": "Gwen Thornton-Smyth",
-  "refereeJourneyLevel": "Level 4",
+  "refereeJourneyLevel": "level 4",
   "applicationNumber": "HDJ2123F",
   "refereeName": "His Honour Judge Robert Marlowe",
   "refereeJobTitle": "Circuit Judge",
@@ -10,5 +10,7 @@
   "abilityReference": "The applicant demonstrates a high level of advocacy skill commensurate with the level applied for. Their cross-examination technique is incisive and well-prepared, and they manage complex legal arguments with clarity and composure.",
   "applicantEffectiveness": "The applicant shows sound legal decision making throughout proceedings. Their case strategy is thoughtful and proportionate, and they adapt effectively when cases develop unexpectedly during trial.",
   "interpersonalSkillsReference": "The applicant maintains a professional and respectful manner with the judiciary, witnesses and opposing counsel at all times. They communicate clearly with juries and demonstrate sensitivity when dealing with vulnerable witnesses.",
-  "additionalInformationForReference": "I have no hesitation in supporting this application. The applicant is a highly capable advocate who consistently performs at the standard required for Level 4 panel work."
+  "additionalInformationForReference": "I have no hesitation in supporting this application. The applicant is a highly capable advocate who consistently performs at the standard required for Level 4 panel work.",
+  "refereePersonalMessage": "As we discussed last week, I've decided that it's time for me to upgrade to level 4 of the general crime panel. I would be grateful if you could give me a reference based on the work we did together in 2024. Thanks for helping out with this.",
+  "refereeEmail": "Judge.Marlowe@courtchambers.com"
 }
