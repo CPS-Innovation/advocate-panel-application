@@ -35,14 +35,6 @@
       {% set relationToApplicantLabel = "Not provided" %}
     {% endif %}
 
-
-    <div class="govuk-button-group">
-      {{ govukButton({
-        text: "Start reference",
-        href: "/referee/task-list"
-      }) }}
-    </div>
-
     <h2 class="govuk-heading-m">Applicant details</h2>
 
     {{ govukSummaryList({
@@ -87,6 +79,12 @@
       ]
     }) }}
 
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Start reference",
+        href: "/referee/task-list"
+      }) }}
+    </div>
    
 
   </div>
